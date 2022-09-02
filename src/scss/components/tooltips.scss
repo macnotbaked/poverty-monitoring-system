@@ -1,0 +1,67 @@
+.tooltip--logout {
+  @include toolTip("Logout", -98%);
+  &:hover::after,
+  &:hover::before {
+    display: block;
+  }
+}
+.tooltip--edit {
+  @include toolTip("Edit");
+  &:hover::after,
+  &:hover::before {
+    display: block;
+  }
+}
+
+.tooltip--complete {
+  @include toolTip("Complete");
+  &:hover::after,
+  &:hover::before {
+    display: block;
+  }
+}
+.tooltip--delete {
+  @include toolTip("Delete");
+  &:hover::after,
+  &:hover::before {
+    display: block;
+  }
+}
+
+.tooltip--archive {
+  @include toolTip("Archive");
+  &:hover::after,
+  &:hover::before {
+    display: block;
+  }
+}
+.tooltip--suspend {
+  @include toolTip("Suspend");
+  &:hover::after,
+  &:hover::before {
+    display: block;
+  }
+}
+
+.tooltip--reset {
+  @include toolTip("Reset");
+  &:hover::after,
+  &:hover::before {
+    display: block;
+  }
+}
+
+.tooltip--restore {
+  @include toolTip("Restore");
+  &:hover::after,
+  &:hover::before {
+    display: block;
+  }
+}
+.tooltip--view {
+  @include toolTip("View");
+  &:hover::after,
+  &:hover::before {
+    display: block;
+  }
+}

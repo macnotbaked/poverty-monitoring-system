@@ -1,0 +1,34 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  text-align: center;
+  border-radius: 5px;
+  vertical-align: middle;
+  padding: 5px 0;
+  line-height: 1rem;
+  width: 50px;
+  height: 34px;
+  transition: 0.5s;
+  margin-right: 5px;
+  // margin-top: 5px;
+
+  &:hover {
+    background: $primary-color;
+    span i {
+      color: $light-color;
+    }
+    span svg {
+      fill: $light-color;
+    }
+  }
+  span a {
+    padding: 1px;
+  }
+  span i,
+  span svg {
+    font-size: 2rem;
+    fill: $dark-color;
+  }
+}

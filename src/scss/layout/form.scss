@@ -1,0 +1,65 @@
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+}
+input[disabled],
+select:disabled,
+textarea:disabled,
+button:disabled,
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+input[type="checkbox"]:focus,
+input[type="radio"]:focus,
+input[type="file"]:focus,
+input[type="hidden"]:focus {
+  border: none;
+  outline: 0;
+}
+input[type="checkbox"],
+input[type="radio"],
+input[type="file"],
+input[type="hidden"],
+input[type="image"],
+input[type="color"] {
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+button,
+input,
+textarea {
+  font-family: inherit;
+  line-height: normal;
+}
+textarea {
+  font-size: 100%;
+  overflow: auto;
+  vertical-align: top;
+  height: 10rem;
+}
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="phone"],
+input[type="date"],
+input[type="time"],
+input[type="password"],
+select,
+textarea {
+  background: #fff;
+  height: 38px;
+  padding: 6px 15px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $dark-color;
+  background-clip: padding-box;
+  box-shadow: none;
+  width: 100%;
+}

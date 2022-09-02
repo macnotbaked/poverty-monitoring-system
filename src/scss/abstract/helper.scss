@@ -1,0 +1,324 @@
+.tab--active {
+  border-radius: 2.5rem 0 0 2.5rem;
+  background-color: #fff;
+  a,
+  svg {
+    color: #d02b91 !important;
+  }
+}
+.color--primary {
+  color: $primary-color !important;
+}
+.color--secondary {
+  color: $secondary-color !important;
+}
+.color--lightcolor {
+  color: $light-color !important;
+}
+.color--darkcolor {
+  color: $dark-color !important;
+}
+.color--lightgray {
+  color: $light-gray !important ;
+}
+.bg--primary {
+  background-color: $primary-color !important;
+}
+.bg--secondary {
+  background-color: $secondary-color !important;
+}
+.bg--lightcolor {
+  background-color: $light-color !important;
+}
+.bg--darkcolor {
+  background-color: $dark-color !important;
+}
+.bg--lightgray {
+  background-color: $light-gray !important ;
+}
+.shadow--primary {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+.float--left {
+  float: left !important;
+}
+.float--right {
+  float: right !important;
+}
+.t--center {
+  text-align: center !important;
+}
+.t--left {
+  text-align: left !important;
+}
+.t--right {
+  text-align: right !important;
+}
+.t--justify {
+  text-align: justify !important;
+}
+.t--bold {
+  font-weight: bold !important;
+}
+.t--exbold {
+  font-weight: bold !important;
+  font-family: "montserratextrabold";
+  text-shadow: 0 0 #000;
+}
+.t--italic {
+  font-style: italic !important;
+}
+.t--unset {
+  font-style: unset !important;
+}
+.d--flex {
+  display: flex;
+}
+.d--grid {
+  display: grid;
+}
+.d--block {
+  display: block;
+}
+.d--none {
+  display: none;
+}
+.p--relative {
+  position: relative;
+}
+.p--absolute {
+  position: absolute;
+}
+.modal--front {
+  z-index: 9999999999999;
+}
+.full--width {
+  width: 100%;
+}
+.half--width {
+  width: 50%;
+}
+.word--break {
+  word-break: break-all;
+}
+.btn {
+  color: $light-color;
+  cursor: pointer;
+  padding: 10px 15px;
+  margin: 0 1px;
+  min-width: 90px;
+  transition: 0.5s;
+  font-size: 1.2rem;
+  line-height: normal;
+  font-weight: bold;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: $primary-color;
+
+  &:hover {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    color: $primary-color !important;
+  }
+
+  span {
+    vertical-align: middle;
+    @media screen and (max-width: 324px) {
+      display: none;
+    }
+  }
+
+  svg {
+    margin-right: 5px;
+    vertical-align: middle;
+    font-size: 2rem;
+    @media screen and (max-width: 768px) {
+      margin: unset;
+    }
+  }
+}
+.btn--back {
+  color: $primary-color;
+  cursor: pointer;
+  padding: 10px 15px;
+  margin: 0 1px;
+  min-width: 90px;
+  transition: 0.5s;
+  font-size: 1.2rem;
+  line-height: normal;
+  font-weight: bold;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: $light-color;
+
+  &:hover {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    color: $primary-color !important;
+  }
+
+  span {
+    vertical-align: middle;
+    @media screen and (max-width: 324px) {
+      display: none;
+    }
+  }
+
+  svg {
+    margin-right: 5px;
+    vertical-align: middle;
+    font-size: 2rem;
+    @media screen and (max-width: 768px) {
+      margin: unset;
+    }
+  }
+}
+.btn--primary {
+  background: $primary-color;
+  border: 1px solid #ddd !important;
+  color: #fff;
+  padding: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: inherit;
+  display: inline-block;
+  text-align: center;
+  min-width: 140px;
+  line-height: normal;
+  transition: all 0.5s;
+  &:hover {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    color: $primary-color;
+  }
+}
+.btn--outline {
+  // width: 100%;
+  padding: 1rem;
+  border-radius: 2rem;
+  background: transparent;
+  color: $primary-color;
+  border: 1px solid $primary-color;
+  transition: all 1s;
+  margin-right: 0.5rem;
+}
+.nodata {
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: grayscale(100%);
+  opacity: 0.5;
+
+  h3 {
+    color: $light-gray;
+    font-weight: bold;
+  }
+}
+.loadmore__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+}
+.btn--loadmore {
+  min-width: 15rem;
+  padding: 1rem;
+  border-radius: 2rem;
+  // margin-right: 0.5rem;
+  background: linear-gradient(
+    270deg,
+    rgba($primary-color, 1),
+    rgba($secondary-color, 0.85) 90%
+  );
+  color: $light-color;
+  transition: all 1s;
+  &:hover {
+    background: linear-gradient(
+      90deg,
+      rgba($primary-color, 1),
+      rgba($secondary-color, 0.85) 90%
+    );
+  }
+}
+
+$sizes: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
+
+@each $size in $sizes {
+  .mb--#{$size} {
+    margin-bottom: #{$size}rem;
+  }
+}
+@each $size in $sizes {
+  .mt--#{$size} {
+    margin-top: #{$size}rem;
+  }
+}
+@each $size in $sizes {
+  .mr--#{$size} {
+    margin-right: #{$size}rem;
+  }
+}
+@each $size in $sizes {
+  .ml--#{$size} {
+    margin-left: #{$size}rem;
+  }
+}
+@each $size in $sizes {
+  .pt--#{$size} {
+    padding-top: #{$size}rem;
+  }
+}
+@each $size in $sizes {
+  .pr--#{$size} {
+    padding-right: #{$size}rem;
+  }
+}
+@each $size in $sizes {
+  .pb--#{$size} {
+    padding-bottom: #{$size}rem;
+  }
+}
+@each $size in $sizes {
+  .pl--#{$size} {
+    padding-left: #{$size}rem;
+  }
+}
+@each $size in $sizes {
+  .px--#{$size} {
+    padding: 0 #{$size}rem;
+  }
+}
+@each $size in $sizes {
+  .py--#{$size} {
+    padding: #{$size}rem 0;
+  }
+}
+@each $size in $sizes {
+  .pxy--#{$size} {
+    padding: #{$size}rem;
+  }
+}
+@each $size in $sizes {
+  .mx--#{$size} {
+    margin: 0 #{$size}rem;
+  }
+}
+@each $size in $sizes {
+  .my--#{$size} {
+    margin: #{$size}rem 0;
+  }
+}
+@each $size in $sizes {
+  .mxy--#{$size} {
+    margin: #{$size}rem;
+  }
+
+  @each $size in $sizes {
+    .gap--#{$size} {
+      gap: #{$size}rem;
+    }
+  }
+}
