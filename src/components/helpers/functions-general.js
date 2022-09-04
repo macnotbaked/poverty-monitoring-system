@@ -1,8 +1,8 @@
 // development url
 export const devApiUrl =
-  "http://localhost/self-projects/vanity-whitening-lounge/rest";
+  "http://localhost/school-works/poverty-monitoring-system/rest";
 export const devBaseUrl =
-  "http://localhost/self-projects/vanity-whitening-lounge/public";
+  "http://localhost/school-works/poverty-monitoring-system/public";
 export const devNavUrl = "/dev-app";
 
 // Copyright year
