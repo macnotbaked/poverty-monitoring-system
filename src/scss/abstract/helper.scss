@@ -3,7 +3,7 @@
   background-color: #fff;
   a,
   svg {
-    color: #d02b91 !important;
+    color: $primary-color !important;
   }
 }
 .color--primary {
@@ -193,14 +193,24 @@
   }
 }
 .btn--outline {
-  // width: 100%;
+  width: 100%;
   padding: 1rem;
   border-radius: 2rem;
-  background: transparent;
-  color: $primary-color;
-  border: 1px solid $primary-color;
+  // margin-right: 0.5rem;
+  background: linear-gradient(
+    270deg,
+    rgba($primary-color, 1),
+    rgba($secondary-color, 0.85) 90%
+  );
+  color: $light-color;
   transition: all 1s;
-  margin-right: 0.5rem;
+  &:hover {
+    background: linear-gradient(
+      90deg,
+      rgba($primary-color, 1),
+      rgba($secondary-color, 0.85) 90%
+    );
+  }
 }
 .nodata {
   text-align: center;
