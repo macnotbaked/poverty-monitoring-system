@@ -1,8 +1,26 @@
 .tab--active {
-  border-radius: 2.5rem 0 0 2.5rem;
-  background-color: #fff;
-  a,
+  // border-radius: 2.5rem 0 0 2.5rem;
+  // background-color: $light-color;
+
+  background: linear-gradient(
+    90deg,
+    rgba($secondary-color, 1),
+    rgba($light-color, 1)
+  );
+
+  // border-right: 0.5rem solid $light-color;
+  &:hover {
+    background: linear-gradient(
+      90deg,
+      rgba($primary-color, 1),
+      rgba($secondary-color, 0.85)
+    );
+  }
+
   svg {
+    color: $primary-color !important;
+  }
+  a {
     color: $primary-color !important;
   }
 }
@@ -88,6 +106,9 @@
 }
 .p--absolute {
   position: absolute;
+}
+.p--fixed {
+  position: fixed;
 }
 .modal--front {
   z-index: 9999999999999;
@@ -212,12 +233,12 @@
     );
   }
 }
-.nodata {
+.no--data {
   text-align: center;
   padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
   filter: grayscale(100%);
   opacity: 0.5;
 

@@ -8,33 +8,157 @@
   );
   width: 20rem;
   height: 100%;
-  padding-top: 6rem;
+  // border-right: 0.5rem solid $secondary-color;
   // top: 50rem;
-
-  li {
-    color: $light-color;
-    a {
-      display: flex;
-      align-items: center;
-      padding: 2rem;
-      color: $light-color;
+  &__logo {
+    background-color: $light-color;
+    padding: 1rem;
+    height: 6rem;
+    // display: grid;
+    // place-items: center;
+    img {
       width: 100%;
       height: 100%;
-      svg {
-        font-size: 2rem;
-        margin-right: 2rem;
+      object-fit: contain;
+    }
+  }
+
+  ul {
+    // padding-top: 6rem;
+
+    li {
+      position: relative;
+      color: $light-color;
+      a {
+        display: flex;
+        align-items: center;
+        padding: 2rem;
+        color: $light-color;
+        width: 100%;
+        height: 100%;
+        svg {
+          font-size: 2rem;
+          margin-right: 2rem;
+        }
+      }
+      &:hover {
+        background: linear-gradient(
+          90deg,
+          rgba($secondary-color, 1),
+          rgba($primary-color, 0.85)
+        );
+      }
+      &.tab--active:hover {
+        background: linear-gradient(
+          90deg,
+          rgba($secondary-color, 1),
+          rgba($light-color, 1)
+        );
       }
     }
-    &:hover {
-      background: linear-gradient(
-        90deg,
-        rgba($primary-color, 1),
-        rgba($secondary-color, 0.85)
-      );
+  }
+
+  .tab--active .shape-wrapper-top,
+  .tab--active .shape-wrapper-bottom {
+    display: block;
+  }
+
+  $shape-wrapper: 20px;
+  $circle-wrapper: 20px;
+  $circle: 120px;
+  $border: 40px;
+
+  .shape-wrapper-top {
+    display: none;
+    width: $shape-wrapper;
+    height: $shape-wrapper;
+    position: absolute;
+    overflow: hidden;
+    top: -20px;
+    right: 0;
+    z-index: 2;
+    // @media screen and (max-width: 640px) {
+    //   left: 0;
+    // }
+  }
+
+  .shape-wrapper-bottom {
+    display: none;
+    width: $shape-wrapper;
+    height: $shape-wrapper;
+    position: absolute;
+    overflow: hidden;
+    bottom: -20px;
+    top: auto;
+    right: 0;
+    z-index: 2;
+    // @media screen and (max-width: 640px) {
+    //   left: 0;
+    // }
+  }
+
+  .circle-wrapper {
+    background-color: transparent;
+    overflow: hidden;
+    width: $circle-wrapper;
+    height: $circle-wrapper;
+    float: right;
+    background-color: transparent;
+    position: relative;
+  }
+
+  .circle {
+    &-top {
+      border-radius: 50%;
+      border: $border solid $light-color;
+      width: $circle;
+      height: $circle;
+      position: absolute;
+      right: -$border;
+      bottom: -$border;
+      // @media screen and (max-width: 640px) {
+      //   left: -$border;
+      // }
     }
 
-    &.tab--active:hover {
-      background: $light-color;
+    &-bottom {
+      border-radius: 50%;
+      border: $border solid $light-color;
+      width: $circle;
+      height: $circle;
+      position: absolute;
+      right: -$border;
+      top: -$border;
+      // @media screen and (max-width: 640px) {
+      //   left: -$border;
+      // }
+    }
+  }
+
+  .profile {
+    position: absolute;
+    bottom: 0;
+    padding: 2rem;
+    color: $light-color;
+    width: 100%;
+
+    .title {
+      font-weight: bold;
+      font-size: 2rem;
+    }
+
+    &__user {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      svg {
+        height: 3.5rem;
+        width: 3.5rem;
+      }
+    }
+    &__name {
+      display: flex;
+      flex-direction: column;
     }
   }
 }
