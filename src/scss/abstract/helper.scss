@@ -39,6 +39,9 @@
 .color--lightgray {
   color: $light-gray !important ;
 }
+.color--accent {
+  color: $accent;
+}
 .bg--primary {
   background-color: $primary-color !important;
 }
@@ -109,6 +112,18 @@
 }
 .p--fixed {
   position: fixed;
+}
+.p--left {
+  left: 0;
+}
+.p--right {
+  right: 0;
+}
+.p--top {
+  top: 0;
+}
+.p--bottom {
+  bottom: 0;
 }
 .modal--front {
   z-index: 9999999999999;
@@ -239,11 +254,14 @@
   // display: flex;
   // justify-content: center;
   // align-items: center;
-  filter: grayscale(100%);
-  opacity: 0.5;
+  // filter: grayscale(100%);
+  // opacity: 0.5;
+  // img {
+  //   opacity: 0.2;
+  // }
 
   h3 {
-    color: $light-gray;
+    // color: $light-gray;
     font-weight: bold;
   }
 }

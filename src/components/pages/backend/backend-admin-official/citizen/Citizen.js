@@ -1,25 +1,27 @@
 import React from "react";
-import { HiFilter } from "react-icons/hi";
+import { AiOutlinePlus } from "react-icons/ai";
+import { FaPlus } from "react-icons/fa";
+import { HiPlus } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { devNavUrl } from "../../../../helpers/functions-general";
 import Navigation from "../../../../navigation/Navigation";
-import HomeList from "./HomeList";
+import CitizenList from "./CitizenList";
 
-const Home = () => {
+const Citizen = () => {
   return (
     <>
-      <Navigation menu="home" />
+      <Navigation menu="citizen" />
       <div className="main-content">
         <div className="container">
           <div className="title">
             <div className="row">
               <div style={{ marginBottom: "1.5rem" }}>
-                <span className="tab-title">Dashboard</span>
+                <span className="tab-title">Citizen</span>
                 <Link
                   className="btn float--right "
-                  to={`${devNavUrl}/admin/filter`}
+                  to={`${devNavUrl}/admin/citizen-add`}
                 >
-                  <HiFilter /> <span>Filter</span>
+                  <HiPlus /> <span>Add</span>
                 </Link>
               </div>
               <hr />
@@ -29,13 +31,9 @@ const Home = () => {
 
         <div className="container">
           <div className="row">
-            <div className="content-block bg--highlight ">
+            <div className="content-block bg-highlight ">
               <div className="tab">
-                {/* <h4 className=" title-box-light mb--20">
-                    Information Posting
-                  </h4> */}
-
-                <HomeList />
+                <CitizenList />
               </div>
             </div>
           </div>
@@ -45,4 +43,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Citizen;

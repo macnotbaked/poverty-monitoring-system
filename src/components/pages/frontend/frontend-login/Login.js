@@ -84,7 +84,7 @@ const Login = () => {
                         required
                       />
                       <i
-                        className="show--pass"
+                        className="icon--input"
                         onMouseUp={togglePassword}
                         onMouseDown={togglePassword}
                       >

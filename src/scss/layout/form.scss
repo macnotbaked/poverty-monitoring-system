@@ -144,25 +144,25 @@ textarea {
 
   input[type="text"]:disabled ~ label,
   input[type="text"]:focus ~ label,
-  input[type="text"]:valid ~ label,
+  input[type="text"]:invalid ~ label,
   input[type="password"]:disabled ~ label,
   input[type="password"]:focus ~ label,
-  input[type="password"]:valid ~ label,
+  input[type="password"]:invalid ~ label,
   input[type="email"]:disabled ~ label,
   input[type="email"]:focus ~ label,
-  input[type="email"]:valid ~ label,
+  input[type="email"]:invalid ~ label,
   input[type="date"]:disabled ~ label,
   input[type="date"]:focus ~ label,
-  input[type="date"]:valid ~ label,
+  input[type="date"]:invalid ~ label,
   input[type="number"]:disabled ~ label,
   input[type="number"]:focus ~ label,
-  input[type="number"]:valid ~ label,
+  input[type="number"]:invalid ~ label,
   select:disabled ~ label,
   select:focus ~ label,
-  select:valid ~ label,
+  select:invalid ~ label,
   textarea:disabled ~ label,
   textarea:focus ~ label,
-  textarea:valid ~ label {
+  textarea:invalid ~ label {
     top: -9px !important;
     left: 3px !important;
     font-size: 1.11rem;
@@ -186,11 +186,58 @@ textarea {
   label.error-show {
     color: $primary-color !important;
   }
-  .show--pass {
+  .icon--input {
     position: absolute;
     right: 1rem;
     bottom: 0.6rem;
     font-size: 2rem;
     cursor: pointer;
+    color: $dark-gray;
+  }
+  .search--bar {
+    // border: 0 !important;
+    border: 0.1rem solid $light-gray !important;
+  }
+}
+.profile--upload {
+  border-radius: 100%;
+  width: 8rem;
+  height: 8rem;
+  padding: 0;
+  margin: 0 auto 20px;
+  position: relative;
+  img,
+  svg {
+    width: 100%;
+    height: 100%;
+    color: $light-gray;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .upload--button {
+    position: absolute;
+    bottom: 0;
+    right: -3px;
+    color: $light-color;
+    background: $secondary-color !important;
+    padding: 7px !important;
+    border-radius: 50% !important;
+    border: 4px solid lighten($light-color, 40%) !important;
+    line-height: 12px;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    input {
+      opacity: 0;
+      cursor: pointer;
+      font-size: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+    }
   }
 }

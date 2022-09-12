@@ -44,14 +44,15 @@ const HomeList = () => {
         />
       </div>
 
-      <div className="mb--2 responsive--table">
+      <div className="mb--2">
+        <h3 className="t--bold mb--1">Baranggay San Marcos</h3>
         <table id="" className="" cellSpacing="0" width="100%">
           <thead className="">
             <tr>
               <th className="" rowSpan="1">
                 #
               </th>
-              <th className="row--name" rowSpan="1">
+              <th className="row--name" rowSpan="1" style={{ width: "15rem" }}>
                 Name
               </th>
               <th rowSpan="1">Ratings</th>
@@ -64,13 +65,14 @@ const HomeList = () => {
               <td>Sitio 1</td>
               <td>80%</td>
               <td>
-                <div className="dropdown tooltip--view">
+                <Link
+                  to={`${devNavUrl}/admin/sitio`}
+                  className="dropdown tooltip--view"
+                >
                   <span>
-                    <Link to={`${devNavUrl}`} className="d-block">
-                      <AiFillEye />
-                    </Link>
+                    <AiFillEye />
                   </span>
-                </div>
+                </Link>
               </td>
             </tr>
             <>

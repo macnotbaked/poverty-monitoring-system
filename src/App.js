@@ -8,6 +8,9 @@ import CreatePassword from "./components/pages/frontend/frontend-create-password
 import CreatePasswordSuccess from "./components/pages/frontend/frontend-create-password/CreatePasswordSuccess";
 import Home from "./components/pages/backend/backend-admin-official/home/Home";
 import HomeFilter from "./components/pages/backend/backend-admin-official/home/HomeFilter";
+import Sitio from "./components/pages/backend/backend-admin-official/home/sitio/Sitio";
+import Citizen from "./components/pages/backend/backend-admin-official/citizen/Citizen";
+import AddCitizen from "./components/pages/backend/backend-admin-official/citizen/citizen-add/AddCitizen";
 
 function App() {
   return (
@@ -37,6 +40,12 @@ function App() {
             <Route
               path={`${devNavUrl}/admin/filter`}
               element={<HomeFilter />}
+            />
+            <Route path={`${devNavUrl}/admin/sitio`} element={<Sitio />} />
+            <Route path={`${devNavUrl}/admin/citizen`} element={<Citizen />} />
+            <Route
+              path={`${devNavUrl}/admin/citizen-add`}
+              element={<AddCitizen />}
             />
           </Routes>
         </Router>

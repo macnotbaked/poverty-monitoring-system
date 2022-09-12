@@ -1,11 +1,12 @@
 import React from "react";
 import { HiFilter } from "react-icons/hi";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { devNavUrl } from "../../../../helpers/functions-general";
-import Navigation from "../../../../navigation/Navigation";
-import HomeList from "./HomeList";
+import { devNavUrl } from "../../../../../helpers/functions-general";
+import Navigation from "../../../../../navigation/Navigation";
+import SitioList from "./SitioList";
 
-const Home = () => {
+const Sitio = () => {
   return (
     <>
       <Navigation menu="home" />
@@ -14,12 +15,16 @@ const Home = () => {
           <div className="title">
             <div className="row">
               <div style={{ marginBottom: "1.5rem" }}>
-                <span className="tab-title">Dashboard</span>
+                <span className="t--bold mb--1">
+                  Baranggay San Marcos{": "}
+                  <span className="tab-title color--accent">Sitio 1</span>
+                </span>
+
                 <Link
                   className="btn float--right "
-                  to={`${devNavUrl}/admin/filter`}
+                  to={`${devNavUrl}/admin/home`}
                 >
-                  <HiFilter /> <span>Filter</span>
+                  <IoMdArrowRoundBack /> <span>Back</span>
                 </Link>
               </div>
               <hr />
@@ -29,13 +34,9 @@ const Home = () => {
 
         <div className="container">
           <div className="row">
-            <div className="content-block bg--highlight ">
+            <div className="content-block bg-highlight ">
               <div className="tab">
-                {/* <h4 className=" title-box-light mb--20">
-                    Information Posting
-                  </h4> */}
-
-                <HomeList />
+                <SitioList />
               </div>
             </div>
           </div>
@@ -45,4 +46,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Sitio;

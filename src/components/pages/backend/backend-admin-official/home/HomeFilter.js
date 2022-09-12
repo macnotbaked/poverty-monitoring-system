@@ -54,10 +54,10 @@ const HomeFilter = () => {
         <div className="container">
           <div className="title">
             <div className="row">
-              <div className="mb--1 tab-header">
+              <div style={{ marginBottom: "1.5rem" }} className="tab-header ">
                 <span className="tab-title">Filter</span>
                 <Link
-                  className="btn float--right "
+                  className="btn float--right"
                   to={`${devNavUrl}/admin/home`}
                 >
                   <IoMdArrowRoundBack /> <span>Back</span>
@@ -70,8 +70,8 @@ const HomeFilter = () => {
 
         <div className="container">
           <div className="row">
-            <h4 className="title-box-light pl--3">Date Range</h4>
-            <div className="content-block  ">
+            <h4 className="title-box-light ">Date Range</h4>
+            <div className="content-block">
               <div className="tab">
                 {/* <h4 className=" title-box-light mb--20">
                     Information Posting
@@ -120,13 +120,14 @@ const HomeFilter = () => {
                           <Form>
                             <div className="tab">
                               <div className="row">
-                                <div className="d--flex gap--2">
+                                <div className="d--flex gap--2 mx--3">
                                   <div className="half--width">
                                     <div className="input mb--2">
                                       <InputText
                                         label="Start Date"
                                         type="date"
                                         name="date_from"
+                                        required
                                       />
                                     </div>
                                   </div>
@@ -136,6 +137,7 @@ const HomeFilter = () => {
                                         label="End Date"
                                         type="date"
                                         name="date_to"
+                                        required
                                       />
                                     </div>
                                   </div>
@@ -177,7 +179,11 @@ const HomeFilter = () => {
                         <th className="" rowSpan="1">
                           #
                         </th>
-                        <th className="row--name" rowSpan="1">
+                        <th
+                          className="row--name"
+                          rowSpan="1"
+                          style={{ width: "15rem" }}
+                        >
                           Name
                         </th>
                         <th rowSpan="1">Ratings</th>
