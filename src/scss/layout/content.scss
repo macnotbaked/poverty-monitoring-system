@@ -79,11 +79,12 @@
     margin-right: 0.2rem;
     cursor: pointer;
     background: $dark-color;
-    color: #fff;
+    color: $light-color;
     font-weight: bold;
     font-size: 1.2rem;
-    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
     z-index: 1;
+    border-radius: 0.5rem 0.5rem 0 0;
     a,
     span {
       padding: 1.1rem 2.3rem;
@@ -101,14 +102,14 @@
     flex-grow: 1;
     width: 100%;
     padding: 3rem 0 0;
-    background: #fff;
+    background: $light-color;
   }
-  .tab-content {
-    margin: 0 auto;
-    max-width: 70rem;
-    padding: 2rem;
-    border-radius: 0.5rem;
-  }
+  // .tab-content {
+  //   margin: 0 auto;
+  //   max-width: 70rem;
+  //   padding: 2rem;
+  //   border-radius: 0.5rem;
+  // }
 
   input[type="radio"] {
     display: none;
@@ -145,23 +146,21 @@
 .tab-submenu {
   display: flex;
   flex-wrap: wrap;
-  padding: 3rem 3rem 0;
-  @media screen and (max-width: 640px) {
-    padding: 15px;
-  }
-
+  padding: 3rem;
   .menu-label {
     display: block;
     padding: 0.8rem 0;
-    margin-bottom: 5px;
-    margin-right: 0.2rem;
+    margin-bottom: 0;
+    margin-right: 0;
     cursor: pointer;
-    background: #fff;
-    color: #000;
+    background: $light-color;
+    color: $dark-color;
     font-weight: bold;
     font-size: 1.2rem;
     z-index: 1;
-    border-top: 0.2rem solid transparent;
+    border-bottom: 0.2rem solid $light-gray;
+    z-index: 1;
+    border-radius: 0.5rem 0.5rem 0 0;
 
     a,
     span {
@@ -169,29 +168,17 @@
       text-transform: uppercase;
       height: 100%;
       width: 100%;
-
-      @media screen and (max-width: 768px) {
-        display: flex;
-        align-items: center;
-        padding: 0 2.3rem;
-      }
-    }
-    &:hover a,
-    &:hover span {
-      color: $light-color;
     }
   }
-
   .menu-label:hover {
-    background: $primary-color !important;
+    background: $primary-color;
     color: $light-color;
   }
-
   .tab {
     order: 99;
     flex-grow: 1;
     width: 100%;
-    background: #fff;
+    background: $light-color;
   }
 
   input[type="radio"] {
@@ -199,10 +186,9 @@
   }
 
   input[type="radio"]:checked + label {
-    background: #f9f9f9;
-    color: $primary-color;
-    border-bottom: 2px solid $primary-color;
-    border-top: none;
+    color: $primary-color !important;
+    border: 0.2rem solid $primary-color;
+    border-bottom: none;
     box-shadow: unset;
   }
 

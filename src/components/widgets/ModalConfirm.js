@@ -1,5 +1,5 @@
 import React from "react";
-import { FaTimes, FaTrashAlt } from "react-icons/fa";
+import { FaArchive, FaTimes, FaTrashAlt } from "react-icons/fa";
 import { RiInboxArchiveLine } from "react-icons/ri";
 import ModalError from "./ModalError";
 import { StoreContext } from "../../store/StoreContext";
@@ -56,7 +56,7 @@ const ModalConfirm = ({
           </div>
           <div className="bg--white">
             <div className="dialogbox color-primary mb--20 t-center">
-              {isDel ? <FaTrashAlt /> : <RiInboxArchiveLine />}
+              {isDel ? <FaTrashAlt /> : <FaArchive />}
             </div>
 
             <h3 className="t-center t-bold mb--10 ">

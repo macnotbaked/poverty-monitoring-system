@@ -10,7 +10,7 @@ import NoData from "../../../../widgets/NoData";
 import { StoreContext } from "../../../../../store/StoreContext";
 import LoadMore from "../../../../widgets/LoadMore";
 
-const HomeList = () => {
+const EvaluationList = () => {
   const background = [];
   const border = [];
   const labels = ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"];
@@ -22,19 +22,25 @@ const HomeList = () => {
     background.push("rgba(" + r + ", " + g + ", " + b + ", .5)");
     border.push("rgba(" + r + ", " + g + ", " + b + ", 1)");
   }
+
   const userData = {
     labels: ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"],
     datasets: [
       {
-        label: "Total Population",
+        label: "Yearly Poverty Rate",
         data: [80, 76, 89, 100, 92, 88],
         backgroundColor: background,
         borderColor: border,
         borderWidth: 1,
       },
+    ],
+  };
+  const user = {
+    labels: ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"],
+    datasets: [
       {
-        label: "Poverty Rate",
-        data: [20, 36, 19, 70, 44, 55],
+        label: "Yearly Poverty Rate",
+        data: [80, 76, 89, 100, 92, 88],
         backgroundColor: background,
         borderColor: border,
         borderWidth: 1,
@@ -97,4 +103,4 @@ const HomeList = () => {
   );
 };
 
-export default HomeList;
+export default EvaluationList;

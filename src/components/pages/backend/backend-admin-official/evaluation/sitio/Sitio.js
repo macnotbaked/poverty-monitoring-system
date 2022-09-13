@@ -9,7 +9,7 @@ import SitioList from "./SitioList";
 const Sitio = () => {
   return (
     <>
-      <Navigation menu="home" />
+      <Navigation menu="evaluation" />
       <div className="main-content">
         <div className="container">
           <div className="title">
@@ -22,7 +22,7 @@ const Sitio = () => {
 
                 <Link
                   className="btn float--right "
-                  to={`${devNavUrl}/admin/home`}
+                  to={`${devNavUrl}/admin/evaluation`}
                 >
                   <IoMdArrowRoundBack /> <span>Back</span>
                 </Link>

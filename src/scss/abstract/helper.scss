@@ -1,5 +1,5 @@
 .tab--active {
-  // border-radius: 2.5rem 0 0 2.5rem;
+  border-radius: 3rem 0 0 3rem;
   // background-color: $light-color;
 
   background: linear-gradient(
@@ -251,17 +251,7 @@
 .no--data {
   text-align: center;
   padding: 20px;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // filter: grayscale(100%);
-  // opacity: 0.5;
-  // img {
-  //   opacity: 0.2;
-  // }
-
   h3 {
-    // color: $light-gray;
     font-weight: bold;
   }
 }

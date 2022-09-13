@@ -1,15 +1,15 @@
 import React from "react";
-import SearchBox from "../../../../widgets/SearchBox";
 import { BiMessageDetail } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoMdArchive } from "react-icons/io";
 import { FaArchive, FaTrashAlt } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { devNavUrl } from "../../../../helpers/functions-general";
-import NoData from "../../../../widgets/NoData";
+import { devNavUrl } from "../../../../../helpers/functions-general";
+import NoData from "../../../../../widgets/NoData";
+import SearchBox from "../../../../../widgets/SearchBox";
 
-const CitizenList = () => {
+const SitioList = () => {
   return (
     <>
       <SearchBox url="/admin/admin-trainee/read-trainee-search-active.php" />
@@ -23,23 +23,15 @@ const CitizenList = () => {
               <th className="row--name" rowSpan="1" style={{ width: "15rem" }}>
                 Name
               </th>
-              <th style={{ width: "7rem" }} rowSpan="1">
-                Sitio
-              </th>
-              <th style={{ width: "12rem" }} rowSpan="1">
-                Contact
-              </th>
-              <th rowSpan="1">Email</th>
+              <th rowSpan="1">Ratings</th>
               <th rowSpan="1">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr className=" ">
               <td>1.</td>
-              <td>Merin, Mark Ryan B.</td>
               <td>Sitio 1</td>
-              <td>09491040057</td>
-              <td>merin.ryanmark@gmail.com</td>
+              <td>80%</td>
               <td>
                 <div className="dropdown tooltip--view">
                   <span>
@@ -80,4 +72,4 @@ const CitizenList = () => {
   );
 };
 
-export default CitizenList;
+export default SitioList;

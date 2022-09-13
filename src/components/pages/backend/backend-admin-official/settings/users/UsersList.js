@@ -1,19 +1,14 @@
 import React from "react";
-import { BiMessageDetail } from "react-icons/bi";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { IoMdArchive } from "react-icons/io";
-import { FaTrashAlt } from "react-icons/fa";
-import { AiFillEdit } from "react-icons/ai";
+import { AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { devNavUrl } from "../../../../../helpers/functions-general";
 import NoData from "../../../../../widgets/NoData";
-import SearchBox from "../../../../../widgets/SearchBox";
 
-const SitioList = () => {
+const UsersList = () => {
   return (
     <>
-      <SearchBox url="/admin/admin-trainee/read-trainee-search-active.php" />
       <div className="mb--2">
+        {/* <h3 className="t--bold mb--1">Baranggay San Marcos</h3> */}
         <table id="" className="" cellSpacing="0" width="100%">
           <thead className="">
             <tr>
@@ -33,28 +28,14 @@ const SitioList = () => {
               <td>Sitio 1</td>
               <td>80%</td>
               <td>
-                <div className="dropdown tooltip--view">
+                <Link
+                  to={`${devNavUrl}/admin/sitio`}
+                  className="dropdown tooltip--view"
+                >
                   <span>
-                    <BiMessageDetail />
+                    <AiFillEye />
                   </span>
-                </div>
-
-                <div className="dropdown">
-                  <span>
-                    <BsThreeDotsVertical />
-                  </span>
-                  <div className="dropdown-content">
-                    <Link to={`${devNavUrl}/admin/trainee-filter?id`}>
-                      <AiFillEdit /> Edit
-                    </Link>
-                    <button>
-                      <FaTrashAlt /> Delete
-                    </button>
-                    <button>
-                      <IoMdArchive /> Archive
-                    </button>
-                  </div>
-                </div>
+                </Link>
               </td>
             </tr>
             <>
@@ -72,4 +53,4 @@ const SitioList = () => {
   );
 };
 
-export default SitioList;
+export default UsersList;

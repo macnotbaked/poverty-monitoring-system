@@ -11,7 +11,7 @@ import * as Yup from "yup";
 import { InputText } from "../../../../helpers/FormInputs";
 import SpinnerButton from "../../../../widgets/SpinnerButton";
 
-const HomeFilter = () => {
+const EvaluationFilter = () => {
   const background = [];
   const border = [];
   const labels = ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"];
@@ -49,7 +49,7 @@ const HomeFilter = () => {
 
   return (
     <>
-      <Navigation menu="home" />
+      <Navigation menu="evaluation" />
       <div className="main-content">
         <div className="container">
           <div className="title">
@@ -58,7 +58,7 @@ const HomeFilter = () => {
                 <span className="tab-title">Filter</span>
                 <Link
                   className="btn float--right"
-                  to={`${devNavUrl}/admin/home`}
+                  to={`${devNavUrl}/admin/evaluation`}
                 >
                   <IoMdArrowRoundBack /> <span>Back</span>
                 </Link>
@@ -225,4 +225,4 @@ const HomeFilter = () => {
   );
 };
 
-export default HomeFilter;
+export default EvaluationFilter;

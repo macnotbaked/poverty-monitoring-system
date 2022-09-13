@@ -3,21 +3,21 @@ import { HiFilter } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { devNavUrl } from "../../../../helpers/functions-general";
 import Navigation from "../../../../navigation/Navigation";
-import HomeList from "./HomeList";
+import EvaluationList from "./EvaluationList";
 
-const Home = () => {
+const Evaluation = () => {
   return (
     <>
-      <Navigation menu="home" />
+      <Navigation menu="evaluation" />
       <div className="main-content">
         <div className="container">
           <div className="title">
             <div className="row">
               <div style={{ marginBottom: "1.5rem" }}>
-                <span className="tab-title">Home Dashboard</span>
+                <span className="tab-title">Evaluation</span>
                 <Link
                   className="btn float--right "
-                  to={`${devNavUrl}/admin/filter`}
+                  to={`${devNavUrl}/admin/evaluation-filter`}
                 >
                   <HiFilter /> <span>Filter</span>
                 </Link>
@@ -35,7 +35,7 @@ const Home = () => {
                     Information Posting
                   </h4> */}
 
-                <HomeList />
+                <EvaluationList />
               </div>
             </div>
           </div>
@@ -45,4 +45,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Evaluation;
