@@ -10,7 +10,7 @@ const NoData = () => {
           <img src={`${devBaseUrl}/img/no-data.png`} alt="no data" />
 
           <h3>
-            <strong>NO DATA</strong>
+            <strong>No Data</strong>
           </h3>
         </div>
       </div>

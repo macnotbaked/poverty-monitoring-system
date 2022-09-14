@@ -3,9 +3,9 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { devNavUrl } from "../../../../../helpers/functions-general";
 import Navigation from "../../../../../navigation/Navigation";
-import UsersList from "./UsersList";
+import UsersActiveList from "./UsersActiveList";
 
-const Users = () => {
+const UsersActive = () => {
   return (
     <>
       <Navigation menu="settings" />
@@ -49,7 +49,7 @@ const Users = () => {
                       </span>
                     </label>
                     <div className="tab">
-                      <UsersList />
+                      <UsersActiveList />
                     </div>
 
                     <input type="radio" name="sub-tabs" id="tab-inactive" />
@@ -79,4 +79,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UsersActive;

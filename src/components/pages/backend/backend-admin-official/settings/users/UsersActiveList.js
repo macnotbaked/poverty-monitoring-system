@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { devNavUrl } from "../../../../../helpers/functions-general";
 import NoData from "../../../../../widgets/NoData";
 
-const UsersList = () => {
+const UsersActiveList = () => {
   return (
     <>
       <div className="mb--2">
@@ -15,18 +15,22 @@ const UsersList = () => {
               <th className="" rowSpan="1">
                 #
               </th>
-              <th className="row--name" rowSpan="1" style={{ width: "15rem" }}>
+              <th rowSpan="1" style={{ width: "15rem" }}>
                 Name
               </th>
-              <th rowSpan="1">Ratings</th>
+              <th rowSpan="1" style={{ width: "20rem" }}>
+                Email
+              </th>
+              <th rowSpan="1">Contact</th>
               <th rowSpan="1">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr className=" ">
               <td>1.</td>
-              <td>Sitio 1</td>
-              <td>80%</td>
+              <td>Merin, Mark Ryan B.</td>
+              <td>merin.ryanmark@gmail.com</td>
+              <td>09491040057</td>
               <td>
                 <Link
                   to={`${devNavUrl}/admin/sitio`}
@@ -53,4 +57,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList;
+export default UsersActiveList;

@@ -13,7 +13,7 @@ import Evaluation from "./components/pages/backend/backend-admin-official/evalua
 import EvaluationFilter from "./components/pages/backend/backend-admin-official/evaluation/EvaluationFilter";
 import Sitio from "./components/pages/backend/backend-admin-official/evaluation/sitio/Sitio";
 import Settings from "./components/pages/backend/backend-admin-official/settings/Settings";
-import Users from "./components/pages/backend/backend-admin-official/settings/users/Users";
+import UsersActive from "./components/pages/backend/backend-admin-official/settings/users/UsersActive";
 
 function App() {
   return (
@@ -58,7 +58,10 @@ function App() {
               path={`${devNavUrl}/admin/settings`}
               element={<Settings />}
             />
-            <Route path={`${devNavUrl}/admin/users`} element={<Users />} />
+            <Route
+              path={`${devNavUrl}/admin/users`}
+              element={<UsersActive />}
+            />
           </Routes>
         </Router>
       </StoreProvider>
