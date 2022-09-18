@@ -1,10 +1,10 @@
 import React from "react";
 import { AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { devNavUrl } from "../../../../../helpers/functions-general";
-import NoData from "../../../../../widgets/NoData";
+import { devNavUrl } from "../../../../../../helpers/functions-general";
+import NoData from "../../../../../../widgets/NoData";
 
-const UsersActiveList = () => {
+const UsersInactiveList = () => {
   return (
     <>
       <div className="mb--2">
@@ -57,4 +57,4 @@ const UsersActiveList = () => {
   );
 };
 
-export default UsersActiveList;
+export default UsersInactiveList;

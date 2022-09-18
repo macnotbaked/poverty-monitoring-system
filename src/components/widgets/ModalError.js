@@ -14,22 +14,21 @@ const ModalError = () => {
     <>
       <div className="modal modal-front">
         <div className="display-center">
-          <div className="title-container">
-            <span className="error-icon color-primary"></span>
-            <button className="btn--close" onClick={handleClose}>
+          <div className="modal-title-container-error">
+            <button className="btn--close float--right" onClick={handleClose}>
               <FaTimes />
             </button>
           </div>
 
           <div className="bg--white">
-            <div className="dialogbox color-primary mb--10 t-center">
+            <div className="error__logo mb--1 t--center">
               <FaExclamation />
             </div>
 
-            <h3 className="t-center t-bold mb--10">{store.message}</h3>
-            <p className="t-center mb--50"></p>
+            <h3 className="t--center t--bold mb--1">{store.message}</h3>
+            <p className="t--center mb--5"></p>
             <div className="button-container">
-              <button className="btn-gradient" onClick={handleClose}>
+              <button className="btn--outline" onClick={handleClose}>
                 Okay
               </button>
             </div>

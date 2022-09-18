@@ -126,7 +126,7 @@
   bottom: 0;
 }
 .modal--front {
-  z-index: 9999999999999;
+  z-index: 999999999;
 }
 .full--width {
   width: 100%;
@@ -148,12 +148,12 @@
   line-height: normal;
   font-weight: bold;
   border-radius: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid $light-gray;
   background: $primary-color;
 
   &:hover {
     background-color: transparent;
-    border: 1px solid #ddd;
+    border: 1px solid $light-gray;
     color: $primary-color !important;
   }
 
@@ -184,12 +184,12 @@
   line-height: normal;
   font-weight: bold;
   border-radius: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid $light-gray;
   background: $light-color;
 
   &:hover {
     background-color: transparent;
-    border: 1px solid #ddd;
+    border: 1px solid $light-gray;
     color: $primary-color !important;
   }
 
@@ -211,7 +211,7 @@
 }
 .btn--primary {
   background: $primary-color;
-  border: 1px solid #ddd !important;
+  border: 1px solid $light-gray !important;
   color: #fff;
   padding: 10px;
   border-radius: 50px;
@@ -224,7 +224,26 @@
   transition: all 0.5s;
   &:hover {
     background-color: transparent;
-    border: 1px solid #ddd;
+    border: 1px solid $light-gray;
+    color: $primary-color;
+  }
+}
+.btn--secondary {
+  background: $light-color;
+  border: 1px solid $light-gray !important;
+  color: $primary-color;
+  padding: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: inherit;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  line-height: normal;
+  transition: all 0.5s;
+  &:hover {
+    background-color: transparent;
+    border: 1px solid $light-gray;
     color: $primary-color;
   }
 }

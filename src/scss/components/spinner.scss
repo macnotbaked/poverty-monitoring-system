@@ -139,3 +139,38 @@
     background: $secondary-color;
   }
 }
+
+.progress {
+  position: relative;
+  height: 0.5rem;
+  width: 15rem;
+  border: 0.5rem solid $primary-color;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+}
+.progress .color {
+  position: absolute;
+  background-color: $light-color;
+  width: 0px;
+  height: 0.5rem;
+  border-radius: 15px;
+  animation: progres 4s infinite linear;
+}
+@keyframes progres {
+  0% {
+    width: 0%;
+  }
+  25% {
+    width: 50%;
+  }
+  50% {
+    width: 75%;
+  }
+  75% {
+    width: 85%;
+  }
+  100% {
+    width: 100%;
+  }
+} ;

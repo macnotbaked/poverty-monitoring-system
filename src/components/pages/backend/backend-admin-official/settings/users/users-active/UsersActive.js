@@ -1,9 +1,10 @@
 import React from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { devNavUrl } from "../../../../../helpers/functions-general";
-import Navigation from "../../../../../navigation/Navigation";
+import { devNavUrl } from "../../../../../../helpers/functions-general";
+import Navigation from "../../../../../../navigation/Navigation";
 import UsersActiveList from "./UsersActiveList";
+import { HiPlus } from "react-icons/hi";
 
 const UsersActive = () => {
   return (
@@ -16,11 +17,14 @@ const UsersActive = () => {
               <div style={{ marginBottom: "1.5rem" }}>
                 <span className="tab-title">{"Settings"}</span>
                 <Link
-                  className="btn float--right"
+                  className="btn--back float--right"
                   to={`${devNavUrl}/admin/settings`}
                 >
                   <IoMdArrowRoundBack /> <span>Back</span>
                 </Link>
+                <button className="btn float--right ">
+                  <HiPlus /> <span>Add</span>
+                </button>
               </div>
               <hr />
             </div>
@@ -57,9 +61,7 @@ const UsersActive = () => {
                       htmlFor="tab-inactive"
                       className="menu-label tab-icon"
                     >
-                      <Link
-                        to={`${devNavUrl}/admin/settings-system-user-account-inactive`}
-                      >
+                      <Link to={`${devNavUrl}/admin/users-inactive`}>
                         Inactive <small className="badge--active">3</small>
                       </Link>
                     </label>
@@ -68,7 +70,7 @@ const UsersActive = () => {
 
                 <input type="radio" name="tabs" id="tab-role" />
                 <label htmlFor="tab-role" className="menu-label">
-                  <Link to={`${devNavUrl}/admin/users-role`}>Role</Link>
+                  <Link to={`${devNavUrl}/admin/users-roles`}>Role</Link>
                 </label>
               </div>
             </div>

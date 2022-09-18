@@ -5,7 +5,7 @@ import { devNavUrl } from "../../../../helpers/functions-general";
 const SettingList = () => {
   return (
     <>
-      <div className="grid-col-2 mb--2">
+      <div className="grid-col-2 mb--2 shadow--primary pxy--2">
         {/* 1 */}
         <div className="setting shadow--primary ">
           <h4 className="t--bold mb--1">Users</h4>

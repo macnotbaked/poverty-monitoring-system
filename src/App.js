@@ -13,7 +13,10 @@ import Evaluation from "./components/pages/backend/backend-admin-official/evalua
 import EvaluationFilter from "./components/pages/backend/backend-admin-official/evaluation/EvaluationFilter";
 import Sitio from "./components/pages/backend/backend-admin-official/evaluation/sitio/Sitio";
 import Settings from "./components/pages/backend/backend-admin-official/settings/Settings";
-import UsersActive from "./components/pages/backend/backend-admin-official/settings/users/UsersActive";
+import PageNotFound from "./components/widgets/PageNotFound";
+import UsersActive from "./components/pages/backend/backend-admin-official/settings/users/users-active/UsersActive";
+import UsersInactive from "./components/pages/backend/backend-admin-official/settings/users/users-inactive/UsersInactive";
+import Roles from "./components/pages/backend/backend-admin-official/settings/users/roles/Roles";
 
 function App() {
   return (
@@ -62,6 +65,16 @@ function App() {
               path={`${devNavUrl}/admin/users`}
               element={<UsersActive />}
             />
+            <Route
+              path={`${devNavUrl}/admin/users-inactive`}
+              element={<UsersInactive />}
+            />
+            <Route
+              path={`${devNavUrl}/admin/users-roles`}
+              element={<Roles />}
+            />
+
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Router>
       </StoreProvider>
