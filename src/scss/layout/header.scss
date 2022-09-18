@@ -1,0 +1,33 @@
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 6rem;
+  padding: 0 2rem;
+  background-color: $light-color;
+  border-bottom: 3px solid $primary-color;
+  // margin-left: 20rem;
+  &__logo {
+    height: 5rem;
+    width: 15rem;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+      object-position: center center;
+    }
+  }
+  &__credential {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 4rem;
+
+    svg {
+      color: $light-gray;
+    }
+  }
+}

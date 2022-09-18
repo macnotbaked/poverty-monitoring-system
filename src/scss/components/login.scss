@@ -1,0 +1,11 @@
+.login {
+  min-height: 100vh;
+  position: relative;
+  .success__logo {
+    text-align: center;
+    svg {
+      color: $secondary-color;
+      font-size: 8rem;
+    }
+  }
+}

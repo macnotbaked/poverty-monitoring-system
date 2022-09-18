@@ -1,0 +1,243 @@
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+}
+input[disabled],
+select:disabled,
+textarea:disabled,
+button:disabled,
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+input[type="checkbox"]:focus,
+input[type="radio"]:focus,
+input[type="file"]:focus,
+input[type="hidden"]:focus {
+  border: none;
+  outline: 0;
+}
+input[type="checkbox"],
+input[type="radio"],
+input[type="file"],
+input[type="hidden"],
+input[type="image"],
+input[type="color"] {
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+button,
+input,
+textarea {
+  font-family: inherit;
+  line-height: normal;
+}
+textarea {
+  font-size: 100%;
+  overflow: auto;
+  vertical-align: top;
+  height: 10rem;
+}
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="phone"],
+input[type="date"],
+input[type="time"],
+input[type="password"],
+select,
+textarea {
+  background: #fff;
+  height: 38px;
+  padding: 6px 15px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $dark-color;
+  background-clip: padding-box;
+  box-shadow: none;
+  width: 100%;
+}
+.login__form {
+  padding: 5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  transform: translateY(clamp(5rem, 10vw, 22rem));
+  position: relative;
+  margin: 0 auto;
+  border-radius: 5px;
+  max-width: 40rem;
+}
+.form {
+  position: relative;
+  padding: 4rem 0;
+  width: 100%;
+}
+.input {
+  position: relative;
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="date"],
+  input[type="number"],
+  select {
+    border: 1px solid $dark-color;
+    background: #fff;
+    height: 38px;
+    padding: 6px 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #54667a;
+    background-clip: padding-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-shadow: none;
+    width: 100%;
+    border-radius: 0.5rem;
+  }
+  textarea {
+    border: 1px solid $dark-color;
+    background: #fff;
+    height: 10rem;
+    padding: 6px 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #54667a;
+    background-clip: padding-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-shadow: none;
+    width: 100%;
+  }
+  label {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    pointer-events: none;
+    background: $light-color;
+    font-size: 1.3rem;
+    transition: 0.5s;
+  }
+  input[type="password"]:focus,
+  input[type="text"]:focus,
+  input[type="date"]:focus,
+  input[type="number"]:focus,
+  input[type="email"]:focus,
+  select:focus,
+  textarea:focus {
+    border: 1px solid $primary-color;
+    -webkit-box-shadow: inset 0 1px 5px #d6d6d6 !important;
+    -moz-box-shadow: inset 0 1px 5px #d6d6d6 !important;
+    box-shadow: inset 0 1px 5px #d6d6d6 !important;
+  }
+
+  input[type="text"]:disabled ~ label,
+  input[type="text"]:focus ~ label,
+  input[type="text"]:valid ~ label,
+  input[type="password"]:disabled ~ label,
+  input[type="password"]:focus ~ label,
+  input[type="password"]:valid ~ label,
+  input[type="email"]:disabled ~ label,
+  input[type="email"]:focus ~ label,
+  input[type="email"]:valid ~ label,
+  input[type="date"]:disabled ~ label,
+  input[type="date"]:focus ~ label,
+  input[type="date"]:valid ~ label,
+  input[type="number"]:disabled ~ label,
+  input[type="number"]:focus ~ label,
+  input[type="number"]:valid ~ label,
+  select:disabled ~ label,
+  select:focus ~ label,
+  select:valid ~ label,
+  textarea:disabled ~ label,
+  textarea:focus ~ label,
+  textarea:valid ~ label {
+    top: -9px !important;
+    left: 3px !important;
+    font-size: 1.11rem;
+    color: $primary-color !important;
+    font-weight: bold;
+    padding: 0 8px;
+  }
+  span.error-show {
+    display: block;
+    left: 0;
+    right: 0;
+    text-align: right;
+    bottom: -20px;
+    font-weight: bold;
+  }
+  input.error-show,
+  textarea.error-show,
+  select.error-show {
+    border: 1px solid $primary-color !important;
+  }
+  label.error-show {
+    color: $primary-color !important;
+  }
+  .icon--input {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.6rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: $dark-gray;
+  }
+  .search--bar {
+    // border: 0 !important;
+    border: 0.1rem solid $light-gray !important;
+  }
+}
+.profile--upload {
+  border-radius: 100%;
+  width: 8rem;
+  height: 8rem;
+  padding: 0;
+  margin: 0 auto 20px;
+  position: relative;
+  img,
+  svg {
+    width: 100%;
+    height: 100%;
+    color: $light-gray;
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .upload--button {
+    position: absolute;
+    bottom: 0;
+    right: -3px;
+    color: $light-color;
+    background: $secondary-color !important;
+    padding: 7px !important;
+    border-radius: 50% !important;
+    border: 4px solid lighten($light-color, 40%) !important;
+    line-height: 12px;
+    font-size: 14px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    input {
+      opacity: 0;
+      cursor: pointer;
+      font-size: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+    }
+  }
+}
