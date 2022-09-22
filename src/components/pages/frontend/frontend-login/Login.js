@@ -5,15 +5,17 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { StoreContext } from "../../../../store/StoreContext";
 import { InputText } from "../../../helpers/FormInputs";
 import Logo from "../../../widgets/Logo";
-import { devNavUrl } from "../../../helpers/functions-general";
+import { devNavUrl, fetchFormData } from "../../../helpers/functions-general";
 import Spinner from "../../../widgets/Spinner";
 import { useNavigate } from "react-router-dom";
 import useIsLogin from "../../../custom-hooks/useIsLogin";
+import { fetchData } from "../../../helpers/fetchData";
 
 const Login = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [passwordShown, setPasswordShown] = React.useState(false);
   const navigate = useNavigate();
+  const [btnLoading, setLoading] = React.useState(false);
   const { loading } = useIsLogin(navigate);
 
   const togglePassword = () => {
@@ -21,15 +23,13 @@ const Login = () => {
   };
 
   const initVal = {
-    settings_account_email: "",
-    settings_account_password: "",
+    users_email: "",
+    users_password: "",
   };
 
   const yupSchema = Yup.object({
-    settings_account_email: Yup.string()
-      .email("Invalid Email")
-      .required("Required"),
-    settings_account_password: Yup.string().required("Required"),
+    users_email: Yup.string().email("Invalid Email").required("Required"),
+    users_password: Yup.string().required("Required"),
   });
   return (
     <>
@@ -42,27 +42,26 @@ const Login = () => {
               <Logo />
             </div>
             <h2 className="t--left t--exbold my--2">LOGIN</h2>
-            {/* <span className="t--left mb--2">Fill out fields</span> */}
 
             <Formik
               initialValues={initVal}
               validationSchema={yupSchema}
               onSubmit={async (values, { setSubmitting, resetForm }) => {
                 // clear first the local storage
-                //   localStorage.removeItem("lcsstoken");
-                // fetchData(
-                //   setLoading,
-                //   "/admin/admin-settings/account/read-account-login.php",
-                //   values, // form data values
-                //   null, // result set data
-                //   "Access granted.", // success msg
-                //   "Access denied.", // additional error msg if needed
-                //   dispatch, // context api action
-                //   store, // context api state
-                //   false, // boolean to show success modal
-                //   false, // boolean to show load more functionality button
-                //   navigate // props optional
-                // );
+                localStorage.removeItem("pmstoken");
+                fetchData(
+                  setLoading,
+                  "/admin/admin-settings/users/read-user-login.php",
+                  values, // form data values
+                  null, // result set data
+                  "Access granted.", // success msg
+                  "Access denied.", // additional error msg if needed
+                  dispatch, // context api action
+                  store, // context api state
+                  true, // boolean to show success modal
+                  false, // boolean to show load more functionality button
+                  navigate // props optional
+                );
               }}
             >
               {(props) => {
@@ -72,7 +71,7 @@ const Login = () => {
                       <InputText
                         label="Email address"
                         type="text"
-                        name="settings_account_email"
+                        name="users_email"
                         required
                       />
                     </div>
@@ -80,7 +79,7 @@ const Login = () => {
                       <InputText
                         label="Password"
                         type={passwordShown ? "text" : "password"}
-                        name="settings_account_password"
+                        name="users_password"
                         required
                       />
                       <i

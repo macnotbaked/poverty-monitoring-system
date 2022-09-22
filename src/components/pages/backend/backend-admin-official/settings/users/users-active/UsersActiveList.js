@@ -3,12 +3,22 @@ import { AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { devNavUrl } from "../../../../../../helpers/functions-general";
 import NoData from "../../../../../../widgets/NoData";
+import Spinner from "../../../../../../widgets/Spinner";
 
-const UsersActiveList = () => {
+const UsersActiveList = ({
+  loading,
+  handleLoad,
+  totalResult,
+  result,
+  handleSearch,
+  handleChange,
+}) => {
   return (
     <>
       <div className="mb--2">
         {/* <h3 className="t--bold mb--1">Baranggay San Marcos</h3> */}
+        {/* {loading && <Spinner />} */}
+
         <table id="" className="" cellSpacing="0" width="100%">
           <thead className="">
             <tr>

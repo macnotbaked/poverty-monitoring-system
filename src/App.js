@@ -17,6 +17,7 @@ import PageNotFound from "./components/widgets/PageNotFound";
 import UsersActive from "./components/pages/backend/backend-admin-official/settings/users/users-active/UsersActive";
 import UsersInactive from "./components/pages/backend/backend-admin-official/settings/users/users-inactive/UsersInactive";
 import Roles from "./components/pages/backend/backend-admin-official/settings/users/roles/Roles";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -42,7 +43,14 @@ function App() {
 
             {/* ADMIN HOME */}
 
-            <Route path={`${devNavUrl}/admin/home`} element={<Home />} />
+            <Route
+              path={`${devNavUrl}/admin/home`}
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
             <Route path={`${devNavUrl}/admin/citizen`} element={<Citizen />} />
             <Route
               path={`${devNavUrl}/admin/citizen-add`}

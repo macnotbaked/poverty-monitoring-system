@@ -6,10 +6,18 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { StoreContext } from "../../../../store/StoreContext";
 import { getUrlParam } from "../../../helpers/functions-general";
 import Logo from "../../../widgets/Logo";
-import { setError, setMessage } from "../../../../store/StoreAction";
+import {
+  setCreatePass,
+  setError,
+  setMessage,
+} from "../../../../store/StoreAction";
 import { InputText } from "../../../helpers/FormInputs";
 import SpinnerButton from "../../../widgets/SpinnerButton";
 import ModalError from "../../../widgets/ModalError";
+import useLoadAll from "../../../custom-hooks/useLoadAll";
+import Spinner from "../../../widgets/Spinner";
+import PageNotFound from "../../../widgets/PageNotFound";
+import { fetchData } from "../../../helpers/fetchData";
 
 const CreatePassword = ({ itemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -21,16 +29,43 @@ const CreatePassword = ({ itemEdit }) => {
     setPasswordShown(!passwordShown);
   };
 
+  const { loading, result } = useLoadAll(
+    "/admin/admin-settings/users/read-user-key.php",
+    getUrlParam().get("key")
+  );
+
+  React.useEffect(() => {
+    dispatch(setCreatePass(true));
+  }, []);
+
   const initVal = {
-    settings_account_password: "",
-    settings_account_password_confirm: "",
+    users_password: "",
+    users_password_confirm: "",
     key: getUrlParam().get("key"),
   };
 
   const yupSchema = Yup.object({
-    settings_account_password: Yup.string().required("Required"),
-    settings_account_password_confirm: Yup.string().required("Required"),
+    users_password: Yup.string().required("Required"),
+    users_password_confirm: Yup.string().required("Required"),
   });
+
+  if (
+    getUrlParam().get("key") === null ||
+    getUrlParam().get("key") === "" ||
+    result.length === 0
+  ) {
+    return loading ? (
+      <>
+        <Spinner />
+      </>
+    ) : (
+      <>
+        {store.error && <ModalError />}
+
+        <PageNotFound />
+      </>
+    );
+  }
 
   return (
     <>
@@ -40,35 +75,31 @@ const CreatePassword = ({ itemEdit }) => {
             <Logo />
           </div>
           <h2 className="t--left t--exbold my--2">CREATE PASSWORD</h2>
-          {/* <span className="t--left mb--2">Fill out fields</span> */}
 
           <Formik
             initialValues={initVal}
             validationSchema={yupSchema}
             onSubmit={async (values, { setSubmitting, resetForm }) => {
               // console.log(values);
-              if (
-                values.settings_account_password !==
-                values.settings_account_password_confirm
-              ) {
+              if (values.users_password !== values.users_password_confirm) {
                 dispatch(setError(true));
                 dispatch(setMessage("Your password did not match."));
                 return;
               }
 
-              // fetchData(
-              //   setLoading,
-              //   "/admin/admin-settings/account/update-account-new-pass.php",
-              //   values, // form data values
-              //   null, // result set data
-              //   "", // success msg
-              //   "", // additional error msg if needed
-              //   dispatch, // context api action
-              //   store, // context api state
-              //   false, // boolean to show success modal
-              //   false, // boolean to show load more functionality button
-              //   Navigate
-              // );
+              fetchData(
+                setLoading,
+                "/admin/admin-settings/users/update-user-new-pass.php",
+                values, // form data values
+                null, // result set data
+                "", // success msg
+                "", // additional error msg if needed
+                dispatch, // context api action
+                store, // context api state
+                false, // boolean to show success modal
+                false, // boolean to show load more functionality button
+                Navigate
+              );
             }}
           >
             {(props) => {
@@ -78,11 +109,11 @@ const CreatePassword = ({ itemEdit }) => {
                     <InputText
                       label="New Password"
                       type={passwordShown ? "text" : "password"}
-                      name="settings_account_password"
+                      name="users_password"
                       required
                     />
                     <i
-                      className="show--pass"
+                      className="icon--input"
                       onMouseDown={togglePassword}
                       onMouseUp={togglePassword}
                     >
@@ -97,11 +128,11 @@ const CreatePassword = ({ itemEdit }) => {
                     <InputText
                       label="Confirm Password"
                       type={passwordShown ? "text" : "password"}
-                      name="settings_account_password_confirm"
+                      name="users_password_confirm"
                       required
                     />
                     <i
-                      className="show--pass"
+                      className="icon--input"
                       onMouseDown={togglePassword}
                       onMouseUp={togglePassword}
                     >

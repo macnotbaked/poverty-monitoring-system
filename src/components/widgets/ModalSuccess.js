@@ -14,20 +14,19 @@ const ModalSuccess = () => {
     <>
       <div className="modal modal-front">
         <div className="display-center">
-          <div className="title-container">
-            <span className="success-icon color-green"></span>
-            <button className="btn--close" onClick={handleClose}>
+          <div className="modal-title-container-error">
+            <button className="btn--close float--right" onClick={handleClose}>
               <FaTimes />
             </button>
           </div>
           <div className="bg--white">
-            <div className="dialogbox color-primary mb--20 t-center">
+            <div className="mb--2 t--center">
               <FaCheck />
             </div>
-            <h3 className="t-center t-bold mb--10">Success!</h3>
-            <p className="t-center mb--50">{store.message}</p>
+            <h3 className="t--center t--bold mb--1">Success!</h3>
+            <p className="t--center mb--5">{store.message}</p>
             <div className="button-container">
-              <button className="btn-gradient" onClick={handleClose}>
+              <button className="btn--outline" onClick={handleClose}>
                 Okay
               </button>
             </div>

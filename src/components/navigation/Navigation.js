@@ -7,12 +7,28 @@ import {
 } from "react-icons/fa";
 import { AiFillSetting } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { setStartIndex } from "../../store/StoreAction";
+import {
+  setIsActive,
+  setIsLogout,
+  setStartIndex,
+} from "../../store/StoreAction";
 import { StoreContext } from "../../store/StoreContext";
 import { devBaseUrl, devNavUrl } from "../helpers/functions-general";
+import ModalLogout from "../widgets/ModalLogout";
 
 const Navigation = ({ menu }) => {
   const { store, dispatch } = React.useContext(StoreContext);
+  const [itemEdit, setItemEdit] = React.useState(null);
+  const role = store.credentials.roles_name;
+
+  const handleLogout = () => {
+    dispatch(setIsLogout(true));
+    setItemEdit(null);
+  };
+
+  const handleshow = () => {
+    dispatch(setIsActive(!store.isActive));
+  };
 
   return (
     <>
@@ -106,16 +122,25 @@ const Navigation = ({ menu }) => {
             <FaUserCircle />
             <div className="profile__name">
               <span>
-                Hi, <span className="t--bold">Mark Ryan</span>
+                Hi{" "}
+                <span className="t--bold">
+                  {role === "Citizen"
+                    ? store.credentials.citizen_fname
+                    : store.credentials.users_fname}
+                  ,
+                </span>
               </span>
-              <span>Admin</span>
+              <span>{store.credentials.roles_name}</span>
             </div>
           </div>
-          <button type="sumbit" className="btn--primary">
+          <button type="sumbit" className="btn--primary" onClick={handleLogout}>
             Logout
           </button>
         </div>
       </nav>
+
+      {store.isLogout && <ModalLogout />}
+      {/* <ModalLogout /> */}
     </>
   );
 };

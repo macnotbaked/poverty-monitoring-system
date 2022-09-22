@@ -5,8 +5,38 @@ import { devNavUrl } from "../../../../../../helpers/functions-general";
 import Navigation from "../../../../../../navigation/Navigation";
 import UsersActiveList from "./UsersActiveList";
 import { HiPlus } from "react-icons/hi";
+import { setIsAdd } from "../../../../../../../store/StoreAction";
+import { StoreContext } from "../../../../../../../store/StoreContext";
+import ModalAddUsers from "./ModalAddUsers";
+import ModalError from "../../../../../../widgets/ModalError";
+import ModalSuccess from "../../../../../../widgets/ModalSuccess";
+import useLoadAllRole from "../../../../../../custom-hooks/useLoadAllRole";
+import useFetchDataLoadMore from "../../../../../../custom-hooks/useFetchDataLoadMore";
 
 const UsersActive = () => {
+  const { store, dispatch } = React.useContext(StoreContext);
+  const [itemEdit, setItemEdit] = React.useState(null);
+
+  const { role } = useLoadAllRole("/admin/admin-settings/roles/read-role.php");
+
+  const {
+    loading,
+    handleLoad,
+    totalResult,
+    result,
+    handleSearch,
+    handleChange,
+  } = useFetchDataLoadMore(
+    "/admin/admin-settings/account/read-account-limit.php",
+    "/admin/admin-settings/account/read-account.php",
+    5 // show number of records on a table
+  );
+
+  const handleAdd = () => {
+    dispatch(setIsAdd(true));
+    setItemEdit(null);
+  };
+
   return (
     <>
       <Navigation menu="settings" />
@@ -22,7 +52,7 @@ const UsersActive = () => {
                 >
                   <IoMdArrowRoundBack /> <span>Back</span>
                 </Link>
-                <button className="btn float--right ">
+                <button className="btn float--right " onClick={handleAdd}>
                   <HiPlus /> <span>Add</span>
                 </button>
               </div>
@@ -53,7 +83,14 @@ const UsersActive = () => {
                       </span>
                     </label>
                     <div className="tab">
-                      <UsersActiveList />
+                      <UsersActiveList
+                        loading={loading}
+                        handleLoad={handleLoad}
+                        totalResult={totalResult}
+                        result={result}
+                        handleSearch={handleSearch}
+                        handleChange={handleChange}
+                      />
                     </div>
 
                     <input type="radio" name="sub-tabs" id="tab-inactive" />
@@ -77,6 +114,10 @@ const UsersActive = () => {
           </div>
         </div>
       </div>
+
+      {store.isAdd && <ModalAddUsers item={itemEdit} role={role} />}
+      {store.error && <ModalError />}
+      {store.success && <ModalSuccess />}
     </>
   );
 };

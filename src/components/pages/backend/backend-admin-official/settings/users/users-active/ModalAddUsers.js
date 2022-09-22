@@ -8,10 +8,10 @@ import {
 } from "../../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../../store/StoreContext";
 import { fetchData } from "../../../../../../helpers/fetchData";
-import { InputText } from "../../../../../../helpers/FormInputs";
+import { InputSelect, InputText } from "../../../../../../helpers/FormInputs";
 import SpinnerButton from "../../../../../../widgets/SpinnerButton";
 
-const ModalAddUsers = ({ item }) => {
+const ModalAddUsers = ({ item, role }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [loading, setLoading] = React.useState(false);
 
@@ -20,12 +20,24 @@ const ModalAddUsers = ({ item }) => {
   };
 
   const initVal = {
-    roles_aid: item ? item.roles_aid : "",
-    roles_name: item ? item.roles_name : "",
+    users_aid: item ? item.users_aid : "",
+    users_fname: item ? item.users_fname : "",
+    users_mname: item ? item.users_mname : "",
+    users_lname: item ? item.users_lname : "",
+    users_email: item ? item.users_email : "",
+    users_phone: item ? item.users_phone : "",
+    users_gender: item ? item.users_gender : "",
+    users_role_id: item ? item.users_role_id : "",
   };
 
   const yupSchema = Yup.object({
-    roles_name: Yup.string().required("Required"),
+    users_fname: Yup.string().required("Required"),
+    users_mname: Yup.string().required("Required"),
+    users_lname: Yup.string().required("Required"),
+    users_email: Yup.string().required("Required").email("Invalid email"),
+    users_phone: Yup.string().required("Required"),
+    users_gender: Yup.string().required("Required"),
+    users_role_id: Yup.string().required("Required"),
   });
 
   React.useEffect(() => {
@@ -43,7 +55,7 @@ const ModalAddUsers = ({ item }) => {
       <div className="modal modal--front">
         <div className="display-center">
           <div className="modal-title-container">
-            <h4 className="t--bold">{item ? "Update" : "Add"} role</h4>
+            <h4 className="t--bold">{item ? "Update" : "Add"} user</h4>
             <button className="btn--close" onClick={handleClose}>
               <FaTimes />
             </button>
@@ -58,14 +70,14 @@ const ModalAddUsers = ({ item }) => {
                   setLoading,
                   item
                     ? "/admin/admin-settings/roles/update-role.php"
-                    : "/admin/admin-settings/roles/create-role.php",
+                    : "/admin/admin-settings/users/create-user.php",
                   values, // form data values
                   null, // result set data
-                  "", // success msg
+                  "Please check the email to proceed.", // success msg
                   "", // additional error msg if needed
                   dispatch, // context api action
                   store, // context api state
-                  false, // boolean to show success modal
+                  true, // boolean to show success modal
                   false // boolean to show load more functionality button
                 );
                 dispatch(setStartIndex(0));
@@ -76,12 +88,86 @@ const ModalAddUsers = ({ item }) => {
                   <Form>
                     <div className="input my--3">
                       <InputText
-                        label="Role"
+                        label="First name"
                         type="text"
-                        name="roles_name"
+                        name="users_fname"
                         disabled={loading}
                         required
                       />
+                    </div>
+                    <div className="input my--3">
+                      <InputText
+                        label="Middle name"
+                        type="text"
+                        name="users_mname"
+                        disabled={loading}
+                        required
+                      />
+                    </div>
+                    <div className="input my--3">
+                      <InputText
+                        label="Last name"
+                        type="text"
+                        name="users_lname"
+                        disabled={loading}
+                        required
+                      />
+                    </div>
+                    <div className="input my--3">
+                      <InputText
+                        label="Email"
+                        type="text"
+                        name="users_email"
+                        disabled={loading}
+                        required
+                      />
+                    </div>
+                    <div className="input my--3">
+                      <InputText
+                        label="Phone number"
+                        type="text"
+                        name="users_phone"
+                        disabled={loading}
+                        required
+                      />
+                    </div>
+                    <div className="input my--3">
+                      <InputSelect
+                        label="Gender"
+                        name="users_gender"
+                        disabled={loading}
+                        required
+                      >
+                        <option value="">
+                          {loading ? "loading..." : "--"}
+                        </option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </InputSelect>
+                    </div>
+                    <div className="input my--3">
+                      <InputSelect
+                        label="Role"
+                        name="users_role_id"
+                        disabled={loading}
+                        required
+                      >
+                        <option value="">
+                          {" "}
+                          {loading ? "loading..." : "--"}
+                        </option>
+                        {role.length > 0 ? (
+                          role.map((item, key) => {
+                            return (
+                              <option key={key} value={item.roles_aid}>
+                                {item.roles_name}
+                              </option>
+                            );
+                          })
+                        ) : (
+                          <option value="">No data</option>
+                        )}
+                      </InputSelect>
                     </div>
 
                     <div className="d--flex gap--1">

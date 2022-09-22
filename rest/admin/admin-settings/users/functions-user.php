@@ -89,6 +89,26 @@ function checkArchive($object)
     return $result;
 }
 
+function checkReadKey($object)
+{
+    $result = $object->readKey();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(false, "The link is Invalid.", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkNewPassword($object)
+{
+    $result = $object->updateNewPassword();
+    if (!$result) {
+        Response::sendResponse(false, "Please check your sql query (Update new password)", []);
+        exit();
+    }
+    return $result;
+}
+
 function getResultData($result)
 {
     $data = [];
@@ -97,6 +117,8 @@ function getResultData($result)
         $list = [
             "users_aid" => $users_aid,
             "users_is_active" => $users_is_active,
+            "users_key" => $users_key,
+            "users_password" => $users_password,
             "users_fname" => $users_fname,
             "users_mname" => $users_mname,
             "users_lname" => $users_lname,
@@ -106,6 +128,9 @@ function getResultData($result)
             "users_role_id" => $users_role_id,
             "users_created" => $users_created,
             "users_datetime" => $users_datetime,
+
+            "roles_aid" => $roles_aid,
+            "roles_name" => $roles_name,
         ];
         array_push($data, $list);
     }

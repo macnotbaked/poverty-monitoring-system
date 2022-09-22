@@ -16,16 +16,14 @@ import {
   setSave,
   setIsConfirm,
   setIsAdd,
-  // setIsDonorSignUp,
   setCreatePass,
   setIsLogin,
-  setCredentials,
   setForgotPass,
-  // setSelfEvaluationComplete,
-  // setPeerEvaluationComplete,
   setIsEvalEnabled,
   setIsSignup,
+  setCredentials,
 } from "../../store/StoreAction";
+import { checkRoleToRedirect } from "./login-functions";
 // import { checkRoleToRedirect } from "./login-functions";
 
 export const fetchData = async (
@@ -113,31 +111,31 @@ export const fetchData = async (
     // redirect to other page after create password
     if (store.isCreatePass) {
       dispatch(setCreatePass(false));
-      navigate(`${devNavUrl}/admin/all-set`);
+      navigate(`${devNavUrl}/all-set`);
     }
 
     // redirect to other page after request forgot password
     if (store.isForgotPassword) {
       dispatch(setForgotPass(false));
-      navigate(`${devNavUrl}/admin/almost-done`);
+      navigate(`${devNavUrl}/almost-done`);
     }
 
     // redirect to other page after login
-    // if (store.isLogin) {
-    //   // dispatch(setCredentials(data.mail));
-    //   dispatch(
-    //     setCredentials(
-    //       data.mail.settings_account_aid,
-    //       data.mail.settings_account_fname,
-    //       data.mail.settings_role_name,
-    //       data.mail.settings_account_email,
-    //       data.mail.settings_account_aid
-    //     )
-    //   );
-    //   setStorageRoute(data.data);
-    //   // setStorageRoute(data.data, data.mail);
-    //   dispatch(setIsLogin(false));
-    //   checkRoleToRedirect(navigate, data.mail);
-    // }
+    if (store.isLogin) {
+      // dispatch(setCredentials(data.mail));
+      dispatch(
+        setCredentials(
+          data.mail.users_aid,
+          data.mail.users_fname,
+          data.mail.roles_name,
+          data.mail.users_email,
+          data.mail.users_aid
+        )
+      );
+      setStorageRoute(data.data);
+      // setStorageRoute(data.data, data.mail);
+      dispatch(setIsLogin(false));
+      checkRoleToRedirect(navigate, data.mail);
+    }
   }
 };
