@@ -13,7 +13,7 @@ const LoadMore = ({ handleLoad, loading, totalResult, result }) => {
           <button
             className="btn--loadmore mb--20"
             onClick={handleLoad}
-            // disabled={loading}
+            disabled={loading}
           >
             {loading && <SpinnerButton />} Load more
           </button>

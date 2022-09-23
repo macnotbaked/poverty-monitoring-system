@@ -10,7 +10,6 @@ require 'PHPMailer/Exception.php';
 
 include_once("mail-config.php");
 include_once("html/html-new-account.php");
-// include_once($_SERVER['DOCUMENT_ROOT'] . "/rest/notification/html/html-new-account.php");
 
 
 function sendEmail($email, $key, $name)
@@ -26,7 +25,7 @@ function sendEmail($email, $key, $name)
 	$mail->Subject = SUBJECT_NEW_ACCOUNT;
 	$mail->setFrom(USERNAME, FROM);
 	$mail->isHTML(true);
-	$mail->Body = getHtmlNewAccount($key, ROOT_DOMAIN, IMAGES_URL, $name);
+	$mail->Body = getHtmlNewAccount($key, ROOT_DOMAIN, $name);
 	$mail->addAddress($email);
 
 	if ($mail->Send()) {

@@ -1,6 +1,6 @@
 <?php
 
-function getHtmlNewAccount($key, $ROOT_DOMAIN, $name)
+function getHtmlForgotAccount($key, $ROOT_DOMAIN, $name)
 {
   $html = '<div
     style="
@@ -37,10 +37,12 @@ function getHtmlNewAccount($key, $ROOT_DOMAIN, $name)
         </div>
 
         <div style="margin-bottom: 20px; padding: 30px">
-          <p style="color: #000; font-size: 20px">Hi ' . $name . ',</p>
           <p>
-            To get started you need to create a password. Your account will
-            not be created until you have succesfully created a password.
+            It looks like you are resetting your password.
+          </p>
+          <p>
+          If you did not request a password change, then just ignore this
+          message.
           </p>
           <a
             href="' . $ROOT_DOMAIN . '/create-password?key=' . $key . '"
@@ -55,7 +57,7 @@ function getHtmlNewAccount($key, $ROOT_DOMAIN, $name)
               margin: 30px auto 0;
               text-align: center;
             "
-            >Create Password</a
+            >Reset Password</a
           >
           <p style="margin-top: 20px; color: #000">
             Or, paste this link into your browser:

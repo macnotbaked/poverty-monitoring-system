@@ -18,6 +18,7 @@ import UsersActive from "./components/pages/backend/backend-admin-official/setti
 import UsersInactive from "./components/pages/backend/backend-admin-official/settings/users/users-inactive/UsersInactive";
 import Roles from "./components/pages/backend/backend-admin-official/settings/users/roles/Roles";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ForgotPasswordAlmostDone from "./components/pages/frontend/frontend-forgot-pass/ForgotPasswordAlmostDone";
 
 function App() {
   return (
@@ -40,6 +41,10 @@ function App() {
               path={`${devNavUrl}/all-set`}
               element={<CreatePasswordSuccess />}
             />
+            <Route
+              path={`${devNavUrl}/almost-done`}
+              element={<ForgotPasswordAlmostDone />}
+            />
 
             {/* ADMIN HOME */}
 
@@ -51,35 +56,77 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path={`${devNavUrl}/admin/citizen`} element={<Citizen />} />
+            <Route
+              path={`${devNavUrl}/admin/citizen`}
+              element={
+                <ProtectedRoute>
+                  <Citizen />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path={`${devNavUrl}/admin/citizen-add`}
-              element={<AddCitizen />}
+              element={
+                <ProtectedRoute>
+                  <AddCitizen />
+                </ProtectedRoute>
+              }
             />
             <Route
               path={`${devNavUrl}/admin/evaluation`}
-              element={<Evaluation />}
+              element={
+                <ProtectedRoute>
+                  <Evaluation />
+                </ProtectedRoute>
+              }
             />
             <Route
               path={`${devNavUrl}/admin/evaluation-filter`}
-              element={<EvaluationFilter />}
+              element={
+                <ProtectedRoute>
+                  <EvaluationFilter />
+                </ProtectedRoute>
+              }
             />
-            <Route path={`${devNavUrl}/admin/sitio`} element={<Sitio />} />
+            <Route
+              path={`${devNavUrl}/admin/sitio`}
+              element={
+                <ProtectedRoute>
+                  <Sitio />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path={`${devNavUrl}/admin/settings`}
-              element={<Settings />}
+              element={
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
+              }
             />
             <Route
               path={`${devNavUrl}/admin/users`}
-              element={<UsersActive />}
+              element={
+                <ProtectedRoute>
+                  <UsersActive />
+                </ProtectedRoute>
+              }
             />
             <Route
               path={`${devNavUrl}/admin/users-inactive`}
-              element={<UsersInactive />}
+              element={
+                <ProtectedRoute>
+                  <UsersInactive />
+                </ProtectedRoute>
+              }
             />
             <Route
               path={`${devNavUrl}/admin/users-roles`}
-              element={<Roles />}
+              element={
+                <ProtectedRoute>
+                  <Roles />
+                </ProtectedRoute>
+              }
             />
 
             <Route path="*" element={<PageNotFound />} />

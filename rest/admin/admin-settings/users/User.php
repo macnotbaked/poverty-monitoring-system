@@ -64,15 +64,49 @@ class Users
 
         return $result;
     }
+
     public function readAllActive()
     {
-        $sql = "select * from {$this->tblUsers} ";
-        $sql .= "where users_is_active = 1 ";
-        $sql .= "order by users_lname asc ";
+        $sql = "select * from {$this->tblUsers} as user, ";
+        $sql .= "{$this->tblRoles} as role ";
+        $sql .= "where user.users_is_active = 1 ";
+        $sql .= "and user.users_role_id = role.roles_aid ";
+        $sql .= "order by user.users_lname asc ";
         $result = $this->connection->query($sql);
 
         return $result;
     }
+
+    public function readLimitActive($start, $total)
+    {
+        $sql = "select * from {$this->tblUsers} as user, ";
+        $sql .= "{$this->tblRoles} as role ";
+        $sql .= "where user.users_is_active = 1 ";
+        $sql .= "and user.users_role_id = role.roles_aid ";
+        $sql .= "order by user.users_lname asc ";
+        $sql .= "limit {$start}, {$total} ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function readSearchActive($search)
+    {
+        $sql = "select * from {$this->tblUsers} as user, ";
+        $sql .= "{$this->tblRoles} as role ";
+        $sql .= "where user.users_is_active = 1 ";
+        $sql .= "and user.users_role_id = role.roles_aid ";
+        $sql .= "and (user.users_email like '{$search}%' ";
+        $sql .= "or user.users_fname like '{$search}%' ";
+        $sql .= "or user.users_mname like '{$search}%' ";
+        $sql .= "or user.users_lname like '{$search}%' ";
+        $sql .= ") ";
+        $sql .= "order by user.users_lname asc ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
     public function readAllInactive()
     {
         $sql = "select * from {$this->tblUsers} ";
@@ -149,7 +183,7 @@ class Users
         $sql .= "{$this->tblRoles} as role ";
         $sql .= "where user.users_is_active = 1 ";
         $sql .= "and user.users_email = '{$this->users_email}' ";
-        $sql .= "and user.settings_account_role = role.settings_role_aid ";
+        $sql .= "and user.users_role = role.settings_role_aid ";
         $sql .= "and citizen.trainee_email = user.users_email ";
         $sql .= "and citizen.trainee_is_active = 1 ";
         $result = $this->connection->query($sql);
@@ -181,5 +215,41 @@ class Users
         } else {
             return false;
         }
+    }
+
+    public function updateForgotPassword()
+    {
+        $sql = "update {$this->tblUsers} set ";
+        $sql .= "users_key = '{$this->users_key}', ";
+        $sql .= "users_datetime = '{$this->users_datetime}' ";
+        $sql .= "where users_email = '{$this->users_email}' ";
+        $sql .= "and users_is_active = 1 ";
+        $result = $this->connection->query($sql);
+        $c_affected = $this->connection->affected_rows;
+
+        if ($c_affected > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isEmailExist()
+    {
+        $sql = "select * from {$this->tblUsers} ";
+        $sql .= "where users_email = '{$this->users_email}' ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function isUserActive()
+    {
+        $sql = "select * from {$this->tblUsers} ";
+        $sql .= "where users_email = '{$this->users_email}' ";
+        $sql .= "and users_is_active = 0 ";
+        $result = $this->connection->query($sql);
+
+        return $result;
     }
 }

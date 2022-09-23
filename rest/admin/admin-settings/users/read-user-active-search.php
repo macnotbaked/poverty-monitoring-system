@@ -1,20 +1,22 @@
 <?php
 try {
     include_once("../../../common/package.php");
-    include_once("Roles.php");
-    include_once("functions-roles.php");
+    include_once("User.php");
+    include_once("functions-user.php");
 
     $body = file_get_contents("php://input");
     $data = json_decode($body, true);
     $connection = checkConnection();
     checkInputData($data);
-    $role = new Roles($connection);
+    $user = new Users($connection);
 
-    $result = checkReadAll($role);
+    $search = trim(filter_var($data["search"], FILTER_SANITIZE_STRING));
+
+    $result = checkReadSearchActive($user, trim($search));
 
     $data = getResultData($result);
 
-    Response::sendResponse(true, "Role data found", $data);
+    Response::sendResponse(true, "Search active user data found", $data);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted because a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

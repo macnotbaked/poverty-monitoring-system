@@ -12,7 +12,7 @@ import NoData from "../../../../widgets/NoData";
 const CitizenList = () => {
   return (
     <>
-      <SearchBox url="/admin/admin-trainee/read-trainee-search-active.php" />
+      {/* <SearchBox url="/admin/admin-trainee/read-trainee-search-active.php" /> */}
       <div className="mb--2">
         <table id="" className="" cellSpacing="0" width="100%">
           <thead className="">

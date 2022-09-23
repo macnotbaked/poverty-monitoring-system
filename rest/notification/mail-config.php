@@ -1,7 +1,7 @@
 <?php
 
-define("USERNAME", "macmerin24@gmail.com");
-define("PASSWORD", "furpnplbbwwceftr");
+define("USERNAME", "povertymonitoringsystem@gmail.com");
+define("PASSWORD", "vrfbayjfdwzfxrvs");
 // define("USERNAME", "povertymonitoringsystem@gmail.com");
 // define("PASSWORD", "062421KramNayr");
 define("FROM", "Brgy. San Mateo, PMS");

@@ -49,6 +49,26 @@ function checkReadAllActive($object)
     return $result;
 }
 
+function checkReadSearchActive($object, $search)
+{
+    $result = $object->readSearchActive($search);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Search active users).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadLimitActive($object, $start, $total)
+{
+    $result = $object->readLimitActive($start, $total);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Limit active users).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkReadAllInactive($object)
 {
     $result = $object->readAllInactive();
@@ -104,6 +124,16 @@ function checkNewPassword($object)
     $result = $object->updateNewPassword();
     if (!$result) {
         Response::sendResponse(false, "Please check your sql query (Update new password)", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkForgotPass($object)
+{
+    $result = $object->updateForgotPassword();
+    if (!$result) {
+        Response::sendResponse(false, "Please check your sql query (Update forgot password)", []);
         exit();
     }
     return $result;

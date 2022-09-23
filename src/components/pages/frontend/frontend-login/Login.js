@@ -58,7 +58,7 @@ const Login = () => {
                   "Access denied.", // additional error msg if needed
                   dispatch, // context api action
                   store, // context api state
-                  true, // boolean to show success modal
+                  false, // boolean to show success modal
                   false, // boolean to show load more functionality button
                   navigate // props optional
                 );

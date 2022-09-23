@@ -133,15 +133,14 @@
     display: block;
   }
 }
-.badge {
-  padding: 1px;
-  border-radius: 10px;
-  width: 15px;
-  height: 15px;
-  text-align: center;
-  display: inline-block;
-  margin-left: 0.5rem;
-  font-style: normal;
+.table--name {
+  span {
+    display: inline-block;
+    font-size: 0;
+  }
+  span::first-letter {
+    font-size: 1.2rem;
+  }
 }
 .tab-submenu {
   display: flex;

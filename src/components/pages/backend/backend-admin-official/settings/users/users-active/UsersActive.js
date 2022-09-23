@@ -12,6 +12,7 @@ import ModalError from "../../../../../../widgets/ModalError";
 import ModalSuccess from "../../../../../../widgets/ModalSuccess";
 import useLoadAllRole from "../../../../../../custom-hooks/useLoadAllRole";
 import useFetchDataLoadMore from "../../../../../../custom-hooks/useFetchDataLoadMore";
+import SpinnerTab from "../../../../../../widgets/SpinnerTab";
 
 const UsersActive = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -27,8 +28,8 @@ const UsersActive = () => {
     handleSearch,
     handleChange,
   } = useFetchDataLoadMore(
-    "/admin/admin-settings/account/read-account-limit.php",
-    "/admin/admin-settings/account/read-account.php",
+    "/admin/admin-settings/users/read-user-active-limit.php",
+    "/admin/admin-settings/users/read-user-active-all.php",
     5 // show number of records on a table
   );
 
@@ -79,7 +80,10 @@ const UsersActive = () => {
                     />
                     <label htmlFor="tab-active" className="menu-label tab-icon">
                       <span>
-                        Active <small className="badge--active">3</small>
+                        Active{" "}
+                        <small>
+                          {loading ? <SpinnerTab /> : result.length}
+                        </small>
                       </span>
                     </label>
                     <div className="tab">
@@ -90,6 +94,7 @@ const UsersActive = () => {
                         result={result}
                         handleSearch={handleSearch}
                         handleChange={handleChange}
+                        setItemEdit={setItemEdit}
                       />
                     </div>
 

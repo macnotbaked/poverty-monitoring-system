@@ -69,11 +69,13 @@ const ModalAddUsers = ({ item, role }) => {
                 fetchData(
                   setLoading,
                   item
-                    ? "/admin/admin-settings/roles/update-role.php"
+                    ? "/admin/admin-settings/users/update-user.php"
                     : "/admin/admin-settings/users/create-user.php",
                   values, // form data values
                   null, // result set data
-                  "Please check the email to proceed.", // success msg
+                  item
+                    ? "User updated!" // success msg
+                    : "Please check the email to proceed.",
                   "", // additional error msg if needed
                   dispatch, // context api action
                   store, // context api state
