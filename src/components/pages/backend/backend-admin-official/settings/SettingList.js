@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { setStartIndex } from "../../../../../store/StoreAction";
+import { StoreContext } from "../../../../../store/StoreContext";
 import { devNavUrl } from "../../../../helpers/functions-general";
 
 const SettingList = () => {
+  const { store, dispatch } = React.useContext(StoreContext);
+
   return (
     <>
       <div className="grid-col-2 mb--2 shadow--primary pxy--2">
@@ -14,6 +18,9 @@ const SettingList = () => {
             <Link
               to={`${devNavUrl}/admin/users`}
               className="btn--primary mt--3"
+              onClick={() => {
+                dispatch(setStartIndex(0));
+              }}
             >
               View
             </Link>
@@ -22,13 +29,16 @@ const SettingList = () => {
 
         {/* 2 */}
         <div className="setting shadow--primary ">
-          <h4 className="t--bold mb--1">System Information</h4>
+          <h4 className="t--bold mb--1">Baranggay Information</h4>
           <h5>Manage the services being offered.</h5>
           <div className="mb--4">
             <label htmlFor="tab-events-calendar">
               <Link
                 to={`${devNavUrl}/admin/system-information`}
                 className="btn--primary mt--3"
+                onClick={() => {
+                  dispatch(setStartIndex(0));
+                }}
               >
                 View
               </Link>
@@ -45,6 +55,9 @@ const SettingList = () => {
               <Link
                 to={`${devNavUrl}/admin/recommended-programs`}
                 className="btn--primary mt--3"
+                onClick={() => {
+                  dispatch(setStartIndex(0));
+                }}
               >
                 View
               </Link>
@@ -61,6 +74,9 @@ const SettingList = () => {
               <Link
                 to={`${devNavUrl}/admin/program-criteria`}
                 className="btn--primary mt--3"
+                onClick={() => {
+                  dispatch(setStartIndex(0));
+                }}
               >
                 View
               </Link>
@@ -77,6 +93,9 @@ const SettingList = () => {
               <Link
                 to={`${devNavUrl}/admin/evaluation-questionnaire`}
                 className="btn--primary mt--3"
+                onClick={() => {
+                  dispatch(setStartIndex(0));
+                }}
               >
                 View
               </Link>

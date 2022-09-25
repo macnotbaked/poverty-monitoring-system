@@ -1,7 +1,9 @@
 import React from "react";
 import {
   FaHome,
+  FaHouseUser,
   FaMoneyCheck,
+  FaSitemap,
   FaUserCircle,
   FaUserFriends,
 } from "react-icons/fa";
@@ -56,18 +58,18 @@ const Navigation = ({ menu }) => {
               </div>
             </div>
           </li>
-          <li className={menu === "citizen" ? "tab--active" : ""}>
+          <li className={menu === "sitio" ? "tab--active" : ""}>
             <div className="shape-wrapper-top">
               <div className="circle-wrapper">
                 <span className="circle-top"></span>
               </div>
             </div>
             <Link
-              to={`${devNavUrl}/admin/citizen`}
+              to={`${devNavUrl}/admin/sitio`}
               onClick={() => dispatch(setStartIndex(0))}
             >
-              <FaUserFriends />
-              <span>Citizen</span>
+              <FaSitemap />
+              <span>Sitio</span>
             </Link>
             <div className="shape-wrapper-bottom">
               <div className="circle-wrapper">

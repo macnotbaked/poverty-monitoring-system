@@ -6,7 +6,7 @@ import { devNavUrl } from "../../../../../helpers/functions-general";
 import Navigation from "../../../../../navigation/Navigation";
 import SitioList from "./SitioList";
 
-const Sitio = () => {
+const SitioEvaluation = () => {
   return (
     <>
       <Navigation menu="evaluation" />
@@ -46,4 +46,4 @@ const Sitio = () => {
   );
 };
 
-export default Sitio;
+export default SitioEvaluation;

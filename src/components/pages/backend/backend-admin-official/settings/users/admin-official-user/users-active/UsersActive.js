@@ -1,24 +1,34 @@
 import React from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { devNavUrl } from "../../../../../../helpers/functions-general";
-import Navigation from "../../../../../../navigation/Navigation";
+import { devNavUrl } from "../../../../../../../helpers/functions-general";
+import Navigation from "../../../../../../../navigation/Navigation";
 import UsersActiveList from "./UsersActiveList";
 import { HiPlus } from "react-icons/hi";
-import { setIsAdd } from "../../../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../../../store/StoreContext";
+import {
+  setIsAdd,
+  setStartIndex,
+} from "../../../../../../../../store/StoreAction";
+import { StoreContext } from "../../../../../../../../store/StoreContext";
 import ModalAddUsers from "./ModalAddUsers";
-import ModalError from "../../../../../../widgets/ModalError";
-import ModalSuccess from "../../../../../../widgets/ModalSuccess";
-import useLoadAllRole from "../../../../../../custom-hooks/useLoadAllRole";
-import useFetchDataLoadMore from "../../../../../../custom-hooks/useFetchDataLoadMore";
-import SpinnerTab from "../../../../../../widgets/SpinnerTab";
+import ModalError from "../../../../../../../widgets/ModalError";
+import ModalSuccess from "../../../../../../../widgets/ModalSuccess";
+import useLoadAllRole from "../../../../../../../custom-hooks/useLoadAllRole";
+import useFetchDataLoadMore from "../../../../../../../custom-hooks/useFetchDataLoadMore";
+import SpinnerTab from "../../../../../../../widgets/SpinnerTab";
+import useLoadAllInactive from "../../../../../../../custom-hooks/useLoadAllInactive";
+import { FaPlus } from "react-icons/fa";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 const UsersActive = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState(null);
 
   const { role } = useLoadAllRole("/admin/admin-settings/roles/read-role.php");
+
+  const { inactive } = useLoadAllInactive(
+    "/admin/admin-settings/users/read-user-inactive-all.php"
+  );
 
   const {
     loading,
@@ -50,11 +60,14 @@ const UsersActive = () => {
                 <Link
                   className="btn--back float--right"
                   to={`${devNavUrl}/admin/settings`}
+                  onClick={() => {
+                    dispatch(setStartIndex(0));
+                  }}
                 >
                   <IoMdArrowRoundBack /> <span>Back</span>
                 </Link>
                 <button className="btn float--right " onClick={handleAdd}>
-                  <HiPlus /> <span>Add</span>
+                  <AiFillPlusCircle /> <span>Add</span>
                 </button>
               </div>
               <hr />
@@ -103,8 +116,16 @@ const UsersActive = () => {
                       htmlFor="tab-inactive"
                       className="menu-label tab-icon"
                     >
-                      <Link to={`${devNavUrl}/admin/users-inactive`}>
-                        Inactive <small className="badge--active">3</small>
+                      <Link
+                        to={`${devNavUrl}/admin/admin-official-users-inactive`}
+                        onClick={() => {
+                          dispatch(setStartIndex(0));
+                        }}
+                      >
+                        Inactive{" "}
+                        <small>
+                          {loading ? <SpinnerTab /> : inactive.length}
+                        </small>
                       </Link>
                     </label>
                   </div>
@@ -112,7 +133,14 @@ const UsersActive = () => {
 
                 <input type="radio" name="tabs" id="tab-role" />
                 <label htmlFor="tab-role" className="menu-label">
-                  <Link to={`${devNavUrl}/admin/users-roles`}>Role</Link>
+                  <Link
+                    to={`${devNavUrl}/admin/users-roles`}
+                    onClick={() => {
+                      dispatch(setStartIndex(0));
+                    }}
+                  >
+                    Role
+                  </Link>
                 </label>
               </div>
             </div>

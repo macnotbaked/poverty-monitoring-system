@@ -5,10 +5,10 @@ import { FaTimes } from "react-icons/fa";
 import {
   setIsConfirm,
   setStartIndex,
-} from "../../../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../../../store/StoreContext";
-import { fetchData } from "../../../../../../helpers/fetchData";
-import SpinnerButton from "../../../../../../widgets/SpinnerButton";
+} from "../../../../../../../../store/StoreAction";
+import { StoreContext } from "../../../../../../../../store/StoreContext";
+import { fetchData } from "../../../../../../../helpers/fetchData";
+import SpinnerButton from "../../../../../../../widgets/SpinnerButton";
 
 const ModalUserConfirm = ({ isSus, susEndpoint, resetEndpoint, item }) => {
   const { store, dispatch } = React.useContext(StoreContext);

@@ -2,8 +2,8 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { devNavUrl } from "../../../../../helpers/functions-general";
-import Navigation from "../../../../../navigation/Navigation";
+import { devNavUrl } from "../../../../../../helpers/functions-general";
+import Navigation from "../../../../../../navigation/Navigation";
 import * as Yup from "yup";
 import { FaUserCircle } from "react-icons/fa";
 import { AiFillCamera } from "react-icons/ai";
@@ -11,9 +11,9 @@ import {
   InputFileUpload,
   InputSelect,
   InputText,
-} from "../../../../../helpers/FormInputs";
-import SpinnerButton from "../../../../../widgets/SpinnerButton";
-import NoData from "../../../../../widgets/NoData";
+} from "../../../../../../helpers/FormInputs";
+import SpinnerButton from "../../../../../../widgets/SpinnerButton";
+import NoData from "../../../../../../widgets/NoData";
 
 const AddCitizen = () => {
   const initVal = {};

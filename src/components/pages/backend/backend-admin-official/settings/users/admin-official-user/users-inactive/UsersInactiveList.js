@@ -1,19 +1,20 @@
 import React from "react";
-import { AiFillEdit, AiFillEye } from "react-icons/ai";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { RiUserUnfollowFill } from "react-icons/ri";
-import { MdPassword } from "react-icons/md";
+import { AiFillEye } from "react-icons/ai";
+import { MdOutlineRestore } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { StoreContext } from "../../../../../../../store/StoreContext";
-import { devNavUrl } from "../../../../../../helpers/functions-general";
-import NoData from "../../../../../../widgets/NoData";
-import SearchBox from "../../../../../../widgets/SearchBox";
-import Spinner from "../../../../../../widgets/Spinner";
-import { setIsAdd, setIsConfirm } from "../../../../../../../store/StoreAction";
-import LoadMore from "../../../../../../widgets/LoadMore";
-import ModalUserConfirm from "./ModalUserConfirm";
+import {
+  setIsAdd,
+  setIsConfirm,
+} from "../../../../../../../../store/StoreAction";
+import { StoreContext } from "../../../../../../../../store/StoreContext";
+import { devNavUrl } from "../../../../../../../helpers/functions-general";
+import LoadMore from "../../../../../../../widgets/LoadMore";
+import NoData from "../../../../../../../widgets/NoData";
+import SearchBox from "../../../../../../../widgets/SearchBox";
+import Spinner from "../../../../../../../widgets/Spinner";
+import ModalRestoreUser from "./ModalRestoreUser";
 
-const UsersActiveList = ({
+const UsersInactiveList = ({
   loading,
   handleLoad,
   totalResult,
@@ -23,20 +24,22 @@ const UsersActiveList = ({
   setItemEdit,
 }) => {
   const { store, dispatch } = React.useContext(StoreContext);
-  const [dataItem, setData] = React.useState(null);
-  const [isSus, setSus] = React.useState(false);
   const search = React.useRef(null);
+  const [dataItem, setData] = React.useState(null);
+  const [id, setId] = React.useState(null);
+  const [isDel, setDel] = React.useState(false);
   let count = 0;
 
-  const handleReset = (item) => {
-    dispatch(setIsConfirm(true));
-    setSus(false);
-    setData(item);
-  };
-
-  const handleEdit = (item) => {
+  const handleView = (item) => {
     dispatch(setIsAdd(true));
     setItemEdit(item);
+  };
+
+  const handleRestore = (item) => {
+    dispatch(setIsConfirm(true));
+    setId(item.users_aid);
+    setData(item);
+    setDel(null);
   };
 
   return (
@@ -48,7 +51,7 @@ const UsersActiveList = ({
         loading={loading}
         result={result}
         store={store}
-        url="/admin/admin-settings/users/read-user-active-search.php"
+        url="/admin/admin-settings/users/read-user-inactive-search.php"
       />
       <div className="mb--2">
         {loading && <Spinner />}
@@ -58,15 +61,13 @@ const UsersActiveList = ({
               <th className="" rowSpan="1">
                 #
               </th>
-              <th rowSpan="1" style={{ width: "20rem" }}>
+              <th rowSpan="1" style={{ width: "15rem" }}>
                 Name
               </th>
               <th rowSpan="1" style={{ width: "20rem" }}>
                 Email
               </th>
-              <th rowSpan="1" style={{ width: "15rem" }}>
-                Contact
-              </th>
+              <th rowSpan="1">Contact</th>
               <th rowSpan="1">Role</th>
               <th rowSpan="1">Actions</th>
             </tr>
@@ -86,34 +87,28 @@ const UsersActiveList = ({
                     <td>{item.users_phone}</td>
                     <td>{item.roles_name}</td>
                     <td>
-                      <div
-                        className="dropdown tooltip--reset"
-                        onClick={() => handleReset(item)}
+                      <button
+                        className="dropdown tooltip--view"
+                        onClick={() => handleView(item)}
                       >
                         <span>
-                          <MdPassword />
+                          <AiFillEye />
                         </span>
-                      </div>
-
-                      <div className="dropdown">
+                      </button>
+                      <button
+                        className="dropdown tooltip--restore"
+                        onClick={() => handleRestore(item)}
+                      >
                         <span>
-                          <BsThreeDotsVertical />
+                          <MdOutlineRestore />
                         </span>
-                        <div className="dropdown-content">
-                          <button onClick={() => handleEdit(item)}>
-                            <RiUserUnfollowFill /> Edit
-                          </button>
-                          <button>
-                            <RiUserUnfollowFill /> Suspend
-                          </button>
-                        </div>
-                      </div>
+                      </button>
                     </td>
                   </tr>
                 );
               })
             ) : (
-              <tr className="">
+              <tr>
                 <td colSpan="100%">
                   <NoData />
                 </td>
@@ -134,15 +129,16 @@ const UsersActiveList = ({
       </div>
 
       {store.isConfirm && (
-        <ModalUserConfirm
-          isSus={isSus}
-          susEndpoint="/admin/admin-settings/account/archive-account.php"
-          resetEndpoint="/admin/admin-settings/users/update-user-forgot-pass.php"
-          item={dataItem}
+        <ModalRestoreUser
+          id={id}
+          isDel={isDel}
+          mysqlApiRestore={"/admin/admin-settings/users/restore-user.php"}
+          msg={"Are you sure you want to restore"}
+          item={dataItem.users_email}
         />
       )}
     </>
   );
 };
 
-export default UsersActiveList;
+export default UsersInactiveList;

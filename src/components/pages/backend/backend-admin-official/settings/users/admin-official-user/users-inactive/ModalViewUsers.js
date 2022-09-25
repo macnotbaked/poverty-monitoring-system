@@ -5,13 +5,16 @@ import * as Yup from "yup";
 import {
   setIsAdd,
   setStartIndex,
-} from "../../../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../../../store/StoreContext";
-import { fetchData } from "../../../../../../helpers/fetchData";
-import { InputSelect, InputText } from "../../../../../../helpers/FormInputs";
-import SpinnerButton from "../../../../../../widgets/SpinnerButton";
+} from "../../../../../../../../store/StoreAction";
+import { StoreContext } from "../../../../../../../../store/StoreContext";
+import { fetchData } from "../../../../../../../helpers/fetchData";
+import {
+  InputSelect,
+  InputText,
+} from "../../../../../../../helpers/FormInputs";
+import SpinnerButton from "../../../../../../../widgets/SpinnerButton";
 
-const ModalAddUsers = ({ item, role }) => {
+const ModalViewUsers = ({ item, role }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [loading, setLoading] = React.useState(false);
 
@@ -20,24 +23,24 @@ const ModalAddUsers = ({ item, role }) => {
   };
 
   const initVal = {
-    users_aid: item ? item.users_aid : "",
-    users_fname: item ? item.users_fname : "",
-    users_mname: item ? item.users_mname : "",
-    users_lname: item ? item.users_lname : "",
-    users_email: item ? item.users_email : "",
-    users_phone: item ? item.users_phone : "",
-    users_gender: item ? item.users_gender : "",
-    users_role_id: item ? item.users_role_id : "",
+    users_aid: item.users_aid,
+    users_fname: item.users_fname,
+    users_mname: item.users_mname,
+    users_lname: item.users_lname,
+    users_email: item.users_email,
+    users_phone: item.users_phone,
+    users_gender: item.users_gender,
+    users_role_id: item.users_role_id,
   };
 
   const yupSchema = Yup.object({
-    users_fname: Yup.string().required("Required"),
-    users_mname: Yup.string().required("Required"),
-    users_lname: Yup.string().required("Required"),
-    users_email: Yup.string().required("Required").email("Invalid email"),
-    users_phone: Yup.string().required("Required"),
-    users_gender: Yup.string().required("Required"),
-    users_role_id: Yup.string().required("Required"),
+    // users_fname: Yup.string().required("Required"),
+    // users_mname: Yup.string().required("Required"),
+    // users_lname: Yup.string().required("Required"),
+    // users_email: Yup.string().required("Required").email("Invalid email"),
+    // users_phone: Yup.string().required("Required"),
+    // users_gender: Yup.string().required("Required"),
+    // users_role_id: Yup.string().required("Required"),
   });
 
   React.useEffect(() => {
@@ -55,7 +58,7 @@ const ModalAddUsers = ({ item, role }) => {
       <div className="modal modal--front">
         <div className="display-center">
           <div className="modal-title-container">
-            <h4 className="t--bold">{item ? "Update" : "Add"} user</h4>
+            <h4 className="t--bold">View user</h4>
             <button className="btn--close" onClick={handleClose}>
               <FaTimes />
             </button>
@@ -66,22 +69,22 @@ const ModalAddUsers = ({ item, role }) => {
               validationSchema={yupSchema}
               onSubmit={async (values, { setSubmitting, resetForm }) => {
                 // console.log(values);
-                fetchData(
-                  setLoading,
-                  item
-                    ? "/admin/admin-settings/users/update-user.php"
-                    : "/admin/admin-settings/users/create-user.php",
-                  values, // form data values
-                  null, // result set data
-                  item
-                    ? "User updated!" // success msg
-                    : "Please check the email to proceed.",
-                  "", // additional error msg if needed
-                  dispatch, // context api action
-                  store, // context api state
-                  true, // boolean to show success modal
-                  false // boolean to show load more functionality button
-                );
+                // fetchData(
+                //   setLoading,
+                //   item
+                //     ? "/admin/admin-settings/users/update-user.php"
+                //     : "/admin/admin-settings/users/create-user.php",
+                //   values, // form data values
+                //   null, // result set data
+                //   item
+                //     ? "User updated!" // success msg
+                //     : "Please check the email to proceed.",
+                //   "", // additional error msg if needed
+                //   dispatch, // context api action
+                //   store, // context api state
+                //   true, // boolean to show success modal
+                //   false // boolean to show load more functionality button
+                // );
                 dispatch(setStartIndex(0));
               }}
             >
@@ -93,16 +96,17 @@ const ModalAddUsers = ({ item, role }) => {
                         label="First name"
                         type="text"
                         name="users_fname"
-                        disabled={loading}
+                        disabled
                         required
                       />
                     </div>
+
                     <div className="input my--3">
                       <InputText
                         label="Middle name"
                         type="text"
                         name="users_mname"
-                        disabled={loading}
+                        disabled
                         required
                       />
                     </div>
@@ -111,7 +115,7 @@ const ModalAddUsers = ({ item, role }) => {
                         label="Last name"
                         type="text"
                         name="users_lname"
-                        disabled={loading}
+                        disabled
                         required
                       />
                     </div>
@@ -120,7 +124,7 @@ const ModalAddUsers = ({ item, role }) => {
                         label="Email"
                         type="text"
                         name="users_email"
-                        disabled={loading}
+                        disabled
                         required
                       />
                     </div>
@@ -129,7 +133,7 @@ const ModalAddUsers = ({ item, role }) => {
                         label="Phone number"
                         type="text"
                         name="users_phone"
-                        disabled={loading}
+                        disabled
                         required
                       />
                     </div>
@@ -137,7 +141,7 @@ const ModalAddUsers = ({ item, role }) => {
                       <InputSelect
                         label="Gender"
                         name="users_gender"
-                        disabled={loading}
+                        disabled
                         required
                       >
                         <option value="">
@@ -147,11 +151,12 @@ const ModalAddUsers = ({ item, role }) => {
                         <option value="female">Female</option>
                       </InputSelect>
                     </div>
+
                     <div className="input my--3">
                       <InputSelect
                         label="Role"
                         name="users_role_id"
-                        disabled={loading}
+                        disabled
                         required
                       >
                         <option value="">
@@ -172,22 +177,13 @@ const ModalAddUsers = ({ item, role }) => {
                       </InputSelect>
                     </div>
 
-                    <div className="d--flex gap--1">
-                      <button
-                        type="submit"
-                        disabled={loading}
-                        className="btn--outline"
-                      >
-                        {loading && <SpinnerButton />} {item ? "Save" : "Add"}
-                      </button>
-                      <button
-                        className="btn--secondary "
-                        type="reset"
-                        onClick={handleClose}
-                      >
-                        Cancel
-                      </button>
-                    </div>
+                    <button
+                      className="btn--secondary "
+                      type="reset"
+                      onClick={handleClose}
+                    >
+                      Close
+                    </button>
                   </Form>
                 );
               }}
@@ -199,4 +195,4 @@ const ModalAddUsers = ({ item, role }) => {
   );
 };
 
-export default ModalAddUsers;
+export default ModalViewUsers;

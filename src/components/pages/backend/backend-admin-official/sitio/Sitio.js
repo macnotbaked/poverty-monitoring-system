@@ -1,28 +1,23 @@
 import React from "react";
-import { AiOutlinePlus } from "react-icons/ai";
-import { FaPlus } from "react-icons/fa";
-import { HiPlus } from "react-icons/hi";
+import { AiFillPlusCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { devNavUrl } from "../../../../helpers/functions-general";
 import Navigation from "../../../../navigation/Navigation";
-import CitizenList from "./CitizenList";
+import SitioList from "./SitioList";
 
-const Citizen = () => {
+const Sitio = () => {
   return (
     <>
-      <Navigation menu="citizen" />
+      <Navigation menu="sitio" />
       <div className="main-content">
         <div className="container">
           <div className="title">
             <div className="row">
               <div style={{ marginBottom: "1.5rem" }}>
-                <span className="tab-title">Citizen</span>
-                <Link
-                  className="btn float--right "
-                  to={`${devNavUrl}/admin/citizen-add`}
-                >
-                  <HiPlus /> <span>Add</span>
-                </Link>
+                <span className="tab-title">Sitio</span>
+                <button className="btn float--right ">
+                  <AiFillPlusCircle /> <span>Add</span>
+                </button>
               </div>
               <hr />
             </div>
@@ -31,9 +26,9 @@ const Citizen = () => {
 
         <div className="container">
           <div className="row">
-            <div className="content-block bg-highlight ">
+            <div className="content-block bg--highlight ">
               <div className="tab">
-                <CitizenList />
+                <SitioList />
               </div>
             </div>
           </div>
@@ -43,4 +38,4 @@ const Citizen = () => {
   );
 };
 
-export default Citizen;
+export default Sitio;

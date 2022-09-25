@@ -1,13 +1,11 @@
 import React from "react";
-import SearchBox from "../../../../widgets/SearchBox";
 import { BiMessageDetail } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { IoMdArchive } from "react-icons/io";
 import { FaArchive, FaTrashAlt } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { devNavUrl } from "../../../../helpers/functions-general";
-import NoData from "../../../../widgets/NoData";
+import { devNavUrl } from "../../../../../helpers/functions-general";
+import NoData from "../../../../../widgets/NoData";
 
 const CitizenList = () => {
   return (

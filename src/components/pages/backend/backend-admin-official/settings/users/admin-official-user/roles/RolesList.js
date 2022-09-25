@@ -1,12 +1,14 @@
 import React from "react";
-import { AiFillEdit, AiFillEye } from "react-icons/ai";
+import { AiFillEdit } from "react-icons/ai";
 import { FaTrashAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { setIsAdd, setIsConfirm } from "../../../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../../../store/StoreContext";
-import ModalConfirm from "../../../../../../widgets/ModalConfirm";
-import NoData from "../../../../../../widgets/NoData";
-import Spinner from "../../../../../../widgets/Spinner";
+import {
+  setIsAdd,
+  setIsConfirm,
+} from "../../../../../../../../store/StoreAction";
+import { StoreContext } from "../../../../../../../../store/StoreContext";
+import ModalConfirm from "../../../../../../../widgets/ModalConfirm";
+import NoData from "../../../../../../../widgets/NoData";
+import Spinner from "../../../../../../../widgets/Spinner";
 
 const RolesList = ({ role, loading, setItemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);

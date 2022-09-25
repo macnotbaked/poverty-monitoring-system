@@ -10,6 +10,7 @@ import Spinner from "../../../widgets/Spinner";
 import { useNavigate } from "react-router-dom";
 import useIsLogin from "../../../custom-hooks/useIsLogin";
 import { fetchData } from "../../../helpers/fetchData";
+import ModalError from "../../../widgets/ModalError";
 
 const Login = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -116,6 +117,8 @@ const Login = () => {
           </div>
         </div>
       )}
+
+      {store.error && <ModalError />}
     </>
   );
 };

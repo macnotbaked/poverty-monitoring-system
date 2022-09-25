@@ -1,36 +1,32 @@
 import React from "react";
 import { AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { devNavUrl } from "../../../../../../helpers/functions-general";
-import NoData from "../../../../../../widgets/NoData";
+import { devNavUrl } from "../../../../helpers/functions-general";
+import NoData from "../../../../widgets/NoData";
 
-const UsersInactiveList = () => {
+const SitioList = () => {
   return (
     <>
       <div className="mb--2">
-        {/* <h3 className="t--bold mb--1">Baranggay San Marcos</h3> */}
+        <h3 className="t--bold mb--1">Baranggay San Marcos</h3>
         <table id="" className="" cellSpacing="0" width="100%">
           <thead className="">
             <tr>
               <th className="" rowSpan="1">
                 #
               </th>
-              <th rowSpan="1" style={{ width: "15rem" }}>
+              <th className="row--name" rowSpan="1" style={{ width: "15rem" }}>
                 Name
               </th>
-              <th rowSpan="1" style={{ width: "20rem" }}>
-                Email
-              </th>
-              <th rowSpan="1">Contact</th>
+              <th rowSpan="1">Ratings</th>
               <th rowSpan="1">Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr className=" ">
               <td>1.</td>
-              <td>Merin, Mark Ryan B.</td>
-              <td>merin.ryanmark@gmail.com</td>
-              <td>09491040057</td>
+              <td>Sitio 1</td>
+              <td>80%</td>
               <td>
                 <Link
                   to={`${devNavUrl}/admin/sitio`}
@@ -57,4 +53,4 @@ const UsersInactiveList = () => {
   );
 };
 
-export default UsersInactiveList;
+export default SitioList;

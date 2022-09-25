@@ -7,18 +7,20 @@ import ForgotPassword from "./components/pages/frontend/frontend-forgot-pass/For
 import CreatePassword from "./components/pages/frontend/frontend-create-password/CreatePassword";
 import CreatePasswordSuccess from "./components/pages/frontend/frontend-create-password/CreatePasswordSuccess";
 import Home from "./components/pages/backend/backend-admin-official/home/Home";
-import Citizen from "./components/pages/backend/backend-admin-official/citizen/Citizen";
-import AddCitizen from "./components/pages/backend/backend-admin-official/citizen/citizen-add/AddCitizen";
 import Evaluation from "./components/pages/backend/backend-admin-official/evaluation/Evaluation";
 import EvaluationFilter from "./components/pages/backend/backend-admin-official/evaluation/EvaluationFilter";
-import Sitio from "./components/pages/backend/backend-admin-official/evaluation/sitio/Sitio";
 import Settings from "./components/pages/backend/backend-admin-official/settings/Settings";
 import PageNotFound from "./components/widgets/PageNotFound";
-import UsersActive from "./components/pages/backend/backend-admin-official/settings/users/users-active/UsersActive";
-import UsersInactive from "./components/pages/backend/backend-admin-official/settings/users/users-inactive/UsersInactive";
-import Roles from "./components/pages/backend/backend-admin-official/settings/users/roles/Roles";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ForgotPasswordAlmostDone from "./components/pages/frontend/frontend-forgot-pass/ForgotPasswordAlmostDone";
+import UsersActive from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/users-active/UsersActive";
+import UsersInactive from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/users-inactive/UsersInactive";
+import Roles from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/roles/Roles";
+import Users from "./components/pages/backend/backend-admin-official/settings/users/Users";
+import Citizen from "./components/pages/backend/backend-admin-official/sitio/citizen/Citizen";
+import AddCitizen from "./components/pages/backend/backend-admin-official/sitio/citizen/citizen-add/AddCitizen";
+import SitioEvaluation from "./components/pages/backend/backend-admin-official/evaluation/sitio/SitioEvaluation";
+import Sitio from "./components/pages/backend/backend-admin-official/sitio/Sitio";
 
 function App() {
   return (
@@ -89,10 +91,10 @@ function App() {
               }
             />
             <Route
-              path={`${devNavUrl}/admin/sitio`}
+              path={`${devNavUrl}/admin/sitio-evaluation`}
               element={
                 <ProtectedRoute>
-                  <Sitio />
+                  <SitioEvaluation />
                 </ProtectedRoute>
               }
             />
@@ -108,12 +110,20 @@ function App() {
               path={`${devNavUrl}/admin/users`}
               element={
                 <ProtectedRoute>
+                  <Users />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={`${devNavUrl}/admin/admin-official-users`}
+              element={
+                <ProtectedRoute>
                   <UsersActive />
                 </ProtectedRoute>
               }
             />
             <Route
-              path={`${devNavUrl}/admin/users-inactive`}
+              path={`${devNavUrl}/admin/admin-official-users-inactive`}
               element={
                 <ProtectedRoute>
                   <UsersInactive />
@@ -125,6 +135,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Roles />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={`${devNavUrl}/admin/sitio`}
+              element={
+                <ProtectedRoute>
+                  <Sitio />
                 </ProtectedRoute>
               }
             />
