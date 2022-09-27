@@ -34,7 +34,7 @@ const UsersList = () => {
           <div className="mb--4">
             <label htmlFor="tab-events-calendar">
               <Link
-                to={`${devNavUrl}/admin/system-information`}
+                to={`${devNavUrl}/admin/citizen-user`}
                 onClick={() => {
                   dispatch(setStartIndex(0));
                 }}

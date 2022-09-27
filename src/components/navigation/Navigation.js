@@ -3,10 +3,12 @@ import {
   FaHome,
   FaHouseUser,
   FaMoneyCheck,
+  FaNewspaper,
   FaSitemap,
   FaUserCircle,
   FaUserFriends,
 } from "react-icons/fa";
+import { HiUserGroup } from "react-icons/hi";
 import { AiFillSetting } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import {
@@ -44,77 +46,103 @@ const Navigation = ({ menu }) => {
           </a>
         </div>
         <ul>
-          <li className={menu === "home" ? "tab--active" : ""}>
-            <Link
-              to={`${devNavUrl}/admin/home`}
-              onClick={() => dispatch(setStartIndex(0))}
-            >
-              <FaHome />
-              <span>Home</span>
-            </Link>
-            <div className="shape-wrapper-bottom">
-              <div className="circle-wrapper">
-                <span className="circle-bottom"></span>
+          <>
+            <li className={menu === "home" ? "tab--active" : ""}>
+              <Link
+                to={`${devNavUrl}/admin/home`}
+                onClick={() => dispatch(setStartIndex(0))}
+              >
+                <FaHome />
+                <span>Home</span>
+              </Link>
+              <div className="shape-wrapper-bottom">
+                <div className="circle-wrapper">
+                  <span className="circle-bottom"></span>
+                </div>
               </div>
-            </div>
-          </li>
-          <li className={menu === "sitio" ? "tab--active" : ""}>
-            <div className="shape-wrapper-top">
-              <div className="circle-wrapper">
-                <span className="circle-top"></span>
+            </li>
+            <li className={menu === "sitio" ? "tab--active" : ""}>
+              <div className="shape-wrapper-top">
+                <div className="circle-wrapper">
+                  <span className="circle-top"></span>
+                </div>
               </div>
-            </div>
-            <Link
-              to={`${devNavUrl}/admin/sitio`}
-              onClick={() => dispatch(setStartIndex(0))}
-            >
-              <FaSitemap />
-              <span>Sitio</span>
-            </Link>
-            <div className="shape-wrapper-bottom">
-              <div className="circle-wrapper">
-                <span className="circle-bottom"></span>
+              <Link
+                to={`${devNavUrl}/admin/sitio`}
+                onClick={() => dispatch(setStartIndex(0))}
+              >
+                <FaSitemap />
+                <span>Sitio</span>
+              </Link>
+              <div className="shape-wrapper-bottom">
+                <div className="circle-wrapper">
+                  <span className="circle-bottom"></span>
+                </div>
               </div>
-            </div>
-          </li>
-          <li className={menu === "evaluation" ? "tab--active" : ""}>
-            <div className="shape-wrapper-top">
-              <div className="circle-wrapper">
-                <span className="circle-top"></span>
+            </li>
+            <li className={menu === "citizens" ? "tab--active" : ""}>
+              <div className="shape-wrapper-top">
+                <div className="circle-wrapper">
+                  <span className="circle-top"></span>
+                </div>
               </div>
-            </div>
-            <Link
-              to={`${devNavUrl}/admin/evaluation`}
-              onClick={() => dispatch(setStartIndex(0))}
-            >
-              <FaMoneyCheck />
-              <span>Evaluation</span>
-            </Link>
-            <div className="shape-wrapper-bottom">
-              <div className="circle-wrapper">
-                <span className="circle-bottom"></span>
+              <Link
+                to={`${devNavUrl}/admin/citizens`}
+                onClick={() => dispatch(setStartIndex(0))}
+              >
+                <HiUserGroup />
+                <span>Citizens</span>
+              </Link>
+              <div className="shape-wrapper-bottom">
+                <div className="circle-wrapper">
+                  <span className="circle-bottom"></span>
+                </div>
               </div>
-            </div>
-          </li>
-          <li className={menu === "settings" ? "tab--active" : ""}>
-            <div className="shape-wrapper-top">
-              <div className="circle-wrapper">
-                <span className="circle-top"></span>
+            </li>
+            <li className={menu === "evaluation" ? "tab--active" : ""}>
+              <div className="shape-wrapper-top">
+                <div className="circle-wrapper">
+                  <span className="circle-top"></span>
+                </div>
               </div>
-            </div>
-            <Link
-              to={`${devNavUrl}/admin/settings`}
-              onClick={() => dispatch(setStartIndex(0))}
-            >
-              <AiFillSetting />
-              <span>Settings</span>
-            </Link>
-            <div className="shape-wrapper-bottom">
-              <div className="circle-wrapper">
-                <span className="circle-bottom"></span>
+              <Link
+                to={`${devNavUrl}/admin/evaluation`}
+                onClick={() => dispatch(setStartIndex(0))}
+              >
+                <FaMoneyCheck />
+                <span>Evaluation</span>
+              </Link>
+              <div className="shape-wrapper-bottom">
+                <div className="circle-wrapper">
+                  <span className="circle-bottom"></span>
+                </div>
               </div>
-            </div>
-          </li>
+            </li>
+          </>
+
+          {store.credentials.roles_name === "Admin" && (
+            <>
+              <li className={menu === "settings" ? "tab--active" : ""}>
+                <div className="shape-wrapper-top">
+                  <div className="circle-wrapper">
+                    <span className="circle-top"></span>
+                  </div>
+                </div>
+                <Link
+                  to={`${devNavUrl}/admin/settings`}
+                  onClick={() => dispatch(setStartIndex(0))}
+                >
+                  <AiFillSetting />
+                  <span>Settings</span>
+                </Link>
+                <div className="shape-wrapper-bottom">
+                  <div className="circle-wrapper">
+                    <span className="circle-bottom"></span>
+                  </div>
+                </div>
+              </li>
+            </>
+          )}
         </ul>
 
         <div className="profile">

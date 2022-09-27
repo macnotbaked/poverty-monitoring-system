@@ -21,6 +21,10 @@ import Citizen from "./components/pages/backend/backend-admin-official/sitio/cit
 import AddCitizen from "./components/pages/backend/backend-admin-official/sitio/citizen/citizen-add/AddCitizen";
 import SitioEvaluation from "./components/pages/backend/backend-admin-official/evaluation/sitio/SitioEvaluation";
 import Sitio from "./components/pages/backend/backend-admin-official/sitio/Sitio";
+import UsersCitizenActive from "./components/pages/backend/backend-admin-official/settings/users/citizen-users/citizen-active/UsersCitizenActive";
+import MyInfo from "./components/pages/backend/backend-citizen/my-info/MyInfo";
+import Citizens from "./components/pages/backend/backend-admin-official/citizens/Citizens";
+import CitizenEvaluation from "./components/pages/backend/backend-citizen/evaluation/CitizenEvaluation";
 
 function App() {
   return (
@@ -143,6 +147,38 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Sitio />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={`${devNavUrl}/admin/citizen-user`}
+              element={
+                <ProtectedRoute>
+                  <UsersCitizenActive />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={`${devNavUrl}/citizen/my-info`}
+              element={
+                <ProtectedRoute>
+                  <MyInfo />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={`${devNavUrl}/citizen/evaluation`}
+              element={
+                <ProtectedRoute>
+                  <CitizenEvaluation />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={`${devNavUrl}/admin/citizens`}
+              element={
+                <ProtectedRoute>
+                  <Citizens />
                 </ProtectedRoute>
               }
             />

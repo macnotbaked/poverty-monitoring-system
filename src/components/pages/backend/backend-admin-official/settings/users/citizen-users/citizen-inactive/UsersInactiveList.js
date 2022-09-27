@@ -1,18 +1,20 @@
 import React from "react";
-import { AiFillEdit, AiFillEye } from "react-icons/ai";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaTrashAlt } from "react-icons/fa";
+import { AiFillEye } from "react-icons/ai";
+import { MdOutlineRestore } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { setIsAdd, setIsConfirm } from "../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../store/StoreContext";
-import { devNavUrl } from "../../../../helpers/functions-general";
-import LoadMore from "../../../../widgets/LoadMore";
-import ModalConfirm from "../../../../widgets/ModalConfirm";
-import NoData from "../../../../widgets/NoData";
-import SearchBox from "../../../../widgets/SearchBox";
-import Spinner from "../../../../widgets/Spinner";
+import {
+  setIsAdd,
+  setIsConfirm,
+} from "../../../../../../../../store/StoreAction";
+import { StoreContext } from "../../../../../../../../store/StoreContext";
+import { devNavUrl } from "../../../../../../../helpers/functions-general";
+import LoadMore from "../../../../../../../widgets/LoadMore";
+import NoData from "../../../../../../../widgets/NoData";
+import SearchBox from "../../../../../../../widgets/SearchBox";
+import Spinner from "../../../../../../../widgets/Spinner";
+import ModalRestoreUser from "./ModalRestoreUser";
 
-const SitioList = ({
+const UsersInactiveList = ({
   loading,
   handleLoad,
   totalResult,
@@ -21,24 +23,23 @@ const SitioList = ({
   handleChange,
   setItemEdit,
 }) => {
-  const search = React.useRef(null);
   const { store, dispatch } = React.useContext(StoreContext);
+  const search = React.useRef(null);
   const [dataItem, setData] = React.useState(null);
-  const [isSus, setSus] = React.useState(false);
   const [id, setId] = React.useState(null);
   const [isDel, setDel] = React.useState(false);
   let count = 0;
 
-  const handleEdit = (item) => {
+  const handleView = (item) => {
     dispatch(setIsAdd(true));
     setItemEdit(item);
   };
 
-  const handleDelete = (item) => {
+  const handleRestore = (item) => {
     dispatch(setIsConfirm(true));
-    setId(item.sitio_aid);
+    setId(item.users_aid);
     setData(item);
-    setDel(true);
+    setDel(null);
   };
 
   return (
@@ -50,10 +51,9 @@ const SitioList = ({
         loading={loading}
         result={result}
         store={store}
-        url="/admin/admin-sitio/read-sitio-search.php"
+        url="/admin/admin-settings/users/read-user-inactive-search.php"
       />
       <div className="mb--2">
-        <h3 className="t--bold mb--1">Baranggay San Mateo</h3>
         {loading && <Spinner />}
         <table id="" className="" cellSpacing="0" width="100%">
           <thead className="">
@@ -61,10 +61,14 @@ const SitioList = ({
               <th className="" rowSpan="1">
                 #
               </th>
-              <th className="row--name" rowSpan="1" style={{ width: "15rem" }}>
+              <th rowSpan="1" style={{ width: "15rem" }}>
                 Name
               </th>
-              <th rowSpan="1">Total Population</th>
+              <th rowSpan="1" style={{ width: "20rem" }}>
+                Email
+              </th>
+              <th rowSpan="1">Contact</th>
+              <th rowSpan="1">Role</th>
               <th rowSpan="1">Actions</th>
             </tr>
           </thead>
@@ -75,31 +79,30 @@ const SitioList = ({
                 return (
                   <tr key={key}>
                     <td>{count}.</td>
-                    <td>{item.sitio_name}</td>
-                    <td>{100}</td>
+                    <td className="table--name">
+                      {item.users_lname}, {item.users_fname}{" "}
+                      <span>{item.users_mname}</span>.
+                    </td>
+                    <td>{item.users_email}</td>
+                    <td>{item.users_phone}</td>
+                    <td>{item.roles_name}</td>
                     <td>
-                      <Link
-                        to={`${devNavUrl}/admin/citizen?sid=${item.sitio_aid}`}
+                      <button
                         className="dropdown tooltip--view"
+                        onClick={() => handleView(item)}
                       >
                         <span>
                           <AiFillEye />
                         </span>
-                      </Link>
-
-                      <div className="dropdown">
+                      </button>
+                      <button
+                        className="dropdown tooltip--restore"
+                        onClick={() => handleRestore(item)}
+                      >
                         <span>
-                          <BsThreeDotsVertical />
+                          <MdOutlineRestore />
                         </span>
-                        <div className="dropdown-content">
-                          <button onClick={() => handleEdit(item)}>
-                            <AiFillEdit /> Edit
-                          </button>
-                          <button onClick={() => handleDelete(item)}>
-                            <FaTrashAlt /> Delete
-                          </button>
-                        </div>
-                      </div>
+                      </button>
                     </td>
                   </tr>
                 );
@@ -114,7 +117,6 @@ const SitioList = ({
           </tbody>
         </table>
       </div>
-
       <div className="t--center row">
         {!store.isSearch && (
           <LoadMore
@@ -127,16 +129,16 @@ const SitioList = ({
       </div>
 
       {store.isConfirm && (
-        <ModalConfirm
+        <ModalRestoreUser
           id={id}
           isDel={isDel}
-          mysqlApiDelete={"/admin/admin-sitio/delete-sitio.php"}
-          msg={"Are you sure you want to delete this"}
-          item={`"${dataItem.sitio_name}"`}
+          mysqlApiRestore={"/admin/admin-settings/users/restore-user.php"}
+          msg={"Are you sure you want to restore"}
+          item={dataItem.users_email}
         />
       )}
     </>
   );
 };
 
-export default SitioList;
+export default UsersInactiveList;

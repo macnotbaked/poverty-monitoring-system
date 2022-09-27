@@ -2,7 +2,10 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { devNavUrl } from "../../../../../../helpers/functions-general";
+import {
+  devNavUrl,
+  getUrlParam,
+} from "../../../../../../helpers/functions-general";
 import Navigation from "../../../../../../navigation/Navigation";
 import * as Yup from "yup";
 import { FaUserCircle } from "react-icons/fa";
@@ -16,21 +19,23 @@ import SpinnerButton from "../../../../../../widgets/SpinnerButton";
 import NoData from "../../../../../../widgets/NoData";
 
 const AddCitizen = () => {
+  const sitioId = getUrlParam().get("sid");
+
   const initVal = {};
 
   const yupSchema = Yup.object({});
   return (
     <>
-      <Navigation menu="citizen" />
+      <Navigation menu="sitio" />
       <div className="main-content">
         <div className="container">
           <div className="title">
             <div className="row">
               <div style={{ marginBottom: "1.5rem" }}>
-                <span className="tab-title">Citizen</span>
+                <span className="tab-title">Sitio 1: Add Citizen</span>
                 <Link
                   className="btn float--right "
-                  to={`${devNavUrl}/admin/citizen`}
+                  to={`${devNavUrl}/admin/citizen?sid=${sitioId}`}
                 >
                   <IoMdArrowRoundBack /> <span>Back</span>
                 </Link>
@@ -43,8 +48,8 @@ const AddCitizen = () => {
         <div className="container">
           <div className="row">
             <div className="content-block  ">
-              <div className="tab-menu shadow--primary mb--4">
-                <input
+              <div className=" shadow--primary mb--4">
+                {/* <input
                   type="radio"
                   name="tabs"
                   id="tab-personal"
@@ -52,8 +57,8 @@ const AddCitizen = () => {
                 />
                 <label htmlFor="tab-personal" className="menu-label">
                   <span>Personal</span>
-                </label>
-                <div className="tab">
+                </label> */}
+                <div style={{ width: "65rem" }} className="mxy--auto">
                   <Formik
                     initialValues={initVal}
                     validationSchema={yupSchema}
@@ -228,12 +233,12 @@ const AddCitizen = () => {
                   <NoData />
                 </div>
 
-                <input type="radio" name="tabs" id="tab-academic" />
+                {/* <input type="radio" name="tabs" id="tab-academic" />
                 <label htmlFor="tab-academic" className="menu-label">
                   <Link to={`${devNavUrl}/admin/trainees-edit-academic?eid`}>
                     Academic
                   </Link>
-                </label>
+                </label> */}
               </div>
             </div>
           </div>

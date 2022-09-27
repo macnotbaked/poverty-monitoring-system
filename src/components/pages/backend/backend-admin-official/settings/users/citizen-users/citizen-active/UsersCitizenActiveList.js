@@ -1,18 +1,20 @@
 import React from "react";
-import { AiFillEdit, AiFillEye } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaTrashAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { setIsAdd, setIsConfirm } from "../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../store/StoreContext";
-import { devNavUrl } from "../../../../helpers/functions-general";
-import LoadMore from "../../../../widgets/LoadMore";
-import ModalConfirm from "../../../../widgets/ModalConfirm";
-import NoData from "../../../../widgets/NoData";
-import SearchBox from "../../../../widgets/SearchBox";
-import Spinner from "../../../../widgets/Spinner";
+import { RiUserUnfollowFill } from "react-icons/ri";
+import { MdPassword } from "react-icons/md";
+import { StoreContext } from "../../../../../../../../store/StoreContext";
+import NoData from "../../../../../../../widgets/NoData";
+import SearchBox from "../../../../../../../widgets/SearchBox";
+import Spinner from "../../../../../../../widgets/Spinner";
+import {
+  setIsAdd,
+  setIsConfirm,
+} from "../../../../../../../../store/StoreAction";
+import LoadMore from "../../../../../../../widgets/LoadMore";
+import ModalUserConfirm from "./ModalUserConfirm";
+import { AiFillEdit } from "react-icons/ai";
 
-const SitioList = ({
+const UsersCitizenActiveList = ({
   loading,
   handleLoad,
   totalResult,
@@ -21,24 +23,27 @@ const SitioList = ({
   handleChange,
   setItemEdit,
 }) => {
-  const search = React.useRef(null);
   const { store, dispatch } = React.useContext(StoreContext);
   const [dataItem, setData] = React.useState(null);
   const [isSus, setSus] = React.useState(false);
-  const [id, setId] = React.useState(null);
-  const [isDel, setDel] = React.useState(false);
+  const search = React.useRef(null);
   let count = 0;
+
+  const handleReset = (item) => {
+    dispatch(setIsConfirm(true));
+    setSus(false);
+    setData(item);
+  };
 
   const handleEdit = (item) => {
     dispatch(setIsAdd(true));
     setItemEdit(item);
   };
 
-  const handleDelete = (item) => {
+  const handleSuspend = (item) => {
     dispatch(setIsConfirm(true));
-    setId(item.sitio_aid);
+    setSus(true);
     setData(item);
-    setDel(true);
   };
 
   return (
@@ -50,10 +55,9 @@ const SitioList = ({
         loading={loading}
         result={result}
         store={store}
-        url="/admin/admin-sitio/read-sitio-search.php"
+        url="/admin/admin-settings/users/read-user-active-search.php"
       />
       <div className="mb--2">
-        <h3 className="t--bold mb--1">Baranggay San Mateo</h3>
         {loading && <Spinner />}
         <table id="" className="" cellSpacing="0" width="100%">
           <thead className="">
@@ -61,10 +65,16 @@ const SitioList = ({
               <th className="" rowSpan="1">
                 #
               </th>
-              <th className="row--name" rowSpan="1" style={{ width: "15rem" }}>
+              <th rowSpan="1" style={{ width: "20rem" }}>
                 Name
               </th>
-              <th rowSpan="1">Total Population</th>
+              <th rowSpan="1" style={{ width: "20rem" }}>
+                Email
+              </th>
+              <th rowSpan="1" style={{ width: "15rem" }}>
+                Contact
+              </th>
+              <th rowSpan="1">Sitio</th>
               <th rowSpan="1">Actions</th>
             </tr>
           </thead>
@@ -75,17 +85,22 @@ const SitioList = ({
                 return (
                   <tr key={key}>
                     <td>{count}.</td>
-                    <td>{item.sitio_name}</td>
-                    <td>{100}</td>
+                    <td className="table--name">
+                      {item.users_lname}, {item.users_fname}{" "}
+                      <span>{item.users_mname}</span>.
+                    </td>
+                    <td>{item.users_email}</td>
+                    <td>{item.users_phone}</td>
+                    <td>{"Sitio 1"}</td>
                     <td>
-                      <Link
-                        to={`${devNavUrl}/admin/citizen?sid=${item.sitio_aid}`}
-                        className="dropdown tooltip--view"
+                      <div
+                        className="dropdown tooltip--reset"
+                        onClick={() => handleReset(item)}
                       >
                         <span>
-                          <AiFillEye />
+                          <MdPassword />
                         </span>
-                      </Link>
+                      </div>
 
                       <div className="dropdown">
                         <span>
@@ -95,8 +110,8 @@ const SitioList = ({
                           <button onClick={() => handleEdit(item)}>
                             <AiFillEdit /> Edit
                           </button>
-                          <button onClick={() => handleDelete(item)}>
-                            <FaTrashAlt /> Delete
+                          <button onClick={() => handleSuspend(item)}>
+                            <RiUserUnfollowFill /> Suspend
                           </button>
                         </div>
                       </div>
@@ -105,7 +120,7 @@ const SitioList = ({
                 );
               })
             ) : (
-              <tr>
+              <tr className="">
                 <td colSpan="100%">
                   <NoData />
                 </td>
@@ -114,7 +129,6 @@ const SitioList = ({
           </tbody>
         </table>
       </div>
-
       <div className="t--center row">
         {!store.isSearch && (
           <LoadMore
@@ -127,16 +141,15 @@ const SitioList = ({
       </div>
 
       {store.isConfirm && (
-        <ModalConfirm
-          id={id}
-          isDel={isDel}
-          mysqlApiDelete={"/admin/admin-sitio/delete-sitio.php"}
-          msg={"Are you sure you want to delete this"}
-          item={`"${dataItem.sitio_name}"`}
+        <ModalUserConfirm
+          isSus={isSus}
+          susEndpoint="/admin/admin-settings/users/archive-user.php"
+          resetEndpoint="/admin/admin-settings/users/update-user-forgot-pass.php"
+          item={dataItem}
         />
       )}
     </>
   );
 };
 
-export default SitioList;
+export default UsersCitizenActiveList;

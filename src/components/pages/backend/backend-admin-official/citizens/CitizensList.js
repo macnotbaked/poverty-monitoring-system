@@ -4,12 +4,12 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaArchive, FaTrashAlt } from "react-icons/fa";
 import { AiFillEdit } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { devNavUrl } from "../../../../../helpers/functions-general";
-import NoData from "../../../../../widgets/NoData";
-import { StoreContext } from "../../../../../../store/StoreContext";
-import Spinner from "../../../../../widgets/Spinner";
+import { devNavUrl } from "../../../../helpers/functions-general";
+import NoData from "../../../../widgets/NoData";
+import { StoreContext } from "../../../../../store/StoreContext";
+import Spinner from "../../../../widgets/Spinner";
 
-const CitizenList = () => {
+const CitizensList = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [loading, setLoading] = React.useState(false);
 
@@ -163,4 +163,4 @@ const CitizenList = () => {
   );
 };
 
-export default CitizenList;
+export default CitizensList;

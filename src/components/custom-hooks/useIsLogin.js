@@ -14,7 +14,7 @@ const useIsLogin = (navigate) => {
     setLoading(true);
     const fetchLogin = async () => {
       const login = await fetchApi(
-        devApiUrl + "/admin/admin-settings/account/read-account-token.php",
+        devApiUrl + "/admin/admin-settings/users/read-user-token.php",
         {
           token: checkLocalStorage().token,
           // idNumber: checkLocalStorage().data.settings_account_aid,

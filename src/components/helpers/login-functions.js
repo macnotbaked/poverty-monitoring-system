@@ -10,7 +10,7 @@ export const checkRoleToRedirect = (navigate, data) => {
       navigate(`${devNavUrl}/admin/home`);
       break;
     default:
-      navigate(`${devNavUrl}/trainee/my-info`);
+      navigate(`${devNavUrl}/citizen/my-info`);
       break;
   }
 };

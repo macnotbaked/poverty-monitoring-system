@@ -232,16 +232,26 @@ class Users
     public function readCitizenLogin()
     {
         $sql = "select * from {$this->tblUsers} as user, ";
-        $sql .= "{$this->tblCitizen} as citizen, ";
         $sql .= "{$this->tblRoles} as role ";
         $sql .= "where user.users_is_active = 1 ";
         $sql .= "and user.users_email = '{$this->users_email}' ";
-        $sql .= "and user.users_role = role.settings_role_aid ";
-        $sql .= "and citizen.trainee_email = user.users_email ";
-        $sql .= "and citizen.trainee_is_active = 1 ";
+        $sql .= "and user.users_role_id = role.roles_aid ";
         $result = $this->connection->query($sql);
         return $result;
     }
+    // public function readCitizenLogin()
+    // {
+    //     $sql = "select * from {$this->tblUsers} as user, ";
+    //     $sql .= "{$this->tblCitizen} as citizen, ";
+    //     $sql .= "{$this->tblRoles} as role ";
+    //     $sql .= "where user.users_is_active = 1 ";
+    //     $sql .= "and user.users_email = '{$this->users_email}' ";
+    //     $sql .= "and user.users_role = role.settings_role_aid ";
+    //     $sql .= "and citizen.trainee_email = user.users_email ";
+    //     $sql .= "and citizen.trainee_is_active = 1 ";
+    //     $result = $this->connection->query($sql);
+    //     return $result;
+    // }
 
     public function readKey()
     {
