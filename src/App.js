@@ -1,30 +1,28 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.scss";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { devNavUrl } from "./components/helpers/functions-general";
-import { StoreProvider } from "./store/StoreContext";
-import Login from "./components/pages/frontend/frontend-login/Login";
-import ForgotPassword from "./components/pages/frontend/frontend-forgot-pass/ForgotPassword";
-import CreatePassword from "./components/pages/frontend/frontend-create-password/CreatePassword";
-import CreatePasswordSuccess from "./components/pages/frontend/frontend-create-password/CreatePasswordSuccess";
-import Home from "./components/pages/backend/backend-admin-official/home/Home";
+import Citizens from "./components/pages/backend/backend-admin-official/citizens/Citizens";
 import Evaluation from "./components/pages/backend/backend-admin-official/evaluation/Evaluation";
 import EvaluationFilter from "./components/pages/backend/backend-admin-official/evaluation/EvaluationFilter";
+import SitioEvaluation from "./components/pages/backend/backend-admin-official/evaluation/sitio/SitioEvaluation";
+import Dashboard from "./components/pages/backend/backend-admin-official/home/Dashboard";
 import Settings from "./components/pages/backend/backend-admin-official/settings/Settings";
-import PageNotFound from "./components/widgets/PageNotFound";
-import ProtectedRoute from "./components/ProtectedRoute";
-import ForgotPasswordAlmostDone from "./components/pages/frontend/frontend-forgot-pass/ForgotPasswordAlmostDone";
+import Roles from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/roles/Roles";
 import UsersActive from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/users-active/UsersActive";
 import UsersInactive from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/users-inactive/UsersInactive";
-import Roles from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/roles/Roles";
+import UsersCitizenActive from "./components/pages/backend/backend-admin-official/settings/users/citizen-users/citizen-active/UsersCitizenActive";
 import Users from "./components/pages/backend/backend-admin-official/settings/users/Users";
 import Citizen from "./components/pages/backend/backend-admin-official/sitio/citizen/Citizen";
 import AddCitizen from "./components/pages/backend/backend-admin-official/sitio/citizen/citizen-add/AddCitizen";
-import SitioEvaluation from "./components/pages/backend/backend-admin-official/evaluation/sitio/SitioEvaluation";
 import Sitio from "./components/pages/backend/backend-admin-official/sitio/Sitio";
-import UsersCitizenActive from "./components/pages/backend/backend-admin-official/settings/users/citizen-users/citizen-active/UsersCitizenActive";
-import MyInfo from "./components/pages/backend/backend-citizen/my-info/MyInfo";
-import Citizens from "./components/pages/backend/backend-admin-official/citizens/Citizens";
-import CitizenEvaluation from "./components/pages/backend/backend-citizen/evaluation/CitizenEvaluation";
+import CreatePassword from "./components/pages/frontend/frontend-create-password/CreatePassword";
+import CreatePasswordSuccess from "./components/pages/frontend/frontend-create-password/CreatePasswordSuccess";
+import ForgotPassword from "./components/pages/frontend/frontend-forgot-pass/ForgotPassword";
+import ForgotPasswordAlmostDone from "./components/pages/frontend/frontend-forgot-pass/ForgotPasswordAlmostDone";
+import Login from "./components/pages/frontend/frontend-login/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
+import PageNotFound from "./components/widgets/PageNotFound";
+import { StoreProvider } from "./store/StoreContext";
 
 function App() {
   return (
@@ -55,10 +53,18 @@ function App() {
             {/* ADMIN HOME */}
 
             <Route
+              path={`/`}
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path={`${devNavUrl}/admin/home`}
               element={
                 <ProtectedRoute>
-                  <Home />
+                  <Dashboard />
                 </ProtectedRoute>
               }
             />
@@ -155,22 +161,6 @@ function App() {
               element={
                 <ProtectedRoute>
                   <UsersCitizenActive />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path={`${devNavUrl}/citizen/my-info`}
-              element={
-                <ProtectedRoute>
-                  <MyInfo />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path={`${devNavUrl}/citizen/evaluation`}
-              element={
-                <ProtectedRoute>
-                  <CitizenEvaluation />
                 </ProtectedRoute>
               }
             />

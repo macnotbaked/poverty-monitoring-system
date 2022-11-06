@@ -1,15 +1,12 @@
 import React from "react";
-import {
-  FaHome,
-  FaHouseUser,
-  FaMoneyCheck,
-  FaNewspaper,
-  FaSitemap,
-  FaUserCircle,
-  FaUserFriends,
-} from "react-icons/fa";
-import { HiUserGroup } from "react-icons/hi";
 import { AiFillSetting } from "react-icons/ai";
+import {
+  FaChartBar,
+  FaHome,
+  FaMapMarkedAlt,
+  FaPowerOff,
+  FaUsers,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {
   setIsActive,
@@ -37,140 +34,88 @@ const Navigation = ({ menu }) => {
   return (
     <>
       <nav className="navigation">
-        <div className="navigation__logo">
-          <a
-            href={`${devNavUrl}/admin/home`}
-            onClick={() => dispatch(setStartIndex(0))}
-          >
-            <img src={`${devBaseUrl}/img/pms-logo-transparent.png`} alt="PMS" />
-          </a>
-        </div>
         <ul>
           <>
+            <div className="navigation__logo">
+              <a
+                href={`${devNavUrl}/admin/home`}
+                onClick={() => dispatch(setStartIndex(0))}
+              >
+                <img
+                  src={`${devBaseUrl}/img/pms-icon-transparent.png`}
+                  alt="PMS"
+                />
+              </a>
+              <span></span>
+            </div>
             <li className={menu === "home" ? "tab--active" : ""}>
               <Link
                 to={`${devNavUrl}/admin/home`}
                 onClick={() => dispatch(setStartIndex(0))}
+                className="tooltip"
+                data-tooltip="Home"
               >
                 <FaHome />
-                <span>Home</span>
               </Link>
-              <div className="shape-wrapper-bottom">
-                <div className="circle-wrapper">
-                  <span className="circle-bottom"></span>
-                </div>
-              </div>
             </li>
             <li className={menu === "sitio" ? "tab--active" : ""}>
-              <div className="shape-wrapper-top">
-                <div className="circle-wrapper">
-                  <span className="circle-top"></span>
-                </div>
-              </div>
               <Link
                 to={`${devNavUrl}/admin/sitio`}
                 onClick={() => dispatch(setStartIndex(0))}
+                className="tooltip"
+                data-tooltip="Purok"
               >
-                <FaSitemap />
-                <span>Sitio</span>
+                <FaMapMarkedAlt />
               </Link>
-              <div className="shape-wrapper-bottom">
-                <div className="circle-wrapper">
-                  <span className="circle-bottom"></span>
-                </div>
-              </div>
             </li>
             <li className={menu === "citizens" ? "tab--active" : ""}>
-              <div className="shape-wrapper-top">
-                <div className="circle-wrapper">
-                  <span className="circle-top"></span>
-                </div>
-              </div>
               <Link
                 to={`${devNavUrl}/admin/citizens`}
                 onClick={() => dispatch(setStartIndex(0))}
+                className="tooltip"
+                data-tooltip="Representatives"
               >
-                <HiUserGroup />
-                <span>Citizens</span>
+                <FaUsers />
               </Link>
-              <div className="shape-wrapper-bottom">
-                <div className="circle-wrapper">
-                  <span className="circle-bottom"></span>
-                </div>
-              </div>
             </li>
             <li className={menu === "evaluation" ? "tab--active" : ""}>
-              <div className="shape-wrapper-top">
-                <div className="circle-wrapper">
-                  <span className="circle-top"></span>
-                </div>
-              </div>
               <Link
                 to={`${devNavUrl}/admin/evaluation`}
                 onClick={() => dispatch(setStartIndex(0))}
+                className="tooltip"
+                data-tooltip="Evaluation"
               >
-                <FaMoneyCheck />
-                <span>Evaluation</span>
+                <FaChartBar />
               </Link>
-              <div className="shape-wrapper-bottom">
-                <div className="circle-wrapper">
-                  <span className="circle-bottom"></span>
-                </div>
-              </div>
             </li>
           </>
 
           {store.credentials.roles_name === "Admin" && (
             <>
               <li className={menu === "settings" ? "tab--active" : ""}>
-                <div className="shape-wrapper-top">
-                  <div className="circle-wrapper">
-                    <span className="circle-top"></span>
-                  </div>
-                </div>
                 <Link
                   to={`${devNavUrl}/admin/settings`}
                   onClick={() => dispatch(setStartIndex(0))}
+                  className="tooltip"
+                  data-tooltip="Settings"
                 >
                   <AiFillSetting />
-                  <span>Settings</span>
                 </Link>
-                <div className="shape-wrapper-bottom">
-                  <div className="circle-wrapper">
-                    <span className="circle-bottom"></span>
-                  </div>
-                </div>
               </li>
             </>
           )}
         </ul>
-
-        <div className="profile">
-          <span className="title">Profile</span>
-          <div className="profile__user my--2">
-            {/* <img src="" alt="" /> */}
-            <FaUserCircle />
-            <div className="profile__name">
-              <span>
-                Hi{" "}
-                <span className="t--bold">
-                  {role === "Citizen"
-                    ? store.credentials.citizen_fname
-                    : store.credentials.users_fname}
-                  ,
-                </span>
-              </span>
-              <span>{store.credentials.roles_name}</span>
-            </div>
-          </div>
-          <button type="sumbit" className="btn--primary" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
+        <button
+          type="sumbit"
+          onClick={handleLogout}
+          className="logout__container tooltip"
+          data-tooltip="Logout"
+        >
+          <FaPowerOff />
+        </button>
       </nav>
 
       {store.isLogout && <ModalLogout />}
-      {/* <ModalLogout /> */}
     </>
   );
 };

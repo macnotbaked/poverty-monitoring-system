@@ -1,17 +1,17 @@
-import React from "react";
-import { Bar, Doughnut, Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
-import { setStartIndex } from "../../../../../store/StoreAction";
-import { Link } from "react-router-dom";
-import { devNavUrl } from "../../../../helpers/functions-general";
+import React from "react";
+import { Bar, Doughnut, Line, PolarArea } from "react-chartjs-2";
 import { AiFillEye } from "react-icons/ai";
-import Spinner from "../../../../widgets/Spinner";
-import NoData from "../../../../widgets/NoData";
+import { Link } from "react-router-dom";
+import { setStartIndex } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
+import { devNavUrl } from "../../../../helpers/functions-general";
 import LoadMore from "../../../../widgets/LoadMore";
+import NoData from "../../../../widgets/NoData";
 import SearchBox from "../../../../widgets/SearchBox";
+import Spinner from "../../../../widgets/Spinner";
 
-const HomeList = ({
+const DashboardList = ({
   loading,
   handleLoad,
   totalResult,
@@ -23,32 +23,21 @@ const HomeList = ({
   const { store, dispatch } = React.useContext(StoreContext);
   let count = 0;
 
-  const background = [];
-  const border = [];
   const labels = ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"];
 
-  for (let i = 0; i < labels.length; i++) {
-    let r = Math.floor(Math.random() * 73);
-    let g = Math.floor(Math.random() * 149);
-    let b = Math.floor(Math.random() * 139);
-    background.push("rgba(" + r + ", " + g + ", " + b + ", .5)");
-    border.push("rgba(" + r + ", " + g + ", " + b + ", 1)");
-  }
   const userData = {
-    labels: ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"],
+    labels: labels,
     datasets: [
       {
         label: "Total Population",
-        data: [80, 76, 89, 100, 92, 88],
-        backgroundColor: background,
-        borderColor: border,
+        data: [80, 76, 89, 100, 92],
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
         borderWidth: 1,
       },
       {
         label: "Poverty Rate",
-        data: [20, 36, 19, 70, 44, 55],
-        backgroundColor: background,
-        borderColor: border,
+        data: [20, 36, 19, 70, 44],
+        backgroundColor: "rgba(54, 162, 235, 0.5)",
         borderWidth: 1,
       },
     ],
@@ -57,14 +46,28 @@ const HomeList = ({
   return (
     <>
       {loading && <Spinner />}
-      <div className="graph" style={{ maxWidth: "90rem", maxHeight: "35rem" }}>
-        <Bar
-          style={{ maxWidth: "90rem", maxHeight: "30rem" }}
-          data={userData}
-        />
+      <div className="graph__container">
+        <div className="graph__item">
+          <Bar style={{ width: "100%", maxHeight: "30rem" }} data={userData} />
+        </div>
+        <div className="graph__item">
+          <Doughnut
+            style={{ width: "100%", maxHeight: "30rem" }}
+            data={userData}
+          />
+        </div>
+        <div className="graph__item">
+          <PolarArea
+            style={{ width: "100%", maxHeight: "30rem" }}
+            data={userData}
+          />
+        </div>
+        <div className="graph__item">
+          <Line style={{ width: "100%", maxHeight: "30rem" }} data={userData} />
+        </div>
       </div>
 
-      <div className="mb--2">
+      {/* <div className="mb--2">
         <h3 className="t--bold mb--1">Baranggay San Marcos</h3>
         <SearchBox
           search={search}
@@ -119,8 +122,8 @@ const HomeList = ({
             )}
           </tbody>
         </table>
-      </div>
-      <div className="t--center row">
+      </div> */}
+      {/* <div className="t--center">
         {!store.isSearch && (
           <LoadMore
             handleLoad={handleLoad}
@@ -129,9 +132,9 @@ const HomeList = ({
             totalResult={totalResult}
           />
         )}
-      </div>
+      </div> */}
     </>
   );
 };
 
-export default HomeList;
+export default DashboardList;

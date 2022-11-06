@@ -1,16 +1,17 @@
 import { Form, Formik } from "formik";
 import React from "react";
-import * as Yup from "yup";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { StoreContext } from "../../../../store/StoreContext";
-import { InputText } from "../../../helpers/FormInputs";
-import Logo from "../../../widgets/Logo";
-import { devNavUrl, fetchFormData } from "../../../helpers/functions-general";
-import Spinner from "../../../widgets/Spinner";
+import { FaLock, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { StoreContext } from "../../../../store/StoreContext";
 import useIsLogin from "../../../custom-hooks/useIsLogin";
 import { fetchData } from "../../../helpers/fetchData";
+import { InputText } from "../../../helpers/FormInputs";
+import { devNavUrl, fetchFormData } from "../../../helpers/functions-general";
+import Logo from "../../../widgets/Logo";
 import ModalError from "../../../widgets/ModalError";
+import Spinner from "../../../widgets/Spinner";
 
 const Login = () => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -70,22 +71,28 @@ const Login = () => {
                 return (
                   <Form>
                     <div className="input mb--2">
+                      <i className="icon--email">
+                        <FaUser />
+                      </i>
                       <InputText
-                        label="Email address"
+                        placeholder="Email address"
                         type="text"
                         name="users_email"
                         required
                       />
                     </div>
                     <div className="input mb--3">
+                      <i className="icon--pass">
+                        <FaLock />
+                      </i>
                       <InputText
-                        label="Password"
+                        placeholder="Password"
                         type={passwordShown ? "text" : "password"}
                         name="users_password"
                         required
                       />
                       <i
-                        className="icon--input"
+                        className="icon--show"
                         onMouseUp={togglePassword}
                         onMouseDown={togglePassword}
                       >
@@ -101,14 +108,13 @@ const Login = () => {
                       <span>Log in</span>
                     </button>
 
-                    <p className="t--left">
-                      Did you forget your password?{" "}
+                    <p className="t--center">
                       <a
                         href={`${devNavUrl}/forgot-password`}
                         className="color--primary"
                         style={{ position: "relative" }}
                       >
-                        <u> Forgot Password</u>
+                        <u>Forgot Password?</u>
                       </a>
                     </p>
                   </Form>

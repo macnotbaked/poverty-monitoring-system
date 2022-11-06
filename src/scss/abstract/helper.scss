@@ -1,27 +1,15 @@
 .tab--active {
-  border-radius: 3rem 0 0 3rem;
-  // background-color: $light-color;
-
-  background: linear-gradient(
-    90deg,
-    rgba($secondary-color, 1),
-    rgba($light-color, 1)
-  );
-
-  // border-right: 0.5rem solid $light-color;
   &:hover {
-    background: linear-gradient(
-      90deg,
-      rgba($primary-color, 1),
-      rgba($secondary-color, 0.85)
-    );
+    background: none !important;
   }
 
   svg {
     color: $primary-color !important;
-  }
-  a {
-    color: $primary-color !important;
+    background: $light-color;
+    height: 4rem;
+    width: 4rem;
+    padding: 1rem;
+    border-radius: 5rem;
   }
 }
 .color--primary {

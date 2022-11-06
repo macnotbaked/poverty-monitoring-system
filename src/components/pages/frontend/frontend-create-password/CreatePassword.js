@@ -1,23 +1,23 @@
+import { Form, Formik } from "formik";
 import React from "react";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { StoreContext } from "../../../../store/StoreContext";
-import { getUrlParam } from "../../../helpers/functions-general";
-import Logo from "../../../widgets/Logo";
+import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 import {
   setCreatePass,
   setError,
   setMessage,
 } from "../../../../store/StoreAction";
-import { InputText } from "../../../helpers/FormInputs";
-import SpinnerButton from "../../../widgets/SpinnerButton";
-import ModalError from "../../../widgets/ModalError";
+import { StoreContext } from "../../../../store/StoreContext";
 import useLoadAll from "../../../custom-hooks/useLoadAll";
-import Spinner from "../../../widgets/Spinner";
-import PageNotFound from "../../../widgets/PageNotFound";
 import { fetchData } from "../../../helpers/fetchData";
+import { InputText } from "../../../helpers/FormInputs";
+import { getUrlParam } from "../../../helpers/functions-general";
+import Logo from "../../../widgets/Logo";
+import ModalError from "../../../widgets/ModalError";
+import PageNotFound from "../../../widgets/PageNotFound";
+import Spinner from "../../../widgets/Spinner";
+import SpinnerButton from "../../../widgets/SpinnerButton";
 
 const CreatePassword = ({ itemEdit }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -45,8 +45,24 @@ const CreatePassword = ({ itemEdit }) => {
   };
 
   const yupSchema = Yup.object({
-    users_password: Yup.string().required("Required"),
-    users_password_confirm: Yup.string().required("Required"),
+    users_password: Yup.string()
+      .required("Required")
+      .oneOf(
+        [Yup.ref("user_account_password"), null],
+        "Passwords does not match."
+      )
+      .min(6, "Password must be at least 6 characters.")
+      .matches(/[a-z]/, "At least one lowercase character.")
+      .matches(/[A-Z]/, "At least one uppercase character."),
+    users_password_confirm: Yup.string()
+      .required("Required")
+      .oneOf(
+        [Yup.ref("user_account_password"), null],
+        "Passwords does not match."
+      )
+      .min(6, "Password must be at least 6 characters.")
+      .matches(/[a-z]/, "At least one lowercase character.")
+      .matches(/[A-Z]/, "At least one uppercase character."),
   });
 
   if (

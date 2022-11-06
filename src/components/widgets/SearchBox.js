@@ -13,23 +13,24 @@ const SearchBox = ({
   return (
     <>
       <div className="mb--1">
-        <form onChange={(e) => handleSearch(e, search, url)}>
+        <form onSubmit={(e) => handleSearch(e, search, url)}>
           <div className="input">
             <input
               type="text"
               ref={search}
               onChange={handleChange}
+              placeholder="Search here.."
               className="search--bar"
             />
-            <label htmlFor="search">Search...</label>
+            {/* <label htmlFor="search">Search...</label> */}
 
-            <i className="icon--input">
+            <button type="submit" className="icon--search">
               <ImSearch />
-            </i>
+            </button>
           </div>
         </form>
         <p className={store.isSearch ? "mxy--2" : "d--none mxy--2"}>
-          Search Result: <span>{!loading && result.length}</span>
+          Result: {loading ? "Searching..." : !loading && result.length}
         </p>
       </div>
     </>
