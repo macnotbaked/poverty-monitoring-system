@@ -1,7 +1,6 @@
 import fetchApi from "./fetchApi";
 
 import {
-  baseUrl,
   devApiUrl,
   devNavUrl,
   doList,
@@ -16,7 +15,6 @@ import {
   setForgotPass,
   setIsAdd,
   setIsConfirm,
-  setIsEvalEnabled,
   setIsLogin,
   setIsSignup,
   setMessage,

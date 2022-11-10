@@ -1,9 +1,20 @@
 import React from "react";
-import { AiFillEdit, AiFillEye } from "react-icons/ai";
+import { AiFillEye } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaTrashAlt } from "react-icons/fa";
+import {
+  FaArchive,
+  FaEdit,
+  FaEye,
+  FaHistory,
+  FaTrash,
+  FaUndo,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { setIsAdd, setIsConfirm } from "../../../../../store/StoreAction";
+import {
+  setIsAdd,
+  setIsClick,
+  setIsConfirm,
+} from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
 import { devNavUrl } from "../../../../helpers/functions-general";
 import LoadMore from "../../../../widgets/LoadMore";
@@ -41,6 +52,10 @@ const SitioList = ({
     setDel(true);
   };
 
+  const handleClick = () => {
+    dispatch(setIsClick(!store.isClick));
+  };
+
   return (
     <>
       <SearchBox
@@ -52,19 +67,18 @@ const SitioList = ({
         store={store}
         url="/admin/admin-sitio/read-sitio-search.php"
       />
-      <div className="mb--2">
-        <h3 className="t--bold mb--1">Baranggay San Mateo</h3>
-
+      <div className="table__container">
+        {loading && <Spinner />}
         <table id="" className="" cellSpacing="0" width="100%">
           <thead className="">
             <tr>
               <th className="" rowSpan="1">
                 #
               </th>
-              <th className="row--name" rowSpan="1" style={{ width: "15rem" }}>
+              <th className="row--name" rowSpan="1">
                 Name
               </th>
-              <th rowSpan="1">Total Population</th>
+              <th rowSpan="1">Total Household</th>
               <th rowSpan="1">Actions</th>
             </tr>
           </thead>
@@ -78,28 +92,58 @@ const SitioList = ({
                     <td>{item.sitio_name}</td>
                     <td>{100}</td>
                     <td>
-                      <Link
-                        to={`${devNavUrl}/admin/citizen?sid=${item.sitio_aid}`}
-                        className="dropdown tooltip--view"
-                      >
-                        <span>
-                          <AiFillEye />
-                        </span>
-                      </Link>
+                      {item.sitio_is_active === "1" && (
+                        <div className="d--flex">
+                          <Link
+                            to={`${devNavUrl}/admin/citizen?sid=${item.sitio_aid}`}
+                            className="dropdown tooltip--table"
+                            data-tooltip="View"
+                          >
+                            <span>
+                              <FaEye />
+                            </span>
+                          </Link>
 
-                      <div className="dropdown">
-                        <span>
-                          <BsThreeDotsVertical />
-                        </span>
-                        <div className="dropdown-content">
-                          <button onClick={() => handleEdit(item)}>
-                            <AiFillEdit /> Edit
-                          </button>
-                          <button onClick={() => handleDelete(item)}>
-                            <FaTrashAlt /> Delete
-                          </button>
+                          <div className="dropdown">
+                            <span>
+                              <BsThreeDotsVertical />
+                            </span>
+                            <div className="dropdown-content">
+                              <button onClick={() => handleEdit(item)}>
+                                <FaEdit /> Edit
+                              </button>
+                              <button>
+                                <FaArchive /> Archive
+                              </button>
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                      )}
+
+                      {item.sitio_is_active === "0" && (
+                        <>
+                          <div className="d--flex">
+                            <button
+                              className="dropdown tooltip--table"
+                              data-tooltip="Restore"
+                            >
+                              <span>
+                                <FaHistory />
+                              </span>
+                            </button>
+
+                            <button
+                              onClick={() => handleDelete(item)}
+                              className="dropdown tooltip--table"
+                              data-tooltip="Delete"
+                            >
+                              <span>
+                                <FaTrash />
+                              </span>
+                            </button>
+                          </div>
+                        </>
+                      )}
                     </td>
                   </tr>
                 );
@@ -107,24 +151,23 @@ const SitioList = ({
             ) : (
               <tr>
                 <td colSpan="100%">
-                  {loading && <Spinner />}
                   <NoData />
                 </td>
               </tr>
             )}
           </tbody>
         </table>
-      </div>
 
-      <div className="t--center row">
-        {!store.isSearch && (
-          <LoadMore
-            handleLoad={handleLoad}
-            loading={loading}
-            result={result}
-            totalResult={totalResult}
-          />
-        )}
+        <div className="mt--2 t--center row">
+          {!store.isSearch && (
+            <LoadMore
+              handleLoad={handleLoad}
+              loading={loading}
+              result={result}
+              totalResult={totalResult}
+            />
+          )}
+        </div>
       </div>
 
       {store.isConfirm && (

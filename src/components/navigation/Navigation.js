@@ -3,6 +3,7 @@ import { AiFillSetting } from "react-icons/ai";
 import {
   FaChartBar,
   FaHome,
+  FaHouseUser,
   FaMapMarkedAlt,
   FaPowerOff,
   FaUsers,
@@ -75,7 +76,7 @@ const Navigation = ({ menu }) => {
                 className="tooltip"
                 data-tooltip="Representatives"
               >
-                <FaUsers />
+                <FaHouseUser />
               </Link>
             </li>
             <li className={menu === "evaluation" ? "tab--active" : ""}>

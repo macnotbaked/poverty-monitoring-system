@@ -46,7 +46,7 @@ const DashboardList = ({
   return (
     <>
       <div className="graph__container p--relative">
-        {!loading && <Spinner />}
+        {loading && <Spinner />}
         <div className="graph__item">
           <Bar style={{ width: "100%", maxHeight: "30rem" }} data={userData} />
         </div>

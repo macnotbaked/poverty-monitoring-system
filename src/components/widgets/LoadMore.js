@@ -11,7 +11,7 @@ const LoadMore = ({ handleLoad, loading, totalResult, result }) => {
       <>
         <div className="loadmore_container mb--2">
           <button
-            className="btn--loadmore mb--20"
+            className="btn--gradient mb--20"
             onClick={handleLoad}
             disabled={loading}
           >

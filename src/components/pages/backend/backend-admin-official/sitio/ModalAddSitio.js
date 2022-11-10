@@ -1,11 +1,11 @@
 import { Form, Formik } from "formik";
 import React from "react";
-import { FaTimes } from "react-icons/fa";
+import { FaMapMarkedAlt, FaTimes } from "react-icons/fa";
 import * as Yup from "yup";
 import { setIsAdd, setStartIndex } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
 import { fetchData } from "../../../../helpers/fetchData";
-import { InputSelect, InputText } from "../../../../helpers/FormInputs";
+import { InputText } from "../../../../helpers/FormInputs";
 import SpinnerButton from "../../../../widgets/SpinnerButton";
 
 const ModalAddSitio = ({ item }) => {
@@ -40,7 +40,7 @@ const ModalAddSitio = ({ item }) => {
       <div className="modal modal--front">
         <div className="display-center">
           <div className="modal-title-container">
-            <h4 className="t--bold">{item ? "Update" : "Add"} sitio</h4>
+            <h4 className="t--bold">{item ? "Update" : "Add"} purok</h4>
             <button className="btn--close" onClick={handleClose}>
               <FaTimes />
             </button>
@@ -72,12 +72,14 @@ const ModalAddSitio = ({ item }) => {
                 return (
                   <Form>
                     <div className="input my--3">
+                      <i className="icon--input">
+                        <FaMapMarkedAlt />
+                      </i>
                       <InputText
-                        label="Sitio name"
+                        placeholder="Sitio name"
                         type="text"
                         name="sitio_name"
                         disabled={loading}
-                        required
                       />
                     </div>
 
@@ -85,12 +87,12 @@ const ModalAddSitio = ({ item }) => {
                       <button
                         type="submit"
                         disabled={loading}
-                        className="btn--outline"
+                        className="btn--default"
                       >
                         {loading && <SpinnerButton />} {item ? "Save" : "Add"}
                       </button>
                       <button
-                        className="btn--secondary "
+                        className="btn--outline "
                         type="reset"
                         onClick={handleClose}
                       >

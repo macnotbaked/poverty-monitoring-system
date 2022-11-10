@@ -55,121 +55,121 @@ function App() {
             <Route
               path={`/`}
               element={
-                // <ProtectedRoute>
-                <Dashboard />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/home`}
               element={
-                // <ProtectedRoute>
-                <Dashboard />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/citizen`}
               element={
-                // <ProtectedRoute>
-                <Citizen />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <Citizen />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/citizen-add`}
               element={
-                // <ProtectedRoute>
-                <AddCitizen />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <AddCitizen />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/evaluation`}
               element={
-                // <ProtectedRoute>
-                <Evaluation />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <Evaluation />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/evaluation-filter`}
               element={
-                // <ProtectedRoute>
-                <EvaluationFilter />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <EvaluationFilter />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/sitio-evaluation`}
               element={
-                // <ProtectedRoute>
-                <SitioEvaluation />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <SitioEvaluation />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/settings`}
               element={
-                // <ProtectedRoute>
-                <Settings />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/users`}
               element={
-                // <ProtectedRoute>
-                <Users />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <Users />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/admin-official-users`}
               element={
-                // <ProtectedRoute>
-                <UsersActive />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <UsersActive />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/admin-official-users-inactive`}
               element={
-                // <ProtectedRoute>
-                <UsersInactive />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <UsersInactive />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/users-roles`}
               element={
-                // <ProtectedRoute>
-                <Roles />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <Roles />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/sitio`}
               element={
-                // <ProtectedRoute>
-                <Sitio />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <Sitio />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/citizen-user`}
               element={
-                // <ProtectedRoute>
-                <UsersCitizenActive />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <UsersCitizenActive />
+                </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/citizens`}
               element={
-                // <ProtectedRoute>
-                <Citizens />
-                // </ProtectedRoute>
+                <ProtectedRoute>
+                  <Citizens />
+                </ProtectedRoute>
               }
             />
 

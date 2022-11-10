@@ -86,6 +86,7 @@ function getResultData($result)
         extract($row);
         $list = [
             "sitio_aid" => $sitio_aid,
+            "sitio_is_active" => $sitio_is_active,
             "sitio_name" => $sitio_name,
             "sitio_created" => $sitio_created,
             "sitio_datetime" => $sitio_datetime,

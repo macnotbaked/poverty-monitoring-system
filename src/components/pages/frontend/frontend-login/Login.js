@@ -71,7 +71,7 @@ const Login = () => {
                 return (
                   <Form>
                     <div className="input mb--2">
-                      <i className="icon--email">
+                      <i className="icon--input">
                         <FaUser />
                       </i>
                       <InputText
@@ -82,7 +82,7 @@ const Login = () => {
                       />
                     </div>
                     <div className="input mb--3">
-                      <i className="icon--pass">
+                      <i className="icon--input">
                         <FaLock />
                       </i>
                       <InputText

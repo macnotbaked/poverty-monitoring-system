@@ -97,6 +97,13 @@ export const setIsSignup = (val) => {
   };
 };
 
+export const setIsClick = (val) => {
+  return {
+    type: "IS_CLICK",
+    payload: val,
+  };
+};
+
 export const setCredentials = (
   users_aid,
   roles_aid,

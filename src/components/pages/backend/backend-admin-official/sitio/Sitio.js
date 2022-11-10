@@ -1,5 +1,6 @@
 import React from "react";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { FaPlus, FaPlusCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { setIsAdd } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
@@ -41,9 +42,9 @@ const Sitio = () => {
           <div className="row">
             <div className="content">
               <div className="content__header">
-                <h3 className="t--bold py--2">Sitio</h3>
-                <button className="btn" onClick={handleAdd}>
-                  <AiFillPlusCircle /> <span>Add</span>
+                <h3 className="t--bold py--2">Purok</h3>
+                <button className="btn--primary" onClick={handleAdd}>
+                  <FaPlusCircle /> <span>Add</span>
                 </button>
               </div>
               <SitioList

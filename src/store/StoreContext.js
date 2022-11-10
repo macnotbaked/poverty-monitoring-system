@@ -17,6 +17,7 @@ const initVal = {
   isLogin: false,
   isLogout: false,
   isSignup: false,
+  isClick: false,
   credentials: {},
 };
 
