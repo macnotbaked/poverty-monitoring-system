@@ -2,7 +2,7 @@ import React from "react";
 import { StoreContext } from "../../store/StoreContext";
 import { fetchData } from "../helpers/fetchData";
 
-const useLoadAllInActive = (url, param1 = null, param2 = null) => {
+const useLoadAllInactive = (url, param1 = null, param2 = null) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [inactive, setResult] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -32,4 +32,4 @@ const useLoadAllInActive = (url, param1 = null, param2 = null) => {
   };
 };
 
-export default useLoadAllInActive;
+export default useLoadAllInactive;

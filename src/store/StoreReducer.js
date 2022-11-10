@@ -81,6 +81,12 @@ export const StoreReducer = (state, action) => {
         isSignup: action.payload,
       };
 
+    case "CREDENTIALS":
+      return {
+        ...state,
+        credentials: action.payload,
+      };
+
     default:
       return state;
   }

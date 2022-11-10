@@ -1,176 +1,294 @@
-@keyframes spinner {
-  0% {
-    transform: translate3d(-50%, -50%, 0) rotate(0deg);
-  }
-  100% {
-    transform: translate3d(-50%, -50%, 0) rotate(360deg);
-  }
-}
-.spinner {
-  background: rgba(255, 255, 255, 0.5);
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  overflow-y: hidden;
-  min-height: 50px;
-  padding: 40px 0;
-  z-index: 2;
+// @keyframes spinner {
+//   0% {
+//     transform: translate3d(-50%, -50%, 0) rotate(0deg);
+//   }
+//   100% {
+//     transform: translate3d(-50%, -50%, 0) rotate(360deg);
+//   }
+// }
+// .spinner {
+//   background: rgba(255, 255, 255, 0.5);
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   bottom: 0;
+//   right: 0;
+//   width: 100%;
+//   overflow-y: hidden;
+//   min-height: 50px;
+//   padding: 40px 0;
+//   z-index: 2;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   .spin::before {
+//     animation: 1.5s linear infinite spinner;
+//     animation-play-state: inherit;
+//     border: solid 5px $secondary-color;
+//     border-radius: 50%;
+//     content: "";
+//     height: 40px;
+//     width: 40px;
+//     position: absolute;
+//     left: 25px;
+//     transform: translate3d(-50%, -50%, 0);
+//     will-change: transform;
+//     z-index: 99;
+//   }
+//   span {
+//     position: relative;
+//     top: 20px;
+//     margin: auto;
+//   }
+// }
+
+.loading-spinner {
   display: flex;
   justify-content: center;
   align-items: center;
-  // .center-vertically {
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   //   margin: 0 auto;
-  //   //   position: absolute;
-  //   //   top: 50%;
-  //   //   left: 50%;
-  //   //   -ms-transform: translate(-50%, -50%);
-  //   //   transform: translate(-50%, -50%);
-  // }
-  .spin::before {
-    animation: 1.5s linear infinite spinner;
-    animation-play-state: inherit;
-    border: solid 5px $secondary-color;
-    border-radius: 50%;
-    content: "";
-    height: 40px;
-    width: 40px;
-    position: absolute;
-    left: 25px;
-    transform: translate3d(-50%, -50%, 0);
-    will-change: transform;
-    z-index: 99;
-  }
-  span {
-    position: relative;
-    top: 20px;
-    margin: auto;
-  }
-}
-.spinner-btn {
-  position: relative;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 14%;
-  z-index: 9;
-  overflow-y: hidden;
-  display: inline;
-  .center-vertically {
-    margin: 0 auto;
-    position: absolute;
-    top: 50%;
-    left: -9px;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
-  .spin-btn::before {
-    animation: 1s linear infinite spinner;
-    animation-play-state: inherit;
-    border: solid 3px $light-color;
-    border-bottom-color: $primary-color;
-    border-radius: 50%;
-    content: "";
-    height: 15px;
-    width: 15px;
-    position: absolute;
-    left: -10px;
-    transform: translate3d(-50%, -50%, 0);
-    will-change: transform;
-    z-index: 99;
-  }
-  .spin-tab::before {
-    animation: 1s linear infinite spinner;
-    animation-play-state: inherit;
-    border: solid 3px $light-color;
-    border-bottom-color: $primary-color;
-    border-radius: 50%;
-    content: "";
-    height: 18px;
-    width: 18px;
-    position: absolute;
-    margin-left: 15px;
-    transform: translate3d(-50%, -50%, 0);
-    will-change: transform;
-    z-index: 99;
-    top: -1px;
-  }
-}
-.loader > span {
-  width: 1rem;
-  height: 1rem;
-  display: block;
-  border-radius: 50%;
-  position: relative;
-  margin: 0 0.3rem;
-}
-
-.loader {
-  display: flex;
-}
-.load-1 {
-  animation: load 1s linear 0s infinite;
-}
-
-.load-2 {
-  animation: load 1s linear 0.25s infinite;
-}
-.load-3 {
-  animation: load 1s linear 0.5s infinite;
-}
-@keyframes load {
-  0% {
-    background: $secondary-color;
-  }
-
-  50% {
-    height: 1.5rem;
-    width: 1.5rem;
-    background: $primary-color;
-  }
-
-  100% {
-    background: $secondary-color;
-  }
-}
-
-.progress {
-  position: relative;
-  height: 0.5rem;
-  width: 15rem;
-  border: 0.5rem solid $primary-color;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-}
-.progress .color {
+  flex-direction: column;
   position: absolute;
-  background-color: $light-color;
-  width: 0px;
-  height: 0.5rem;
-  border-radius: 15px;
-  animation: progres 4s infinite linear;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $light-color;
 }
-@keyframes progres {
+
+.spin-load {
+  width: 44px;
+  height: 44px;
+  animation: spin-loading 2s infinite ease;
+  transform-style: preserve-3d;
+}
+
+.spin-load > div {
+  background-color: rgba($secondary-color, 0.2);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  border: 2px solid $primary-color;
+}
+
+.spin-load div:nth-of-type(1) {
+  transform: translateZ(-22px) rotateY(180deg);
+}
+
+.spin-load div:nth-of-type(2) {
+  transform: rotateY(-270deg) translateX(50%);
+  transform-origin: top right;
+}
+
+.spin-load div:nth-of-type(3) {
+  transform: rotateY(270deg) translateX(-50%);
+  transform-origin: center left;
+}
+
+.spin-load div:nth-of-type(4) {
+  transform: rotateX(90deg) translateY(-50%);
+  transform-origin: top center;
+}
+
+.spin-load div:nth-of-type(5) {
+  transform: rotateX(-90deg) translateY(50%);
+  transform-origin: bottom center;
+}
+
+.spin-load div:nth-of-type(6) {
+  transform: translateZ(22px);
+}
+
+@keyframes spin-loading {
   0% {
-    width: 0%;
+    transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
   }
-  25% {
-    width: 50%;
-  }
+
   50% {
-    width: 75%;
+    transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
   }
-  75% {
-    width: 85%;
-  }
+
   100% {
+    transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+  }
+}
+
+.scanner span {
+  color: transparent;
+  font-size: 1.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.scanner span::before {
+  content: "Loading...";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  border-right: 4px solid $secondary-color;
+  overflow: hidden;
+  color: $secondary-color;
+  animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+  0%,
+  10%,
+  100% {
+    width: 0;
+  }
+
+  10%,
+  20%,
+  30%,
+  40%,
+  50%,
+  60%,
+  70%,
+  80%,
+  90%,
+  100% {
+    border-right-color: transparent;
+  }
+
+  11%,
+  21%,
+  31%,
+  41%,
+  51%,
+  61%,
+  71%,
+  81%,
+  91% {
+    border-right: 4px solid $secondary-color;
+  }
+
+  60%,
+  80% {
     width: 100%;
   }
-} ;
+}
+
+// .spinner-btn {
+//   position: relative;
+//   left: 0;
+//   top: 0;
+//   bottom: 0;
+//   right: 0;
+//   width: 14%;
+//   z-index: 9;
+//   overflow-y: hidden;
+//   display: inline;
+//   .center-vertically {
+//     margin: 0 auto;
+//     position: absolute;
+//     top: 50%;
+//     left: -9px;
+//     -ms-transform: translate(-50%, -50%);
+//     transform: translate(-50%, -50%);
+//   }
+//   .spin-btn::before {
+//     animation: 1s linear infinite spinner;
+//     animation-play-state: inherit;
+//     border: solid 3px $light-color;
+//     border-bottom-color: $primary-color;
+//     border-radius: 50%;
+//     content: "";
+//     height: 15px;
+//     width: 15px;
+//     position: absolute;
+//     left: -10px;
+//     transform: translate3d(-50%, -50%, 0);
+//     will-change: transform;
+//     z-index: 99;
+//   }
+//   .spin-tab::before {
+//     animation: 1s linear infinite spinner;
+//     animation-play-state: inherit;
+//     border: solid 3px $light-color;
+//     border-bottom-color: $primary-color;
+//     border-radius: 50%;
+//     content: "";
+//     height: 18px;
+//     width: 18px;
+//     position: absolute;
+//     margin-left: 15px;
+//     transform: translate3d(-50%, -50%, 0);
+//     will-change: transform;
+//     z-index: 99;
+//     top: -1px;
+//   }
+// }
+// .loader > span {
+//   width: 1rem;
+//   height: 1rem;
+//   display: block;
+//   border-radius: 50%;
+//   position: relative;
+//   margin: 0 0.3rem;
+// }
+
+// .loader {
+//   display: flex;
+// }
+// .load-1 {
+//   animation: load 1s linear 0s infinite;
+// }
+
+// .load-2 {
+//   animation: load 1s linear 0.25s infinite;
+// }
+// .load-3 {
+//   animation: load 1s linear 0.5s infinite;
+// }
+// @keyframes load {
+//   0% {
+//     background: $secondary-color;
+//   }
+
+//   50% {
+//     height: 1.5rem;
+//     width: 1.5rem;
+//     background: $primary-color;
+//   }
+
+//   100% {
+//     background: $secondary-color;
+//   }
+// }
+
+// .progress {
+//   position: relative;
+//   height: 0.5rem;
+//   width: 15rem;
+//   border-radius: 15px;
+//   display: flex;
+//   align-items: center;
+//   background-color: $light-gray;
+// }
+// .progress .color {
+//   position: absolute;
+//   background-color: $primary-color;
+//   width: 0px;
+//   height: 0.5rem;
+//   border-radius: 15px;
+//   animation: progres 4s infinite linear;
+// }
+// @keyframes progres {
+//   0% {
+//     width: 0%;
+//   }
+//   25% {
+//     width: 50%;
+//   }
+//   50% {
+//     width: 75%;
+//   }
+//   75% {
+//     width: 85%;
+//   }
+//   100% {
+//     width: 100%;
+//   }
+// } ;

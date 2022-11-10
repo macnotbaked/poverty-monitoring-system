@@ -96,3 +96,22 @@ export const setIsSignup = (val) => {
     payload: val,
   };
 };
+
+export const setCredentials = (
+  users_aid,
+  roles_aid,
+  users_fname,
+  roles_name,
+  users_email
+) => {
+  return {
+    type: "CREDENTIALS",
+    payload: {
+      users_aid,
+      roles_aid,
+      users_fname,
+      roles_name,
+      users_email,
+    },
+  };
+};

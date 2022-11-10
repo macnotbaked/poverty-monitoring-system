@@ -1,31 +1,32 @@
 import { Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { StoreContext } from "../../../../store/StoreContext";
 import { InputText } from "../../../helpers/FormInputs";
 import Logo from "../../../widgets/Logo";
 import { devNavUrl } from "../../../helpers/functions-general";
+import { fetchData } from "../../../helpers/fetchData";
+import { useNavigate } from "react-router-dom";
+import { setForgotPass } from "../../../../store/StoreAction";
+import SpinnerButton from "../../../widgets/SpinnerButton";
 
 const ForgotPassword = () => {
   const { store, dispatch } = React.useContext(StoreContext);
-  const [passwordShown, setPasswordShown] = React.useState(false);
-
-  const togglePassword = () => {
-    setPasswordShown(!passwordShown);
-  };
+  const [Loading, setLoading] = React.useState(false);
+  const Navigate = useNavigate();
 
   const initVal = {
-    settings_account_email: "",
-    settings_account_password: "",
+    users_email: "",
   };
 
   const yupSchema = Yup.object({
-    settings_account_email: Yup.string()
-      .email("Invalid Email")
-      .required("Required"),
-    settings_account_password: Yup.string().required("Required"),
+    users_email: Yup.string().email("Invalid Email").required("Required"),
   });
+
+  React.useEffect(() => {
+    dispatch(setForgotPass(true));
+  }, []);
+
   return (
     <>
       <div className="login">
@@ -33,27 +34,25 @@ const ForgotPassword = () => {
           <div className="t--center">
             <Logo />
           </div>
-          <h2 className="t--left t--exbold my--2">LOGIN</h2>
+          <h2 className="t--left t--exbold my--2">FORGOT PASSWORD</h2>
 
           <Formik
             initialValues={initVal}
             validationSchema={yupSchema}
             onSubmit={async (values, { setSubmitting, resetForm }) => {
-              // clear first the local storage
-              //   localStorage.removeItem("lcsstoken");
-              // fetchData(
-              //   setLoading,
-              //   "/admin/admin-settings/account/read-account-login.php",
-              //   values, // form data values
-              //   null, // result set data
-              //   "Access granted.", // success msg
-              //   "Access denied.", // additional error msg if needed
-              //   dispatch, // context api action
-              //   store, // context api state
-              //   false, // boolean to show success modal
-              //   false, // boolean to show load more functionality button
-              //   navigate // props optional
-              // );
+              fetchData(
+                setLoading,
+                "/admin/admin-settings/users/update-user-forgot-pass.php",
+                values, // form data values
+                null, // result set data
+                "", // success msg
+                "", // additional error msg if needed
+                dispatch, // context api action
+                store, // context api state
+                false, // boolean to show success modal
+                false, // boolean to show load more functionality button
+                Navigate // props optional
+              );
             }}
           >
             {(props) => {
@@ -63,22 +62,23 @@ const ForgotPassword = () => {
                     <InputText
                       label="Email address"
                       type="text"
-                      name="settings_account_email"
+                      name="users_email"
+                      disabled={Loading}
                       required
                     />
                   </div>
 
-                  <button type="submit" className="btn--outline mb--2">
-                    <span>Submit</span>
+                  <button
+                    type="submit"
+                    className="btn--outline mb--2"
+                    disabled={Loading ? true : false}
+                  >
+                    {Loading && <SpinnerButton />} <span>Submit</span>
                   </button>
 
                   <p className="t--left">
                     Go back to{" "}
-                    <a
-                      href={`${devNavUrl}/login`}
-                      className="color-primary"
-                      style={{ position: "relative" }}
-                    >
+                    <a href={`${devNavUrl}/login`} className="color-primary">
                       <u> Login</u>
                     </a>
                   </p>

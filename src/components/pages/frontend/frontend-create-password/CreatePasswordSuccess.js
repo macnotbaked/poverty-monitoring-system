@@ -21,7 +21,7 @@ const CreatePasswordSuccess = () => {
           </p>
 
           <a href={`${devNavUrl}/login`} className="color--primary">
-            <u>Proceed to Login</u>
+            Proceed to <u>login</u>
           </a>
         </div>
       </div>

@@ -10,23 +10,20 @@ import {
 } from "./functions-general";
 
 import {
-  setSuccess,
-  setMessage,
-  setError,
-  setSave,
-  setIsConfirm,
-  setIsAdd,
-  // setIsDonorSignUp,
   setCreatePass,
-  setIsLogin,
   setCredentials,
+  setError,
   setForgotPass,
-  // setSelfEvaluationComplete,
-  // setPeerEvaluationComplete,
+  setIsAdd,
+  setIsConfirm,
   setIsEvalEnabled,
+  setIsLogin,
   setIsSignup,
+  setMessage,
+  setSave,
+  setSuccess,
 } from "../../store/StoreAction";
-// import { checkRoleToRedirect } from "./login-functions";
+import { checkRoleToRedirect } from "./login-functions";
 
 export const fetchData = async (
   //parameters
@@ -75,10 +72,6 @@ export const fetchData = async (
 
     // add modal will be closed when used
     if (store.isAdd) {
-      // if (fd.settings_account_aid === store.credentials.settings_account_aid) {
-      //   localStorage.removeItem("hrisv3token");
-      //   window.location.replace(`${devNavUrl}/admin/login`);
-      // }
       dispatch(setIsAdd(false));
       //this will refresh table list
       store.isSave ? dispatch(setSave(false)) : dispatch(setSave(true));
@@ -103,41 +96,34 @@ export const fetchData = async (
       navigate(`${devNavUrl}/admin/application-almost-done`);
     }
 
-    // check if eval is enabled
-    // if (store.isEvalEnabled) {
-    //   console.log(11111);
-    //   dispatch(setIsEvalEnabled(false));
-    //   store.isSave ? dispatch(setSave(false)) : dispatch(setSave(true));
-    // }
-
     // redirect to other page after create password
     if (store.isCreatePass) {
       dispatch(setCreatePass(false));
-      navigate(`${devNavUrl}/admin/all-set`);
+      navigate(`${devNavUrl}/all-set`);
     }
 
     // redirect to other page after request forgot password
     if (store.isForgotPassword) {
       dispatch(setForgotPass(false));
-      navigate(`${devNavUrl}/admin/almost-done`);
+      navigate(`${devNavUrl}/almost-done`);
     }
 
     // redirect to other page after login
-    // if (store.isLogin) {
-    //   // dispatch(setCredentials(data.mail));
-    //   dispatch(
-    //     setCredentials(
-    //       data.mail.settings_account_aid,
-    //       data.mail.settings_account_fname,
-    //       data.mail.settings_role_name,
-    //       data.mail.settings_account_email,
-    //       data.mail.settings_account_aid
-    //     )
-    //   );
-    //   setStorageRoute(data.data);
-    //   // setStorageRoute(data.data, data.mail);
-    //   dispatch(setIsLogin(false));
-    //   checkRoleToRedirect(navigate, data.mail);
-    // }
+    if (store.isLogin) {
+      // dispatch(setCredentials(data.mail));
+      dispatch(
+        setCredentials(
+          data.mail.users_aid,
+          data.mail.users_fname,
+          data.mail.roles_name,
+          data.mail.users_email,
+          data.mail.users_aid
+        )
+      );
+      setStorageRoute(data.data);
+      // setStorageRoute(data.data, data.mail);
+      dispatch(setIsLogin(false));
+      checkRoleToRedirect(navigate, data.mail);
+    }
   }
 };

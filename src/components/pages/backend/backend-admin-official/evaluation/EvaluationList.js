@@ -9,8 +9,20 @@ import Spinner from "../../../../widgets/Spinner";
 import NoData from "../../../../widgets/NoData";
 import { StoreContext } from "../../../../../store/StoreContext";
 import LoadMore from "../../../../widgets/LoadMore";
+import SearchBox from "../../../../widgets/SearchBox";
 
-const EvaluationList = () => {
+const EvaluationList = ({
+  loading,
+  handleLoad,
+  totalResult,
+  result,
+  handleSearch,
+  handleChange,
+}) => {
+  const search = React.useRef(null);
+  const { store, dispatch } = React.useContext(StoreContext);
+  let count = 0;
+
   const background = [];
   const border = [];
   const labels = ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"];
@@ -50,6 +62,7 @@ const EvaluationList = () => {
 
   return (
     <>
+      {loading && <Spinner />}
       <div className="graph" style={{ maxWidth: "90rem", maxHeight: "35rem" }}>
         <Bar
           style={{ maxWidth: "90rem", maxHeight: "30rem" }}
@@ -59,6 +72,15 @@ const EvaluationList = () => {
 
       <div className="mb--2">
         <h3 className="t--bold mb--1">Baranggay San Marcos</h3>
+        <SearchBox
+          search={search}
+          handleSearch={handleSearch}
+          handleChange={handleChange}
+          loading={loading}
+          result={result}
+          store={store}
+          url="/admin/admin-sitio/read-sitio-search.php"
+        />
         <table id="" className="" cellSpacing="0" width="100%">
           <thead className="">
             <tr>
@@ -73,32 +95,47 @@ const EvaluationList = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className=" ">
-              <td>1.</td>
-              <td>Sitio 1</td>
-              <td>80%</td>
-              <td>
-                <Link
-                  to={`${devNavUrl}/admin/sitio`}
-                  className="dropdown tooltip--view"
-                >
-                  <span>
-                    <AiFillEye />
-                  </span>
-                </Link>
-              </td>
-            </tr>
-            <>
-              <tr className="">
+            {result.length > 0 ? (
+              result.map((item, key) => {
+                count += 1;
+                return (
+                  <tr key={key}>
+                    <td>{count}.</td>
+                    <td>{item.sitio_name}</td>
+                    <td>{"80%"}</td>
+                    <td>
+                      <Link
+                        to={`${devNavUrl}/admin/citizen?sid=${item.sitio_aid}`}
+                        className="dropdown tooltip--view"
+                      >
+                        <span>
+                          <AiFillEye />
+                        </span>
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
                 <td colSpan="100%">
                   <NoData />
                 </td>
               </tr>
-            </>
+            )}
           </tbody>
         </table>
       </div>
-      <div className="t--center row">{/* <LoadMore /> */}</div>
+      <div className="t--center row">
+        {!store.isSearch && (
+          <LoadMore
+            handleLoad={handleLoad}
+            loading={loading}
+            result={result}
+            totalResult={totalResult}
+          />
+        )}
+      </div>
     </>
   );
 };

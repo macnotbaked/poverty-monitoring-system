@@ -80,3 +80,7 @@ export const formatDate = (dateVal) => {
   // return `${months[month]}. ${date}, ${year}`;
   // return `${date} `;
 };
+
+export function setStorageRoute(jwt, roleId) {
+  localStorage.setItem("pmstoken", JSON.stringify({ token: jwt, roleId }));
+}

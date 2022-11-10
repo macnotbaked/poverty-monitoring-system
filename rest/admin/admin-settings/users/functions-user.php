@@ -49,11 +49,51 @@ function checkReadAllActive($object)
     return $result;
 }
 
+function checkReadLimitActive($object, $start, $total)
+{
+    $result = $object->readLimitActive($start, $total);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Limit active users).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadSearchActive($object, $search)
+{
+    $result = $object->readSearchActive($search);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Search active users).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkReadAllInactive($object)
 {
     $result = $object->readAllInactive();
     if ($result->num_rows == 0) {
         Response::sendResponse(true, "Empty Records (All inactive users).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadLimitInactive($object, $start, $total)
+{
+    $result = $object->readLimitInactive($start, $total);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Limit inactive users).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadSearchInactive($object, $search)
+{
+    $result = $object->readSearchInactive($search);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Search inactive users).", []);
         exit();
     }
     return $result;
@@ -89,6 +129,46 @@ function checkArchive($object)
     return $result;
 }
 
+function checkRestore($object)
+{
+    $result = $object->Restore();
+    if (!$result) {
+        Response::sendResponse(false, "Please check your sql query (Restore).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadKey($object)
+{
+    $result = $object->readKey();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(false, "The link is Invalid.", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkNewPassword($object)
+{
+    $result = $object->updateNewPassword();
+    if (!$result) {
+        Response::sendResponse(false, "Please check your sql query (Update new password)", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkForgotPass($object)
+{
+    $result = $object->updateForgotPassword();
+    if (!$result) {
+        Response::sendResponse(false, "Please check your sql query (Update forgot password)", []);
+        exit();
+    }
+    return $result;
+}
+
 function getResultData($result)
 {
     $data = [];
@@ -97,6 +177,8 @@ function getResultData($result)
         $list = [
             "users_aid" => $users_aid,
             "users_is_active" => $users_is_active,
+            "users_key" => $users_key,
+            "users_password" => $users_password,
             "users_fname" => $users_fname,
             "users_mname" => $users_mname,
             "users_lname" => $users_lname,
@@ -106,6 +188,9 @@ function getResultData($result)
             "users_role_id" => $users_role_id,
             "users_created" => $users_created,
             "users_datetime" => $users_datetime,
+
+            "roles_aid" => $roles_aid,
+            "roles_name" => $roles_name,
         ];
         array_push($data, $list);
     }

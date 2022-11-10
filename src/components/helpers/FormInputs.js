@@ -1,5 +1,5 @@
-import React from "react";
 import { useField } from "formik";
+import React from "react";
 
 export const InputFileUpload = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -76,8 +76,6 @@ export const InputSelect = ({ label, ...props }) => {
   );
 };
 
-// OCT18 END
-
 export const MyRadioEval = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
@@ -110,10 +108,6 @@ export const MyRadio = ({ label, ...props }) => {
       <label className="" htmlFor={props.id || props.name}>
         <strong>{label}</strong>
       </label>
-
-      {/* {meta.touched && meta.error ? (
-        <p className="error-msg">{meta.error}</p>
-      ) : null} */}
     </>
   );
 };
@@ -131,7 +125,6 @@ export const MyRadioError = ({ label, ...props }) => {
 };
 
 export const MyCheckbox = ({ label, ...props }) => {
-  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and alse replace ErrorMessage entirely.
   const [field, meta] = useField(props);
   return (
@@ -144,7 +137,6 @@ export const MyCheckbox = ({ label, ...props }) => {
       <label className="label" htmlFor={props.id || props.name}>
         {label}
       </label>
-      {/* <span htmlFor={props.id || props.name}>{label}</span> */}
       {meta.touched && meta.error ? (
         <span className="error-msg error-show">{meta.error}</span>
       ) : null}

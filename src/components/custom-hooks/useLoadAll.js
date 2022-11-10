@@ -9,8 +9,6 @@ const useLoadAll = (url, param1 = null, param2 = null) => {
   const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
-    // use by enable evaluation settings
-    param1 === "isEvalEnabled" && dispatch(setIsEvalEnabled(true));
     getData();
   }, [store.isSave]);
 
