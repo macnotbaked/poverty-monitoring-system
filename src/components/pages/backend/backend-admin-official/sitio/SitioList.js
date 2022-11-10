@@ -54,7 +54,7 @@ const SitioList = ({
       />
       <div className="mb--2">
         <h3 className="t--bold mb--1">Baranggay San Mateo</h3>
-        {loading && <Spinner />}
+
         <table id="" className="" cellSpacing="0" width="100%">
           <thead className="">
             <tr>
@@ -107,6 +107,7 @@ const SitioList = ({
             ) : (
               <tr>
                 <td colSpan="100%">
+                  {loading && <Spinner />}
                   <NoData />
                 </td>
               </tr>

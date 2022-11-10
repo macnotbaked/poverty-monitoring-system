@@ -110,7 +110,7 @@ a {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  position: relative;
+  min-height: 25rem;
   table-layout: auto;
   width: 100%;
   text-align: left;
@@ -127,6 +127,9 @@ table {
     &:hover {
       // display: block !important;
     }
+  }
+  tbody {
+    position: relative;
   }
 }
 table tr:hover {
