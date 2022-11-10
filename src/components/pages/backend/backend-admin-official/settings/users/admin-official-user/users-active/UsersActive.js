@@ -1,24 +1,22 @@
 import React from "react";
+import { AiFillPlusCircle } from "react-icons/ai";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { devNavUrl } from "../../../../../../../helpers/functions-general";
-import Navigation from "../../../../../../../navigation/Navigation";
-import UsersActiveList from "./UsersActiveList";
-import { HiPlus } from "react-icons/hi";
 import {
   setIsAdd,
   setStartIndex,
 } from "../../../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../../../store/StoreContext";
-import ModalAddUsers from "./ModalAddUsers";
+import useFetchDataLoadMore from "../../../../../../../custom-hooks/useFetchDataLoadMore";
+import useLoadAllInactive from "../../../../../../../custom-hooks/useLoadAllInactive";
+import useLoadAllRole from "../../../../../../../custom-hooks/useLoadAllRole";
+import { devNavUrl } from "../../../../../../../helpers/functions-general";
+import Navigation from "../../../../../../../navigation/Navigation";
 import ModalError from "../../../../../../../widgets/ModalError";
 import ModalSuccess from "../../../../../../../widgets/ModalSuccess";
-import useLoadAllRole from "../../../../../../../custom-hooks/useLoadAllRole";
-import useFetchDataLoadMore from "../../../../../../../custom-hooks/useFetchDataLoadMore";
 import SpinnerTab from "../../../../../../../widgets/SpinnerTab";
-import useLoadAllInactive from "../../../../../../../custom-hooks/useLoadAllInactive";
-import { FaPlus } from "react-icons/fa";
-import { AiFillPlusCircle } from "react-icons/ai";
+import ModalAddUsers from "./ModalAddUsers";
+import UsersActiveList from "./UsersActiveList";
 
 const UsersActive = () => {
   const { store, dispatch } = React.useContext(StoreContext);
