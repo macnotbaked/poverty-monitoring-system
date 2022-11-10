@@ -1,44 +1,50 @@
 .navigation {
   position: fixed;
   left: 0;
-  background: linear-gradient(
-    180deg,
-    darken($primary-color, 8%),
-    rgba($secondary-color, 1) 90%
-  );
-  width: 20rem;
+  top: 0;
+  background: $primary-color;
+  width: 10rem;
   height: 100%;
-  // border-right: 0.5rem solid $secondary-color;
-  // top: 50rem;
+  border-radius: 0 2rem 0 0;
+  transition: 0.3s ease;
+  z-index: 1;
   &__logo {
-    background-color: $light-color;
-    padding: 1rem;
     height: 6rem;
-    // display: grid;
-    // place-items: center;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    position: relative;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: contain;
     }
+    span {
+      position: absolute;
+      right: 2.5rem;
+      bottom: -0.5rem;
+      height: 5rem;
+      width: 5rem;
+      background: $dark-color;
+      border-radius: 5rem;
+      z-index: -1;
+      border: 1px solid $secondary-color;
+    }
   }
 
   ul {
-    // padding-top: 6rem;
-
     li {
-      position: relative;
       color: $light-color;
       a {
         display: flex;
         align-items: center;
+        justify-content: center;
         padding: 2rem;
         color: $light-color;
         width: 100%;
         height: 100%;
         svg {
           font-size: 2rem;
-          margin-right: 2rem;
         }
       }
       &:hover {
@@ -48,117 +54,20 @@
           rgba($primary-color, 0.85)
         );
       }
-      &.tab--active:hover {
-        background: linear-gradient(
-          90deg,
-          rgba($secondary-color, 1),
-          rgba($light-color, 1)
-        );
-      }
     }
   }
-
-  .tab--active .shape-wrapper-top,
-  .tab--active .shape-wrapper-bottom {
-    display: block;
-  }
-
-  $shape-wrapper: 20px;
-  $circle-wrapper: 20px;
-  $circle: 120px;
-  $border: 40px;
-
-  .shape-wrapper-top {
-    display: none;
-    width: $shape-wrapper;
-    height: $shape-wrapper;
-    position: absolute;
-    overflow: hidden;
-    top: -20px;
-    right: 0;
-    z-index: 2;
-    // @media screen and (max-width: 640px) {
-    //   left: 0;
-    // }
-  }
-
-  .shape-wrapper-bottom {
-    display: none;
-    width: $shape-wrapper;
-    height: $shape-wrapper;
-    position: absolute;
-    overflow: hidden;
-    bottom: -20px;
-    top: auto;
-    right: 0;
-    z-index: 2;
-    // @media screen and (max-width: 640px) {
-    //   left: 0;
-    // }
-  }
-
-  .circle-wrapper {
-    background-color: transparent;
-    overflow: hidden;
-    width: $circle-wrapper;
-    height: $circle-wrapper;
-    float: right;
-    background-color: transparent;
-    position: relative;
-  }
-
-  .circle {
-    &-top {
-      border-radius: 50%;
-      border: $border solid $light-color;
-      width: $circle;
-      height: $circle;
-      position: absolute;
-      right: -$border;
-      bottom: -$border;
-      // @media screen and (max-width: 640px) {
-      //   left: -$border;
-      // }
-    }
-
-    &-bottom {
-      border-radius: 50%;
-      border: $border solid $light-color;
-      width: $circle;
-      height: $circle;
-      position: absolute;
-      right: -$border;
-      top: -$border;
-      // @media screen and (max-width: 640px) {
-      //   left: -$border;
-      // }
-    }
-  }
-
-  .profile {
-    position: absolute;
+  .logout__container {
+    position: absolute !important;
     bottom: 0;
     padding: 2rem;
-    color: $light-color;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .title {
-      font-weight: bold;
+    svg {
       font-size: 2rem;
-    }
-
-    &__user {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      svg {
-        height: 3.5rem;
-        width: 3.5rem;
-      }
-    }
-    &__name {
-      display: flex;
-      flex-direction: column;
+      color: $light-color;
     }
   }
 }

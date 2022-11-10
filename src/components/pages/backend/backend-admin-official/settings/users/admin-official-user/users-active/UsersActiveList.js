@@ -1,18 +1,18 @@
 import React from "react";
+import { AiFillEdit } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { RiUserUnfollowFill } from "react-icons/ri";
 import { MdPassword } from "react-icons/md";
-import { StoreContext } from "../../../../../../../../store/StoreContext";
-import NoData from "../../../../../../../widgets/NoData";
-import SearchBox from "../../../../../../../widgets/SearchBox";
-import Spinner from "../../../../../../../widgets/Spinner";
+import { RiUserUnfollowFill } from "react-icons/ri";
 import {
   setIsAdd,
   setIsConfirm,
 } from "../../../../../../../../store/StoreAction";
+import { StoreContext } from "../../../../../../../../store/StoreContext";
 import LoadMore from "../../../../../../../widgets/LoadMore";
+import NoData from "../../../../../../../widgets/NoData";
+import SearchBox from "../../../../../../../widgets/SearchBox";
+import Spinner from "../../../../../../../widgets/Spinner";
 import ModalUserConfirm from "./ModalUserConfirm";
-import { AiFillEdit } from "react-icons/ai";
 
 const UsersActiveList = ({
   loading,
