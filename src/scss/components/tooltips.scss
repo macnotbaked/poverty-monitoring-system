@@ -13,7 +13,7 @@
     right: 1.3rem;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid rgba(0, 0, 0, 0.8);
+    border-top: 5px solid rgba($dark-color, 0.8);
     opacity: 0;
   }
 
@@ -21,7 +21,7 @@
     content: attr(data-tooltip);
     position: absolute;
     left: 8.4rem;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba($dark-color, 0.8);
     color: $light-color;
     font-size: 1.2rem;
     padding: 0.5rem;
@@ -59,7 +59,7 @@
     top: -0.8rem;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid rgba(0, 0, 0, 0.8);
+    border-top: 5px solid rgba($dark-color, 0.8);
     opacity: 0;
     pointer-events: none;
   }
@@ -71,7 +71,7 @@
     transform: translateX(-50%);
     bottom: 100%;
     top: -3rem;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba($dark-color, 0.8);
     color: $light-color;
     font-size: 1.2rem;
     padding: 0.5rem;

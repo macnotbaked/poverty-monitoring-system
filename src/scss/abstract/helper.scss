@@ -4,8 +4,8 @@
   }
 
   svg {
-    color: $primary-color !important;
-    background: $light-color;
+    color: $dark-color !important;
+    background: $accent;
     height: 4rem;
     width: 4rem;
     padding: 1rem;
@@ -166,7 +166,7 @@
 }
 
 .btn--default {
-  color: $light-color;
+  color: $dark-color;
   cursor: pointer;
   padding: 1rem 1.5rem;
   margin: 0 1px;
@@ -253,13 +253,6 @@
   }
 }
 
-.no--data {
-  text-align: center;
-  padding: 20px;
-  h3 {
-    font-weight: bold;
-  }
-}
 .loadmore__container {
   display: flex;
   justify-content: center;

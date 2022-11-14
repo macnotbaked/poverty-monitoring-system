@@ -3,35 +3,45 @@
   left: 0;
   top: 0;
   bottom: 0;
-  background: $primary-color;
+  background: $secondary-color;
   width: 10rem;
   height: 100%;
   border-radius: 0 2rem 0 0;
   transition: 0.3s ease;
   z-index: 1;
   &__logo {
-    height: 6rem;
-    padding: 1rem;
-    margin: 1.5rem 0;
-    position: relative;
-
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
     img {
-      width: 100%;
+      width: 5.5rem;
       height: 100%;
       object-fit: contain;
     }
-    span {
-      position: absolute;
-      right: 2.5rem;
-      bottom: -0.5rem;
-      height: 5rem;
-      width: 5rem;
-      background: $dark-color;
-      border-radius: 5rem;
-      z-index: -1;
-      border: 1px solid $secondary-color;
-    }
   }
+  // &__logo {
+  //   height: 6rem;
+  //   padding: 1rem;
+  //   margin: 1.5rem 0;
+  //   position: relative;
+
+  //   img {
+  //     width: 100%;
+  //     height: 100%;
+  //     object-fit: contain;
+  //   }
+  //   span {
+  //     position: absolute;
+  //     right: 2.5rem;
+  //     bottom: -0.5rem;
+  //     height: 5rem;
+  //     width: 5rem;
+  //     background: $dark-color;
+  //     border-radius: 5rem;
+  //     z-index: -1;
+  //     border: 1px solid $secondary-color;
+  //   }
+  // }
 
   ul {
     li {

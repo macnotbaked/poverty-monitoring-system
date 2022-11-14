@@ -22,6 +22,14 @@
       justify-content: space-between;
       align-items: center;
     }
+    &__button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .form__container {
+      min-width: 65rem !important;
+    }
   }
 }
 .main-content.show {

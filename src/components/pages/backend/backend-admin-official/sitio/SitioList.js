@@ -69,7 +69,7 @@ const SitioList = ({
       />
       <div className="table__container">
         {loading && <Spinner />}
-        <table id="" className="" cellSpacing="0" width="100%">
+        <table>
           <thead className="">
             <tr>
               <th className="" rowSpan="1">
@@ -95,7 +95,7 @@ const SitioList = ({
                       {item.sitio_is_active === "1" && (
                         <div className="d--flex">
                           <Link
-                            to={`${devNavUrl}/admin/citizen?sid=${item.sitio_aid}`}
+                            to={`${devNavUrl}/admin/purok/household?sid=${item.sitio_aid}`}
                             className="dropdown tooltip--table"
                             data-tooltip="View"
                           >
@@ -149,7 +149,7 @@ const SitioList = ({
                 );
               })
             ) : (
-              <tr>
+              <tr className="nodata">
                 <td colSpan="100%">
                   <NoData />
                 </td>

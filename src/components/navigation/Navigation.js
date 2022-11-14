@@ -42,12 +42,9 @@ const Navigation = ({ menu }) => {
                 href={`${devNavUrl}/admin/home`}
                 onClick={() => dispatch(setStartIndex(0))}
               >
-                <img
-                  src={`${devBaseUrl}/img/pms-icon-transparent.png`}
-                  alt="PMS"
-                />
+                <img src={`${devBaseUrl}/img/pms-logo.png`} alt="PMS" />
               </a>
-              <span></span>
+              {/* <span></span> */}
             </div>
             <li className={menu === "home" ? "tab--active" : ""}>
               <Link

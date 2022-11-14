@@ -67,7 +67,7 @@ const DashboardList = ({
         </div>
       </div>
 
-      {/* <div className="mb--2">
+      <div className="table__container">
         <h3 className="t--bold mb--1">Baranggay San Marcos</h3>
         <SearchBox
           search={search}
@@ -78,21 +78,17 @@ const DashboardList = ({
           store={store}
           url="/admin/admin-sitio/read-sitio-search.php"
         />
-        <table id="" className="" cellSpacing="0" width="100%">
+        <table>
           <thead className="">
             <tr>
-              <th className="" rowSpan="1">
-                #
-              </th>
-              <th className="row--name" rowSpan="1" style={{ width: "15rem" }}>
-                Name
-              </th>
-              <th rowSpan="1">Ratings</th>
-              <th rowSpan="1">Actions</th>
+              <th className="">#</th>
+              <th>Name</th>
+              <th>Ratings</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {result.length > 0 ? (
+            {!result.length > 0 ? (
               result.map((item, key) => {
                 count += 1;
                 return (
@@ -102,7 +98,7 @@ const DashboardList = ({
                     <td>{"80%"}</td>
                     <td>
                       <Link
-                        to={`${devNavUrl}/admin/citizen?sid=${item.sitio_aid}`}
+                        to={`${devNavUrl}/admin/purok/household?sid=${item.sitio_aid}`}
                         className="dropdown tooltip--view"
                       >
                         <span>
@@ -114,7 +110,7 @@ const DashboardList = ({
                 );
               })
             ) : (
-              <tr>
+              <tr className="nodata">
                 <td colSpan="100%">
                   <NoData />
                 </td>
@@ -122,7 +118,7 @@ const DashboardList = ({
             )}
           </tbody>
         </table>
-      </div> */}
+      </div>
       {/* <div className="t--center">
         {!store.isSearch && (
           <LoadMore

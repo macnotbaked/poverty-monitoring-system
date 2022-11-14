@@ -69,7 +69,7 @@ function App() {
               }
             />
             <Route
-              path={`${devNavUrl}/admin/citizen`}
+              path={`${devNavUrl}/admin/purok/household`}
               element={
                 <ProtectedRoute>
                   <Citizen />

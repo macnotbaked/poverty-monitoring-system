@@ -1,5 +1,7 @@
 import React from "react";
+import { FaSearch, FaTimes } from "react-icons/fa";
 import { ImSearch } from "react-icons/im";
+import { setIsSearch, setSave, setStartIndex } from "../../store/StoreAction";
 
 const SearchBox = ({
   search,
@@ -8,8 +10,13 @@ const SearchBox = ({
   loading,
   result,
   store,
+  dispatch,
   url,
 }) => {
+  const handleClear = () => {
+    dispatch(setIsSearch(false));
+    dispatch(setStartIndex(0));
+  };
   return (
     <>
       <div className="mb--1">
@@ -24,8 +31,11 @@ const SearchBox = ({
             />
             {/* <label htmlFor="search">Search...</label> */}
 
+            {/* <button type="reset" className="icon--clear" onClick={handleClear}>
+              <FaTimes />
+            </button> */}
             <button type="submit" className="icon--search">
-              <ImSearch />
+              <FaSearch />
             </button>
           </div>
         </form>
