@@ -41,10 +41,10 @@ const Login = () => {
       ) : (
         <div className="login">
           <div className="login__form">
-            <div className="t--center">
+            <div className="t--center mb--2">
               <Logo />
             </div>
-            <h2 className="t--left t--exbold my--2">LOGIN</h2>
+            {/* <h2 className="t--left t--exbold my--2">LOGIN</h2> */}
 
             <Formik
               initialValues={initVal}
