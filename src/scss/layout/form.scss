@@ -52,7 +52,7 @@ input[type="time"],
 input[type="password"],
 select,
 textarea {
-  background: #fff;
+  background: $light-color;
   height: 38px;
   padding: 6px 15px;
   font-size: 1.2rem;
@@ -79,6 +79,9 @@ textarea {
   margin: 0 auto;
   border-radius: 5px;
   max-width: 40rem;
+  img {
+    width: 10rem;
+  }
 }
 .form {
   position: relative;
@@ -190,10 +193,12 @@ textarea {
   .icon--show {
     position: absolute;
     right: 1rem;
-    bottom: 0.6rem;
+    transform: translateY(50%);
+    bottom: 50%;
     font-size: 2rem;
-    cursor: pointer;
     color: $dark-gray;
+    top: 0;
+    cursor: pointer;
   }
   .icon--search {
     position: absolute;

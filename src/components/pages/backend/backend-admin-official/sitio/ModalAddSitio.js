@@ -87,9 +87,10 @@ const ModalAddSitio = ({ item }) => {
                       <button
                         type="submit"
                         disabled={loading}
-                        className="btn--default"
+                        className="btn--default d--flex align-center justify-center"
                       >
-                        {loading && <SpinnerButton />} {item ? "Save" : "Add"}
+                        {!loading && <SpinnerButton />}
+                        <span>{item ? "Save" : "Add"}</span>
                       </button>
                       <button
                         className="btn--outline "

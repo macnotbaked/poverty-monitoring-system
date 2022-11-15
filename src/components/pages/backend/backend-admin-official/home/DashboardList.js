@@ -66,69 +66,6 @@ const DashboardList = ({
           <Line style={{ width: "100%", maxHeight: "30rem" }} data={userData} />
         </div>
       </div>
-
-      <div className="table__container">
-        <h3 className="t--bold mb--1">Baranggay San Marcos</h3>
-        <SearchBox
-          search={search}
-          handleSearch={handleSearch}
-          handleChange={handleChange}
-          loading={loading}
-          result={result}
-          store={store}
-          url="/admin/admin-sitio/read-sitio-search.php"
-        />
-        <table>
-          <thead className="">
-            <tr>
-              <th className="">#</th>
-              <th>Name</th>
-              <th>Ratings</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {!result.length > 0 ? (
-              result.map((item, key) => {
-                count += 1;
-                return (
-                  <tr key={key}>
-                    <td>{count}.</td>
-                    <td>{item.sitio_name}</td>
-                    <td>{"80%"}</td>
-                    <td>
-                      <Link
-                        to={`${devNavUrl}/admin/purok/household?sid=${item.sitio_aid}`}
-                        className="dropdown tooltip--view"
-                      >
-                        <span>
-                          <AiFillEye />
-                        </span>
-                      </Link>
-                    </td>
-                  </tr>
-                );
-              })
-            ) : (
-              <tr className="nodata">
-                <td colSpan="100%">
-                  <NoData />
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-      {/* <div className="t--center">
-        {!store.isSearch && (
-          <LoadMore
-            handleLoad={handleLoad}
-            loading={loading}
-            result={result}
-            totalResult={totalResult}
-          />
-        )}
-      </div> */}
     </>
   );
 };

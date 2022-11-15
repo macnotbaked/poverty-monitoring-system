@@ -83,6 +83,12 @@
 .d--flex {
   display: flex;
 }
+.align-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
 .d--grid {
   display: grid;
 }
@@ -166,7 +172,7 @@
 }
 
 .btn--default {
-  color: $dark-color;
+  color: $light-color;
   cursor: pointer;
   padding: 1rem 1.5rem;
   margin: 0 1px;

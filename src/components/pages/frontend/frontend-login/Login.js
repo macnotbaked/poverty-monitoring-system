@@ -44,7 +44,6 @@ const Login = () => {
             <div className="t--center mb--2">
               <Logo />
             </div>
-            {/* <h2 className="t--left t--exbold my--2">LOGIN</h2> */}
 
             <Formik
               initialValues={initVal}
@@ -70,7 +69,7 @@ const Login = () => {
               {(props) => {
                 return (
                   <Form>
-                    <div className="input mb--2">
+                    <div className="input mb--3">
                       <i className="icon--input">
                         <FaUser />
                       </i>
@@ -78,7 +77,6 @@ const Login = () => {
                         placeholder="Email address"
                         type="text"
                         name="users_email"
-                        required
                       />
                     </div>
                     <div className="input mb--3">
@@ -89,7 +87,6 @@ const Login = () => {
                         placeholder="Password"
                         type={passwordShown ? "text" : "password"}
                         name="users_password"
-                        required
                       />
                       <i
                         className="icon--show"
@@ -104,9 +101,11 @@ const Login = () => {
                       </i>
                     </div>
 
-                    <button type="submit" className="btn--outline mb--2">
-                      <span>Log in</span>
-                    </button>
+                    <div className="t--center">
+                      <button type="submit" className="btn--gradient mb--2 ">
+                        <span>LOGIN</span>
+                      </button>
+                    </div>
 
                     <p className="t--center">
                       <a

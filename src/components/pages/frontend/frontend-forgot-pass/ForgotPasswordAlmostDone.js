@@ -1,7 +1,7 @@
 import React from "react";
 import { BsCheck2Circle, BsFillCheckCircleFill } from "react-icons/bs";
-import Logo from "../../../widgets/Logo";
 import { devNavUrl } from "../../../helpers/functions-general";
+import Logo from "../../../widgets/Logo";
 
 const ForgotPasswordAlmostDone = () => {
   return (
@@ -20,7 +20,7 @@ const ForgotPasswordAlmostDone = () => {
           </p>
 
           <a href={`${devNavUrl}/login`} className="color--primary">
-            Proceed to <u>login</u>
+            Proceed to login
           </a>
         </div>
       </div>

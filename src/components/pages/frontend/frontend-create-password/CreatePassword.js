@@ -1,6 +1,7 @@
 import { Form, Formik } from "formik";
 import React from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import {
@@ -47,22 +48,12 @@ const CreatePassword = ({ itemEdit }) => {
   const yupSchema = Yup.object({
     users_password: Yup.string()
       .required("Required")
-      .oneOf(
-        [Yup.ref("user_account_password"), null],
-        "Passwords does not match."
-      )
       .min(6, "Password must be at least 6 characters.")
       .matches(/[a-z]/, "At least one lowercase character.")
       .matches(/[A-Z]/, "At least one uppercase character."),
     users_password_confirm: Yup.string()
       .required("Required")
-      .oneOf(
-        [Yup.ref("user_account_password"), null],
-        "Passwords does not match."
-      )
-      .min(6, "Password must be at least 6 characters.")
-      .matches(/[a-z]/, "At least one lowercase character.")
-      .matches(/[A-Z]/, "At least one uppercase character."),
+      .oneOf([Yup.ref("users_password"), null], "Passwords does not match."),
   });
 
   if (
@@ -121,15 +112,17 @@ const CreatePassword = ({ itemEdit }) => {
             {(props) => {
               return (
                 <Form>
-                  <div className="input mb--2 ">
+                  <div className="input mb--3 ">
+                    <i className="icon--input">
+                      <FaLock />
+                    </i>
                     <InputText
-                      label="New Password"
+                      placeholder="New Password"
                       type={passwordShown ? "text" : "password"}
                       name="users_password"
-                      required
                     />
                     <i
-                      className="icon--input"
+                      className="icon--show"
                       onMouseDown={togglePassword}
                       onMouseUp={togglePassword}
                     >
@@ -141,14 +134,16 @@ const CreatePassword = ({ itemEdit }) => {
                     </i>
                   </div>
                   <div className="input mb--3">
+                    <i className="icon--input">
+                      <FaLock />
+                    </i>
                     <InputText
-                      label="Confirm Password"
+                      placeholder="Confirm Password"
                       type={passwordShown ? "text" : "password"}
                       name="users_password_confirm"
-                      required
                     />
                     <i
-                      className="icon--input"
+                      className="icon--show"
                       onMouseDown={togglePassword}
                       onMouseUp={togglePassword}
                     >
@@ -159,13 +154,15 @@ const CreatePassword = ({ itemEdit }) => {
                       )}
                     </i>
                   </div>
-                  <button
-                    type="submit"
-                    className="btn--outline"
-                    disabled={Loading ? true : false}
-                  >
-                    {Loading && <SpinnerButton />} <span>Create</span>
-                  </button>
+                  <div className="t--center">
+                    <button
+                      type="submit"
+                      className="btn--gradient"
+                      disabled={Loading ? true : false}
+                    >
+                      {Loading && <SpinnerButton />} <span>Create</span>
+                    </button>
+                  </div>
                 </Form>
               );
             }}

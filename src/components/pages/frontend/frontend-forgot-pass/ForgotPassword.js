@@ -1,13 +1,14 @@
 import { Form, Formik } from "formik";
 import React from "react";
-import * as Yup from "yup";
-import { StoreContext } from "../../../../store/StoreContext";
-import { InputText } from "../../../helpers/FormInputs";
-import Logo from "../../../widgets/Logo";
-import { devNavUrl } from "../../../helpers/functions-general";
-import { fetchData } from "../../../helpers/fetchData";
+import { FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 import { setForgotPass } from "../../../../store/StoreAction";
+import { StoreContext } from "../../../../store/StoreContext";
+import { fetchData } from "../../../helpers/fetchData";
+import { InputText } from "../../../helpers/FormInputs";
+import { devNavUrl } from "../../../helpers/functions-general";
+import Logo from "../../../widgets/Logo";
 import SpinnerButton from "../../../widgets/SpinnerButton";
 
 const ForgotPassword = () => {
@@ -59,22 +60,26 @@ const ForgotPassword = () => {
               return (
                 <Form>
                   <div className="input mb--3">
+                    <i className="icon--input">
+                      <FaUser />
+                    </i>
                     <InputText
-                      label="Email address"
+                      placeholder="Email address"
                       type="text"
                       name="users_email"
                       disabled={Loading}
-                      required
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    className="btn--outline mb--2"
-                    disabled={Loading ? true : false}
-                  >
-                    {Loading && <SpinnerButton />} <span>Submit</span>
-                  </button>
+                  <div className="t--center">
+                    <button
+                      type="submit"
+                      className="btn--gradient mb--2"
+                      disabled={Loading ? true : false}
+                    >
+                      {Loading && <SpinnerButton />} <span>Submit</span>
+                    </button>
+                  </div>
 
                   <p className="t--left">
                     Go back to{" "}
