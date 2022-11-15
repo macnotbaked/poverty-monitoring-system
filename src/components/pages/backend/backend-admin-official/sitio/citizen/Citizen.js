@@ -11,6 +11,7 @@ import {
   getUrlParam,
 } from "../../../../../helpers/functions-general";
 import Navigation from "../../../../../navigation/Navigation";
+import Back from "../../../../../widgets/Back";
 import CitizenList from "./CitizenList";
 
 const Citizen = () => {
@@ -49,12 +50,7 @@ const Citizen = () => {
                   >
                     <FaPlusCircle /> <span>Add</span>
                   </Link>
-                  <button
-                    className="d--flex tooltip--table"
-                    data-tooltip="Back"
-                  >
-                    <FaArrowLeft />
-                  </button>
+                  <Back />
                 </div>
               </div>
 

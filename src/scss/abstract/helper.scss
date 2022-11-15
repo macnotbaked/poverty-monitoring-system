@@ -80,6 +80,9 @@
 .t--unset {
   font-style: unset !important;
 }
+.t--underline {
+  text-decoration: underline;
+}
 .d--flex {
   display: flex;
 }
@@ -133,6 +136,11 @@
 }
 .word--break {
   word-break: break-all;
+}
+.btn__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn--primary {
   color: $light-color;

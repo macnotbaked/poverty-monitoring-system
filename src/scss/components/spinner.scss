@@ -128,12 +128,9 @@
 }
 
 .spinner {
-  --red: #d62d20;
-  --blue: #0057e7;
-  --green: #008744;
-  --yellow: #ffa700;
   position: relative;
-  width: 3rem;
+  width: 1.8rem;
+  height: 1.8rem;
 }
 
 .spinner:before {
@@ -158,8 +155,7 @@
 .path {
   stroke-dasharray: 1, 200;
   stroke-dashoffset: 0;
-  animation: dash0175 1.5s ease-in-out infinite,
-    color7123 6s ease-in-out infinite;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
   stroke-linecap: round;
 }
 
@@ -169,7 +165,7 @@
   }
 }
 
-@keyframes dash0175 {
+@keyframes dash {
   0% {
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
@@ -186,22 +182,22 @@
   }
 }
 
-@keyframes color7123 {
+@keyframes color {
   100%,
   0% {
-    stroke: var(--red);
+    stroke: $primary-color;
   }
 
   40% {
-    stroke: var(--blue);
+    stroke: $secondary-color;
   }
 
   66% {
-    stroke: var(--green);
+    stroke: $dark-color;
   }
 
   80%,
   90% {
-    stroke: var(--yellow);
+    stroke: $accent;
   }
 }

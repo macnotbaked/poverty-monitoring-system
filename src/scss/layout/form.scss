@@ -12,7 +12,8 @@ textarea:disabled,
 button:disabled,
 .disabled {
   cursor: not-allowed;
-  opacity: 0.5;
+  background: $light-gray-x !important;
+  border: transparent !important;
 }
 input[type="checkbox"]:focus,
 input[type="radio"]:focus,
@@ -96,6 +97,7 @@ textarea {
   input[type="email"],
   input[type="date"],
   input[type="number"],
+  input[type="search"],
   select {
     border: 1px solid $dark-color;
     background: #fff;
@@ -125,8 +127,8 @@ textarea {
   }
   label {
     position: absolute;
-    top: 12px;
-    left: 15px;
+    top: -2rem;
+    left: 0;
     pointer-events: none;
     background: $light-color;
     font-size: 1.3rem;
@@ -137,6 +139,7 @@ textarea {
   input[type="date"]:focus,
   input[type="number"]:focus,
   input[type="email"]:focus,
+  input[type="search"]:focus,
   select:focus,
   textarea:focus {
     border: 1px solid $primary-color;
@@ -242,10 +245,151 @@ textarea {
   }
   .search--bar {
     padding-left: 2rem !important;
+    padding-right: 5rem !important;
     border-radius: 0 2rem 2rem 0 !important;
     border: 0.1rem solid $light-gray !important;
   }
 }
+// INPUT FORM
+
+.input--form {
+  position: relative;
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="date"],
+  input[type="number"],
+  select {
+    // border: none;
+    border: 1px solid $dark-color;
+    background: #fff;
+    height: 38px;
+    padding: 0.6rem 2rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #54667a;
+    background-clip: padding-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-shadow: none;
+    width: 100%;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+  }
+  textarea {
+    border: none;
+    border-bottom: 1px solid $dark-color;
+    background: #fff;
+    height: 10rem;
+    padding: 6px 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #54667a;
+    background-clip: padding-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-shadow: none;
+    width: 100%;
+  }
+  label {
+    // position: absolute;
+    margin-bottom: 1rem;
+    pointer-events: none;
+    // background: $light-color;
+    font-size: 1.3rem;
+    transition: 0.5s;
+    font-weight: bold;
+  }
+  h3 {
+    border-bottom: 1px solid $dark-color;
+  }
+  input[type="password"]:focus,
+  input[type="text"]:focus,
+  input[type="date"]:focus,
+  input[type="number"]:focus,
+  input[type="email"]:focus,
+  select:focus,
+  textarea:focus {
+    border: none;
+    border-bottom: 1px solid $dark-color;
+    -webkit-box-shadow: inset 0 1px 5px #d6d6d6 !important;
+    -moz-box-shadow: inset 0 1px 5px #d6d6d6 !important;
+    box-shadow: inset 0 1px 5px #d6d6d6 !important;
+  }
+
+  span.error-show {
+    display: block;
+    left: 0;
+    right: 0;
+    text-align: right;
+    bottom: -20px;
+    font-weight: bold;
+  }
+  input.error-show,
+  textarea.error-show,
+  select.error-show {
+    border: 1px solid red !important;
+  }
+
+  label.error-show {
+    color: $primary-color !important;
+  }
+  .icon--show {
+    position: absolute;
+    right: 1rem;
+    transform: translateY(50%);
+    bottom: 50%;
+    font-size: 2rem;
+    color: $dark-gray;
+    top: 0;
+    cursor: pointer;
+  }
+  .icon--search {
+    position: absolute;
+    right: 1.5rem;
+    transform: translateY(50%);
+    bottom: 50%;
+    font-size: 1.5rem;
+    color: $dark-gray;
+    border-left: 0.1rem solid $dark-gray;
+    top: 0;
+
+    svg {
+      font-size: 1.7rem;
+    }
+  }
+  .icon--clear {
+    position: absolute;
+    right: 5.5rem;
+    transform: translateY(50%);
+    bottom: 50%;
+    font-size: 1.5rem;
+    color: $dark-gray;
+    top: 0;
+    font-weight: 100;
+
+    svg {
+      font-size: 1.7rem;
+    }
+  }
+  .icon--input {
+    position: absolute;
+    left: 1.5rem;
+    transform: translateY(50%);
+    bottom: 50%;
+    font-size: 2.5rem;
+    color: $dark-gray;
+    border-right: 0.1rem solid $dark-gray;
+    svg {
+      padding-right: 1rem;
+    }
+  }
+  .search--bar {
+    padding-left: 2rem !important;
+    border-radius: 0 2rem 2rem 0 !important;
+    border: 0.1rem solid $light-gray !important;
+  }
+}
+
 .profile--upload {
   border-radius: 100%;
   width: 8rem;

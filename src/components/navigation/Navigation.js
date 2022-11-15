@@ -66,12 +66,12 @@ const Navigation = ({ menu }) => {
                 <FaMapMarkedAlt />
               </Link>
             </li>
-            <li className={menu === "citizens" ? "tab--active" : ""}>
+            <li className={menu === "household" ? "tab--active" : ""}>
               <Link
                 to={`${devNavUrl}/admin/citizens`}
                 onClick={() => dispatch(setStartIndex(0))}
                 className="tooltip"
-                data-tooltip="Representatives"
+                data-tooltip="Household"
               >
                 <FaHouseUser />
               </Link>

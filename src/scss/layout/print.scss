@@ -1,0 +1,34 @@
+@media print {
+  body,
+  html,
+  header,
+  footer,
+  hr,
+  .main-content,
+  .content,
+  .content__header,
+  .container,
+  .tab-menu,
+  .show,
+  .row,
+  .tab {
+    visibility: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .header,
+  .main-content .content__header {
+    display: none;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .form__container {
+    padding: 0 !important;
+  }
+
+  .to_print {
+    visibility: visible;
+  }
+}

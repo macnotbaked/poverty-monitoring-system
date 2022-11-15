@@ -23,7 +23,7 @@ const SearchBox = ({
         <form onSubmit={(e) => handleSearch(e, search, url)}>
           <div className="input">
             <input
-              type="text"
+              type="search"
               ref={search}
               onChange={handleChange}
               placeholder="Search here.."

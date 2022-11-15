@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import { devNavUrl } from "./components/helpers/functions-general";
 import Citizens from "./components/pages/backend/backend-admin-official/citizens/Citizens";
+import CitizenView from "./components/pages/backend/backend-admin-official/citizens/CitizenView";
 import Evaluation from "./components/pages/backend/backend-admin-official/evaluation/Evaluation";
 import EvaluationFilter from "./components/pages/backend/backend-admin-official/evaluation/EvaluationFilter";
 import SitioEvaluation from "./components/pages/backend/backend-admin-official/evaluation/sitio/SitioEvaluation";
@@ -169,6 +170,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Citizens />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/household-view`}
+              element={
+                <ProtectedRoute>
+                  <CitizenView />
                 </ProtectedRoute>
               }
             />

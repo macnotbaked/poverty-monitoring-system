@@ -79,14 +79,14 @@ const ModalAddSitio = ({ item }) => {
                         placeholder="Sitio name"
                         type="text"
                         name="sitio_name"
-                        disabled={loading}
+                        disabled={!loading}
                       />
                     </div>
 
                     <div className="d--flex gap--1">
                       <button
                         type="submit"
-                        disabled={loading}
+                        disabled={!loading}
                         className="btn--default d--flex align-center justify-center"
                       >
                         {!loading && <SpinnerButton />}
