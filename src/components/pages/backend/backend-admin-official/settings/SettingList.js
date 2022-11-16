@@ -1,4 +1,12 @@
 import React from "react";
+import {
+  FaArchive,
+  FaListAlt,
+  FaListUl,
+  FaNotesMedical,
+  FaUserCircle,
+} from "react-icons/fa";
+import { MdCategory, MdHomeWork } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { setStartIndex } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
@@ -9,99 +17,84 @@ const SettingList = () => {
 
   return (
     <>
-      <div className="grid-col-2 mb--2 shadow--primary pxy--2">
+      <div className="grid-col-3 mb--2 shadow--primary pxy--2">
         {/* 1 */}
-        <div className="setting shadow--primary ">
-          <h4 className="t--bold mb--1">Users</h4>
+        <Link
+          to={`${devNavUrl}/admin/users`}
+          onClick={() => {
+            dispatch(setStartIndex(0));
+          }}
+          className="setting shadow--primary "
+        >
+          <FaUserCircle />
+          <h4 className="t--bold my--1">Users</h4>
           <h5>Manage the system users.</h5>
-          <div className="mb--4">
-            <Link
-              to={`${devNavUrl}/admin/users`}
-              className="btn--primary mt--3"
-              onClick={() => {
-                dispatch(setStartIndex(0));
-              }}
-            >
-              View
-            </Link>
-          </div>
-        </div>
+        </Link>
 
         {/* 2 */}
-        <div className="setting shadow--primary ">
-          <h4 className="t--bold mb--1">Baranggay Information</h4>
+        <Link
+          to={`${devNavUrl}/admin/users`}
+          onClick={() => {
+            dispatch(setStartIndex(0));
+          }}
+          className="setting shadow--primary "
+        >
+          <FaNotesMedical />
+          <h4 className="t--bold my--1">Recommended Program</h4>
           <h5>Manage the services being offered.</h5>
-          <div className="mb--4">
-            <label htmlFor="tab-events-calendar">
-              <Link
-                to={`${devNavUrl}/admin/system-information`}
-                className="btn--primary mt--3"
-                onClick={() => {
-                  dispatch(setStartIndex(0));
-                }}
-              >
-                View
-              </Link>
-            </label>
-          </div>
-        </div>
+        </Link>
 
         {/* 3 */}
-        <div className="setting shadow--primary ">
-          <h4 className="t--bold mb--1">Recommended Program</h4>
+        <Link
+          to={`${devNavUrl}/admin/users`}
+          onClick={() => {
+            dispatch(setStartIndex(0));
+          }}
+          className="setting shadow--primary "
+        >
+          <FaListAlt />
+          <h4 className="t--bold my--1">Program Criteria</h4>
           <h5>Manage the services being offered.</h5>
-          <div className="mb--4">
-            <label htmlFor="tab-events-calendar">
-              <Link
-                to={`${devNavUrl}/admin/recommended-programs`}
-                className="btn--primary mt--3"
-                onClick={() => {
-                  dispatch(setStartIndex(0));
-                }}
-              >
-                View
-              </Link>
-            </label>
-          </div>
-        </div>
+        </Link>
 
         {/* 4 */}
-        <div className="setting shadow--primary ">
-          <h4 className="t--bold mb--1">Program Criteria</h4>
+        <Link
+          to={`${devNavUrl}/admin/users`}
+          onClick={() => {
+            dispatch(setStartIndex(0));
+          }}
+          className="setting shadow--primary "
+        >
+          <MdCategory />
+          <h4 className="t--bold mb--1">Category</h4>
           <h5>Manage the services being offered.</h5>
-          <div className="mb--4">
-            <label htmlFor="tab-events-calendar">
-              <Link
-                to={`${devNavUrl}/admin/program-criteria`}
-                className="btn--primary mt--3"
-                onClick={() => {
-                  dispatch(setStartIndex(0));
-                }}
-              >
-                View
-              </Link>
-            </label>
-          </div>
-        </div>
+        </Link>
 
         {/* 5 */}
-        <div className="setting shadow--primary ">
-          <h4 className="t--bold mb--1">Evaluation Questionnaire</h4>
+        <Link
+          to={`${devNavUrl}/admin/users`}
+          onClick={() => {
+            dispatch(setStartIndex(0));
+          }}
+          className="setting shadow--primary "
+        >
+          <FaArchive />
+          <h4 className="t--bold mb--1">Archived</h4>
           <h5>Manage the services being offered.</h5>
-          <div className="mb--4">
-            <label htmlFor="tab-events-calendar">
-              <Link
-                to={`${devNavUrl}/admin/evaluation-questionnaire`}
-                className="btn--primary mt--3"
-                onClick={() => {
-                  dispatch(setStartIndex(0));
-                }}
-              >
-                View
-              </Link>
-            </label>
-          </div>
-        </div>
+        </Link>
+
+        {/* 6 */}
+        <Link
+          to={`${devNavUrl}/admin/users`}
+          onClick={() => {
+            dispatch(setStartIndex(0));
+          }}
+          className="setting shadow--primary "
+        >
+          <MdHomeWork />
+          <h4 className="t--bold mb--1">Barangay Information</h4>
+          <h5>Manage the services being offered.</h5>
+        </Link>
       </div>
     </>
   );

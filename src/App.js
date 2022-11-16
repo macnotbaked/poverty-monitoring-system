@@ -4,15 +4,13 @@ import { devNavUrl } from "./components/helpers/functions-general";
 import Citizens from "./components/pages/backend/backend-admin-official/citizens/Citizens";
 import CitizenView from "./components/pages/backend/backend-admin-official/citizens/CitizenView";
 import Evaluation from "./components/pages/backend/backend-admin-official/evaluation/Evaluation";
+import EvaluationHousehold from "./components/pages/backend/backend-admin-official/evaluation/evaluation-household/EvaluationHousehold";
 import EvaluationFilter from "./components/pages/backend/backend-admin-official/evaluation/EvaluationFilter";
-import SitioEvaluation from "./components/pages/backend/backend-admin-official/evaluation/sitio/SitioEvaluation";
 import Dashboard from "./components/pages/backend/backend-admin-official/home/Dashboard";
 import Settings from "./components/pages/backend/backend-admin-official/settings/Settings";
 import Roles from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/roles/Roles";
 import UsersActive from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/users-active/UsersActive";
 import UsersInactive from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/users-inactive/UsersInactive";
-import UsersCitizenActive from "./components/pages/backend/backend-admin-official/settings/users/citizen-users/citizen-active/UsersCitizenActive";
-import Users from "./components/pages/backend/backend-admin-official/settings/users/Users";
 import Citizen from "./components/pages/backend/backend-admin-official/sitio/citizen/Citizen";
 import AddCitizen from "./components/pages/backend/backend-admin-official/sitio/citizen/citizen-add/AddCitizen";
 import Sitio from "./components/pages/backend/backend-admin-official/sitio/Sitio";
@@ -102,10 +100,10 @@ function App() {
               }
             />
             <Route
-              path={`${devNavUrl}/admin/sitio-evaluation`}
+              path={`${devNavUrl}/admin/evaluation/household`}
               element={
                 <ProtectedRoute>
-                  <SitioEvaluation />
+                  <EvaluationHousehold />
                 </ProtectedRoute>
               }
             />
@@ -121,18 +119,18 @@ function App() {
               path={`${devNavUrl}/admin/users`}
               element={
                 <ProtectedRoute>
-                  <Users />
+                  <UsersActive />
                 </ProtectedRoute>
               }
             />
-            <Route
+            {/* <Route
               path={`${devNavUrl}/admin/admin-official-users`}
               element={
                 <ProtectedRoute>
                   <UsersActive />
                 </ProtectedRoute>
               }
-            />
+            /> */}
             <Route
               path={`${devNavUrl}/admin/admin-official-users-inactive`}
               element={
@@ -154,14 +152,6 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Sitio />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path={`${devNavUrl}/admin/citizen-user`}
-              element={
-                <ProtectedRoute>
-                  <UsersCitizenActive />
                 </ProtectedRoute>
               }
             />

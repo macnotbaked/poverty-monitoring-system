@@ -1,15 +1,15 @@
 import React from "react";
-import { FaFilter } from "react-icons/fa";
-import { HiFilter } from "react-icons/hi";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { StoreContext } from "../../../../../store/StoreContext";
-import useFetchDataLoadMore from "../../../../custom-hooks/useFetchDataLoadMore";
-import Header from "../../../../header/Header";
-import { devNavUrl } from "../../../../helpers/functions-general";
-import Navigation from "../../../../navigation/Navigation";
-import EvaluationList from "./EvaluationList";
+import { StoreContext } from "../../../../../../store/StoreContext";
+import useFetchDataLoadMore from "../../../../../custom-hooks/useFetchDataLoadMore";
+import Header from "../../../../../header/Header";
+import { devNavUrl } from "../../../../../helpers/functions-general";
+import Navigation from "../../../../../navigation/Navigation";
+import Back from "../../../../../widgets/Back";
+import EvaluationHouseholdList from "./EvaluationHouseholdList";
 
-const Evaluation = () => {
+const EvaluationHousehold = () => {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const {
@@ -24,7 +24,6 @@ const Evaluation = () => {
     "/admin/admin-sitio/read-sitio-all.php",
     5 // show number of records on a table
   );
-
   return (
     <>
       <div className={store.isActive ? "main-content show" : "main-content"}>
@@ -34,17 +33,12 @@ const Evaluation = () => {
           <div className="row">
             <div className="content">
               <div className="content__header">
-                <h3 className="t--bold py--2">Santa Elena</h3>
+                <h3 className="t--bold py--2">House 001</h3>
                 <div className="content__button">
-                  <Link
-                    className="btn--primary mr--1"
-                    to={`${devNavUrl}/admin/evaluation-filter?sid=`}
-                  >
-                    <FaFilter /> <span>Filter</span>
-                  </Link>
+                  <Back />
                 </div>
               </div>
-              <EvaluationList
+              <EvaluationHouseholdList
                 loading={loading}
                 handleLoad={handleLoad}
                 totalResult={totalResult}
@@ -60,4 +54,4 @@ const Evaluation = () => {
   );
 };
 
-export default Evaluation;
+export default EvaluationHousehold;

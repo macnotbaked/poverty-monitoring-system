@@ -34,9 +34,6 @@
     span i {
       color: $dark-gray;
     }
-    // span svg {
-    //   fill: $dark-gray;
-    // }
   }
 }
 
@@ -45,28 +42,34 @@
   text-align: center;
   position: absolute;
   min-width: 120px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  background: $light-color;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
+    rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
   z-index: 1;
   right: 0;
-  bottom: -7.2rem;
+  bottom: -5.7rem;
   margin-top: 5px;
+  border-radius: 1rem;
 
   a,
   button {
     font-weight: bold;
-    padding: 10px 15px;
+    padding: 0.6rem 1.5rem;
     display: flex;
-    align-items: center;
     color: $dark-color;
-    background: $light-color;
     width: 100%;
     font-size: 1.2rem;
+    border-radius: 1rem;
+    transition: 0.1s ease;
+    svg {
+      transition: 0.1s ease;
+    }
 
     &:hover {
-      background: $primary-color;
-      color: $light-color;
+      background: $light-gray-x;
+      color: $dark-color;
       svg {
-        fill: $light-color !important;
+        fill: $dark-color !important;
       }
     }
   }

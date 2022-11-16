@@ -35,10 +35,10 @@
 .row:after {
   clear: both;
 }
-.grid-col-2 {
+.grid-col-3 {
   display: grid;
   grid-gap: 2rem;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   border-radius: 5px;
   min-height: 200px;
   // margin: 0 15px;

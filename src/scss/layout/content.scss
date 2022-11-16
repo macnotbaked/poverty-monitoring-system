@@ -199,4 +199,16 @@
 .setting {
   padding: 20px;
   border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: 0.2s ease;
+  svg {
+    font-size: 10rem;
+  }
+
+  &:hover {
+    background: $accent;
+  }
 }

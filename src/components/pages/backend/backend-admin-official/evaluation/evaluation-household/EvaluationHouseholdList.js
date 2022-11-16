@@ -1,18 +1,17 @@
-import { Chart as ChartJS } from "chart.js/auto";
 import React from "react";
-import { Bar, Doughnut, Line } from "react-chartjs-2";
-import { AiFillEye } from "react-icons/ai";
-import { FaEye } from "react-icons/fa";
+import { AiFillEdit } from "react-icons/ai";
+import { BiMessageDetail } from "react-icons/bi";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { FaArchive, FaEye, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { setStartIndex } from "../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../store/StoreContext";
-import { devNavUrl } from "../../../../helpers/functions-general";
-import LoadMore from "../../../../widgets/LoadMore";
-import NoData from "../../../../widgets/NoData";
-import SearchBox from "../../../../widgets/SearchBox";
-import Spinner from "../../../../widgets/Spinner";
+import { StoreContext } from "../../../../../../store/StoreContext";
+import { devNavUrl } from "../../../../../helpers/functions-general";
+import LoadMore from "../../../../../widgets/LoadMore";
+import NoData from "../../../../../widgets/NoData";
+import SearchBox from "../../../../../widgets/SearchBox";
+import Spinner from "../../../../../widgets/Spinner";
 
-const EvaluationList = ({
+const EvaluationHouseholdList = ({
   loading,
   handleLoad,
   totalResult,
@@ -20,10 +19,10 @@ const EvaluationList = ({
   handleSearch,
   handleChange,
 }) => {
-  const search = React.useRef(null);
   const { store, dispatch } = React.useContext(StoreContext);
-  let count = 0;
+  const search = React.useRef(null);
 
+  let count = 0;
   return (
     <>
       <div className="table__container">
@@ -47,7 +46,7 @@ const EvaluationList = ({
                 Name
               </th>
               <th rowSpan="1">Total Household</th>
-              <th rowSpan="1">Actions</th>
+              <th rowSpan="1">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -99,4 +98,4 @@ const EvaluationList = ({
   );
 };
 
-export default EvaluationList;
+export default EvaluationHouseholdList;
