@@ -1,6 +1,14 @@
 import { Form, Formik } from "formik";
 import React from "react";
-import { FaTimes } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaPhone,
+  FaTimes,
+  FaTransgender,
+  FaUser,
+  FaUserEdit,
+  FaUsersCog,
+} from "react-icons/fa";
 import * as Yup from "yup";
 import {
   setIsAdd,
@@ -92,60 +100,68 @@ const ModalAddUsers = ({ item, role }) => {
                 return (
                   <Form>
                     <div className="input my--3">
+                      <i className="icon--input">
+                        <FaUserEdit />
+                      </i>
                       <InputText
-                        label="First name"
+                        placeholder="First name"
                         type="text"
                         name="users_fname"
                         disabled={loading}
-                        required
                       />
                     </div>
 
                     <div className="input my--3">
+                      <i className="icon--input">
+                        <FaUserEdit />
+                      </i>
                       <InputText
-                        label="Middle name"
+                        placeholder="Middle name"
                         type="text"
                         name="users_mname"
                         disabled={loading}
-                        required
                       />
                     </div>
                     <div className="input my--3">
+                      <i className="icon--input">
+                        <FaUserEdit />
+                      </i>
                       <InputText
-                        label="Last name"
+                        placeholder="Last name"
                         type="text"
                         name="users_lname"
                         disabled={loading}
-                        required
                       />
                     </div>
                     <div className="input my--3">
+                      <i className="icon--input">
+                        <FaEnvelope />
+                      </i>
                       <InputText
-                        label="Email"
+                        placeholder="Email"
                         type="text"
                         name="users_email"
                         disabled={loading}
-                        required
                       />
                     </div>
                     <div className="input my--3">
+                      <i className="icon--input">
+                        <FaPhone />
+                      </i>
                       <InputText
-                        label="Phone number"
+                        placeholder="Phone number"
                         type="text"
                         name="users_phone"
                         disabled={loading}
-                        required
                       />
                     </div>
                     <div className="input my--3">
-                      <InputSelect
-                        label="Gender"
-                        name="users_gender"
-                        disabled={loading}
-                        required
-                      >
+                      <i className="icon--input">
+                        <FaTransgender />
+                      </i>
+                      <InputSelect name="users_gender" disabled={loading}>
                         <option value="">
-                          {loading ? "loading..." : "--"}
+                          {loading ? "loading..." : "Gender"}
                         </option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -153,15 +169,13 @@ const ModalAddUsers = ({ item, role }) => {
                     </div>
 
                     <div className="input my--3">
-                      <InputSelect
-                        label="Role"
-                        name="users_role_id"
-                        disabled={loading}
-                        required
-                      >
+                      <i className="icon--input">
+                        <FaUsersCog />
+                      </i>
+                      <InputSelect name="users_role_id" disabled={loading}>
                         <option value="">
                           {" "}
-                          {loading ? "loading..." : "--"}
+                          {loading ? "loading..." : "Role"}
                         </option>
                         {role.length > 0 ? (
                           role.map((item, key) => {
@@ -181,12 +195,12 @@ const ModalAddUsers = ({ item, role }) => {
                       <button
                         type="submit"
                         disabled={loading}
-                        className="btn--outline"
+                        className="btn--default d--flex align-center justify-center"
                       >
                         {loading && <SpinnerButton />} {item ? "Save" : "Add"}
                       </button>
                       <button
-                        className="btn--secondary "
+                        className="btn--outline "
                         type="reset"
                         onClick={handleClose}
                       >

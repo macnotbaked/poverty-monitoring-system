@@ -57,23 +57,17 @@ const UsersActiveList = ({
         store={store}
         url="/admin/admin-settings/users/read-user-active-search.php"
       />
-      <div className="mb--2">
+      <div className="table__container">
         {loading && <Spinner />}
-        <table id="" className="" cellSpacing="0" width="100%">
+        <table>
           <thead className="">
             <tr>
               <th className="" rowSpan="1">
                 #
               </th>
-              <th rowSpan="1" style={{ width: "20rem" }}>
-                Name
-              </th>
-              <th rowSpan="1" style={{ width: "20rem" }}>
-                Email
-              </th>
-              <th rowSpan="1" style={{ width: "15rem" }}>
-                Contact
-              </th>
+              <th rowSpan="1">Name</th>
+              <th rowSpan="1">Email</th>
+              <th rowSpan="1">Contact</th>
               <th rowSpan="1">Role</th>
               <th rowSpan="1">Actions</th>
             </tr>
@@ -85,7 +79,7 @@ const UsersActiveList = ({
                 return (
                   <tr key={key}>
                     <td>{count}.</td>
-                    <td className="table--name">
+                    <td>
                       {item.users_lname}, {item.users_fname}{" "}
                       <span>{item.users_mname}</span>.
                     </td>
@@ -93,26 +87,29 @@ const UsersActiveList = ({
                     <td>{item.users_phone}</td>
                     <td>{item.roles_name}</td>
                     <td>
-                      <div
-                        className="dropdown tooltip--reset"
-                        onClick={() => handleReset(item)}
-                      >
-                        <span>
-                          <MdPassword />
-                        </span>
-                      </div>
+                      <div className="d--flex">
+                        <div
+                          className="dropdown tooltip--table"
+                          onClick={() => handleReset(item)}
+                          data-tooltip="Reset password"
+                        >
+                          <span>
+                            <MdPassword />
+                          </span>
+                        </div>
 
-                      <div className="dropdown">
-                        <span>
-                          <BsThreeDotsVertical />
-                        </span>
-                        <div className="dropdown-content">
-                          <button onClick={() => handleEdit(item)}>
-                            <AiFillEdit /> Edit
-                          </button>
-                          <button onClick={() => handleSuspend(item)}>
-                            <RiUserUnfollowFill /> Suspend
-                          </button>
+                        <div className="dropdown">
+                          <span>
+                            <BsThreeDotsVertical />
+                          </span>
+                          <div className="dropdown-content">
+                            <button onClick={() => handleEdit(item)}>
+                              <AiFillEdit /> Edit
+                            </button>
+                            <button onClick={() => handleSuspend(item)}>
+                              <RiUserUnfollowFill /> Suspend
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </td>
@@ -120,7 +117,7 @@ const UsersActiveList = ({
                 );
               })
             ) : (
-              <tr className="">
+              <tr className="nodata">
                 <td colSpan="100%">
                   <NoData />
                 </td>
@@ -128,16 +125,16 @@ const UsersActiveList = ({
             )}
           </tbody>
         </table>
-      </div>
-      <div className="t--center row">
-        {!store.isSearch && (
-          <LoadMore
-            handleLoad={handleLoad}
-            loading={loading}
-            result={result}
-            totalResult={totalResult}
-          />
-        )}
+        <div className="mt--2 t--center row">
+          {!store.isSearch && (
+            <LoadMore
+              handleLoad={handleLoad}
+              loading={loading}
+              result={result}
+              totalResult={totalResult}
+            />
+          )}
+        </div>
       </div>
 
       {store.isConfirm && (
