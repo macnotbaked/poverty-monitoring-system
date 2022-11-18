@@ -1,25 +1,12 @@
 import { Form, Formik } from "formik";
 import React from "react";
-import { AiFillCamera } from "react-icons/ai";
-import { FaArrowLeft, FaUserCircle } from "react-icons/fa";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { setStartIndex } from "../../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../../store/StoreContext";
 import Header from "../../../../../../header/Header";
-import {
-  InputFileUpload,
-  InputSelect,
-  InputText,
-} from "../../../../../../helpers/FormInputs";
-import {
-  devNavUrl,
-  getUrlParam,
-} from "../../../../../../helpers/functions-general";
+import { InputSelect, InputText } from "../../../../../../helpers/FormInputs";
+import { getUrlParam } from "../../../../../../helpers/functions-general";
 import Navigation from "../../../../../../navigation/Navigation";
 import Back from "../../../../../../widgets/Back";
-import NoData from "../../../../../../widgets/NoData";
 import SpinnerButton from "../../../../../../widgets/SpinnerButton";
 
 const AddCitizen = () => {

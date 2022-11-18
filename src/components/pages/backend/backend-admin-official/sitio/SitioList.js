@@ -1,14 +1,6 @@
 import React from "react";
-import { AiFillEye } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import {
-  FaArchive,
-  FaEdit,
-  FaEye,
-  FaHistory,
-  FaTrash,
-  FaUndo,
-} from "react-icons/fa";
+import { FaArchive, FaEdit, FaEye, FaHistory, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {
   setIsAdd,
@@ -50,10 +42,6 @@ const SitioList = ({
     setId(item.sitio_aid);
     setData(item);
     setDel(true);
-  };
-
-  const handleClick = () => {
-    dispatch(setIsClick(!store.isClick));
   };
 
   return (

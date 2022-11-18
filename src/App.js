@@ -7,10 +7,11 @@ import Evaluation from "./components/pages/backend/backend-admin-official/evalua
 import EvaluationHousehold from "./components/pages/backend/backend-admin-official/evaluation/evaluation-household/EvaluationHousehold";
 import EvaluationFilter from "./components/pages/backend/backend-admin-official/evaluation/EvaluationFilter";
 import Dashboard from "./components/pages/backend/backend-admin-official/home/Dashboard";
+import { PopulationRate } from "./components/pages/backend/backend-admin-official/settings/recommended-programs/population-rate/PopulationRate";
+import RecommendedPrograms from "./components/pages/backend/backend-admin-official/settings/recommended-programs/RecommendedPrograms";
 import Settings from "./components/pages/backend/backend-admin-official/settings/Settings";
 import Roles from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/roles/Roles";
 import UsersActive from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/users-active/UsersActive";
-import UsersInactive from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/users-inactive/UsersInactive";
 import Citizen from "./components/pages/backend/backend-admin-official/sitio/citizen/Citizen";
 import AddCitizen from "./components/pages/backend/backend-admin-official/sitio/citizen/citizen-add/AddCitizen";
 import Sitio from "./components/pages/backend/backend-admin-official/sitio/Sitio";
@@ -123,22 +124,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* <Route
-              path={`${devNavUrl}/admin/admin-official-users`}
-              element={
-                <ProtectedRoute>
-                  <UsersActive />
-                </ProtectedRoute>
-              }
-            /> */}
-            <Route
-              path={`${devNavUrl}/admin/admin-official-users-inactive`}
-              element={
-                <ProtectedRoute>
-                  <UsersInactive />
-                </ProtectedRoute>
-              }
-            />
             <Route
               path={`${devNavUrl}/admin/users-roles`}
               element={
@@ -169,6 +154,24 @@ function App() {
               element={
                 <ProtectedRoute>
                   <CitizenView />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/recommended-programs`}
+              element={
+                <ProtectedRoute>
+                  <RecommendedPrograms />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/population-rate`}
+              element={
+                <ProtectedRoute>
+                  <PopulationRate />
                 </ProtectedRoute>
               }
             />

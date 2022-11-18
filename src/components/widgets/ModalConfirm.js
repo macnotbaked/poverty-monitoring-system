@@ -1,10 +1,10 @@
 import React from "react";
 import { FaArchive, FaTimes, FaTrashAlt } from "react-icons/fa";
-import ModalError from "./ModalError";
+import { setIsConfirm, setStartIndex } from "../../store/StoreAction";
 import { StoreContext } from "../../store/StoreContext";
 import { fetchData } from "../helpers/fetchData";
+import ModalError from "./ModalError";
 import SpinnerButton from "./SpinnerButton";
-import { setIsConfirm, setStartIndex } from "../../store/StoreAction";
 
 const ModalConfirm = ({
   id,
@@ -63,15 +63,14 @@ const ModalConfirm = ({
             <div className="d--flex gap--1">
               <button
                 type="submit"
-                className="btn--outline"
+                className="btn--default d--flex justify-center align-center"
                 disabled={loading}
                 onClick={handleYes}
               >
-                {loading && <SpinnerButton />}
-                Confirm
+                {loading ? <SpinnerButton /> : <span>Confirm</span>}
               </button>
               <button
-                className="btn--secondary"
+                className="btn--outline"
                 type="reset"
                 onClick={handleClose}
               >

@@ -155,21 +155,23 @@ h6 {
   font-size: 0.9rem;
   line-height: 1.5rem;
 }
-// ::-webkit-scrollbar {
-//   -webkit-appearance: none;
-// }
-// ::-webkit-scrollbar:vertical {
-//   width: 1rem;
-// }
-// ::-webkit-scrollbar:horizontal {
-//   height: 1rem;
-// }
-// ::-webkit-scrollbar-thumb {
-//   background-color: rgba($dark-color, 0.5);
-//   border-radius: 1rem;
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+::-webkit-scrollbar:vertical {
+  width: 0.5rem;
+  background: $light-gray;
+}
+::-webkit-scrollbar:horizontal {
+  height: 0.5rem;
+  background: $light-gray;
+}
 
-//   // border: 3px solid $light-color;
-// }
+::-webkit-scrollbar-thumb {
+  background-color: rgba($dark-color, 0.5);
+  border-radius: 1rem;
+  // border: 3px solid $light-color;
+}
 // ::-webkit-scrollbar-track {
 //   border-radius: 1rem;
 //   background-color: $light-gray;

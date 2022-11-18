@@ -29,17 +29,16 @@ const SearchBox = ({
               placeholder="Search here.."
               className="search--bar"
             />
-            {/* <label htmlFor="search">Search...</label> */}
-
-            {/* <button type="reset" className="icon--clear" onClick={handleClear}>
-              <FaTimes />
-            </button> */}
             <button type="submit" className="icon--search">
               <FaSearch />
             </button>
           </div>
         </form>
-        <p className={store.isSearch ? "mxy--2" : "d--none mxy--2"}>
+        <p
+          className={
+            store.isSearch ? "mt--1 mb--1 ml--2" : "d--none mt--1 mb--1 ml--2"
+          }
+        >
           Result: {loading ? "Searching..." : !loading && result.length}
         </p>
       </div>

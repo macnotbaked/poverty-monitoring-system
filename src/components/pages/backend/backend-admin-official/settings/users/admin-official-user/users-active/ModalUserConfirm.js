@@ -1,7 +1,7 @@
 import React from "react";
-import { RiUserUnfollowLine } from "react-icons/ri";
-import { MdPassword } from "react-icons/md";
 import { FaTimes } from "react-icons/fa";
+import { MdPassword } from "react-icons/md";
+import { RiUserUnfollowLine } from "react-icons/ri";
 import {
   setIsConfirm,
   setStartIndex,
@@ -71,14 +71,14 @@ const ModalUserConfirm = ({ isSus, susEndpoint, resetEndpoint, item }) => {
             <div className="d--flex gap--1">
               <button
                 type="submit"
-                className="btn--outline"
+                className="btn--default d--flex align-center justify-center"
                 disabled={loading}
                 onClick={handleYes}
               >
-                {loading && <SpinnerButton />} Confirm
+                {!loading ? <SpinnerButton /> : "Confirm"}
               </button>
               <button
-                className="btn--secondary "
+                className="btn--outline "
                 type="reset"
                 onClick={handleClose}
               >

@@ -177,17 +177,19 @@ textarea {
     padding: 0 8px;
   }
   span.error-show {
-    display: block;
-    left: 0;
-    right: 0;
-    text-align: right;
+    right: 10px;
     bottom: -20px;
-    font-weight: bold;
+    color: rgba(255, 0, 0, 0.8);
+    position: absolute;
+    font-size: 1rem;
+    font-style: italic;
   }
+
   input.error-show,
   textarea.error-show,
   select.error-show {
     border: 1px solid red !important;
+    background: hsl(0, 100%, 97%);
   }
 
   label.error-show {
@@ -205,30 +207,17 @@ textarea {
   }
   .icon--search {
     position: absolute;
-    right: 1.5rem;
+    right: 3.5rem;
     transform: translateY(50%);
     bottom: 50%;
-    font-size: 1.5rem;
-    color: $dark-gray;
-    border-left: 0.1rem solid $dark-gray;
-    top: 0;
-
     svg {
-      font-size: 1.7rem;
-    }
-  }
-  .icon--clear {
-    position: absolute;
-    right: 5.5rem;
-    transform: translateY(50%);
-    bottom: 50%;
-    font-size: 1.5rem;
-    color: $dark-gray;
-    top: 0;
-    font-weight: 100;
-
-    svg {
-      font-size: 1.7rem;
+      position: absolute;
+      font-size: 2.5rem;
+      transform: translateY(50%);
+      bottom: 50%;
+      border-left: 0.1rem solid $dark-gray;
+      padding-left: 1rem;
+      fill: $dark-gray;
     }
   }
   .icon--input {
@@ -236,10 +225,12 @@ textarea {
     left: 1.5rem;
     transform: translateY(50%);
     bottom: 50%;
-    font-size: 2.5rem;
-    color: $dark-gray;
-    border-right: 0.1rem solid $dark-gray;
     svg {
+      position: absolute;
+      font-size: 2.5rem;
+      transform: translateY(50%);
+      bottom: 50%;
+      border-right: 0.1rem solid $dark-gray;
       padding-right: 1rem;
     }
   }
@@ -324,6 +315,7 @@ textarea {
     bottom: -20px;
     font-weight: bold;
   }
+
   input.error-show,
   textarea.error-show,
   select.error-show {

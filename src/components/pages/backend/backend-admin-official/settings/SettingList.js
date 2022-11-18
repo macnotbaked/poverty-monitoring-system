@@ -33,7 +33,7 @@ const SettingList = () => {
 
         {/* 2 */}
         <Link
-          to={`${devNavUrl}/admin/users`}
+          to={`${devNavUrl}/admin/recommended-programs`}
           onClick={() => {
             dispatch(setStartIndex(0));
           }}
@@ -46,7 +46,7 @@ const SettingList = () => {
 
         {/* 3 */}
         <Link
-          to={`${devNavUrl}/admin/users`}
+          to={`${devNavUrl}/admin/program-criterias`}
           onClick={() => {
             dispatch(setStartIndex(0));
           }}
@@ -59,20 +59,7 @@ const SettingList = () => {
 
         {/* 4 */}
         <Link
-          to={`${devNavUrl}/admin/users`}
-          onClick={() => {
-            dispatch(setStartIndex(0));
-          }}
-          className="setting shadow--primary "
-        >
-          <MdCategory />
-          <h4 className="t--bold mb--1">Category</h4>
-          <h5>Manage the services being offered.</h5>
-        </Link>
-
-        {/* 5 */}
-        <Link
-          to={`${devNavUrl}/admin/users`}
+          to={`${devNavUrl}/admin/archived`}
           onClick={() => {
             dispatch(setStartIndex(0));
           }}
@@ -85,7 +72,7 @@ const SettingList = () => {
 
         {/* 6 */}
         <Link
-          to={`${devNavUrl}/admin/users`}
+          to={`${devNavUrl}/admin/info`}
           onClick={() => {
             dispatch(setStartIndex(0));
           }}
