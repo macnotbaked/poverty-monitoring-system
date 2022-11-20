@@ -7,8 +7,15 @@ import Evaluation from "./components/pages/backend/backend-admin-official/evalua
 import EvaluationHousehold from "./components/pages/backend/backend-admin-official/evaluation/evaluation-household/EvaluationHousehold";
 import EvaluationFilter from "./components/pages/backend/backend-admin-official/evaluation/EvaluationFilter";
 import Dashboard from "./components/pages/backend/backend-admin-official/home/Dashboard";
+import HouseholdCriteria from "./components/pages/backend/backend-admin-official/settings/program-criteria/household-criteria/HouseholdCriteria";
+import IncomeCriteria from "./components/pages/backend/backend-admin-official/settings/program-criteria/income-criteria/IncomeCriteria";
+import PopulationCriteria from "./components/pages/backend/backend-admin-official/settings/program-criteria/population-criteria/PopulationCriteria";
+import UnemploymentCriteria from "./components/pages/backend/backend-admin-official/settings/program-criteria/unemployment-criteria/UnemploymentCriteria";
+import HouseholdRate from "./components/pages/backend/backend-admin-official/settings/recommended-programs/household-rate/HouseholdRate";
+import IncomeRate from "./components/pages/backend/backend-admin-official/settings/recommended-programs/income-rate/IncomeRate";
 import { PopulationRate } from "./components/pages/backend/backend-admin-official/settings/recommended-programs/population-rate/PopulationRate";
 import RecommendedPrograms from "./components/pages/backend/backend-admin-official/settings/recommended-programs/RecommendedPrograms";
+import UnemploymentRate from "./components/pages/backend/backend-admin-official/settings/recommended-programs/unemployment-rate/UnemploymentRate";
 import Settings from "./components/pages/backend/backend-admin-official/settings/Settings";
 import Roles from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/roles/Roles";
 import UsersActive from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/users-active/UsersActive";
@@ -172,6 +179,69 @@ function App() {
               element={
                 <ProtectedRoute>
                   <PopulationRate />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/household-rate`}
+              element={
+                <ProtectedRoute>
+                  <HouseholdRate />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/income`}
+              element={
+                <ProtectedRoute>
+                  <IncomeRate />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/unemployment-rate`}
+              element={
+                <ProtectedRoute>
+                  <UnemploymentRate />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/population-criteria`}
+              element={
+                <ProtectedRoute>
+                  <PopulationCriteria />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/household-criteria`}
+              element={
+                <ProtectedRoute>
+                  <HouseholdCriteria />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/income-criteria`}
+              element={
+                <ProtectedRoute>
+                  <IncomeCriteria />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/unemployment-criteria`}
+              element={
+                <ProtectedRoute>
+                  <UnemploymentCriteria />
                 </ProtectedRoute>
               }
             />

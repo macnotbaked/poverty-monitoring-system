@@ -113,6 +113,8 @@ export const fetchData = async (
         setCredentials(
           data.mail.users_aid,
           data.mail.users_fname,
+          data.mail.users_mname,
+          data.mail.users_lname,
           data.mail.roles_name,
           data.mail.users_email,
           data.mail.users_aid

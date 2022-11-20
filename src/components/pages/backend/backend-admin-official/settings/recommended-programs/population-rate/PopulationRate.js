@@ -25,7 +25,7 @@ export const PopulationRate = () => {
   } = useFetchDataLoadMore(
     "/admin/admin-settings/population-program/read-limit-active-population-program.php",
     "/admin/admin-settings/population-program/read-all-active-population-program.php",
-    10 // show number of records on a table
+    5 // show number of records on a table
   );
 
   const handleAdd = () => {
@@ -72,3 +72,5 @@ export const PopulationRate = () => {
     </>
   );
 };
+
+export default PopulationRate;

@@ -1,15 +1,16 @@
 .tab--active {
+  background: $accent;
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
   &:hover {
-    background: none !important;
+    background: $accent !important;
   }
-
   svg {
-    color: $dark-color !important;
-    background: $accent;
-    height: 4rem;
-    width: 4rem;
-    padding: 1rem;
-    border-radius: 5rem;
+    fill: $primary-color !important;
+    &:hover {
+      fill: $primary-color !important;
+    }
   }
 }
 .color--primary {
@@ -18,10 +19,10 @@
 .color--secondary {
   color: $secondary-color !important;
 }
-.color--lightcolor {
+.color--light {
   color: $light-color !important;
 }
-.color--darkcolor {
+.color--dark {
   color: $dark-color !important;
 }
 .color--lightgray {
@@ -264,6 +265,73 @@
       rgba($primary-color, 1),
       rgba($secondary-color, 0.85) 90%
     );
+  }
+}
+
+.btn--profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $primary-color;
+  color: $light-color !important;
+  width: 7rem;
+  border-radius: 5rem;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  // position: absolute;
+  // top: 5.5rem;
+  // left: 10rem;
+
+  svg {
+    font-size: 1.2rem !important;
+    fill: $light-color !important;
+    transform: rotate(-90deg) !important;
+  }
+}
+
+.btn--cancel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $light-color;
+  border: 1px solid $dark-gray;
+  color: $dark-color !important;
+  width: 7rem;
+  border-radius: 5rem;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  // position: absolute;
+  // top: 5.5rem;
+  // left: 19.5rem;
+
+  svg {
+    font-size: 1.2rem !important;
+    fill: $dark-color !important;
+    transform: rotate(-90deg) !important;
+  }
+}
+
+.btn--logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $primary-color;
+  color: $light-color !important;
+  width: 9rem;
+  border-radius: 5rem;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  position: absolute;
+  top: 5.5rem;
+  left: 10rem;
+
+  svg {
+    font-size: 1.2rem !important;
+    fill: $light-color !important;
+    transform: rotate(-90deg) !important;
   }
 }
 

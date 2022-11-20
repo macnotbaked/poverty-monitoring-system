@@ -5,28 +5,16 @@ import {
   FaHome,
   FaHouseUser,
   FaMapMarkedAlt,
-  FaPowerOff,
-  FaUsers,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import {
-  setIsActive,
-  setIsLogout,
-  setStartIndex,
-} from "../../store/StoreAction";
+import { setIsActive, setStartIndex } from "../../store/StoreAction";
 import { StoreContext } from "../../store/StoreContext";
 import { devBaseUrl, devNavUrl } from "../helpers/functions-general";
-import ModalLogout from "../widgets/ModalLogout";
 
 const Navigation = ({ menu }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState(null);
   const role = store.credentials.roles_name;
-
-  const handleLogout = () => {
-    dispatch(setIsLogout(true));
-    setItemEdit(null);
-  };
 
   const handleshow = () => {
     dispatch(setIsActive(!store.isActive));
@@ -103,17 +91,7 @@ const Navigation = ({ menu }) => {
             </>
           )}
         </ul>
-        <button
-          type="sumbit"
-          onClick={handleLogout}
-          className="logout__container tooltip"
-          data-tooltip="Logout"
-        >
-          <FaPowerOff />
-        </button>
       </nav>
-
-      {store.isLogout && <ModalLogout />}
     </>
   );
 };

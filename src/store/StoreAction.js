@@ -108,8 +108,11 @@ export const setCredentials = (
   users_aid,
   roles_aid,
   users_fname,
+  users_mname,
+  users_lname,
   roles_name,
-  users_email
+  users_email,
+  users_photo
 ) => {
   return {
     type: "CREDENTIALS",
@@ -117,8 +120,11 @@ export const setCredentials = (
       users_aid,
       roles_aid,
       users_fname,
+      users_mname,
+      users_lname,
       roles_name,
       users_email,
+      users_photo,
     },
   };
 };

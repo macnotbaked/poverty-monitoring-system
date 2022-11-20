@@ -9,7 +9,10 @@ import {
 import { Link } from "react-router-dom";
 import { setStartIndex } from "../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../store/StoreContext";
+import useLoadAllActiveHouseholdProgram from "../../../../../custom-hooks/useLoadAllActiveHouseholdProgram";
+import useLoadAllActiveIncomeProgram from "../../../../../custom-hooks/useLoadAllActiveIncomeProgram";
 import useLoadAllActivePopulationProgram from "../../../../../custom-hooks/useLoadAllActivePopulationProgram";
+import useLoadAllActiveUnemploymentProgram from "../../../../../custom-hooks/useLoadAllActiveUnemploymentProgram";
 import { devNavUrl } from "../../../../../helpers/functions-general";
 import SpinnerCard from "../../../../../widgets/SpinnerCard";
 
@@ -19,6 +22,21 @@ const RecommendedProgramsList = ({}) => {
   const { activePopulationProgram, loadingPopulationProgram } =
     useLoadAllActivePopulationProgram(
       "/admin/admin-settings/population-program/read-all-active-population-program.php"
+    );
+
+  const { activeHouseholdProgram, loadingHouseholdProgram } =
+    useLoadAllActiveHouseholdProgram(
+      "/admin/admin-settings/household-program/read-all-active-household-program.php"
+    );
+
+  const { activeIncomeProgram, loadingIncomeProgram } =
+    useLoadAllActiveIncomeProgram(
+      "/admin/admin-settings/income-program/read-all-active-income-program.php"
+    );
+
+  const { activeUnemploymentProgram, loadingUnemploymentProgram } =
+    useLoadAllActiveUnemploymentProgram(
+      "/admin/admin-settings/unemployment-program/read-all-active-unemployment-program.php"
     );
 
   return (
@@ -42,12 +60,16 @@ const RecommendedProgramsList = ({}) => {
             </h4>
             <ul>
               {activePopulationProgram.length > 0 ? (
-                activePopulationProgram.map((item, key) => {
+                activePopulationProgram.slice(0, 3).map((item, key) => {
                   return <li key={key}>{item.population_program_name}</li>;
                 })
               ) : (
                 <>{loadingPopulationProgram ? "" : <li>No Data</li>}</>
               )}
+              <p className="mt--1 color--primary">
+                {" "}
+                {loadingPopulationProgram ? "" : "See more.."}.
+              </p>
             </ul>
           </Link>
         </div>
@@ -64,12 +86,22 @@ const RecommendedProgramsList = ({}) => {
             }}
             className="setting shadow--primary mt--2"
           >
-            <h4 className="t--bold my--1">Household Rate</h4>
+            {loadingHouseholdProgram && <SpinnerCard />}
+            <h4 className="t--bold my--1">
+              {loadingHouseholdProgram ? "" : "Household Rate"}
+            </h4>
             <ul>
-              <li>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reiciendis, odit.
-              </li>
+              {activeHouseholdProgram.length > 0 ? (
+                activeHouseholdProgram.slice(0, 3).map((item, key) => {
+                  return <li key={key}>{item.household_program_name}</li>;
+                })
+              ) : (
+                <>{loadingHouseholdProgram ? "" : <li>No Data</li>}</>
+              )}
+              <p className="mt--1 color--primary">
+                {" "}
+                {loadingHouseholdProgram ? "" : "See more.."}.
+              </p>
             </ul>
           </Link>
         </div>
@@ -86,43 +118,34 @@ const RecommendedProgramsList = ({}) => {
             }}
             className="setting shadow--primary mt--2"
           >
+            {loadingIncomeProgram && <SpinnerCard />}
             <h4 className="t--bold my--1">
-              Income Rate{" "}
-              <i>ie., Bills Expenses, Food Treshold, Education Expenses</i>
+              {loadingIncomeProgram ? (
+                ""
+              ) : (
+                <strong>
+                  Income Rate{" "}
+                  <i>ie., Bills Expenses, Food Threshold, Education Expenses</i>
+                </strong>
+              )}
             </h4>
-
             <ul>
-              <li>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reiciendis, odit.
-              </li>
+              {activeIncomeProgram.length > 0 ? (
+                activeIncomeProgram.slice(0, 3).map((item, key) => {
+                  return <li key={key}>{item.income_program_name}</li>;
+                })
+              ) : (
+                <>{loadingIncomeProgram ? "" : <li>No Data</li>}</>
+              )}
+              <p className="mt--1 color--primary">
+                {" "}
+                {loadingIncomeProgram ? "" : "See more.."}.
+              </p>
             </ul>
           </Link>
         </div>
 
         {/* 4 */}
-        <div className="list__container">
-          <span>
-            <FaUserTie />
-          </span>
-          <Link
-            to={`${devNavUrl}/admin/employment-rate`}
-            onClick={() => {
-              dispatch(setStartIndex(0));
-            }}
-            className="setting shadow--primary mt--2"
-          >
-            <h4 className="t--bold mb--1">Employment Rate</h4>
-            <ul>
-              <li>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reiciendis, odit.
-              </li>
-            </ul>
-          </Link>
-        </div>
-
-        {/* 5 */}
         <div className="list__container">
           <span>
             <FaUser />
@@ -134,12 +157,22 @@ const RecommendedProgramsList = ({}) => {
             }}
             className="setting shadow--primary mt--2"
           >
-            <h4 className="t--bold mb--1">Unemployment Rate</h4>
+            {loadingUnemploymentProgram && <SpinnerCard />}
+            <h4 className="t--bold my--1">
+              {loadingUnemploymentProgram ? "" : "Unemployment Rate"}
+            </h4>
             <ul>
-              <li>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reiciendis, odit.
-              </li>
+              {activeUnemploymentProgram.length > 0 ? (
+                activeUnemploymentProgram.slice(0, 3).map((item, key) => {
+                  return <li key={key}>{item.unemployment_program_name}</li>;
+                })
+              ) : (
+                <>{loadingUnemploymentProgram ? "" : <li>No Data</li>}</>
+              )}
+              <p className="mt--1 color--primary">
+                {" "}
+                {loadingUnemploymentProgram ? "" : "See more.."}.
+              </p>
             </ul>
           </Link>
         </div>

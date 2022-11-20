@@ -46,7 +46,7 @@ const SettingList = () => {
 
         {/* 3 */}
         <Link
-          to={`${devNavUrl}/admin/program-criterias`}
+          to={`${devNavUrl}/admin/population-criteria`}
           onClick={() => {
             dispatch(setStartIndex(0));
           }}

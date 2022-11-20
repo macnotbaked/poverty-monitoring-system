@@ -28,6 +28,7 @@ const useUploadPhoto = (url, dispatch) => {
 
     const img = e.target.files[0];
     console.log(img);
+
     if (img.size > 60000) {
       console.log(1);
       dispatch(setError(true));

@@ -79,85 +79,15 @@
   .menu-label {
     display: block;
     padding: 0.8rem 0;
-    margin-bottom: 2px;
-    margin-right: 0.2rem;
-    cursor: pointer;
-    background: $dark-color;
-    color: $light-color;
-    font-weight: bold;
-    font-size: 1.2rem;
-    border-bottom: 2px solid transparent;
-    z-index: 1;
-    border-radius: 0.5rem 0.5rem 0 0;
-    a,
-    span {
-      padding: 1.1rem 2.3rem;
-      text-transform: uppercase;
-      height: 100%;
-      width: 100%;
-    }
-  }
-  .menu-label:hover {
-    background: $primary-color;
-    color: $light-color;
-  }
-  .tab {
-    order: 99;
-    flex-grow: 1;
-    width: 100%;
-    padding: 3rem 0 0;
-    background: $light-color;
-  }
-
-  input[type="radio"] {
-    display: none;
-  }
-
-  input[type="radio"]:checked + label {
-    background: #fff;
-    color: $primary-color;
-    border-top: 2px solid $primary-color;
-  }
-  input[type="radio"]:checked + span {
-    color: $primary-color;
-  }
-
-  input[type="radio"]:checked + label svg {
-    margin-left: 1.5rem;
-    transform: rotate(90deg);
-    transition: 0.9 ease;
-  }
-  input[type="radio"]:checked + label + .tab {
-    display: block;
-  }
-}
-.table--name {
-  span {
-    display: inline-block;
-    font-size: 0;
-  }
-  span::first-letter {
-    font-size: 1.2rem;
-  }
-}
-.tab-submenu {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 3rem;
-  .menu-label {
-    display: block;
-    padding: 0.8rem 0;
-    margin-bottom: 0;
-    margin-right: 0;
+    margin-right: 1rem;
     cursor: pointer;
     background: $light-color;
     color: $dark-color;
     font-weight: bold;
-    font-size: 1.2rem;
     z-index: 1;
-    border: 0.2rem solid $primary-color;
     border-radius: 0.5rem 0.5rem 0 0;
-
+    border: 0.1rem solid $light-gray;
+    transition: 0.2s ease;
     a,
     span {
       padding: 1.1rem 2.3rem;
@@ -174,7 +104,9 @@
     order: 99;
     flex-grow: 1;
     width: 100%;
-    background: $light-color;
+    padding: 3rem;
+    // background: $dark-color;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 
   input[type="radio"] {
@@ -182,21 +114,72 @@
   }
 
   input[type="radio"]:checked + label {
-    color: $primary-color !important;
-    border: none;
-    box-shadow: unset;
-  }
-
-  input[type="radio"]:checked + label svg {
-    margin-left: 1.5rem;
-    transform: rotate(90deg);
-    transition: 0.5s;
+    background: $primary-color;
+    color: $light-color;
   }
 
   input[type="radio"]:checked + label + .tab {
     display: block;
   }
 }
+
+// .tab-submenu {
+//   display: flex;
+//   flex-wrap: wrap;
+//   padding: 3rem;
+//   .menu-label {
+//     display: block;
+//     padding: 0.8rem 0;
+//     margin-bottom: 0;
+//     margin-right: 0;
+//     cursor: pointer;
+//     background: $light-color;
+//     color: $dark-color;
+//     font-weight: bold;
+//     font-size: 1.2rem;
+//     z-index: 1;
+//     border: 0.2rem solid $primary-color;
+//     border-radius: 0.5rem 0.5rem 0 0;
+
+//     a,
+//     span {
+//       padding: 1.1rem 2.3rem;
+//       text-transform: uppercase;
+//       height: 100%;
+//       width: 100%;
+//     }
+//   }
+//   .menu-label:hover {
+//     background: $primary-color;
+//     color: $light-color;
+//   }
+//   .tab {
+//     order: 99;
+//     flex-grow: 1;
+//     width: 100%;
+//     background: $light-color;
+//   }
+
+//   input[type="radio"] {
+//     display: none;
+//   }
+
+//   input[type="radio"]:checked + label {
+//     color: $primary-color !important;
+//     border: none;
+//     box-shadow: unset;
+//   }
+
+//   input[type="radio"]:checked + label svg {
+//     margin-left: 1.5rem;
+//     transform: rotate(90deg);
+//     transition: 0.5s;
+//   }
+
+//   input[type="radio"]:checked + label + .tab {
+//     display: block;
+//   }
+// }
 .setting {
   padding: 20px;
   border-radius: 5px;

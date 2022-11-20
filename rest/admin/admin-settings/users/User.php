@@ -12,6 +12,7 @@ class Users
     public $users_phone;
     public $users_gender;
     public $users_role_id;
+    public $users_photo;
     public $users_created;
     public $users_datetime;
 
@@ -53,6 +54,17 @@ class Users
         $sql .= "'{$this->users_datetime}' ) ";
 
         $result = $this->connection->query($sql);
+        return $result;
+    }
+
+
+    public function readById()
+    {
+        $sql = "select * from {$this->tblUsers} ";
+        $sql .= "where users_is_active = 1 ";
+        $sql .= "and users_aid = '{$this->users_aid}' ";
+        $result = $this->connection->query($sql);
+
         return $result;
     }
 
@@ -175,6 +187,22 @@ class Users
             return false;
         }
     }
+    public function updatePhoto()
+    {
+        $sql = "update {$this->tblUsers} set ";
+        $sql .= "users_photo = '{$this->users_photo}', ";
+        $sql .= "users_datetime = '{$this->users_datetime}' ";
+        $sql .= "where users_aid = '{$this->users_aid}' ";
+
+        $result = $this->connection->query($sql);
+        $c_affected = $this->connection->affected_rows;
+
+        if ($c_affected > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function delete()
     {
@@ -228,30 +256,6 @@ class Users
         $result = $this->connection->query($sql);
         return $result;
     }
-
-    public function readCitizenLogin()
-    {
-        $sql = "select * from {$this->tblUsers} as user, ";
-        $sql .= "{$this->tblRoles} as role ";
-        $sql .= "where user.users_is_active = 1 ";
-        $sql .= "and user.users_email = '{$this->users_email}' ";
-        $sql .= "and user.users_role_id = role.roles_aid ";
-        $result = $this->connection->query($sql);
-        return $result;
-    }
-    // public function readCitizenLogin()
-    // {
-    //     $sql = "select * from {$this->tblUsers} as user, ";
-    //     $sql .= "{$this->tblCitizen} as citizen, ";
-    //     $sql .= "{$this->tblRoles} as role ";
-    //     $sql .= "where user.users_is_active = 1 ";
-    //     $sql .= "and user.users_email = '{$this->users_email}' ";
-    //     $sql .= "and user.users_role = role.settings_role_aid ";
-    //     $sql .= "and citizen.trainee_email = user.users_email ";
-    //     $sql .= "and citizen.trainee_is_active = 1 ";
-    //     $result = $this->connection->query($sql);
-    //     return $result;
-    // }
 
     public function readKey()
     {
