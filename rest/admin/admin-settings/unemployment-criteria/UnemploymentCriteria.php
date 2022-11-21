@@ -85,6 +85,48 @@ class UnemploymentCriteria
         return $result;
     }
 
+    public function readAllInactive()
+    {
+        $sql = "select * from {$this->tblUnemploymentCriteria} as criteria, ";
+        $sql .= "{$this->tblUnemploymentProgram} as unemployment ";
+        $sql .= "where criteria.unemployment_criteria_is_active = 0 ";
+        $sql .= "and criteria.unemployment_criteria_category = 'unemployment' ";
+        $sql .= "and criteria.unemployment_criteria_program_id = unemployment.unemployment_program_aid ";
+        $sql .= "order by criteria.unemployment_criteria_program_id asc ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function readLimitInactive($start, $total)
+    {
+        $sql = "select * from {$this->tblUnemploymentCriteria} as criteria, ";
+        $sql .= "{$this->tblUnemploymentProgram} as unemployment ";
+        $sql .= "where criteria.unemployment_criteria_is_active = 0 ";
+        $sql .= "and criteria.unemployment_criteria_category = 'unemployment' ";
+        $sql .= "and criteria.unemployment_criteria_program_id = unemployment.unemployment_program_aid ";
+        $sql .= "order by criteria.unemployment_criteria_program_id asc ";
+        $sql .= "limit {$start}, {$total} ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function readSearchInactive($search)
+    {
+        $sql = "select * from {$this->tblUnemploymentCriteria} as criteria, ";
+        $sql .= "{$this->tblUnemploymentProgram} as unemployment ";
+        $sql .= "where criteria.unemployment_criteria_is_active = 0 ";
+        $sql .= "and criteria.unemployment_criteria_category = 'unemployment' ";
+        $sql .= "and criteria.unemployment_criteria_program_id = unemployment.unemployment_program_aid ";
+        $sql .= "and (unemployment.unemployment_program_name like '{$search}%' ";
+        $sql .= ") ";
+        $sql .= "order by unemployment.unemployment_program_name asc ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
     public function update()
     {
         $sql = "update {$this->tblUnemploymentCriteria} set ";

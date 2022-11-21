@@ -59,7 +59,7 @@ const SettingList = () => {
 
         {/* 4 */}
         <Link
-          to={`${devNavUrl}/admin/archived`}
+          to={`${devNavUrl}/admin/inactive-users`}
           onClick={() => {
             dispatch(setStartIndex(0));
           }}

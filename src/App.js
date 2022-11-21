@@ -7,6 +7,7 @@ import Evaluation from "./components/pages/backend/backend-admin-official/evalua
 import EvaluationHousehold from "./components/pages/backend/backend-admin-official/evaluation/evaluation-household/EvaluationHousehold";
 import EvaluationFilter from "./components/pages/backend/backend-admin-official/evaluation/EvaluationFilter";
 import Dashboard from "./components/pages/backend/backend-admin-official/home/Dashboard";
+import InactiveUser from "./components/pages/backend/backend-admin-official/settings/archived/archived-users/InactiveUser";
 import HouseholdCriteria from "./components/pages/backend/backend-admin-official/settings/program-criteria/household-criteria/HouseholdCriteria";
 import IncomeCriteria from "./components/pages/backend/backend-admin-official/settings/program-criteria/income-criteria/IncomeCriteria";
 import PopulationCriteria from "./components/pages/backend/backend-admin-official/settings/program-criteria/population-criteria/PopulationCriteria";
@@ -242,6 +243,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <UnemploymentCriteria />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/inactive-users`}
+              element={
+                <ProtectedRoute>
+                  <InactiveUser />
                 </ProtectedRoute>
               }
             />

@@ -59,6 +59,36 @@ function checkReadSearch($object, $search)
     return $result;
 }
 
+function checkReadAllInactive($object)
+{
+    $result = $object->readAllInactive();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (All inactive sitio).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadLimitInactive($object, $start, $total)
+{
+    $result = $object->readLimitInactive($start, $total);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Limit inactive sitio).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadSearchInactive($object, $search)
+{
+    $result = $object->readSearchInactive($search);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Search inactive sitio).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkUpdate($object)
 {
     $result = $object->update();

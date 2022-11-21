@@ -32,6 +32,7 @@ class Sitio
     public function readAll()
     {
         $sql = "select * from {$this->tblSitio} ";
+        $sql .= "where sitio_is_active = 1 ";
         $sql .= "order by sitio_name asc ";
         $result = $this->connection->query($sql);
 
@@ -41,6 +42,7 @@ class Sitio
     public function readLimit($start, $total)
     {
         $sql = "select * from {$this->tblSitio} ";
+        $sql .= "where sitio_is_active = 1 ";
         $sql .= "order by sitio_name asc ";
         $sql .= "limit {$start}, {$total} ";
         $result = $this->connection->query($sql);
@@ -53,12 +55,46 @@ class Sitio
         $sql = "select * from {$this->tblSitio} ";
         $sql .= "where (sitio_name like '{$search}%' ";
         $sql .= ") ";
+        $sql .= "where sitio_is_active = 1 ";
         $sql .= "order by sitio_name asc ";
         $result = $this->connection->query($sql);
 
         return $result;
     }
 
+    public function readAllInactive()
+    {
+        $sql = "select * from {$this->tblSitio} ";
+        $sql .= "where sitio_is_active 0 ";
+        $sql .= "order by sitio_name asc ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+
+    public function readLimitInactive($start, $total)
+    {
+        $sql = "select * from {$this->tblSitio} ";
+        $sql .= "where sitio_is_active 0 ";
+        $sql .= "order by sitio_name asc ";
+        $sql .= "limit {$start}, {$total} ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function readSearchInactive($search)
+    {
+        $sql = "select * from {$this->tblSitio} ";
+        $sql .= "where (sitio_name like '{$search}%' ";
+        $sql .= ") ";
+        $sql .= "where sitio_is_active 0 ";
+        $sql .= "order by sitio_name asc ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
 
     public function update()
     {

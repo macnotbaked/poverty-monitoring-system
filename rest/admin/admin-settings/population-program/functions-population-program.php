@@ -59,6 +59,36 @@ function checkReadSearchActive($object, $search)
     return $result;
 }
 
+function checkReadAllInactive($object)
+{
+    $result = $object->readAllInactive();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (All inactive population program).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadLimitInactive($object, $start, $total)
+{
+    $result = $object->readlimitInactive($start, $total);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Limit inactive population program).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadSearchInactive($object, $search)
+{
+    $result = $object->readSearchInactive($search);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Search inactive population program).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkUpdate($object)
 {
     $result = $object->update();

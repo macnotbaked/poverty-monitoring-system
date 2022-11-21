@@ -85,6 +85,48 @@ class PopulationCriteria
         return $result;
     }
 
+    public function readAllInactive()
+    {
+        $sql = "select * from {$this->tblPopulationCriteria} as criteria, ";
+        $sql .= "{$this->tblPopulationProgram} as population ";
+        $sql .= "where criteria.population_criteria_is_active = 0 ";
+        $sql .= "and criteria.population_criteria_category = 'Population' ";
+        $sql .= "and criteria.population_criteria_program_id = population.population_program_aid ";
+        $sql .= "order by criteria.population_criteria_program_id asc ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function readLimitInactive($start, $total)
+    {
+        $sql = "select * from {$this->tblPopulationCriteria} as criteria, ";
+        $sql .= "{$this->tblPopulationProgram} as population ";
+        $sql .= "where criteria.population_criteria_is_active = 0 ";
+        $sql .= "and criteria.population_criteria_category = 'Population' ";
+        $sql .= "and criteria.population_criteria_program_id = population.population_program_aid ";
+        $sql .= "order by criteria.population_criteria_program_id asc ";
+        $sql .= "limit {$start}, {$total} ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function readSearchInactive($search)
+    {
+        $sql = "select * from {$this->tblPopulationCriteria} as criteria, ";
+        $sql .= "{$this->tblPopulationProgram} as population ";
+        $sql .= "where criteria.population_criteria_is_active = 0 ";
+        $sql .= "and criteria.population_criteria_category = 'Population' ";
+        $sql .= "and criteria.population_criteria_program_id = population.population_program_aid ";
+        $sql .= "and (population.population_program_name like '{$search}%' ";
+        $sql .= ") ";
+        $sql .= "order by population.population_program_name asc ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
     public function update()
     {
         $sql = "update {$this->tblPopulationCriteria} set ";

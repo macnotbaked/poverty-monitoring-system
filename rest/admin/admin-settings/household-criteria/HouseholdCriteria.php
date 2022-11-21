@@ -85,6 +85,48 @@ class HouseholdCriteria
         return $result;
     }
 
+    public function readAllInactive()
+    {
+        $sql = "select * from {$this->tblHouseholdCriteria} as criteria, ";
+        $sql .= "{$this->tblHouseholdProgram} as household ";
+        $sql .= "where criteria.household_criteria_is_active = 0 ";
+        $sql .= "and criteria.household_criteria_category = 'Household' ";
+        $sql .= "and criteria.household_criteria_program_id = household.household_program_aid ";
+        $sql .= "order by criteria.household_criteria_program_id asc ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function readLimitInactive($start, $total)
+    {
+        $sql = "select * from {$this->tblHouseholdCriteria} as criteria, ";
+        $sql .= "{$this->tblHouseholdProgram} as household ";
+        $sql .= "where criteria.household_criteria_is_active = 0 ";
+        $sql .= "and criteria.household_criteria_category = 'Household' ";
+        $sql .= "and criteria.household_criteria_program_id = household.household_program_aid ";
+        $sql .= "order by criteria.household_criteria_program_id asc ";
+        $sql .= "limit {$start}, {$total} ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function readSearchInactive($search)
+    {
+        $sql = "select * from {$this->tblHouseholdCriteria} as criteria, ";
+        $sql .= "{$this->tblHouseholdProgram} as household ";
+        $sql .= "where criteria.household_criteria_is_active = 0 ";
+        $sql .= "and criteria.household_criteria_category = 'Household' ";
+        $sql .= "and criteria.household_criteria_program_id = household.household_program_aid ";
+        $sql .= "and (household.household_program_name like '{$search}%' ";
+        $sql .= ") ";
+        $sql .= "order by household.household_program_name asc ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
     public function update()
     {
         $sql = "update {$this->tblHouseholdCriteria} set ";

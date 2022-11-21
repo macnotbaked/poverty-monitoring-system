@@ -59,6 +59,36 @@ function checkReadSearchActive($object, $search)
     return $result;
 }
 
+function checkReadAllInctive($object)
+{
+    $result = $object->readAllInctive();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (All inactive household criteria).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadLimitInctive($object, $start, $total)
+{
+    $result = $object->readlimitInctive($start, $total);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Limit inactive household criteria).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadSearchInctive($object, $search)
+{
+    $result = $object->readSearchInctive($search);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Search inactive household criteria).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkUpdate($object)
 {
     $result = $object->update();

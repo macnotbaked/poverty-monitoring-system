@@ -16,6 +16,7 @@ import {
   setIsAdd,
   setIsConfirm,
   setIsLogin,
+  setIsRestore,
   setIsSignup,
   setMessage,
   setSave,
@@ -78,6 +79,12 @@ export const fetchData = async (
     // delete modal will be closed when used
     if (store.isConfirm) {
       dispatch(setIsConfirm(false));
+      store.isSave ? dispatch(setSave(false)) : dispatch(setSave(true));
+    }
+
+    // restore modal will be closed when used
+    if (store.isRestore) {
+      dispatch(setIsRestore(false));
       store.isSave ? dispatch(setSave(false)) : dispatch(setSave(true));
     }
 

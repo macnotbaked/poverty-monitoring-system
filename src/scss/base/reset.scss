@@ -159,23 +159,38 @@ h6 {
   -webkit-appearance: none;
 }
 ::-webkit-scrollbar:vertical {
-  width: 0.5rem;
-  background: $light-gray;
+  width: 0.6rem;
+  // background: $light-gray;
 }
 ::-webkit-scrollbar:horizontal {
   height: 0.5rem;
   background: $light-gray;
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: rgba($dark-color, 0.5);
-  border-radius: 1rem;
-  // border: 3px solid $light-color;
-}
-// ::-webkit-scrollbar-track {
+// ::-webkit-scrollbar-thumb {
+//   background-color: rgba($dark-color, 0.5);
 //   border-radius: 1rem;
-//   background-color: $light-gray;
+//   // border: 3px solid $light-color;
 // }
+
+// ::-webkit-scrollbar-track-piece {
+//   width: 5rem;
+// }
+
+::-webkit-scrollbar-track-piece {
+  border: 0.2rem solid $light-color;
+  background: $light-gray;
+  border-radius: 1rem;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 1rem;
+}
+::-webkit-scrollbar-thumb {
+  background: $dark-gray;
+  border-radius: 1rem;
+  border: 0.3rem solid transparent;
+}
 
 button {
   background-color: transparent;

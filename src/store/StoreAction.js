@@ -104,6 +104,13 @@ export const setIsClick = (val) => {
   };
 };
 
+export const setIsRestore = (val) => {
+  return {
+    type: "RESTORE",
+    payload: val,
+  };
+};
+
 export const setCredentials = (
   users_aid,
   roles_aid,

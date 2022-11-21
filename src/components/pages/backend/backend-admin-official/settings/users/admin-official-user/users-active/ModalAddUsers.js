@@ -197,7 +197,7 @@ const ModalAddUsers = ({ item, role }) => {
                         disabled={loading}
                         className="btn--default d--flex align-center justify-center"
                       >
-                        {!loading ? (
+                        {loading ? (
                           <SpinnerButton />
                         ) : (
                           <span>{item ? "Save" : "Add"}</span>

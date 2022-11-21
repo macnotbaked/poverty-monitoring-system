@@ -319,17 +319,14 @@
   justify-content: center;
   background: $primary-color;
   color: $light-color !important;
-  width: 9rem;
+  width: 7rem;
   border-radius: 5rem;
   padding: 0.5rem;
   gap: 0.5rem;
   font-size: 1.2rem;
-  position: absolute;
-  top: 5.5rem;
-  left: 10rem;
 
   svg {
-    font-size: 1.2rem !important;
+    font-size: 1rem !important;
     fill: $light-color !important;
     transform: rotate(-90deg) !important;
   }

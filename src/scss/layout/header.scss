@@ -14,9 +14,26 @@
     gap: 2rem;
     position: relative;
 
+    .avatar,
+    img {
+      max-height: 4.5rem !important;
+      max-width: 4.5rem !important;
+      min-height: 4.5rem !important;
+      min-width: 4.5rem !important;
+      object-fit: contain;
+      object-position: center center;
+      overflow: hidden;
+      border: 0.4rem solid $light-gray-x;
+      transition: 0.15s ease;
+      border-radius: 100%;
+      cursor: pointer;
+      &:hover {
+        border: 0.4rem solid rgba($light-gray, 0.4);
+      }
+    }
+
     svg {
-      color: $light-gray;
-      font-size: 3.5rem;
+      fill: $light-gray;
     }
   }
   &__collapse {
@@ -36,16 +53,22 @@
 
   .profile {
     &__container {
-      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-        rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
       background: $light-color;
       border-radius: 0.3rem 0.3rem 1rem 1rem;
       position: absolute;
-      top: 4.9rem;
+      top: 5.4rem;
       z-index: 2;
       padding: 1rem;
       width: 30rem;
-      right: 0;
+      right: 0.4rem;
+      // display: none;
+      transform: translate(0);
+      opacity: 0;
+      transition: opacity 0.15s linear;
+      pointer-events: none;
       &::before {
         content: "";
         position: absolute;
@@ -60,6 +83,13 @@
         pointer-events: none;
         top: -0.8rem;
       }
+    }
+    &__container.show {
+      // display: block;
+      transition: opacity 0.15s linear;
+      transform: translate(0);
+      opacity: 1;
+      pointer-events: visible;
     }
     &__avatar {
       position: relative;

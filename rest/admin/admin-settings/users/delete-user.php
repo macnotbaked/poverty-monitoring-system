@@ -1,20 +1,20 @@
 <?php
 try {
     include_once("../../../common/package.php");
-    include_once("Roles.php");
-    include_once("functions-roles.php");
+    include_once("User.php");
+    include_once("functions-user.php");
 
     $body = file_get_contents("php://input");
     $data = json_decode($body, true);
     $connection = checkConnection();
     checkInputData($data);
-    $role = new Roles($connection);
+    $user = new Users($connection);
 
-    $role->roles_aid = filter_var($data["id"], FILTER_SANITIZE_STRING);
+    $user->users_aid = filter_var($data["id"], FILTER_SANITIZE_STRING);
 
-    $result = checkDelete($role);
+    $result = checkDelete($user);
 
-    Response::sendResponse(true, "Role successfuly deleted.", []);
+    Response::sendResponse(true, "User successfuly deleted.", []);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted because a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

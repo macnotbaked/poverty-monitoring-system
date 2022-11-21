@@ -75,7 +75,7 @@ const ModalUserConfirm = ({ isSus, susEndpoint, resetEndpoint, item }) => {
                 disabled={loading}
                 onClick={handleYes}
               >
-                {!loading ? <SpinnerButton /> : "Confirm"}
+                {loading ? <SpinnerButton /> : "Confirm"}
               </button>
               <button
                 className="btn--outline "
