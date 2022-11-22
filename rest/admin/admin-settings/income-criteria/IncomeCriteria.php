@@ -163,6 +163,32 @@ class IncomeCriteria
         }
     }
 
+    public function restore()
+    {
+        $sql = "update {$this->tblIncomeCriteria} set ";
+        $sql .= "income_criteria_is_active = '1', ";
+        $sql .= "income_criteria_datetime = '{$this->income_criteria_datetime}' ";
+        $sql .= "where income_criteria_aid = '{$this->income_criteria_aid}' ";
+
+        $result = $this->connection->query($sql);
+        $c_affected = $this->connection->affected_rows;
+
+        if ($c_affected > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function delete()
+    {
+        $sql = "select * from {$this->tblIncomeCriteria} ";
+        $sql .= "where income_criteria_aid = '{$this->income_criteria_aid}' ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
     public function isProgramAlreadyExist()
     {
         $sql = "select * from {$this->tblIncomeCriteria} ";

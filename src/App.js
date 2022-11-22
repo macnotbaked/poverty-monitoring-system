@@ -7,6 +7,8 @@ import Evaluation from "./components/pages/backend/backend-admin-official/evalua
 import EvaluationHousehold from "./components/pages/backend/backend-admin-official/evaluation/evaluation-household/EvaluationHousehold";
 import EvaluationFilter from "./components/pages/backend/backend-admin-official/evaluation/EvaluationFilter";
 import Dashboard from "./components/pages/backend/backend-admin-official/home/Dashboard";
+import InactiveHouseholdProgram from "./components/pages/backend/backend-admin-official/settings/archived/archived-recommended-programs/inactive-household-program/InactiveHouseholdProgram";
+import InactivePopulationProgram from "./components/pages/backend/backend-admin-official/settings/archived/archived-recommended-programs/inactive-population-program/InactivePopulationProgram";
 import InactiveUser from "./components/pages/backend/backend-admin-official/settings/archived/archived-users/InactiveUser";
 import HouseholdCriteria from "./components/pages/backend/backend-admin-official/settings/program-criteria/household-criteria/HouseholdCriteria";
 import IncomeCriteria from "./components/pages/backend/backend-admin-official/settings/program-criteria/income-criteria/IncomeCriteria";
@@ -252,6 +254,24 @@ function App() {
               element={
                 <ProtectedRoute>
                   <InactiveUser />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/inactive-population-program`}
+              element={
+                <ProtectedRoute>
+                  <InactivePopulationProgram />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/inactive-household-program`}
+              element={
+                <ProtectedRoute>
+                  <InactiveHouseholdProgram />
                 </ProtectedRoute>
               }
             />

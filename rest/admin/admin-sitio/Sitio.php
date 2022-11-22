@@ -2,6 +2,7 @@
 class Sitio
 {
     public $sitio_aid;
+    public $sitio_is_active;
     public $sitio_name;
     public $sitio_created;
     public $sitio_datetime;
@@ -102,6 +103,40 @@ class Sitio
         $sql .= "sitio_name = '{$this->sitio_name}', ";
         $sql .= "sitio_datetime = '{$this->sitio_datetime}' ";
         $sql .= "where sitio_aid  = '{$this->sitio_aid}' ";
+
+        $result = $this->connection->query($sql);
+        $c_affected = $this->connection->affected_rows;
+
+        if ($c_affected > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function arhive()
+    {
+        $sql = "update {$this->tblSitio} set ";
+        $sql .= "sitio_is_active = '0', ";
+        $sql .= "sitio_datetime = '{$this->sitio_datetime}' ";
+        $sql .= "where sitio_aid = '{$this->sitio_aid}' ";
+
+        $result = $this->connection->query($sql);
+        $c_affected = $this->connection->affected_rows;
+
+        if ($c_affected > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function restore()
+    {
+        $sql = "update {$this->tblSitio} set ";
+        $sql .= "sitio_is_active = '1', ";
+        $sql .= "sitio_datetime = '{$this->sitio_datetime}' ";
+        $sql .= "where sitio_aid = '{$this->sitio_aid}' ";
 
         $result = $this->connection->query($sql);
         $c_affected = $this->connection->affected_rows;

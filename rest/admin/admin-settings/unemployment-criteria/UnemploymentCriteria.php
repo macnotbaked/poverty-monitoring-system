@@ -163,6 +163,32 @@ class UnemploymentCriteria
         }
     }
 
+    public function restore()
+    {
+        $sql = "update {$this->tblUnemploymentCriteria} set ";
+        $sql .= "unemployment_criteria_is_active = '1', ";
+        $sql .= "unemployment_criteria_datetime = '{$this->unemployment_criteria_datetime}' ";
+        $sql .= "where unemployment_criteria_aid = '{$this->unemployment_criteria_aid}' ";
+
+        $result = $this->connection->query($sql);
+        $c_affected = $this->connection->affected_rows;
+
+        if ($c_affected > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function delete()
+    {
+        $sql = "select * from {$this->tblUnemploymentCriteria} ";
+        $sql .= "where unemployment_criteria_aid = '{$this->unemployment_criteria_aid}' ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
     public function isProgramAlreadyExist()
     {
         $sql = "select * from {$this->tblUnemploymentCriteria} ";

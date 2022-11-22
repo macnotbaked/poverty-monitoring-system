@@ -163,6 +163,31 @@ class PopulationCriteria
         }
     }
 
+    public function restore()
+    {
+        $sql = "update {$this->tblPopulationCriteria} set ";
+        $sql .= "population_criteria_is_active = '1', ";
+        $sql .= "population_criteria_datetime = '{$this->population_criteria_datetime}' ";
+        $sql .= "where population_criteria_aid = '{$this->population_criteria_aid}' ";
+
+        $result = $this->connection->query($sql);
+        $c_affected = $this->connection->affected_rows;
+
+        if ($c_affected > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function delete()
+    {
+        $sql = "delete from {$this->tblPopulationCriteria} ";
+        $sql .= "where population_criteria_aid  = '{$this->population_criteria_aid}' ";
+        $result = $this->connection->query($sql);
+        return $result;
+    }
+
     public function isProgramAlreadyExist()
     {
         $sql = "select * from {$this->tblPopulationCriteria} ";

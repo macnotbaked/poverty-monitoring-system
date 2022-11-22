@@ -150,6 +150,32 @@ class IncomeProgram
         }
     }
 
+    public function restore()
+    {
+        $sql = "update {$this->tblIncomeProgram} set ";
+        $sql .= "income_program_is_active = '1', ";
+        $sql .= "income_program_datetime = '{$this->income_program_datetime}' ";
+        $sql .= "where income_program_aid = '{$this->income_program_aid}' ";
+
+        $result = $this->connection->query($sql);
+        $c_affected = $this->connection->affected_rows;
+
+        if ($c_affected > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function delete()
+    {
+        $sql = "select * from {$this->tblIncomeProgram} ";
+        $sql .= "where income_program_aid = '{$this->income_program_aid}' ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
     public function isAlreadyExist()
     {
         $sql = "select * from {$this->tblIncomeProgram} ";

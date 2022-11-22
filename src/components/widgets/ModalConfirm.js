@@ -41,6 +41,16 @@ const ModalConfirm = ({
     dispatch(setStartIndex(0));
   };
 
+  React.useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.keyCode === 27) {
+        handleClose();
+      }
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  });
+
   return (
     <>
       <div className="modal modal-front">

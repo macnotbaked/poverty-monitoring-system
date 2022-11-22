@@ -163,6 +163,32 @@ class HouseholdCriteria
         }
     }
 
+    public function restore()
+    {
+        $sql = "update {$this->tblHouseholdCriteria} set ";
+        $sql .= "household_criteria_is_active = '1', ";
+        $sql .= "household_criteria_datetime = '{$this->household_criteria_datetime}' ";
+        $sql .= "where household_criteria_aid = '{$this->household_criteria_aid}' ";
+
+        $result = $this->connection->query($sql);
+        $c_affected = $this->connection->affected_rows;
+
+        if ($c_affected > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function delete()
+    {
+        $sql = "select * from {$this->tblHouseholdCriteria} ";
+        $sql .= "where household_criteria_aid = '{$this->household_criteria_aid}' ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
     public function isProgramAlreadyExist()
     {
         $sql = "select * from {$this->tblHouseholdCriteria} ";

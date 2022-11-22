@@ -150,6 +150,32 @@ class HouseholdProgram
         }
     }
 
+    public function restore()
+    {
+        $sql = "update {$this->tblHouseholdProgram} set ";
+        $sql .= "household_program_is_active = '1', ";
+        $sql .= "household_program_datetime = '{$this->household_program_datetime}' ";
+        $sql .= "where household_program_aid = '{$this->household_program_aid}' ";
+
+        $result = $this->connection->query($sql);
+        $c_affected = $this->connection->affected_rows;
+
+        if ($c_affected > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function delete()
+    {
+        $sql = "select * from {$this->tblHouseholdProgram} ";
+        $sql .= "where household_program_aid = '{$this->household_program_aid}' ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
     public function isAlreadyExist()
     {
         $sql = "select * from {$this->tblHouseholdProgram} ";

@@ -1,6 +1,10 @@
 import React from "react";
 import { FaHistory, FaTimes, FaTrashAlt } from "react-icons/fa";
-import { setIsConfirm, setStartIndex } from "../../store/StoreAction";
+import {
+  setIsConfirm,
+  setIsRestore,
+  setStartIndex,
+} from "../../store/StoreAction";
 import { StoreContext } from "../../store/StoreContext";
 import { fetchData } from "../helpers/fetchData";
 import ModalError from "./ModalError";
@@ -20,7 +24,7 @@ const ModalDeleteRestore = ({
 
   const handleClose = (e) => {
     e.preventDefault();
-    dispatch(setIsConfirm(false));
+    dispatch(setIsRestore(false));
   };
 
   const handleYes = async () => {

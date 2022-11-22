@@ -109,6 +109,16 @@ function checkArchive($object)
     return $result;
 }
 
+function checkRestore($object)
+{
+    $result = $object->restore();
+    if (!$result) {
+        Response::sendResponse(false, "Please check your sql query (Restore).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkDelete($object)
 {
     $result = $object->delete();
