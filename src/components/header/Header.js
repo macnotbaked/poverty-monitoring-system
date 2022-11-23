@@ -13,6 +13,7 @@ import {
   setIsActive,
   setIsAdd,
   setIsClick,
+  setIsEdit,
   setIsLogout,
   setStartIndex,
 } from "../../store/StoreAction";
@@ -21,7 +22,7 @@ import useLoadAll from "../custom-hooks/useLoadAll";
 import useUploadPhoto from "../custom-hooks/useUploadPhoto";
 import { fetchData } from "../helpers/fetchData";
 import { InputFileUpload } from "../helpers/FormInputs";
-import { devBaseUrl, fetchFormData } from "../helpers/functions-general";
+import { devBaseUrl } from "../helpers/functions-general";
 import ModalError from "../widgets/ModalError";
 import ModalLogout from "../widgets/ModalLogout";
 import ModalSuccess from "../widgets/ModalSuccess";
@@ -44,11 +45,11 @@ const Header = () => {
   };
 
   const handleEdit = () => {
-    dispatch(setIsAdd(true));
+    dispatch(setIsEdit(true));
   };
 
   const handleCancel = () => {
-    dispatch(setIsAdd(false));
+    dispatch(setIsEdit(false));
   };
 
   const { result } = useLoadAll(
@@ -89,14 +90,14 @@ const Header = () => {
               onClick={handleClick}
             />
           ) : (
-            <FaUserCircle onClick={handleClick} />
+            <FaUserCircle className="avatar" onClick={handleClick} />
           )}
           <div
             className={
               store.isClick ? "profile__container show" : "profile__container"
             }
           >
-            {!store.isAdd && (
+            {!store.isEdit && (
               <div className="d--flex align-center gap--1">
                 <div className="profile__avatar ">
                   {result.length && result[0].users_photo ? (
@@ -137,7 +138,7 @@ const Header = () => {
                 </div>
               </div>
             )}
-            {store.isAdd && (
+            {store.isEdit && (
               <Formik
                 initialValues={initVal}
                 onSubmit={async (values, { setSubmitting, resetForm }) => {

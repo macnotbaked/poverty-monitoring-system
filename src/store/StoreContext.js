@@ -9,6 +9,7 @@ const initVal = {
   isActive: false,
   isConfirm: false,
   isAdd: false,
+  isEdit: false,
   isSearch: false,
   startIndex: 0,
   isEvalEnabled: false,

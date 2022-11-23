@@ -140,7 +140,7 @@ export const InactiveHouseholdProgram = () => {
                     to={`${devNavUrl}/admin/inactive-sitio`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
-                    Sitio
+                    Purok
                   </Link>
                 </label>
               </div>

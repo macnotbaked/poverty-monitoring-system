@@ -15,6 +15,7 @@ import {
   setForgotPass,
   setIsAdd,
   setIsConfirm,
+  setIsEdit,
   setIsLogin,
   setIsRestore,
   setIsSignup,
@@ -72,6 +73,13 @@ export const fetchData = async (
     // add modal will be closed when used
     if (store.isAdd) {
       dispatch(setIsAdd(false));
+      //this will refresh table list
+      store.isSave ? dispatch(setSave(false)) : dispatch(setSave(true));
+    }
+
+    // profile edit will be canceled when used
+    if (store.isEdit) {
+      dispatch(setIsEdit(false));
       //this will refresh table list
       store.isSave ? dispatch(setSave(false)) : dispatch(setSave(true));
     }

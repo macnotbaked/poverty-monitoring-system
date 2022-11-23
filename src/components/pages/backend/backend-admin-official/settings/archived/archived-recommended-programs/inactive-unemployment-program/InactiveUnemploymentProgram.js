@@ -9,9 +9,9 @@ import Navigation from "../../../../../../../navigation/Navigation";
 import Back from "../../../../../../../widgets/Back";
 import ModalError from "../../../../../../../widgets/ModalError";
 import ModalSuccess from "../../../../../../../widgets/ModalSuccess";
-import InactivePopulationProgramList from "./InactivePopulationProgramList";
+import InactiveUnemploymentProgramList from "./InactiveUnemploymentProgramList";
 
-export const InactivePopulationProgram = () => {
+export const InactiveUnemploymentProgram = () => {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const {
@@ -22,8 +22,8 @@ export const InactivePopulationProgram = () => {
     handleSearch,
     handleChange,
   } = useFetchDataLoadMore(
-    "/admin/admin-settings/population-program/read-limit-inactive-population-program.php",
-    "/admin/admin-settings/population-program/read-all-inactive-population-program.php",
+    "/admin/admin-settings/unemployment-program/read-limit-inactive-unemployment-program.php",
+    "/admin/admin-settings/unemployment-program/read-all-inactive-unemployment-program.php",
     5 // show number of records on a table
   );
 
@@ -64,22 +64,15 @@ export const InactivePopulationProgram = () => {
                       type="radio"
                       name="sub-tabs"
                       id="inactive-population"
-                      defaultChecked
                     />
                     <label htmlFor="inactive-population" className="menu-label">
-                      <span>Population</span>
+                      <Link
+                        to={`${devNavUrl}/admin/inactive-population-program`}
+                        onClick={() => dispatch(setStartIndex(0))}
+                      >
+                        Population
+                      </Link>
                     </label>
-
-                    <div className="tab">
-                      <InactivePopulationProgramList
-                        loading={loading}
-                        handleLoad={handleLoad}
-                        totalResult={totalResult}
-                        result={result}
-                        handleSearch={handleSearch}
-                        handleChange={handleChange}
-                      />
-                    </div>
 
                     <input
                       type="radio"
@@ -109,18 +102,25 @@ export const InactivePopulationProgram = () => {
                       type="radio"
                       name="sub-tabs"
                       id="inactive-unemployment"
+                      defaultChecked
                     />
                     <label
                       htmlFor="inactive-unemployment"
                       className="menu-label"
                     >
-                      <Link
-                        to={`${devNavUrl}/admin/inactive-unemployment-program`}
-                        onClick={() => dispatch(setStartIndex(0))}
-                      >
-                        Unemployment
-                      </Link>
+                      <span>Unemployment</span>
                     </label>
+
+                    <div className="tab">
+                      <InactiveUnemploymentProgramList
+                        loading={loading}
+                        handleLoad={handleLoad}
+                        totalResult={totalResult}
+                        result={result}
+                        handleSearch={handleSearch}
+                        handleChange={handleChange}
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -155,4 +155,4 @@ export const InactivePopulationProgram = () => {
   );
 };
 
-export default InactivePopulationProgram;
+export default InactiveUnemploymentProgram;

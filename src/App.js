@@ -7,9 +7,17 @@ import Evaluation from "./components/pages/backend/backend-admin-official/evalua
 import EvaluationHousehold from "./components/pages/backend/backend-admin-official/evaluation/evaluation-household/EvaluationHousehold";
 import EvaluationFilter from "./components/pages/backend/backend-admin-official/evaluation/EvaluationFilter";
 import Dashboard from "./components/pages/backend/backend-admin-official/home/Dashboard";
+import InactiveHouseholdCriteria from "./components/pages/backend/backend-admin-official/settings/archived/archived-program-criteria/inactive-household-criteria/InactiveHouseholdCriteria";
+import InactiveIncomeCriteria from "./components/pages/backend/backend-admin-official/settings/archived/archived-program-criteria/inactive-income-program/InactiveIncomeCriteria";
+import InactivePopulationCriteria from "./components/pages/backend/backend-admin-official/settings/archived/archived-program-criteria/inactive-population-criteria/InactivePopulationCriteria";
+import InactiveUnemploymentCriteria from "./components/pages/backend/backend-admin-official/settings/archived/archived-program-criteria/inactive-unemployment-program/InactiveUnemploymentCriteria";
+import InactivePurok from "./components/pages/backend/backend-admin-official/settings/archived/archived-purok/InactivePurok";
 import InactiveHouseholdProgram from "./components/pages/backend/backend-admin-official/settings/archived/archived-recommended-programs/inactive-household-program/InactiveHouseholdProgram";
+import InactiveIncomeProgram from "./components/pages/backend/backend-admin-official/settings/archived/archived-recommended-programs/inactive-income-program/InactiveIncomeProgram";
 import InactivePopulationProgram from "./components/pages/backend/backend-admin-official/settings/archived/archived-recommended-programs/inactive-population-program/InactivePopulationProgram";
+import InactiveUnemploymentProgram from "./components/pages/backend/backend-admin-official/settings/archived/archived-recommended-programs/inactive-unemployment-program/InactiveUnemploymentProgram";
 import InactiveUser from "./components/pages/backend/backend-admin-official/settings/archived/archived-users/InactiveUser";
+import BarangayInfo from "./components/pages/backend/backend-admin-official/settings/barangay-info/BarangayInfo";
 import HouseholdCriteria from "./components/pages/backend/backend-admin-official/settings/program-criteria/household-criteria/HouseholdCriteria";
 import IncomeCriteria from "./components/pages/backend/backend-admin-official/settings/program-criteria/income-criteria/IncomeCriteria";
 import PopulationCriteria from "./components/pages/backend/backend-admin-official/settings/program-criteria/population-criteria/PopulationCriteria";
@@ -272,6 +280,78 @@ function App() {
               element={
                 <ProtectedRoute>
                   <InactiveHouseholdProgram />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/inactive-income-program`}
+              element={
+                <ProtectedRoute>
+                  <InactiveIncomeProgram />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/inactive-unemployment-program`}
+              element={
+                <ProtectedRoute>
+                  <InactiveUnemploymentProgram />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/inactive-population-criteria`}
+              element={
+                <ProtectedRoute>
+                  <InactivePopulationCriteria />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/inactive-household-criteria`}
+              element={
+                <ProtectedRoute>
+                  <InactiveHouseholdCriteria />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/inactive-income-criteria`}
+              element={
+                <ProtectedRoute>
+                  <InactiveIncomeCriteria />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/inactive-unemployment-criteria`}
+              element={
+                <ProtectedRoute>
+                  <InactiveUnemploymentCriteria />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/inactive-sitio`}
+              element={
+                <ProtectedRoute>
+                  <InactivePurok />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/info`}
+              element={
+                <ProtectedRoute>
+                  <BarangayInfo />
                 </ProtectedRoute>
               }
             />

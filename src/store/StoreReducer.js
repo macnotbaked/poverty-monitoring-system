@@ -38,6 +38,11 @@ export const StoreReducer = (state, action) => {
         ...state,
         isAdd: action.payload,
       };
+    case "IS_EDIT":
+      return {
+        ...state,
+        isEdit: action.payload,
+      };
 
     case "IS_SEARCH":
       return {

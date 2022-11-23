@@ -13,9 +13,9 @@ import Navigation from "../../../../../../navigation/Navigation";
 import Back from "../../../../../../widgets/Back";
 import ModalError from "../../../../../../widgets/ModalError";
 import ModalSuccess from "../../../../../../widgets/ModalSuccess";
-import InactiveUserList from "./InactiveUserList";
+import InactivePurokList from "./InactivePurokList";
 
-export const InactiveUser = () => {
+export const InactivePurok = () => {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const {
@@ -26,8 +26,8 @@ export const InactiveUser = () => {
     handleSearch,
     handleChange,
   } = useFetchDataLoadMore(
-    "/admin/admin-settings/users/read-user-inactive-limit.php",
-    "/admin/admin-settings/users/read-user-inactive-all.php",
+    "/admin/admin-sitio/read-sitio-limit-inactive.php",
+    "/admin/admin-sitio/read-sitio-all-inactive.php",
     5 // show number of records on a table
   );
 
@@ -47,20 +47,15 @@ export const InactiveUser = () => {
               </div>
 
               <div className="tab-menu">
-                <input type="radio" name="tabs" id="user" defaultChecked />
+                <input type="radio" name="tabs" id="user" />
                 <label htmlFor="user" className="menu-label">
-                  <span>Users</span>
+                  <Link
+                    to={`${devNavUrl}/admin/inactive-users`}
+                    onClick={() => dispatch(setStartIndex(0))}
+                  >
+                    Users{" "}
+                  </Link>
                 </label>
-                <div className="tab">
-                  <InactiveUserList
-                    loading={loading}
-                    handleLoad={handleLoad}
-                    totalResult={totalResult}
-                    result={result}
-                    handleSearch={handleSearch}
-                    handleChange={handleChange}
-                  />
-                </div>
 
                 <input type="radio" name="tabs" id="program" />
                 <label htmlFor="program" className="menu-label">
@@ -82,15 +77,21 @@ export const InactiveUser = () => {
                   </Link>
                 </label>
 
-                <input type="radio" name="tabs" id="sitio" />
+                <input type="radio" name="tabs" id="sitio" defaultChecked />
                 <label htmlFor="sitio" className="menu-label">
-                  <Link
-                    to={`${devNavUrl}/admin/inactive-sitio`}
-                    onClick={() => dispatch(setStartIndex(0))}
-                  >
-                    Purok
-                  </Link>
+                  <span>Purok</span>
                 </label>
+
+                <div className="tab">
+                  <InactivePurokList
+                    loading={loading}
+                    handleLoad={handleLoad}
+                    totalResult={totalResult}
+                    result={result}
+                    handleSearch={handleSearch}
+                    handleChange={handleChange}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -103,4 +104,4 @@ export const InactiveUser = () => {
   );
 };
 
-export default InactiveUser;
+export default InactivePurok;

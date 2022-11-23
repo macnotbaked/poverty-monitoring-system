@@ -59,9 +59,9 @@ function checkReadSearchActive($object, $search)
     return $result;
 }
 
-function checkReadAllInctive($object)
+function checkReadAllInactive($object)
 {
-    $result = $object->readAllInctive();
+    $result = $object->readAllInactive();
     if ($result->num_rows == 0) {
         Response::sendResponse(true, "Empty Records (All inactive household criteria).", []);
         exit();
@@ -69,9 +69,9 @@ function checkReadAllInctive($object)
     return $result;
 }
 
-function checkReadLimitInctive($object, $start, $total)
+function checkReadLimitInactive($object, $start, $total)
 {
-    $result = $object->readlimitInctive($start, $total);
+    $result = $object->readlimitInactive($start, $total);
     if ($result->num_rows == 0) {
         Response::sendResponse(true, "Empty Records (Limit inactive household criteria).", []);
         exit();
@@ -79,9 +79,9 @@ function checkReadLimitInctive($object, $start, $total)
     return $result;
 }
 
-function checkReadSearchInctive($object, $search)
+function checkReadSearchInactive($object, $search)
 {
-    $result = $object->readSearchInctive($search);
+    $result = $object->readSearchInactive($search);
     if ($result->num_rows == 0) {
         Response::sendResponse(true, "Empty Records (Search inactive household criteria).", []);
         exit();

@@ -9,9 +9,9 @@ import Navigation from "../../../../../../../navigation/Navigation";
 import Back from "../../../../../../../widgets/Back";
 import ModalError from "../../../../../../../widgets/ModalError";
 import ModalSuccess from "../../../../../../../widgets/ModalSuccess";
-import InactivePopulationProgramList from "./InactivePopulationProgramList";
+import InactiveHouseholdCriteriaList from "./InactiveHouseholdCriteriaList";
 
-export const InactivePopulationProgram = () => {
+export const InactiveHouseholdCriteria = () => {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const {
@@ -22,8 +22,8 @@ export const InactivePopulationProgram = () => {
     handleSearch,
     handleChange,
   } = useFetchDataLoadMore(
-    "/admin/admin-settings/population-program/read-limit-inactive-population-program.php",
-    "/admin/admin-settings/population-program/read-all-inactive-population-program.php",
+    "/admin/admin-settings/household-criteria/read-limit-inactive-household-criteria.php",
+    "/admin/admin-settings/household-criteria/read-all-inactive-household-criteria.php",
     5 // show number of records on a table
   );
 
@@ -53,9 +53,19 @@ export const InactivePopulationProgram = () => {
                   </Link>
                 </label>
 
-                <input type="radio" name="tabs" id="program" defaultChecked />
+                <input type="radio" name="tabs" id="program" />
                 <label htmlFor="program" className="menu-label">
-                  <span> Recommended Programs</span>
+                  <Link
+                    to={`${devNavUrl}/admin/inactive-population-program`}
+                    onClick={() => dispatch(setStartIndex(0))}
+                  >
+                    Recommended Programs
+                  </Link>
+                </label>
+
+                <input type="radio" name="tabs" id="criteria" defaultChecked />
+                <label htmlFor="criteria" className="menu-label">
+                  <span>Program Criteria</span>
                 </label>
 
                 <div className="tab">
@@ -64,14 +74,28 @@ export const InactivePopulationProgram = () => {
                       type="radio"
                       name="sub-tabs"
                       id="inactive-population"
-                      defaultChecked
                     />
                     <label htmlFor="inactive-population" className="menu-label">
-                      <span>Population</span>
+                      <Link
+                        to={`${devNavUrl}/admin/inactive-population-criteria`}
+                        onClick={() => dispatch(setStartIndex(0))}
+                      >
+                        Population
+                      </Link>
+                    </label>
+
+                    <input
+                      type="radio"
+                      name="sub-tabs"
+                      id="inactive-household"
+                      defaultChecked
+                    />
+                    <label htmlFor="inactive-household" className="menu-label">
+                      <span>Household</span>
                     </label>
 
                     <div className="tab">
-                      <InactivePopulationProgramList
+                      <InactiveHouseholdCriteriaList
                         loading={loading}
                         handleLoad={handleLoad}
                         totalResult={totalResult}
@@ -81,24 +105,10 @@ export const InactivePopulationProgram = () => {
                       />
                     </div>
 
-                    <input
-                      type="radio"
-                      name="sub-tabs"
-                      id="inactive-household"
-                    />
-                    <label htmlFor="inactive-household" className="menu-label">
-                      <Link
-                        to={`${devNavUrl}/admin/inactive-household-program`}
-                        onClick={() => dispatch(setStartIndex(0))}
-                      >
-                        Household
-                      </Link>
-                    </label>
-
                     <input type="radio" name="sub-tabs" id="inactive-income" />
                     <label htmlFor="inactive-income" className="menu-label">
                       <Link
-                        to={`${devNavUrl}/admin/inactive-income-program`}
+                        to={`${devNavUrl}/admin/inactive-income-criteria`}
                         onClick={() => dispatch(setStartIndex(0))}
                       >
                         Income
@@ -115,7 +125,7 @@ export const InactivePopulationProgram = () => {
                       className="menu-label"
                     >
                       <Link
-                        to={`${devNavUrl}/admin/inactive-unemployment-program`}
+                        to={`${devNavUrl}/admin/inactive-unemployment-criteria`}
                         onClick={() => dispatch(setStartIndex(0))}
                       >
                         Unemployment
@@ -123,16 +133,6 @@ export const InactivePopulationProgram = () => {
                     </label>
                   </div>
                 </div>
-
-                <input type="radio" name="tabs" id="criteria" />
-                <label htmlFor="criteria" className="menu-label">
-                  <Link
-                    to={`${devNavUrl}/admin/inactive-population-criteria`}
-                    onClick={() => dispatch(setStartIndex(0))}
-                  >
-                    Program Criteria
-                  </Link>
-                </label>
 
                 <input type="radio" name="tabs" id="sitio" />
                 <label htmlFor="sitio" className="menu-label">
@@ -155,4 +155,4 @@ export const InactivePopulationProgram = () => {
   );
 };
 
-export default InactivePopulationProgram;
+export default InactiveHouseholdCriteria;
