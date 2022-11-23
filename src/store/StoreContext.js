@@ -20,6 +20,7 @@ const initVal = {
   isSignup: false,
   isClick: false,
   isRestore: false,
+  isAccountUpdated: false,
   credentials: {},
 };
 

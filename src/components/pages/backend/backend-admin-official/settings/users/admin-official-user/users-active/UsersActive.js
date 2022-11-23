@@ -17,8 +17,6 @@ const UsersActive = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState(null);
 
-  const { role } = useLoadAllRole("/admin/admin-settings/roles/read-role.php");
-
   const { inactive } = useLoadAllInactive(
     "/admin/admin-settings/users/read-user-inactive-all.php"
   );
@@ -72,7 +70,7 @@ const UsersActive = () => {
         </div>
       </div>
 
-      {store.isAdd && <ModalAddUsers item={itemEdit} role={role} />}
+      {store.isAdd && <ModalAddUsers item={itemEdit} />}
       {store.error && <ModalError />}
       {store.success && <ModalSuccess />}
     </>

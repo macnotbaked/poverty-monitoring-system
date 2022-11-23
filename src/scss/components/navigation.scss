@@ -36,12 +36,13 @@
         color: $light-color;
         width: 100%;
         height: 100%;
+        transition: 0.2s ease;
         svg {
           font-size: 2rem;
-          color: $dark-color;
-          &:hover {
-            fill: $dark-color;
-          }
+          fill: $accent;
+        }
+        &:hover svg {
+          fill: $primary-color;
         }
       }
       &:hover {

@@ -1,5 +1,5 @@
 <?php
-class Sitio
+class Representative
 {
     public $sitio_aid;
     public $sitio_is_active;

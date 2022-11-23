@@ -22,7 +22,7 @@ import {
 } from "../../../../../../../helpers/FormInputs";
 import SpinnerButton from "../../../../../../../widgets/SpinnerButton";
 
-const ModalAddUsers = ({ item, role }) => {
+const ModalAddUsers = ({ item }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [loading, setLoading] = React.useState(false);
 
@@ -37,8 +37,7 @@ const ModalAddUsers = ({ item, role }) => {
     users_lname: item ? item.users_lname : "",
     users_email: item ? item.users_email : "",
     users_phone: item ? item.users_phone : "",
-    users_gender: item ? item.users_gender : "",
-    users_role_id: item ? item.users_role_id : "",
+    users_role: item ? item.users_role : "",
   };
 
   const yupSchema = Yup.object({
@@ -47,8 +46,7 @@ const ModalAddUsers = ({ item, role }) => {
     users_lname: Yup.string().required("Required"),
     users_email: Yup.string().required("Required").email("Invalid email"),
     users_phone: Yup.string().required("Required"),
-    users_gender: Yup.string().required("Required"),
-    users_role_id: Yup.string().required("Required"),
+    users_role: Yup.string().required("Required"),
   });
 
   React.useEffect(() => {
@@ -155,39 +153,15 @@ const ModalAddUsers = ({ item, role }) => {
                         disabled={loading}
                       />
                     </div>
-                    <div className="input my--3">
-                      <i className="icon--input">
-                        <FaTransgender />
-                      </i>
-                      <InputSelect name="users_gender" disabled={loading}>
-                        <option value="">
-                          {loading ? "loading..." : "Gender"}
-                        </option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                      </InputSelect>
-                    </div>
 
                     <div className="input my--3">
                       <i className="icon--input">
                         <FaUsersCog />
                       </i>
-                      <InputSelect name="users_role_id" disabled={loading}>
-                        <option value="">
-                          {" "}
-                          {loading ? "loading..." : "Role"}
-                        </option>
-                        {role.length > 0 ? (
-                          role.map((item, key) => {
-                            return (
-                              <option key={key} value={item.roles_aid}>
-                                {item.roles_name}
-                              </option>
-                            );
-                          })
-                        ) : (
-                          <option value="">No data</option>
-                        )}
+                      <InputSelect name="users_role" disabled={loading}>
+                        <option value="">Role</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Official">Official</option>
                       </InputSelect>
                     </div>
 

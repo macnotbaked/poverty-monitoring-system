@@ -10,21 +10,18 @@ class Users
     public $users_lname;
     public $users_email;
     public $users_phone;
-    public $users_gender;
-    public $users_role_id;
+    public $users_role;
     public $users_photo;
     public $users_created;
     public $users_datetime;
 
     public $connection;
     public $tblUsers;
-    public $tblRoles;
 
     public function __construct($db)
     {
         $this->connection = $db;
         $this->tblUsers = "pms_users";
-        $this->tblRoles = "pms_roles";
     }
 
     public function create()
@@ -37,8 +34,7 @@ class Users
         $sql .= "users_lname, ";
         $sql .= "users_email, ";
         $sql .= "users_phone, ";
-        $sql .= "users_gender, ";
-        $sql .= "users_role_id, ";
+        $sql .= "users_role, ";
         $sql .= "users_created, ";
         $sql .= "users_datetime ) values ( ";
         $sql .= "'{$this->users_is_active}', ";
@@ -48,8 +44,7 @@ class Users
         $sql .= "'{$this->users_lname}', ";
         $sql .= "'{$this->users_email}', ";
         $sql .= "'{$this->users_phone}', ";
-        $sql .= "'{$this->users_gender}', ";
-        $sql .= "'{$this->users_role_id}', ";
+        $sql .= "'{$this->users_role}', ";
         $sql .= "'{$this->users_created}', ";
         $sql .= "'{$this->users_datetime}' ) ";
 
@@ -81,11 +76,9 @@ class Users
 
     public function readAllActive()
     {
-        $sql = "select * from {$this->tblUsers} as user, ";
-        $sql .= "{$this->tblRoles} as role ";
-        $sql .= "where user.users_is_active = 1 ";
-        $sql .= "and user.users_role_id = role.roles_aid ";
-        $sql .= "order by user.users_lname asc ";
+        $sql = "select * from {$this->tblUsers} ";
+        $sql .= "where users_is_active = 1 ";
+        $sql .= "order by users_lname asc ";
         $result = $this->connection->query($sql);
 
         return $result;
@@ -93,11 +86,9 @@ class Users
 
     public function readLimitActive($start, $total)
     {
-        $sql = "select * from {$this->tblUsers} as user, ";
-        $sql .= "{$this->tblRoles} as role ";
-        $sql .= "where user.users_is_active = 1 ";
-        $sql .= "and user.users_role_id = role.roles_aid ";
-        $sql .= "order by user.users_lname asc ";
+        $sql = "select * from {$this->tblUsers} ";
+        $sql .= "where users_is_active = 1 ";
+        $sql .= "order by users_lname asc ";
         $sql .= "limit {$start}, {$total} ";
         $result = $this->connection->query($sql);
 
@@ -106,16 +97,14 @@ class Users
 
     public function readSearchActive($search)
     {
-        $sql = "select * from {$this->tblUsers} as user, ";
-        $sql .= "{$this->tblRoles} as role ";
-        $sql .= "where user.users_is_active = 1 ";
-        $sql .= "and user.users_role_id = role.roles_aid ";
-        $sql .= "and (user.users_email like '{$search}%' ";
-        $sql .= "or user.users_fname like '{$search}%' ";
-        $sql .= "or user.users_mname like '{$search}%' ";
-        $sql .= "or user.users_lname like '{$search}%' ";
+        $sql = "select * from {$this->tblUsers} ";
+        $sql .= "where users_is_active = 1 ";
+        $sql .= "and (users_email like '{$search}%' ";
+        $sql .= "or users_fname like '{$search}%' ";
+        $sql .= "or users_mname like '{$search}%' ";
+        $sql .= "or users_lname like '{$search}%' ";
         $sql .= ") ";
-        $sql .= "order by user.users_lname asc ";
+        $sql .= "order by users_lname asc ";
         $result = $this->connection->query($sql);
 
         return $result;
@@ -125,11 +114,9 @@ class Users
 
     public function readAllInactive()
     {
-        $sql = "select * from {$this->tblUsers} as user, ";
-        $sql .= "{$this->tblRoles} as role ";
-        $sql .= "where user.users_is_active = 0 ";
-        $sql .= "and user.users_role_id = role.roles_aid ";
-        $sql .= "order by user.users_lname asc ";
+        $sql = "select * from {$this->tblUsers} ";
+        $sql .= "where users_is_active = 0 ";
+        $sql .= "order by users_lname asc ";
         $result = $this->connection->query($sql);
 
         return $result;
@@ -137,11 +124,9 @@ class Users
 
     public function readLimitInactive($start, $total)
     {
-        $sql = "select * from {$this->tblUsers} as user, ";
-        $sql .= "{$this->tblRoles} as role ";
-        $sql .= "where user.users_is_active = 0 ";
-        $sql .= "and user.users_role_id = role.roles_aid ";
-        $sql .= "order by user.users_lname asc ";
+        $sql = "select * from {$this->tblUsers} ";
+        $sql .= "where users_is_active = 0 ";
+        $sql .= "order by users_lname asc ";
         $sql .= "limit {$start}, {$total} ";
         $result = $this->connection->query($sql);
 
@@ -150,16 +135,14 @@ class Users
 
     public function readSearchInactive($search)
     {
-        $sql = "select * from {$this->tblUsers} as user, ";
-        $sql .= "{$this->tblRoles} as role ";
-        $sql .= "where user.users_is_active = 0 ";
-        $sql .= "and user.users_role_id = role.roles_aid ";
-        $sql .= "and (user.users_email like '{$search}%' ";
-        $sql .= "or user.users_fname like '{$search}%' ";
-        $sql .= "or user.users_mname like '{$search}%' ";
-        $sql .= "or user.users_lname like '{$search}%' ";
+        $sql = "select * from {$this->tblUsers} ";
+        $sql .= "where users_is_active = 0 ";
+        $sql .= "and (users_email like '{$search}%' ";
+        $sql .= "or users_fname like '{$search}%' ";
+        $sql .= "or users_mname like '{$search}%' ";
+        $sql .= "or users_lname like '{$search}%' ";
         $sql .= ") ";
-        $sql .= "order by user.users_lname asc ";
+        $sql .= "order by users_lname asc ";
         $result = $this->connection->query($sql);
 
         return $result;
@@ -173,8 +156,7 @@ class Users
         $sql .= "users_lname = '{$this->users_lname}', ";
         $sql .= "users_email = '{$this->users_email}', ";
         $sql .= "users_phone = '{$this->users_phone}', ";
-        $sql .= "users_gender = '{$this->users_gender}', ";
-        $sql .= "users_role_id = '{$this->users_role_id}', ";
+        $sql .= "users_role = '{$this->users_role}', ";
         $sql .= "users_datetime = '{$this->users_datetime}' ";
         $sql .= "where users_aid  = '{$this->users_aid}' ";
 
@@ -248,11 +230,9 @@ class Users
 
     public function readLogin()
     {
-        $sql = "select * from {$this->tblUsers} as user, ";
-        $sql .= "{$this->tblRoles} as role ";
-        $sql .= "where user.users_is_active = 1 ";
-        $sql .= "and user.users_email = '{$this->users_email}' ";
-        $sql .= "and user.users_role_id = role.roles_aid ";
+        $sql = "select * from {$this->tblUsers} ";
+        $sql .= "where users_is_active = 1 ";
+        $sql .= "and users_email = '{$this->users_email}' ";
         $result = $this->connection->query($sql);
         return $result;
     }

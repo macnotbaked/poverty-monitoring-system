@@ -118,27 +118,32 @@ export const setIsRestore = (val) => {
   };
 };
 
+export const setIsAccountUpdated = (val) => {
+  return {
+    type: "IS_ACCOUNT_UPDATED",
+    payload: val,
+  };
+};
+
 export const setCredentials = (
   users_aid,
-  roles_aid,
   users_fname,
   users_mname,
   users_lname,
-  roles_name,
   users_email,
-  users_photo
+  users_photo,
+  users_role
 ) => {
   return {
     type: "CREDENTIALS",
     payload: {
       users_aid,
-      roles_aid,
       users_fname,
       users_mname,
       users_lname,
-      roles_name,
       users_email,
       users_photo,
+      users_role,
     },
   };
 };

@@ -28,7 +28,6 @@ import { PopulationRate } from "./components/pages/backend/backend-admin-officia
 import RecommendedPrograms from "./components/pages/backend/backend-admin-official/settings/recommended-programs/RecommendedPrograms";
 import UnemploymentRate from "./components/pages/backend/backend-admin-official/settings/recommended-programs/unemployment-rate/UnemploymentRate";
 import Settings from "./components/pages/backend/backend-admin-official/settings/Settings";
-import Roles from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/roles/Roles";
 import UsersActive from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/users-active/UsersActive";
 import Citizen from "./components/pages/backend/backend-admin-official/sitio/citizen/Citizen";
 import AddCitizen from "./components/pages/backend/backend-admin-official/sitio/citizen/citizen-add/AddCitizen";
@@ -142,14 +141,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path={`${devNavUrl}/admin/users-roles`}
-              element={
-                <ProtectedRoute>
-                  <Roles />
-                </ProtectedRoute>
-              }
-            />
+
             <Route
               path={`${devNavUrl}/admin/sitio`}
               element={

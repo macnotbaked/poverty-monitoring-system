@@ -114,7 +114,7 @@ const Header = () => {
                   <span className="t--bold">
                     {store.credentials.users_fname}{" "}
                     {store.credentials.users_lname} (
-                    {store.credentials.roles_name})
+                    {store.credentials.users_role})
                   </span>
                   <span>{store.credentials.users_email}</span>
                   <div className="d--flex gap--1">
@@ -202,7 +202,7 @@ const Header = () => {
                           <span className="t--bold">
                             {store.credentials.users_fname}{" "}
                             {store.credentials.users_lname} (
-                            {store.credentials.roles_name})
+                            {store.credentials.users_role})
                           </span>
                           <span>{store.credentials.users_email}</span>
                           <div className="d--flex gap--1">

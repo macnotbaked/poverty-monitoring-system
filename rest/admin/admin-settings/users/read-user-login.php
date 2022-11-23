@@ -21,13 +21,6 @@ try {
     $key = "jwt_admin_ko_ito";
 
     $result = $user->readLogin();
-    $data = getResultData($result);
-
-    if ($data[0]["roles_aid"] == "3") {
-        $result = $user->readCitizenLogin();
-    } else {
-        $result = $user->readLogin();
-    }
 
     if ($result->num_rows == 0) {
         Response::sendResponse(false, "Invalid email. Please use a registered one.", $result->fetch_assoc());

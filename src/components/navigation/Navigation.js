@@ -76,7 +76,7 @@ const Navigation = ({ menu }) => {
             </li>
           </>
 
-          {store.credentials.roles_name === "Admin" && (
+          {store.credentials.users_role === "Admin" && (
             <>
               <li className={menu === "settings" ? "tab--active" : ""}>
                 <Link

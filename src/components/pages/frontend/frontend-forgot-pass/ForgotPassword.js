@@ -9,6 +9,7 @@ import { fetchData } from "../../../helpers/fetchData";
 import { InputText } from "../../../helpers/FormInputs";
 import { devNavUrl } from "../../../helpers/functions-general";
 import Logo from "../../../widgets/Logo";
+import ModalError from "../../../widgets/ModalError";
 import SpinnerButton from "../../../widgets/SpinnerButton";
 
 const ForgotPassword = () => {
@@ -93,6 +94,8 @@ const ForgotPassword = () => {
           </Formik>
         </div>
       </div>
+
+      {store.error && <ModalError />}
     </>
   );
 };

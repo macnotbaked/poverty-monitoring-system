@@ -55,7 +55,7 @@ const UsersActiveList = ({
         loading={loading}
         result={result}
         store={store}
-        url="/admin/admin-settings/users/read-user-active-search.php"
+        url="/admin/admin-settings/users/read-user-search.php"
       />
       <div className="table__container">
         {loading && <Spinner />}
@@ -85,7 +85,7 @@ const UsersActiveList = ({
                     </td>
                     <td>{item.users_email}</td>
                     <td>{item.users_phone}</td>
-                    <td>{item.roles_name}</td>
+                    <td>{item.users_role}</td>
                     <td>
                       <div className="d--flex">
                         <div

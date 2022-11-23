@@ -68,7 +68,15 @@ const AddCitizen = () => {
                     return (
                       <Form>
                         <div className="input--form mb--5">
-                          <label htmlFor="">Household representative:</label>
+                          <label htmlFor="">Household Representative:</label>
+                          <InputText type="text" name="trainee_email" />
+                        </div>
+                        <div className="input--form mb--5">
+                          <label htmlFor="">Contact Number:</label>
+                          <InputText type="text" name="trainee_email" />
+                        </div>
+                        <div className="input--form mb--5">
+                          <label htmlFor="">Household Number:</label>
                           <InputText type="text" name="trainee_email" />
                         </div>
                         <div className="input--form mb--5">
@@ -96,35 +104,14 @@ const AddCitizen = () => {
                         </div>
                         <div className="input--form mb--5">
                           <label htmlFor="">
-                            4. Ilan ang mga nag-aaral ng elementarya? ( How many
-                            are in elementary school?)
-                          </label>
-                          <InputText type="number" name="trainee_lname" />
-                        </div>
-                        <div className="input--form mb--5">
-                          <label htmlFor="">
-                            5. Ilan ang mga nag-aaral ng highschool? (How many
-                            are in high school students?)
-                          </label>
-                          <InputText type="number" name="trainee_birth_date" />
-                        </div>
-                        <div className="input--form mb--5">
-                          <label htmlFor="">
-                            6. Ilan ang mga nag-aaral sa kolehiyo? (How many are
-                            studying in college?)
+                            4. Ilan ang bilang ng mga nasa edad 19 hanggang 59
+                            na taong gulang? (How many are 19 to 59 years old?)
                           </label>
                           <InputText type="number" name="trainee_birth_place" />
                         </div>
                         <div className="input--form mb--5">
                           <label htmlFor="">
-                            7. Ilan ang bilang ng mga nasa edad na 19 na taong
-                            gulang pataas? (How many are aged 19 and above?)
-                          </label>
-                          <InputText type="number" name="trainee_birth_place" />
-                        </div>
-                        <div className="input--form mb--5">
-                          <label htmlFor="">
-                            8. Ilan ang bilang ng mga nakakatanda na nasa 60 na
+                            5. Ilan ang bilang ng mga nakakatanda na nasa 60 na
                             taong gulang pataas? (How many seniors are there who
                             are 60 years old and older?)
                           </label>
@@ -132,7 +119,37 @@ const AddCitizen = () => {
                         </div>
                         <div className="input--form mb--5">
                           <label htmlFor="">
-                            9. Kayo ba ay nasa inyong sariling bahay,
+                            6. Ilan ang bilang sa miyembro ng pamilya ang may
+                            kapansanan? (How many in your family have person
+                            with disability?)
+                          </label>
+                          <InputText type="number" name="trainee_address" />
+                        </div>
+                        <div className="input--form mb--5">
+                          <label htmlFor="">
+                            7. Ilan ang mga nag-aaral ng elementarya? ( How many
+                            are in elementary school?)
+                          </label>
+                          <InputText type="number" name="trainee_lname" />
+                        </div>
+
+                        <div className="input--form mb--5">
+                          <label htmlFor="">
+                            8. Ilan ang mga nag-aaral ng highschool? (How many
+                            are in high school students?)
+                          </label>
+                          <InputText type="number" name="trainee_birth_date" />
+                        </div>
+                        <div className="input--form mb--5">
+                          <label htmlFor="">
+                            9. Ilan ang mga nag-aaral sa kolehiyo? (How many are
+                            studying in college?)
+                          </label>
+                          <InputText type="number" name="trainee_birth_place" />
+                        </div>
+                        <div className="input--form mb--5">
+                          <label htmlFor="">
+                            10. Kayo ba ay nasa inyong sariling bahay,
                             nangungupahan o nakikitara? (Are you living in your
                             own house, renting, or living with relatives?)
                           </label>
@@ -145,7 +162,7 @@ const AddCitizen = () => {
                         </div>
                         <div className="input--form mb--5">
                           <label htmlFor="">
-                            10. Magkano ang halaga ng buwanang kita ng inyong
+                            11. Magkano ang halaga ng buwanang kita ng inyong
                             pamilya? (How much is your family's monthly income?)
                           </label>
                           <InputSelect name="trainee_gender">
@@ -158,7 +175,7 @@ const AddCitizen = () => {
 
                         <div className="input--form mb--5">
                           <label htmlFor="">
-                            11. Halaga na nagagastos para sa buwanang bayarin?
+                            12. Halaga na nagagastos para sa buwanang bayarin?
                             (Kuryente at tubig, gastusin pang edukasyon, at iba
                             pa.) (Amount spent on monthly fees, i.e., Water and
                             Eletricity Bills, Educational expenses, and other
@@ -173,9 +190,10 @@ const AddCitizen = () => {
                         </div>
                         <div className="input--form mb--5">
                           <label htmlFor="">
-                            12. Magkano ang halaga ang inyong nagagastos para sa
+                            13. Magkano ang halaga ng inyong nagagastos para sa
                             pang araw araw na pagkain sa loob ng isang Buwan?
-                            (How much was spent on food per day for a month?)
+                            (How much was spent on daily consumption of food for
+                            a month?)
                           </label>
                           <InputSelect name="trainee_gender">
                             <option value="">--</option>
@@ -186,7 +204,7 @@ const AddCitizen = () => {
                         </div>
                         <div className="input--form mb--5">
                           <label htmlFor="">
-                            13. Ilang ang bilang ng miyembro ng pamilya na may
+                            14. Ilang ang bilang sa miyembro ng pamilya ang may
                             kakayahan na magtrabaho? (How many family members
                             are able to work?)
                           </label>
@@ -197,9 +215,9 @@ const AddCitizen = () => {
                         </div>
                         <div className="input--form mb--5">
                           <label htmlFor="">
-                            14. Ilan sa miyembro ng pamilya ang may kasalukuyang
-                            hanapbuhay? (How many family members are currently
-                            employed?)
+                            15. Ilan sa miyembro ng pamilya ang may trabaho o
+                            kasalukuyang may hanapbuhay? (How many family
+                            members are employed or currently earning?)
                           </label>
                           <InputText
                             type="number"
@@ -207,11 +225,11 @@ const AddCitizen = () => {
                           />
                         </div>
                         <button
-                          className="btn--outline m-left mb--1 btn__container"
+                          className="btn--default m-left mb--1 btn__container"
                           type="submit"
-                          disabled
+                          disabled={loading}
                         >
-                          {!loading && <SpinnerButton />} <span>Save</span>
+                          {loading ? <SpinnerButton /> : <span>Save</span>}
                         </button>
                       </Form>
                     );

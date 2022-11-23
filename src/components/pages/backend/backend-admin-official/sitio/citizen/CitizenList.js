@@ -53,10 +53,10 @@ const CitizenList = ({
           </thead>
           <tbody>
             <tr>
-              <td>1.</td>
-              <td>Reyes, Ervin B.</td>
+              <td>{count}</td>
+              <td>{"item.household_representative"}</td>
 
-              <td>09491040057</td>
+              <td>{"09491040057"}</td>
               <td>ervin@gmail.com</td>
               <td>
                 <div className="d--flex">

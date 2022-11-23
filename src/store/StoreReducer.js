@@ -98,6 +98,12 @@ export const StoreReducer = (state, action) => {
         isRestore: action.payload,
       };
 
+    case "IS_ACCOUNT_UPDATED":
+      return {
+        ...state,
+        isAccountUpdated: action.payload,
+      };
+
     case "CREDENTIALS":
       return {
         ...state,
