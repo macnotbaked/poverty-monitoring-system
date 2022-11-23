@@ -19,9 +19,11 @@ class Sitio
     public function create()
     {
         $sql = "insert into {$this->tblSitio} ";
-        $sql .= "( sitio_name, ";
+        $sql .= "( sitio_is_active, ";
+        $sql .= "sitio_name, ";
         $sql .= "sitio_created, ";
         $sql .= "sitio_datetime ) values ( ";
+        $sql .= "'{$this->sitio_is_active}', ";
         $sql .= "'{$this->sitio_name}', ";
         $sql .= "'{$this->sitio_created}', ";
         $sql .= "'{$this->sitio_datetime}' ) ";
@@ -97,6 +99,16 @@ class Sitio
         return $result;
     }
 
+    public function readById()
+    {
+        $sql = "select * from {$this->tblSitio} ";
+        $sql .= "where sitio_aid = '{$this->sitio_aid}' ";
+
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
     public function update()
     {
         $sql = "update {$this->tblSitio} set ";
@@ -153,6 +165,15 @@ class Sitio
         $sql = "delete from {$this->tblSitio} ";
         $sql .= "where sitio_aid  = '{$this->sitio_aid}' ";
         $result = $this->connection->query($sql);
+        return $result;
+    }
+
+    public function isAlreadyExist()
+    {
+        $sql = "select * from {$this->tblSitio} ";
+        $sql .= "where sitio_name = '{$this->sitio_name}' ";
+        $result = $this->connection->query($sql);
+
         return $result;
     }
 }

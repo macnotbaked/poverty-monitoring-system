@@ -21,9 +21,9 @@ try {
     $barangay->barangay_photo  = filter_var($data["barangay_photo"], FILTER_SANITIZE_STRING);
     $barangay->barangay_datetime = date("Y-m-d H:i:s");
 
-    $result = checkUpdate($barangay);
+    // $result = checkUpdate($barangay);
 
-    Response::sendResponse(true, "Update barangay success.",  $result);
+    Response::sendResponse(true, "Update barangay success.",  $barangay);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted because a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

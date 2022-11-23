@@ -2,11 +2,7 @@ import React from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaArchive, FaEdit, FaEye, FaHistory, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import {
-  setIsAdd,
-  setIsClick,
-  setIsConfirm,
-} from "../../../../../store/StoreAction";
+import { setIsAdd, setIsConfirm } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
 import { devNavUrl } from "../../../../helpers/functions-general";
 import LoadMore from "../../../../widgets/LoadMore";

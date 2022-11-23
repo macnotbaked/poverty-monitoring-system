@@ -5,6 +5,7 @@ import { HiPlus } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../../../../../../store/StoreContext";
 import useFetchDataLoadMore from "../../../../../custom-hooks/useFetchDataLoadMore";
+import useLoadAllActivePurok from "../../../../../custom-hooks/useLoadAllActivePurok";
 import Header from "../../../../../header/Header";
 import {
   devNavUrl,
@@ -18,7 +19,12 @@ const Citizen = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState(null);
 
-  const sitioId = getUrlParam().get("sid");
+  const purokId = getUrlParam().get("sid");
+
+  const { loadingActivePurok, activePurok } = useLoadAllActivePurok(
+    "/admin/admin-sitio/read-sitio-by-id.php",
+    purokId
+  );
 
   const {
     loading,
@@ -42,11 +48,13 @@ const Citizen = () => {
           <div className="row">
             <div className="content">
               <div className="content__header">
-                <h3 className="t--bold py--2">Purok 1</h3>
+                <h3 className="t--bold py--2">
+                  {activePurok.length ? activePurok[0].sitio_name : "Loading.."}
+                </h3>
                 <div className="content__button">
                   <Link
                     className="btn--primary mr--1"
-                    to={`${devNavUrl}/admin/citizen-add?sid=${sitioId}`}
+                    to={`${devNavUrl}/admin/citizen-add?sid=${purokId}`}
                   >
                     <FaPlusCircle /> <span>Add</span>
                   </Link>

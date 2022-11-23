@@ -89,6 +89,16 @@ function checkReadSearchInactive($object, $search)
     return $result;
 }
 
+function checkReadById($object)
+{
+    $result = $object->readById();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Active purok by ID).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkUpdate($object)
 {
     $result = $object->update();
@@ -124,6 +134,16 @@ function checkDelete($object)
     $result = $object->delete();
     if (!$result) {
         Response::sendResponse(false, "Please check your sql query (Delete).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadAlreadyExist($object, $role)
+{
+    $result = $object->isAlreadyExist();
+    if ($result->num_rows > 0) {
+        Response::sendResponse(false, "{$role} already exist.", []);
         exit();
     }
     return $result;

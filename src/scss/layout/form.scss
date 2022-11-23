@@ -99,7 +99,7 @@ textarea {
   input[type="number"],
   input[type="search"],
   select {
-    border: 1px solid $dark-gray;
+    border: 1px solid $light-gray;
     background: #fff;
     height: 38px;
     padding: 0.6rem 1rem 0.6rem 5rem;
@@ -113,7 +113,7 @@ textarea {
     border-radius: 2rem;
   }
   textarea {
-    border: 1px solid $dark-color;
+    border: 1px solid $light-gray;
     background: #fff;
     height: 10rem;
     padding: 6px 15px;
@@ -230,7 +230,7 @@ textarea {
       font-size: 2.5rem;
       transform: translateY(50%);
       bottom: 50%;
-      border-right: 0.1rem solid $dark-gray;
+      border-right: 0.1rem solid $light-gray;
       padding-right: 1rem;
     }
   }

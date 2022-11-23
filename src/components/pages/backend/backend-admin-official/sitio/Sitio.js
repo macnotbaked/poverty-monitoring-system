@@ -5,6 +5,8 @@ import { StoreContext } from "../../../../../store/StoreContext";
 import useFetchDataLoadMore from "../../../../custom-hooks/useFetchDataLoadMore";
 import Header from "../../../../header/Header";
 import Navigation from "../../../../navigation/Navigation";
+import ModalError from "../../../../widgets/ModalError";
+import ModalSuccess from "../../../../widgets/ModalSuccess";
 import ModalAddSitio from "./ModalAddSitio";
 import SitioList from "./SitioList";
 
@@ -59,6 +61,8 @@ const Sitio = () => {
       </div>
 
       {store.isAdd && <ModalAddSitio item={itemEdit} />}
+      {store.error && <ModalError />}
+      {store.success && <ModalSuccess />}
     </>
   );
 };

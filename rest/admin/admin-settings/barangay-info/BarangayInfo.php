@@ -4,7 +4,7 @@ class BarangayInfo
     public $barangay_aid;
     public $barangay_name;
     public $barangay_municipality;
-    public $barangay_provice;
+    public $barangay_province;
     public $barangay_contact_person_primary;
     public $barangay_contact_number_primary;
     public $barangay_contact_person_secondary;

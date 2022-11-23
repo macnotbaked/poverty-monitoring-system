@@ -19,6 +19,7 @@ const ModalAddSitio = ({ item }) => {
   const initVal = {
     sitio_aid: item ? item.sitio_aid : "",
     sitio_name: item ? item.sitio_name : "",
+    sitio_name_old: item ? item.sitio_name : "",
   };
 
   const yupSchema = Yup.object({
@@ -79,18 +80,21 @@ const ModalAddSitio = ({ item }) => {
                         placeholder="Sitio name"
                         type="text"
                         name="sitio_name"
-                        disabled={!loading}
+                        disabled={loading}
                       />
                     </div>
 
                     <div className="d--flex gap--1">
                       <button
                         type="submit"
-                        disabled={!loading}
+                        disabled={loading}
                         className="btn--default d--flex align-center justify-center"
                       >
-                        {!loading && <SpinnerButton />}
-                        <span>{item ? "Save" : "Add"}</span>
+                        {loading ? (
+                          <SpinnerButton />
+                        ) : (
+                          <span>{item ? "Save" : "Add"}</span>
+                        )}
                       </button>
                       <button
                         className="btn--outline "

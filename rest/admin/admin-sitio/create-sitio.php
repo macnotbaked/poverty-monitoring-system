@@ -10,9 +10,12 @@ try {
     checkInputData($data);
     $sitio = new Sitio($connection);
 
+    $sitio->sitio_is_active = 1;
     $sitio->sitio_name = filter_var($data["sitio_name"], FILTER_SANITIZE_STRING);
     $sitio->sitio_created = date("Y-m-d");
     $sitio->sitio_datetime = date("Y-m-d H:i:s");
+
+    checkReadAlreadyExist($sitio, $sitio->sitio_name);
 
     $result = checkCreate($sitio);
 
