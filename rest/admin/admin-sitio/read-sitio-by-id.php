@@ -18,5 +18,5 @@ try {
 
     Response::sendResponse(true, "Purok by ID data found.", $data);
 } catch (Error $e) {
-    Response::sendResponse(false, "Requests interrupted becuase a system error occured, please contact patrick.reyes@frontlinebusiness.com.ph", "finally");
+    Response::sendResponse(false, "Request interrupted becuase a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

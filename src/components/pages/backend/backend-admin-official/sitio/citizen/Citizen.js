@@ -1,7 +1,5 @@
 import React from "react";
-import { AiFillPlusCircle, AiOutlinePlus } from "react-icons/ai";
-import { FaArrowLeft, FaPlus, FaPlusCircle } from "react-icons/fa";
-import { HiPlus } from "react-icons/hi";
+import { FaPlusCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../../../../../../store/StoreContext";
 import useFetchDataLoadMore from "../../../../../custom-hooks/useFetchDataLoadMore";

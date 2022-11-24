@@ -12,7 +12,6 @@ const initVal = {
   isEdit: false,
   isSearch: false,
   startIndex: 0,
-  isEvalEnabled: false,
   isCreatePass: false,
   isForgotPassword: false,
   isLogin: false,
@@ -21,6 +20,7 @@ const initVal = {
   isClick: false,
   isRestore: false,
   isAccountUpdated: false,
+  isEvalEnabled: false,
   credentials: {},
 };
 

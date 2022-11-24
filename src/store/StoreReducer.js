@@ -104,6 +104,12 @@ export const StoreReducer = (state, action) => {
         isAccountUpdated: action.payload,
       };
 
+    case "IS_EVAL_ENABLED":
+      return {
+        ...state,
+        isEvalEnabled: action.payload,
+      };
+
     case "CREDENTIALS":
       return {
         ...state,

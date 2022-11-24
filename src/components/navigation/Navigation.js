@@ -7,22 +7,16 @@ import {
   FaMapMarkedAlt,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { setIsActive, setStartIndex } from "../../store/StoreAction";
+import { setStartIndex } from "../../store/StoreAction";
 import { StoreContext } from "../../store/StoreContext";
 import { devBaseUrl, devNavUrl } from "../helpers/functions-general";
 
 const Navigation = ({ menu }) => {
   const { store, dispatch } = React.useContext(StoreContext);
-  const [itemEdit, setItemEdit] = React.useState(null);
-  const role = store.credentials.roles_name;
-
-  const handleShow = () => {
-    dispatch(setIsActive(!store.isActive));
-  };
 
   return (
     <>
-      <nav className="navigation" onClick={handleShow} onTouchMove={handleShow}>
+      <nav className="navigation">
         <ul>
           <>
             <div className="navigation__logo">

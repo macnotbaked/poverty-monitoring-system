@@ -60,10 +60,13 @@ const RecommendedProgramsList = ({}) => {
               ) : (
                 <>{loadingPopulationProgram ? "" : <li>No Data</li>}</>
               )}
-              <p className="mt--1 color--primary">
-                {" "}
-                {loadingPopulationProgram ? "" : "See more.."}.
-              </p>
+              {activePopulationProgram.length > 0 ? (
+                <p className="mt--1 color--primary">
+                  {loadingPopulationProgram ? "" : "See more.."}.
+                </p>
+              ) : (
+                ""
+              )}
             </ul>
           </Link>
         </div>
@@ -92,10 +95,13 @@ const RecommendedProgramsList = ({}) => {
               ) : (
                 <>{loadingHouseholdProgram ? "" : <li>No Data</li>}</>
               )}
-              <p className="mt--1 color--primary">
-                {" "}
-                {loadingHouseholdProgram ? "" : "See more.."}.
-              </p>
+              {activeHouseholdProgram.length > 0 ? (
+                <p className="mt--1 color--primary">
+                  {loadingHouseholdProgram ? "" : "See more.."}.
+                </p>
+              ) : (
+                ""
+              )}
             </ul>
           </Link>
         </div>
@@ -131,10 +137,13 @@ const RecommendedProgramsList = ({}) => {
               ) : (
                 <>{loadingIncomeProgram ? "" : <li>No Data</li>}</>
               )}
-              <p className="mt--1 color--primary">
-                {" "}
-                {loadingIncomeProgram ? "" : "See more.."}.
-              </p>
+              {activeIncomeProgram.length > 0 ? (
+                <p className="mt--1 color--primary">
+                  {loadingIncomeProgram ? "" : "See more.."}.
+                </p>
+              ) : (
+                ""
+              )}
             </ul>
           </Link>
         </div>
@@ -163,10 +172,13 @@ const RecommendedProgramsList = ({}) => {
               ) : (
                 <>{loadingUnemploymentProgram ? "" : <li>No Data</li>}</>
               )}
-              <p className="mt--1 color--primary">
-                {" "}
-                {loadingUnemploymentProgram ? "" : "See more.."}.
-              </p>
+              {activeUnemploymentProgram.length > 0 ? (
+                <p className="mt--1 color--primary">
+                  {loadingUnemploymentProgram ? "" : "See more.."}.
+                </p>
+              ) : (
+                ""
+              )}
             </ul>
           </Link>
         </div>

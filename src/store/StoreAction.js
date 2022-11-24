@@ -125,6 +125,13 @@ export const setIsAccountUpdated = (val) => {
   };
 };
 
+export const setIsEvalEnabled = (val) => {
+  return {
+    type: "IS_EVAL_ENABLED",
+    payload: val,
+  };
+};
+
 export const setCredentials = (
   users_aid,
   users_fname,
