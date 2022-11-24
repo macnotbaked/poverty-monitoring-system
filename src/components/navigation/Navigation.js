@@ -74,9 +74,20 @@ const Navigation = ({ menu }) => {
                 <FaChartBar />
               </Link>
             </li>
+
+            <li className={menu === "settings" ? "tab--active" : ""}>
+              <Link
+                to={`${devNavUrl}/admin/settings`}
+                onClick={() => dispatch(setStartIndex(0))}
+                className="tooltip"
+                data-tooltip="Settings"
+              >
+                <AiFillSetting />
+              </Link>
+            </li>
           </>
 
-          {store.credentials.users_role === "Admin" && (
+          {/* {store.credentials.users_role === "Admin" && (
             <>
               <li className={menu === "settings" ? "tab--active" : ""}>
                 <Link
@@ -89,7 +100,7 @@ const Navigation = ({ menu }) => {
                 </Link>
               </li>
             </>
-          )}
+          )} */}
         </ul>
       </nav>
     </>

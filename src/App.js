@@ -72,279 +72,279 @@ function App() {
             <Route
               path={`/`}
               element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <Dashboard />
+                // </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/home`}
               element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <Dashboard />
+                // </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/purok/household`}
               element={
-                <ProtectedRoute>
-                  <Citizen />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <Citizen />
+                // </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/citizen-add`}
               element={
-                <ProtectedRoute>
-                  <AddCitizen />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <AddCitizen />
+                // </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/evaluation`}
               element={
-                <ProtectedRoute>
-                  <Evaluation />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <Evaluation />
+                // </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/evaluation-filter`}
               element={
-                <ProtectedRoute>
-                  <EvaluationFilter />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <EvaluationFilter />
+                // </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/evaluation/household`}
               element={
-                <ProtectedRoute>
-                  <EvaluationHousehold />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <EvaluationHousehold />
+                // </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/settings`}
               element={
-                <ProtectedRoute>
-                  <Settings />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <Settings />
+                // </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/users`}
               element={
-                <ProtectedRoute>
-                  <UsersActive />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <UsersActive />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/sitio`}
               element={
-                <ProtectedRoute>
-                  <Sitio />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <Sitio />
+                // </ProtectedRoute>
               }
             />
             <Route
               path={`${devNavUrl}/admin/citizens`}
               element={
-                <ProtectedRoute>
-                  <Citizens />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <Citizens />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/household-view`}
               element={
-                <ProtectedRoute>
-                  <CitizenView />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <CitizenView />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/recommended-programs`}
               element={
-                <ProtectedRoute>
-                  <RecommendedPrograms />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <RecommendedPrograms />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/population-rate`}
               element={
-                <ProtectedRoute>
-                  <PopulationRate />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <PopulationRate />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/household-rate`}
               element={
-                <ProtectedRoute>
-                  <HouseholdRate />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <HouseholdRate />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/income`}
               element={
-                <ProtectedRoute>
-                  <IncomeRate />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <IncomeRate />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/unemployment-rate`}
               element={
-                <ProtectedRoute>
-                  <UnemploymentRate />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <UnemploymentRate />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/population-criteria`}
               element={
-                <ProtectedRoute>
-                  <PopulationCriteria />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <PopulationCriteria />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/household-criteria`}
               element={
-                <ProtectedRoute>
-                  <HouseholdCriteria />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <HouseholdCriteria />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/income-criteria`}
               element={
-                <ProtectedRoute>
-                  <IncomeCriteria />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <IncomeCriteria />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/unemployment-criteria`}
               element={
-                <ProtectedRoute>
-                  <UnemploymentCriteria />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <UnemploymentCriteria />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/inactive-users`}
               element={
-                <ProtectedRoute>
-                  <InactiveUser />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <InactiveUser />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/inactive-population-program`}
               element={
-                <ProtectedRoute>
-                  <InactivePopulationProgram />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <InactivePopulationProgram />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/inactive-household-program`}
               element={
-                <ProtectedRoute>
-                  <InactiveHouseholdProgram />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <InactiveHouseholdProgram />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/inactive-income-program`}
               element={
-                <ProtectedRoute>
-                  <InactiveIncomeProgram />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <InactiveIncomeProgram />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/inactive-unemployment-program`}
               element={
-                <ProtectedRoute>
-                  <InactiveUnemploymentProgram />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <InactiveUnemploymentProgram />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/inactive-population-criteria`}
               element={
-                <ProtectedRoute>
-                  <InactivePopulationCriteria />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <InactivePopulationCriteria />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/inactive-household-criteria`}
               element={
-                <ProtectedRoute>
-                  <InactiveHouseholdCriteria />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <InactiveHouseholdCriteria />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/inactive-income-criteria`}
               element={
-                <ProtectedRoute>
-                  <InactiveIncomeCriteria />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <InactiveIncomeCriteria />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/inactive-unemployment-criteria`}
               element={
-                <ProtectedRoute>
-                  <InactiveUnemploymentCriteria />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <InactiveUnemploymentCriteria />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/inactive-sitio`}
               element={
-                <ProtectedRoute>
-                  <InactivePurok />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <InactivePurok />
+                // </ProtectedRoute>
               }
             />
 
             <Route
               path={`${devNavUrl}/admin/info`}
               element={
-                <ProtectedRoute>
-                  <BarangayInfo />
-                </ProtectedRoute>
+                // <ProtectedRoute>
+                <BarangayInfo />
+                // </ProtectedRoute>
               }
             />
 

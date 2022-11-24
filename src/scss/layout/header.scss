@@ -151,4 +151,14 @@
       }
     }
   }
+
+  // MEDIA QUERY FOR NAVIGATION CLASS
+
+  @media screen and (max-width: 768px) {
+    margin-left: 0;
+    padding-left: 2rem;
+  }
+  @media screen and (max-width: 420px) {
+    padding: 1rem !important;
+  }
 }

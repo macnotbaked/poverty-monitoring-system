@@ -19,7 +19,7 @@ const SearchBox = ({
   };
   return (
     <>
-      <div className="mb--1">
+      <div className="search__container mb--1">
         <form onSubmit={(e) => handleSearch(e, search, url)}>
           <div className="input">
             <input

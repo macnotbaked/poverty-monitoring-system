@@ -9,6 +9,17 @@
   border-radius: 0 2rem 0 0;
   transition: 0.3s ease;
   z-index: 1;
+  &::after {
+    position: absolute !important;
+    top: 6rem;
+    right: 0;
+    bottom: 0;
+    left: 10rem;
+    background: transparent;
+    width: 100vw;
+    z-index: 10 !important;
+  }
+
   &__logo {
     display: flex;
     justify-content: center;
@@ -56,5 +67,9 @@
         fill: $dark-color;
       }
     }
+  }
+
+  @media screen and (max-width: 768px) {
+    left: -20rem;
   }
 }

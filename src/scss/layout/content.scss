@@ -1,7 +1,7 @@
 .main-content {
   .content {
     margin-left: 13rem;
-    margin-right: 2rem;
+    padding-right: 2rem;
     transition: 0.3s ease;
     padding-bottom: 2rem;
     // height: 100%;
@@ -23,6 +23,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      h3 {
+        @media screen and (max-width: 420px) {
+          padding: 1rem 0 !important;
+        }
+      }
     }
     &__button {
       display: flex;
@@ -87,15 +93,40 @@
         }
       }
     }
+
+    .search__container {
+      @media screen and (max-width: 420px) {
+        padding-top: 1rem !important;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      margin-left: 0;
+      padding-left: 2rem;
+    }
+
+    @media screen and (max-width: 420px) {
+      padding: 1rem !important;
+    }
   }
 }
 .main-content.show {
   .header,
   .content {
     margin: 0 2rem;
+    @media screen and (max-width: 768px) {
+      margin: 0;
+      margin-left: 10rem;
+    }
   }
   .navigation {
     left: -20rem;
+    @media screen and (max-width: 768px) {
+      left: 0;
+    }
+    &::after {
+      content: "";
+    }
   }
 }
 .title-box-light {

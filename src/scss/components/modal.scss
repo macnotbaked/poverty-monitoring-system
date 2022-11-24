@@ -12,6 +12,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 420px) {
+    padding: 1rem !important;
+  }
 }
 .display-center {
   background: $light-color;

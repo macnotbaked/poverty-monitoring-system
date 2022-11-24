@@ -46,4 +46,35 @@
       }
     }
   }
+  @media screen and (max-width: 768px) {
+    tr,
+    td {
+      display: block;
+      width: unset !important;
+    }
+    thead tr th {
+      display: none;
+    }
+    tbody tr {
+      margin: 0 auto;
+      border-bottom: 1px solid $light-gray;
+    }
+    tbody tr td {
+      border: none;
+      position: relative;
+      padding-left: 50%;
+      text-align: left !important;
+      word-break: break-all;
+    }
+    tbody tr td:before {
+      content: attr(data-label);
+      position: absolute;
+      top: 1rem;
+      left: 0.6rem;
+      width: 50%;
+      font-weight: 700;
+      padding-right: 1rem;
+      color: $dark-color;
+    }
+  }
 }
