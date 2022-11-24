@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2022 at 05:20 PM
+-- Generation Time: Nov 23, 2022 at 04:36 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -156,11 +156,12 @@ CREATE TABLE `pms_population_criteria` (
 --
 
 INSERT INTO `pms_population_criteria` (`population_criteria_aid`, `population_criteria_is_active`, `population_criteria_program_id`, `population_criteria_range_from`, `population_criteria_range_to`, `population_criteria_category`, `population_criteria_created`, `population_criteria_datetime`) VALUES
-(1, 1, 7, '2', '5', 'Population', '2022-11-20', '2022-11-20 14:53:21'),
+(1, 0, 7, '2', '5', 'Population', '2022-11-20', '2022-11-23 23:34:22'),
 (2, 0, 7, '2', '5', 'Population', '2022-11-20', '2022-11-20 13:10:40'),
-(3, 1, 7, '2', '6', 'Population', '2022-11-20', '2022-11-20 13:29:28'),
-(4, 1, 7, '2', '4', 'Population', '2022-11-20', '2022-11-20 14:53:32'),
-(5, 0, 4, '2', '5', 'Population', '2022-11-20', '2022-11-20 14:53:59');
+(3, 0, 7, '2', '6', 'Population', '2022-11-20', '2022-11-23 23:34:20'),
+(4, 0, 7, '2', '4', 'Population', '2022-11-20', '2022-11-23 23:34:17'),
+(5, 0, 4, '2', '5', 'Population', '2022-11-20', '2022-11-20 14:53:59'),
+(6, 1, 7, '5', '9', 'Population', '2022-11-23', '2022-11-23 22:04:29');
 
 -- --------------------------------------------------------
 
@@ -187,34 +188,41 @@ CREATE TABLE `pms_population_programs` (
 INSERT INTO `pms_population_programs` (`population_program_aid`, `population_program_is_active`, `population_program_name`, `population_program_description`, `population_program_contact_person`, `population_program_contact_number`, `population_program_contact_email`, `population_program_created`, `population_program_datetime`) VALUES
 (1, 1, 'Sample namesasdcxczvsvxcasdcxczvsvxc asdcxczvsvxc asdcxczvsvxc asdcxczvsvxc  asdcxczvsvxc', 'Sample descriptions', 'Sample names', 'Sample numbers', 'sampleemail@gmail.coms', '2022-11-18', '2022-11-19 15:41:38'),
 (2, 1, 'Sample nameas zxcved asdcxczvsvxcasdcxczvsvxc asdcxczvsvxc asdcxczvsvxc asdcxczvsvxc asdcxczvsvxc asdcxczvsvxc ', 'Sample descripsdstion', 'Sample name', 'Sample number', 'sampleemail@gmail.com', '2022-11-18', '2022-11-19 15:41:33'),
-(3, 1, 'weasdafsd asdcxczvsvxcasdcxczvsvxcxasdcxczvsvxc zxv ', 'fsdfasdfsd', 'fsdfcxvsdgf', 'gsdfsdcxa', 'asdsaf@fgmil.com', '2022-11-19', '2022-11-19 15:41:48'),
-(4, 1, 'asdcxczvsvxc asdcxczvsvxc asdcxczvsvxc asdcxczvsvxc asdcxczvsvxc', 'sdfzxcxvsrdfg', 'xzfsdzfczxv', 'sdgsdvfsd', 'fsdgdcvbsrfg@gmi.com', '2022-11-19', '2022-11-19 15:41:21'),
+(3, 0, 'weasdafsd asdcxczvsvxcasdcxczvsvxcxasdcxczvsvxc zxv ', 'fsdfasdfsd', 'fsdfcxvsdgf', 'gsdfsdcxa', 'asdsaf@fgmil.com', '2022-11-19', '2022-11-19 15:41:48'),
 (5, 1, 'svxcvbfsgxcvsdasdcxczvsvxc asdcxczvsvxc asdcxczvsvxcasdcxczvsvxc asdcxczvsvxc asdcxczvsvxc ', 'xvsdgbcvbf', 'bdfg bdfgdf', 'gfdgdfgfdhb', 'fdgdasdasdfgdfh@gmai.com', '2022-11-19', '2022-11-19 15:41:43'),
-(6, 0, 'weasdafsdsdfsdfsd', 'sdvxcvdrs vsdf', 'gsd sdfg dvb', 'df gdcvdf gsdf', 'sdfs@gmail.com', '2022-11-19', '2022-11-19 18:00:16'),
-(7, 1, 'weasdafsdsdsadasd', 'sdfsdf', 'asdasdsa', 'dasdasdas', 'dasdasd@gmail.com', '2022-11-19', '2022-11-19 18:00:33');
+(6, 1, 'weasdafsdsdfsdfsd', 'sdvxcvdrs vsdf', 'gsd sdfg dvb', 'df gdcvdf gsdf', 'sdfs@gmail.com', '2022-11-19', '2022-11-23 00:05:19'),
+(7, 1, 'Family Planning', 'wqeqweasdfsdf xcvdf dbre dv sefwgdfg ', 'Mayor / City Hall / DSWD', 'N/A', 'N/A@gmail.com', '2022-11-19', '2022-11-23 22:09:05');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pms_roles`
+-- Table structure for table `pms_representative`
 --
 
-CREATE TABLE `pms_roles` (
-  `roles_aid` int(11) NOT NULL,
-  `roles_name` varchar(200) NOT NULL,
-  `roles_created` varchar(20) NOT NULL,
-  `roles_datetime` datetime NOT NULL
+CREATE TABLE `pms_representative` (
+  `representative_aid` int(11) NOT NULL,
+  `representative_purok_id` int(11) NOT NULL,
+  `representative_is_active` tinyint(1) NOT NULL,
+  `representative_name` varchar(255) NOT NULL,
+  `representative_contact` varchar(16) NOT NULL,
+  `representative_house_number` varchar(64) NOT NULL,
+  `representative_total_people` varchar(2) NOT NULL,
+  `representative_total_underage` varchar(2) NOT NULL,
+  `representative_total_midage` varchar(2) NOT NULL,
+  `representative_total_adult` varchar(2) NOT NULL,
+  `representative_total_pwd` varchar(2) NOT NULL,
+  `representative_total_elem` varchar(2) NOT NULL,
+  `representative_total_highschool` varchar(2) NOT NULL,
+  `representative_total_college` varchar(2) NOT NULL,
+  `representative_household_living_id` varchar(2) NOT NULL,
+  `representative_monthly_income_id` varchar(2) NOT NULL,
+  `representative_bill_expenses_id` varchar(2) NOT NULL,
+  `representative_food_expenses_id` varchar(2) NOT NULL,
+  `representative_total_able_work` varchar(2) NOT NULL,
+  `representative_total_employed` varchar(2) NOT NULL,
+  `representative_created` varchar(32) NOT NULL,
+  `representative_datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `pms_roles`
---
-
-INSERT INTO `pms_roles` (`roles_aid`, `roles_name`, `roles_created`, `roles_datetime`) VALUES
-(1, 'Admin', '2022-09-18', '2022-09-18 22:06:43'),
-(2, 'Official', '2022-09-18', '2022-09-18 22:33:29'),
-(3, 'Citizen', '2022-09-18', '2022-09-18 22:33:35'),
-(7, 'SK Chairman', '2022-09-28', '2022-09-28 00:31:34');
 
 -- --------------------------------------------------------
 
@@ -235,13 +243,12 @@ CREATE TABLE `pms_sitio` (
 --
 
 INSERT INTO `pms_sitio` (`sitio_aid`, `sitio_is_active`, `sitio_name`, `sitio_created`, `sitio_datetime`) VALUES
-(2, 1, 'Sitio 1', '2022-09-26', '0000-00-00 00:00:00'),
-(3, 0, 'Sitio 2', '2022-09-26', '2022-09-26 14:19:32'),
-(4, 1, 'Sitio 3', '2022-09-26', '2022-09-26 14:19:40'),
-(5, 1, 'Sitio 4', '2022-09-26', '2022-09-26 14:19:46'),
-(6, 1, 'Sitio 5', '2022-09-26', '2022-09-26 14:19:51'),
-(7, 1, 'Sitio 6', '2022-09-26', '2022-09-26 14:21:26'),
-(8, 1, 'Sitio 7', '2022-09-28', '0000-00-00 00:00:00');
+(1, 1, 'Purok 1', '2022-11-23', '2022-11-23 17:44:36'),
+(2, 1, 'Purok 2', '2022-11-23', '2022-11-23 17:45:20'),
+(3, 1, 'Purok 3', '2022-11-23', '2022-11-23 17:45:29'),
+(4, 1, 'Purok 4', '2022-11-23', '2022-11-23 17:45:35'),
+(5, 1, 'Purok 5', '2022-11-23', '2022-11-23 17:45:43'),
+(6, 1, 'Purok 6', '2022-11-23', '2022-11-23 17:45:50');
 
 -- --------------------------------------------------------
 
@@ -314,8 +321,7 @@ CREATE TABLE `pms_users` (
   `users_lname` varchar(55) NOT NULL,
   `users_email` varchar(200) NOT NULL,
   `users_phone` varchar(20) NOT NULL,
-  `users_gender` varchar(20) NOT NULL,
-  `users_role_id` varchar(5) NOT NULL,
+  `users_role` varchar(16) NOT NULL,
   `users_photo` varchar(255) NOT NULL,
   `users_created` varchar(20) NOT NULL,
   `users_datetime` datetime NOT NULL
@@ -325,8 +331,8 @@ CREATE TABLE `pms_users` (
 -- Dumping data for table `pms_users`
 --
 
-INSERT INTO `pms_users` (`users_aid`, `users_is_active`, `users_key`, `users_password`, `users_fname`, `users_mname`, `users_lname`, `users_email`, `users_phone`, `users_gender`, `users_role_id`, `users_photo`, `users_created`, `users_datetime`) VALUES
-(27, 1, '736b5d27b1b9eafbc08c458d0fd7f4d2c1f1df0079a8b2a90cd7760f9fc4b20b', '$2y$10$9ZFG7TAuJYP8UT3sankUg.00BmvMOj3ljt/l0ObfxxjEh7L7QjZUC', 'Mark Ryan', 'Bueno', 'Merin', 'merin.ryanmark@gmail.com', '09491040057', 'male', '1', '2689949.png', '2022-09-22', '2022-11-21 22:30:28');
+INSERT INTO `pms_users` (`users_aid`, `users_is_active`, `users_key`, `users_password`, `users_fname`, `users_mname`, `users_lname`, `users_email`, `users_phone`, `users_role`, `users_photo`, `users_created`, `users_datetime`) VALUES
+(27, 1, '736b5d27b1b9eafbc08c458d0fd7f4d2c1f1df0079a8b2a90cd7760f9fc4b20b', '$2y$10$9ZFG7TAuJYP8UT3sankUg.00BmvMOj3ljt/l0ObfxxjEh7L7QjZUC', 'Mark Ryan', 'Bueno', 'Merin', 'merin.ryanmark@gmail.com', '09491040057', 'Admin', 'ajoyganda.jpg', '2022-09-22', '2022-11-23 22:11:18');
 
 --
 -- Indexes for dumped tables
@@ -369,10 +375,10 @@ ALTER TABLE `pms_population_programs`
   ADD PRIMARY KEY (`population_program_aid`);
 
 --
--- Indexes for table `pms_roles`
+-- Indexes for table `pms_representative`
 --
-ALTER TABLE `pms_roles`
-  ADD PRIMARY KEY (`roles_aid`);
+ALTER TABLE `pms_representative`
+  ADD PRIMARY KEY (`representative_aid`);
 
 --
 -- Indexes for table `pms_sitio`
@@ -430,7 +436,7 @@ ALTER TABLE `pms_income_programs`
 -- AUTO_INCREMENT for table `pms_population_criteria`
 --
 ALTER TABLE `pms_population_criteria`
-  MODIFY `population_criteria_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `population_criteria_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pms_population_programs`
@@ -439,16 +445,16 @@ ALTER TABLE `pms_population_programs`
   MODIFY `population_program_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `pms_roles`
+-- AUTO_INCREMENT for table `pms_representative`
 --
-ALTER TABLE `pms_roles`
-  MODIFY `roles_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+ALTER TABLE `pms_representative`
+  MODIFY `representative_aid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pms_sitio`
 --
 ALTER TABLE `pms_sitio`
-  MODIFY `sitio_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `sitio_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pms_unemployment_criteria`
@@ -466,7 +472,7 @@ ALTER TABLE `pms_unemployment_programs`
 -- AUTO_INCREMENT for table `pms_users`
 --
 ALTER TABLE `pms_users`
-  MODIFY `users_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `users_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
