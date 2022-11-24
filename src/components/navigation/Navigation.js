@@ -16,13 +16,13 @@ const Navigation = ({ menu }) => {
   const [itemEdit, setItemEdit] = React.useState(null);
   const role = store.credentials.roles_name;
 
-  const handleshow = () => {
+  const handleShow = () => {
     dispatch(setIsActive(!store.isActive));
   };
 
   return (
     <>
-      <nav className="navigation">
+      <nav className="navigation" onClick={handleShow} onTouchMove={handleShow}>
         <ul>
           <>
             <div className="navigation__logo">

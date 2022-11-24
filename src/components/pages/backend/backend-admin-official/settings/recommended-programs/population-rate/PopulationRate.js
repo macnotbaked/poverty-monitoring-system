@@ -42,7 +42,7 @@ export const PopulationRate = () => {
             <div className="content">
               <div className="content__header">
                 <h3 className="t--bold py--2">
-                  Program:{" "}
+                  <span>Program:</span>{" "}
                   <span className="color--primary">Population Rate</span>
                 </h3>
                 <div className="content__button">

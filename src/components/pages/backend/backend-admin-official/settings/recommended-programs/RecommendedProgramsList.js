@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  FaHouseUser,
-  FaMoneyCheckAlt,
-  FaUser,
-  FaUsers,
-  FaUserTie,
-} from "react-icons/fa";
+import { FaHouseUser, FaMoneyCheckAlt, FaUser, FaUsers } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { setStartIndex } from "../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../store/StoreContext";
@@ -123,10 +117,10 @@ const RecommendedProgramsList = ({}) => {
               {loadingIncomeProgram ? (
                 ""
               ) : (
-                <strong>
-                  Income Rate{" "}
+                <>
+                  <strong>Income Rate</strong> <br />
                   <i>ie., Bills Expenses, Food Threshold, Education Expenses</i>
-                </strong>
+                </>
               )}
             </h4>
             <ul>
