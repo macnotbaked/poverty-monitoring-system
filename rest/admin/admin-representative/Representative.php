@@ -2,6 +2,7 @@
 class Representative
 {
     public $representative_aid;
+    public $representative_eval_id;
     public $representative_purok_id;
     public $representative_is_active;
     public $representative_name;
@@ -38,7 +39,8 @@ class Representative
     public function create()
     {
         $sql = "insert into {$this->tblRespresentative} ";
-        $sql .= "( representative_purok_id, ";
+        $sql .= "( representative_eval_id, ";
+        $sql .= "representative_purok_id, ";
         $sql .= "representative_is_active, ";
         $sql .= "representative_name, ";
         $sql .= "representative_contact, ";
@@ -59,6 +61,7 @@ class Representative
         $sql .= "representative_total_employed, ";
         $sql .= "representative_created, ";
         $sql .= "representative_datetime ) values ( ";
+        $sql .= "'{$this->representative_eval_id}', ";
         $sql .= "'{$this->representative_purok_id}', ";
         $sql .= "'{$this->representative_is_active}', ";
         $sql .= "'{$this->representative_name}', ";
@@ -90,7 +93,9 @@ class Representative
         $sql = "select * from {$this->tblRespresentative} as household, ";
         $sql .= "{$this->tblSitio} as purok ";
         $sql .= "where household.representative_is_active = 1 ";
-        $sql .= "and household.representative_aid = purok.sitio_aid ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
+        $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "order by household.representative_house_number asc ";
         $result = $this->connection->query($sql);
 
@@ -102,7 +107,9 @@ class Representative
         $sql = "select * from {$this->tblRespresentative} as household, ";
         $sql .= "{$this->tblSitio} as purok ";
         $sql .= "where household.representative_is_active = 1 ";
-        $sql .= "and household.representative_aid = purok.sitio_aid ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
+        $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "order by household.representative_house_number asc ";
         $sql .= "limit {$start}, {$total} ";
         $result = $this->connection->query($sql);
@@ -115,7 +122,9 @@ class Representative
         $sql = "select * from {$this->tblRespresentative} as household, ";
         $sql .= "{$this->tblSitio} as purok ";
         $sql .= "where household.representative_is_active = 1 ";
-        $sql .= "and household.representative_aid = purok.sitio_aid ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
+        $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "and (household.representative_name like '{$search}%' ";
         $sql .= ") ";
         $sql .= "order by household.representative_name asc ";
@@ -129,7 +138,9 @@ class Representative
         $sql = "select * from {$this->tblRespresentative} as household, ";
         $sql .= "{$this->tblSitio} as purok ";
         $sql .= "where household.representative_is_active = 0 ";
-        $sql .= "and household.representative_aid = purok.sitio_aid ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
+        $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "order by household.representative_house_number asc ";
         $result = $this->connection->query($sql);
 
@@ -142,7 +153,9 @@ class Representative
         $sql = "select * from {$this->tblRespresentative} as household, ";
         $sql .= "{$this->tblSitio} as purok ";
         $sql .= "where household.representative_is_active = 0 ";
-        $sql .= "and household.representative_aid = purok.sitio_aid ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
+        $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "order by household.representative_house_number asc ";
         $sql .= "limit {$start}, {$total} ";
         $result = $this->connection->query($sql);
@@ -155,7 +168,9 @@ class Representative
         $sql = "select * from {$this->tblRespresentative} as household, ";
         $sql .= "{$this->tblSitio} as purok ";
         $sql .= "where household.representative_is_active = 0 ";
-        $sql .= "and household.representative_aid = purok.sitio_aid ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
+        $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "and (household.representative_name like '{$search}%' ";
         $sql .= ") ";
         $sql .= "order by household.representative_name asc ";

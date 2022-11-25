@@ -8,16 +8,13 @@ import useLoadAllEvaluationList from "../../../../../../custom-hooks/useLoadAllE
 import Header from "../../../../../../header/Header";
 import { fetchData } from "../../../../../../helpers/fetchData";
 import { InputSelect, InputText } from "../../../../../../helpers/FormInputs";
-import {
-  getUrlParam,
-  loadEvaluationPreview,
-} from "../../../../../../helpers/functions-general";
+import { getUrlParam } from "../../../../../../helpers/functions-general";
 import Navigation from "../../../../../../navigation/Navigation";
 import Back from "../../../../../../widgets/Back";
 import Spinner from "../../../../../../widgets/Spinner";
 import SpinnerButton from "../../../../../../widgets/SpinnerButton";
 
-const AddCitizen = ({
+const AddCitizenReview = ({
   evaluationList,
   loadingevaluationList,
   loadingActivePurok,
@@ -65,7 +62,6 @@ const AddCitizen = ({
       store.evaluationPreview.representative_total_employed,
   };
 
-  const yupSchema = Yup.object({});
   return (
     <>
       <div className={store.isActive ? "main-content show" : "main-content"}>
@@ -91,10 +87,23 @@ const AddCitizen = ({
                 {evaluationList.length > 0 ? (
                   <Formik
                     initialValues={initVal}
-                    validationSchema={yupSchema}
                     onSubmit={async (values, { setSubmitting, resetForm }) => {
-                      dispatch(setPageNum(store.pageNum + 1));
-                      loadEvaluationPreview(dispatch, values);
+                      const data = {
+                        ...store.basicInfo,
+                        ...values,
+                      };
+                      fetchData(
+                        setLoading,
+                        "/admin/admin-representative/create-representative.php",
+                        data, // form data values
+                        null, // result set data
+                        "", // success msg
+                        "", // additional error msg if needed
+                        dispatch, // context api action
+                        store, // context api state
+                        false, // boolean to show success modal
+                        false // boolean to show load more functionality button
+                      );
                     }}
                   >
                     {(props) => {
@@ -102,15 +111,27 @@ const AddCitizen = ({
                         <Form>
                           <div className="input--form mb--5">
                             <label htmlFor="">Household Representative:</label>
-                            <InputText type="text" name="trainee_email" />
+                            <InputText
+                              disabled
+                              type="text"
+                              name="trainee_email"
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">Contact Number:</label>
-                            <InputText type="text" name="trainee_email" />
+                            <InputText
+                              disabled
+                              type="text"
+                              name="trainee_email"
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">Household Number:</label>
-                            <InputText type="text" name="trainee_email" />
+                            <InputText
+                              disabled
+                              type="text"
+                              name="trainee_email"
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
@@ -118,7 +139,11 @@ const AddCitizen = ({
                               (How many people were living or staying in this
                               house?)
                             </label>
-                            <InputText type="number" name="trainee_email" />
+                            <InputText
+                              disabled
+                              type="number"
+                              name="trainee_email"
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
@@ -126,14 +151,22 @@ const AddCitizen = ({
                               pababa? (How many children are there under the age
                               of 5?)
                             </label>
-                            <InputText type="number" name="trainee_fname" />
+                            <InputText
+                              disabled
+                              type="number"
+                              name="trainee_fname"
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
                               3. Ilan ang bilang ng mga 6 hanggang 18 taong
                               gulang? (How many are 6- to 18-year-olds?)
                             </label>
-                            <InputText type="number" name="trainee_mname" />
+                            <InputText
+                              disabled
+                              type="number"
+                              name="trainee_mname"
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
@@ -142,6 +175,7 @@ const AddCitizen = ({
                               old?)
                             </label>
                             <InputText
+                              disabled
                               type="number"
                               name="trainee_birth_place"
                             />
@@ -152,7 +186,11 @@ const AddCitizen = ({
                               na taong gulang pataas? (How many seniors are
                               there who are 60 years old and older?)
                             </label>
-                            <InputText type="number" name="trainee_address" />
+                            <InputText
+                              disabled
+                              type="number"
+                              name="trainee_address"
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
@@ -160,14 +198,22 @@ const AddCitizen = ({
                               kapansanan? (How many in your family have person
                               with disability?)
                             </label>
-                            <InputText type="number" name="trainee_address" />
+                            <InputText
+                              disabled
+                              type="number"
+                              name="trainee_address"
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
                               7. Ilan ang mga nag-aaral ng elementarya? ( How
                               many are in elementary school?)
                             </label>
-                            <InputText type="number" name="trainee_lname" />
+                            <InputText
+                              disabled
+                              type="number"
+                              name="trainee_lname"
+                            />
                           </div>
 
                           <div className="input--form mb--5">
@@ -176,6 +222,7 @@ const AddCitizen = ({
                               are in high school students?)
                             </label>
                             <InputText
+                              disabled
                               type="number"
                               name="trainee_birth_date"
                             />
@@ -186,6 +233,7 @@ const AddCitizen = ({
                               are studying in college?)
                             </label>
                             <InputText
+                              disabled
                               type="number"
                               name="trainee_birth_place"
                             />
@@ -197,7 +245,7 @@ const AddCitizen = ({
                               your own house, renting, or living with
                               relatives?)
                             </label>
-                            <InputSelect name="trainee_gender">
+                            <InputSelect disabled name="trainee_gender">
                               <option value="">--</option>
                               <option value="owner">Sariling bahay</option>
                               <option value="renting">Nangungupahan</option>
@@ -210,7 +258,7 @@ const AddCitizen = ({
                               pamilya? (How much is your family's monthly
                               income?)
                             </label>
-                            <InputSelect name="trainee_gender">
+                            <InputSelect disabled name="trainee_gender">
                               <option value="">--</option>
                               <option value="owner">5,000 - 10,000</option>
                               <option value="renting">10,000 - 20,000</option>
@@ -226,7 +274,7 @@ const AddCitizen = ({
                               Water and Eletricity Bills, Educational expenses,
                               and other utilities.)
                             </label>
-                            <InputSelect name="trainee_gender">
+                            <InputSelect disabled name="trainee_gender">
                               <option value="">--</option>
                               <option value="owner">5,000 - 10,000</option>
                               <option value="renting">10,000 - 20,000</option>
@@ -240,7 +288,7 @@ const AddCitizen = ({
                               Buwan? (How much was spent on daily consumption of
                               food for a month?)
                             </label>
-                            <InputSelect name="trainee_gender">
+                            <InputSelect disabled name="trainee_gender">
                               <option value="">--</option>
                               <option value="owner">5,000 - 10,000</option>
                               <option value="renting">10,000 - 20,000</option>
@@ -254,6 +302,7 @@ const AddCitizen = ({
                               members are able to work?)
                             </label>
                             <InputText
+                              disabled
                               type="number"
                               name="trainee_guardian_contact"
                             />
@@ -265,17 +314,38 @@ const AddCitizen = ({
                               members are employed or currently earning?)
                             </label>
                             <InputText
+                              disabled
                               type="number"
                               name="trainee_guardian_contact"
                             />
                           </div>
-                          <button
-                            className="btn--secondary m-left btn__container"
-                            type="submit"
-                            disabled={loading}
-                          >
-                            {loading ? <SpinnerButton /> : <span>Next</span>}
-                          </button>
+                          <div className="d--flex gap--1">
+                            <button
+                              className="btn--secondary btn__container"
+                              type="button"
+                              disabled={loading}
+                              onClick={() => {
+                                dispatch(setPageNum(store.pageNum - 1));
+                              }}
+                            >
+                              {loading ? (
+                                <SpinnerButton />
+                              ) : (
+                                <span>Previous</span>
+                              )}
+                            </button>
+                            <button
+                              className="btn--primary btn__container"
+                              type="submit"
+                              disabled={loading}
+                            >
+                              {loading ? (
+                                <SpinnerButton />
+                              ) : (
+                                <span>Submit</span>
+                              )}
+                            </button>
+                          </div>
                         </Form>
                       );
                     }}
@@ -292,4 +362,4 @@ const AddCitizen = ({
   );
 };
 
-export default AddCitizen;
+export default AddCitizenReview;

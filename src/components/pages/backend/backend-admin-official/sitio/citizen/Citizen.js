@@ -47,12 +47,14 @@ const Citizen = () => {
             <div className="content">
               <div className="content__header">
                 <h3 className="t--bold py--2">
-                  {activePurok.length ? activePurok[0].sitio_name : "Loading.."}
+                  {activePurok.length
+                    ? activePurok[0].sitio_name
+                    : "Loading..."}
                 </h3>
                 <div className="content__button">
                   <Link
                     className="btn--primary mr--1"
-                    to={`${devNavUrl}/admin/citizen-add?sid=${purokId}`}
+                    to={`${devNavUrl}/admin/household-add?sid=${purokId}`}
                   >
                     <FaPlusCircle /> <span>Add</span>
                   </Link>
