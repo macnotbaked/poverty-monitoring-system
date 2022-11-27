@@ -53,7 +53,7 @@ const Representative = () => {
     return (
       <>
         <h2 className="t-center t-exbold mb--20">
-          This application is already closed.
+          This evaluation has already ended.
         </h2>
       </>
     );

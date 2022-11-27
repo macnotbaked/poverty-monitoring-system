@@ -30,7 +30,7 @@ import UnemploymentRate from "./components/pages/backend/backend-admin-official/
 import Settings from "./components/pages/backend/backend-admin-official/settings/Settings";
 import UsersActive from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/users-active/UsersActive";
 import Citizen from "./components/pages/backend/backend-admin-official/sitio/citizen/Citizen";
-import Representative from "./components/pages/backend/backend-admin-official/sitio/citizen/citizen-add/Representative";
+import AddCitizen from "./components/pages/backend/backend-admin-official/sitio/citizen/citizen-add/AddCitizen";
 import Sitio from "./components/pages/backend/backend-admin-official/sitio/Sitio";
 import CreatePassword from "./components/pages/frontend/frontend-create-password/CreatePassword";
 import CreatePasswordSuccess from "./components/pages/frontend/frontend-create-password/CreatePasswordSuccess";
@@ -352,7 +352,7 @@ function App() {
               path={`${devNavUrl}/admin/household-add`}
               element={
                 <ProtectedRoute>
-                  <Representative />
+                  <AddCitizen />
                 </ProtectedRoute>
               }
             />

@@ -16,6 +16,7 @@ import {
   setIsAdd,
   setIsConfirm,
   setIsEdit,
+  setIsEvaluated,
   setIsLogin,
   setIsRestore,
   setIsSignup,

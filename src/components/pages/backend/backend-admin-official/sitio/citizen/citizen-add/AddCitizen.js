@@ -1,7 +1,11 @@
 import { Form, Formik } from "formik";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { setPageNum } from "../../../../../../../store/StoreAction";
+import {
+  setIsEvaluated,
+  setPageNum,
+} from "../../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../../store/StoreContext";
 import useLoadAllActivePurok from "../../../../../../custom-hooks/useLoadAllActivePurok";
 import useLoadAllEvaluationList from "../../../../../../custom-hooks/useLoadAllEvaluationList";
@@ -14,58 +18,74 @@ import {
 } from "../../../../../../helpers/functions-general";
 import Navigation from "../../../../../../navigation/Navigation";
 import Back from "../../../../../../widgets/Back";
+import ModalError from "../../../../../../widgets/ModalError";
+import ModalSuccess from "../../../../../../widgets/ModalSuccess";
+import NoData from "../../../../../../widgets/NoData";
 import Spinner from "../../../../../../widgets/Spinner";
 import SpinnerButton from "../../../../../../widgets/SpinnerButton";
 
-const AddCitizen = ({
-  evaluationList,
-  loadingevaluationList,
-  loadingActivePurok,
-  activePurok,
-  purokId,
-}) => {
+const AddCitizen = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [loading, setLoading] = React.useState(false);
 
+  const purokId = getUrlParam().get("sid");
+
+  const { loadingActivePurok, activePurok } = useLoadAllActivePurok(
+    "/admin/admin-sitio/read-sitio-by-id.php",
+    purokId
+  );
+
+  const { evaluationList, loadingevaluationList } = useLoadAllEvaluationList(
+    "/admin/admin-evaluation/enable-evaluation/read-enable-evaluation.php",
+    "isEvalEnabled"
+  );
+
   const initVal = {
-    representative_aid: store.evaluationPreview.representative_aid,
-    representative_eval_id: store.evaluationPreview.representative_eval_id,
-    representative_purok_id: store.evaluationPreview.representative_purok_id,
-    representative_is_active: store.evaluationPreview.representative_is_active,
-    representative_name: store.evaluationPreview.representative_name,
-    representative_contact: store.evaluationPreview.representative_contact,
-    representative_house_number:
-      store.evaluationPreview.representative_house_number,
-    representative_total_people:
-      store.evaluationPreview.representative_total_people,
-    representative_total_underage:
-      store.evaluationPreview.representative_total_underage,
-    representative_total_midage:
-      store.evaluationPreview.representative_total_midage,
-    representative_total_adult:
-      store.evaluationPreview.representative_total_adult,
-    representative_total_pwd: store.evaluationPreview.representative_total_pwd,
-    representative_total_elem:
-      store.evaluationPreview.representative_total_elem,
-    representative_total_highschool:
-      store.evaluationPreview.representative_total_highschool,
-    representative_total_college:
-      store.evaluationPreview.representative_total_college,
-    representative_household_living_id:
-      store.evaluationPreview.representative_household_living_id,
-    representative_monthly_income_id:
-      store.evaluationPreview.representative_monthly_income_id,
-    representative_bill_expenses_id:
-      store.evaluationPreview.representative_bill_expenses_id,
-    representative_food_expenses_id:
-      store.evaluationPreview.representative_food_expenses_id,
-    representative_total_able_work:
-      store.evaluationPreview.representative_total_able_work,
-    representative_total_employed:
-      store.evaluationPreview.representative_total_employed,
+    representative_aid: "",
+    representative_eval_id:
+      evaluationList.length && evaluationList[0].evaluation_list_aid,
+    representative_purok_id: activePurok.length && activePurok[0].sitio_aid,
+    representative_is_active: "",
+    representative_name: "",
+    representative_contact: "",
+    representative_house_number: "",
+    representative_total_people: "",
+    representative_total_underage: "",
+    representative_total_midage: "",
+    representative_total_adult: "",
+    representative_total_seniors: "",
+    representative_total_pwd: "",
+    representative_total_elem: "",
+    representative_total_highschool: "",
+    representative_total_college: "",
+    representative_household_living_id: "",
+    representative_monthly_income_id: "",
+    representative_bill_expenses_id: "",
+    representative_food_expenses_id: "",
+    representative_total_able_work: "",
+    representative_total_employed: "",
   };
 
-  const yupSchema = Yup.object({});
+  const yupSchema = Yup.object({
+    representative_name: Yup.string().required("Required"),
+    representative_contact: Yup.string().required("Required"),
+    representative_house_number: Yup.string().required("Required"),
+    representative_total_people: Yup.string().required("Required"),
+    representative_total_underage: Yup.string().required("Required"),
+    representative_total_midage: Yup.string().required("Required"),
+    representative_total_adult: Yup.string().required("Required"),
+    representative_total_seniors: Yup.string().required("Required"),
+    representative_total_pwd: Yup.string().required("Required"),
+    representative_total_elem: Yup.string().required("Required"),
+    representative_total_highschool: Yup.string().required("Required"),
+    representative_total_college: Yup.string().required("Required"),
+    representative_household_living_id: Yup.string().required("Required"),
+    representative_monthly_income_id: Yup.string().required("Required"),
+    representative_bill_expenses_id: Yup.string().required("Required"),
+    representative_food_expenses_id: Yup.string().required("Required"),
+    representative_total_able_work: Yup.string().required("Required"),
+    representative_total_employed: Yup.string().required("Required"),
+  });
   return (
     <>
       <div className={store.isActive ? "main-content show" : "main-content"}>
@@ -93,8 +113,19 @@ const AddCitizen = ({
                     initialValues={initVal}
                     validationSchema={yupSchema}
                     onSubmit={async (values, { setSubmitting, resetForm }) => {
-                      dispatch(setPageNum(store.pageNum + 1));
-                      loadEvaluationPreview(dispatch, values);
+                      fetchData(
+                        setLoading,
+                        "/admin/admin-representative/create-representative.php",
+                        values, // form data values
+                        null, // result set data
+                        "Succesfully evaluated.", // success msg
+                        "", // additional error msg if needed
+                        dispatch, // context api action
+                        store, // context api state
+                        true, // boolean to show success modal
+                        false // boolean to show load more functionality button
+                      );
+                      resetForm();
                     }}
                   >
                     {(props) => {
@@ -102,15 +133,27 @@ const AddCitizen = ({
                         <Form>
                           <div className="input--form mb--5">
                             <label htmlFor="">Household Representative:</label>
-                            <InputText type="text" name="trainee_email" />
+                            <InputText
+                              type="text"
+                              name="representative_name"
+                              required
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">Contact Number:</label>
-                            <InputText type="text" name="trainee_email" />
+                            <InputText
+                              type="text"
+                              name="representative_contact"
+                              required
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">Household Number:</label>
-                            <InputText type="text" name="trainee_email" />
+                            <InputText
+                              type="text"
+                              name="representative_house_number"
+                              required
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
@@ -118,7 +161,11 @@ const AddCitizen = ({
                               (How many people were living or staying in this
                               house?)
                             </label>
-                            <InputText type="number" name="trainee_email" />
+                            <InputText
+                              type="number"
+                              name="representative_total_people"
+                              required
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
@@ -126,14 +173,22 @@ const AddCitizen = ({
                               pababa? (How many children are there under the age
                               of 5?)
                             </label>
-                            <InputText type="number" name="trainee_fname" />
+                            <InputText
+                              type="number"
+                              name="representative_total_underage"
+                              required
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
                               3. Ilan ang bilang ng mga 6 hanggang 18 taong
-                              gulang? (How many are 6- to 18-year-olds?)
+                              gulang? (How many are 6 to 18 years old?)
                             </label>
-                            <InputText type="number" name="trainee_mname" />
+                            <InputText
+                              type="number"
+                              name="representative_total_midage"
+                              required
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
@@ -143,7 +198,8 @@ const AddCitizen = ({
                             </label>
                             <InputText
                               type="number"
-                              name="trainee_birth_place"
+                              name="representative_total_adult"
+                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -152,7 +208,11 @@ const AddCitizen = ({
                               na taong gulang pataas? (How many seniors are
                               there who are 60 years old and older?)
                             </label>
-                            <InputText type="number" name="trainee_address" />
+                            <InputText
+                              type="number"
+                              name="representative_total_seniors"
+                              required
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
@@ -160,14 +220,22 @@ const AddCitizen = ({
                               kapansanan? (How many in your family have person
                               with disability?)
                             </label>
-                            <InputText type="number" name="trainee_address" />
+                            <InputText
+                              type="number"
+                              name="representative_total_pwd"
+                              required
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
                               7. Ilan ang mga nag-aaral ng elementarya? ( How
                               many are in elementary school?)
                             </label>
-                            <InputText type="number" name="trainee_lname" />
+                            <InputText
+                              type="number"
+                              name="representative_total_elem"
+                              required
+                            />
                           </div>
 
                           <div className="input--form mb--5">
@@ -177,7 +245,8 @@ const AddCitizen = ({
                             </label>
                             <InputText
                               type="number"
-                              name="trainee_birth_date"
+                              name="representative_total_highschool"
+                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -187,7 +256,8 @@ const AddCitizen = ({
                             </label>
                             <InputText
                               type="number"
-                              name="trainee_birth_place"
+                              name="representative_total_college"
+                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -197,11 +267,14 @@ const AddCitizen = ({
                               your own house, renting, or living with
                               relatives?)
                             </label>
-                            <InputSelect name="trainee_gender">
+                            <InputSelect
+                              name="representative_household_living_id"
+                              required
+                            >
                               <option value="">--</option>
-                              <option value="owner">Sariling bahay</option>
-                              <option value="renting">Nangungupahan</option>
-                              <option value="living_with">Nakikitara</option>
+                              <option value="1">Sariling bahay</option>
+                              <option value="2">Nangungupahan</option>
+                              <option value="3">Nakikitara</option>
                             </InputSelect>
                           </div>
                           <div className="input--form mb--5">
@@ -210,11 +283,14 @@ const AddCitizen = ({
                               pamilya? (How much is your family's monthly
                               income?)
                             </label>
-                            <InputSelect name="trainee_gender">
+                            <InputSelect
+                              name="representative_monthly_income_id"
+                              required
+                            >
                               <option value="">--</option>
-                              <option value="owner">5,000 - 10,000</option>
-                              <option value="renting">10,000 - 20,000</option>
-                              <option value="living_with">20,000 - more</option>
+                              <option value="1">5,000 - 10,000</option>
+                              <option value="2">10,000 - 20,000</option>
+                              <option value="3">20,000 - more</option>
                             </InputSelect>
                           </div>
 
@@ -226,11 +302,14 @@ const AddCitizen = ({
                               Water and Eletricity Bills, Educational expenses,
                               and other utilities.)
                             </label>
-                            <InputSelect name="trainee_gender">
+                            <InputSelect
+                              name="representative_bill_expenses_id"
+                              required
+                            >
                               <option value="">--</option>
-                              <option value="owner">5,000 - 10,000</option>
-                              <option value="renting">10,000 - 20,000</option>
-                              <option value="living_with">20,000 - more</option>
+                              <option value="1">5,000 - 10,000</option>
+                              <option value="2">10,000 - 20,000</option>
+                              <option value="3">20,000 - more</option>
                             </InputSelect>
                           </div>
                           <div className="input--form mb--5">
@@ -240,11 +319,14 @@ const AddCitizen = ({
                               Buwan? (How much was spent on daily consumption of
                               food for a month?)
                             </label>
-                            <InputSelect name="trainee_gender">
+                            <InputSelect
+                              name="representative_food_expenses_id"
+                              required
+                            >
                               <option value="">--</option>
-                              <option value="owner">5,000 - 10,000</option>
-                              <option value="renting">10,000 - 20,000</option>
-                              <option value="living_with">20,000 - more</option>
+                              <option value="1">5,000 - 10,000</option>
+                              <option value="2">10,000 - 20,000</option>
+                              <option value="3">20,000 - more</option>
                             </InputSelect>
                           </div>
                           <div className="input--form mb--5">
@@ -255,7 +337,8 @@ const AddCitizen = ({
                             </label>
                             <InputText
                               type="number"
-                              name="trainee_guardian_contact"
+                              name="representative_total_able_work"
+                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -266,28 +349,40 @@ const AddCitizen = ({
                             </label>
                             <InputText
                               type="number"
-                              name="trainee_guardian_contact"
+                              name="representative_total_employed"
+                              required
                             />
                           </div>
                           <button
-                            className="btn--secondary m-left btn__container"
+                            className="btn--default m-left btn__container"
                             type="submit"
                             disabled={loading}
                           >
-                            {loading ? <SpinnerButton /> : <span>Next</span>}
+                            {loading ? <SpinnerButton /> : <span>Submit</span>}
                           </button>
                         </Form>
                       );
                     }}
                   </Formik>
                 ) : (
-                  <h3>Evaluation has not yet begun.</h3>
+                  <>
+                    <h3>
+                      Sorry this page is not available due to the restriction
+                      from the administrators. To be able to access this page
+                      you may request consent or wait for its availability.
+                      Thank you!
+                    </h3>
+                    <NoData />
+                  </>
                 )}
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {store.error && <ModalError />}
+      {store.success && <ModalSuccess />}
     </>
   );
 };

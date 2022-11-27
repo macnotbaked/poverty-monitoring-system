@@ -12,6 +12,7 @@ class Representative
     public $representative_total_underage;
     public $representative_total_midage;
     public $representative_total_adult;
+    public $representative_total_seniors;
     public $representative_total_pwd;
     public $representative_total_elem;
     public $representative_total_highschool;
@@ -49,6 +50,7 @@ class Representative
         $sql .= "representative_total_underage, ";
         $sql .= "representative_total_midage, ";
         $sql .= "representative_total_adult, ";
+        $sql .= "representative_total_seniors, ";
         $sql .= "representative_total_pwd, ";
         $sql .= "representative_total_elem, ";
         $sql .= "representative_total_highschool, ";
@@ -71,6 +73,7 @@ class Representative
         $sql .= "'{$this->representative_total_underage}', ";
         $sql .= "'{$this->representative_total_midage}', ";
         $sql .= "'{$this->representative_total_adult}', ";
+        $sql .= "'{$this->representative_total_seniors}', ";
         $sql .= "'{$this->representative_total_pwd}', ";
         $sql .= "'{$this->representative_total_elem}', ";
         $sql .= "'{$this->representative_total_highschool}', ";
@@ -199,6 +202,7 @@ class Representative
         $sql .= "representative_total_underage = '{$this->representative_total_underage}' ";
         $sql .= "representative_total_midage = '{$this->representative_total_midage}' ";
         $sql .= "representative_total_adult = '{$this->representative_total_adult}' ";
+        $sql .= "representative_total_seniors = '{$this->representative_total_seniors}' ";
         $sql .= "representative_total_pwd = '{$this->representative_total_pwd}' ";
         $sql .= "representative_total_elem = '{$this->representative_total_elem}' ";
         $sql .= "representative_total_highschool = '{$this->representative_total_highschool}' ";

@@ -32,9 +32,10 @@ const Citizen = () => {
     handleSearch,
     handleChange,
   } = useFetchDataLoadMore(
-    "/admin/admin-sitio/read-sitio-limit.php",
-    "/admin/admin-sitio/read-sitio-all.php",
-    5 // show number of records on a table
+    "/admin/admin-representative/read-representative-limit.php",
+    "/admin/admin-representative/read-representative-all.php",
+    2, // show number of records on a table
+    purokId
   );
 
   return (

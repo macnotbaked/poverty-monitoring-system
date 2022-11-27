@@ -10,6 +10,7 @@ try {
     checkInputData($data);
     $representative = new Representative($connection);
 
+    $representative->representative_eval_id = filter_var($data["representative_eval_id"], FILTER_SANITIZE_STRING);
     $representative->representative_purok_id = filter_var($data["representative_purok_id"], FILTER_SANITIZE_STRING);
     $representative->representative_is_active = 1;
     $representative->representative_name = filter_var($data["representative_name"], FILTER_SANITIZE_STRING);
@@ -19,6 +20,7 @@ try {
     $representative->representative_total_underage = filter_var($data["representative_total_underage"], FILTER_SANITIZE_STRING);
     $representative->representative_total_midage = filter_var($data["representative_total_midage"], FILTER_SANITIZE_STRING);
     $representative->representative_total_adult = filter_var($data["representative_total_adult"], FILTER_SANITIZE_STRING);
+    $representative->representative_total_seniors = filter_var($data["representative_total_seniors"], FILTER_SANITIZE_STRING);
     $representative->representative_total_pwd = filter_var($data["representative_total_pwd"], FILTER_SANITIZE_STRING);
     $representative->representative_total_elem = filter_var($data["representative_total_elem"], FILTER_SANITIZE_STRING);
     $representative->representative_total_highschool = filter_var($data["representative_total_highschool"], FILTER_SANITIZE_STRING);

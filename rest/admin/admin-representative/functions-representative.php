@@ -165,6 +165,7 @@ function getResultData($result)
             "representative_total_underage" => $representative_total_underage,
             "representative_total_midage" => $representative_total_midage,
             "representative_total_adult" => $representative_total_adult,
+            "representative_total_seniors" => $representative_total_seniors,
             "representative_total_pwd" => $representative_total_pwd,
             "representative_total_elem" => $representative_total_elem,
             "representative_total_highschool" => $representative_total_highschool,

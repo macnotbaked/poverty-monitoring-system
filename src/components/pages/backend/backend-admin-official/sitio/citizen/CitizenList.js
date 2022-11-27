@@ -44,75 +44,61 @@ const CitizenList = ({
           <thead className="">
             <tr>
               <th>#</th>
+              <th>Household Number</th>
               <th>Name</th>
-
               <th>Contact</th>
-              <th>Email</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>{count}</td>
-              <td>{"item.household_representative"}</td>
+            {result.length > 0 ? (
+              result.map((item, key) => {
+                count += 1;
+                return (
+                  <tr>
+                    <td>{count}</td>
+                    <td>House {item.representative_house_number}</td>
 
-              <td>{"09491040057"}</td>
-              <td>ervin@gmail.com</td>
-              <td>
-                <div className="d--flex">
-                  <Link
-                    to={`${devNavUrl}/admin/purok/household?sid=`}
-                    className="dropdown tooltip--table"
-                    data-tooltip="View"
-                  >
-                    <span>
-                      <FaEye />
-                    </span>
-                  </Link>
+                    <td>{item.representative_name}</td>
 
-                  <div className="dropdown">
-                    <span>
-                      <BsThreeDotsVertical />
-                    </span>
-                    <div className="dropdown-content">
-                      <button>
-                        <FaEdit /> Edit
-                      </button>
-                      <button>
-                        <FaArchive /> Archive
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                    <td>{item.representative_contact}</td>
+                    <td>
+                      <div className="d--flex">
+                        <Link
+                          to={`${devNavUrl}/admin/purok/household?sid=`}
+                          className="dropdown tooltip--table"
+                          data-tooltip="View"
+                        >
+                          <span>
+                            <FaEye />
+                          </span>
+                        </Link>
 
-                <div className="d--flex">
-                  <button
-                    className="dropdown tooltip--table"
-                    data-tooltip="Restore"
-                  >
-                    <span>
-                      <FaHistory />
-                    </span>
-                  </button>
-
-                  <button
-                    className="dropdown tooltip--table"
-                    data-tooltip="Delete"
-                  >
-                    <span>
-                      <FaTrash />
-                    </span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <>
+                        <div className="dropdown">
+                          <span>
+                            <BsThreeDotsVertical />
+                          </span>
+                          <div className="dropdown-content">
+                            <button>
+                              <FaEdit /> Edit
+                            </button>
+                            <button>
+                              <FaArchive /> Archive
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
               <tr className="nodata">
                 <td colSpan="100%">
                   <NoData />
                 </td>
               </tr>
-            </>
+            )}
           </tbody>
         </table>
       </div>
