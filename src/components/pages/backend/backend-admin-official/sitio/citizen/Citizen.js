@@ -1,6 +1,7 @@
 import React from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { setStartIndex } from "../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../store/StoreContext";
 import useFetchDataLoadMore from "../../../../../custom-hooks/useFetchDataLoadMore";
 import useLoadAllActivePurok from "../../../../../custom-hooks/useLoadAllActivePurok";
@@ -34,7 +35,7 @@ const Citizen = () => {
   } = useFetchDataLoadMore(
     "/admin/admin-representative/read-representative-limit.php",
     "/admin/admin-representative/read-representative-all.php",
-    2, // show number of records on a table
+    5, // show number of records on a table
     purokId
   );
 
@@ -56,6 +57,7 @@ const Citizen = () => {
                   <Link
                     className="btn--primary mr--1"
                     to={`${devNavUrl}/admin/household-add?sid=${purokId}`}
+                    onClick={() => dispatch(setStartIndex(0))}
                   >
                     <FaPlusCircle /> <span>Add</span>
                   </Link>

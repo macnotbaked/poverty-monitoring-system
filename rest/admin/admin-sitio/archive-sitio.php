@@ -10,8 +10,10 @@ try {
     checkInputData($data);
     $sitio = new Sitio($connection);
 
-    $sitio->sitio_aid  = filter_var($data["id"], FILTER_SANITIZE_STRING);
+    $sitio->sitio_aid = filter_var($data["id"], FILTER_SANITIZE_STRING);
     $sitio->sitio_datetime = filter_var($data["sitio_datetime"], FILTER_SANITIZE_STRING);
+
+    checkReadExist($sitio, $sitio->sitio_aid);
 
     $result = checkArchive($sitio);
 

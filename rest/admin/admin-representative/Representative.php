@@ -91,6 +91,18 @@ class Representative
         return $result;
     }
 
+    public function readAllCount()
+    {
+        $sql = "select *, count(household.representative_purok_id) as total from {$this->tblRespresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok ";
+        $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "group by household.representative_purok_id ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
     public function readAll()
     {
         $sql = "select * from {$this->tblRespresentative} as household, ";

@@ -149,6 +149,16 @@ function checkReadAlreadyExist($object, $role)
     return $result;
 }
 
+function checkReadExist($object)
+{
+    $result = $object->isExist();
+    if ($result->num_rows > 0) {
+        Response::sendResponse(false, "You cannot archive this purok. There are active representative inside.", []);
+        exit();
+    }
+    return $result;
+}
+
 function getResultData($result)
 {
     $data = [];

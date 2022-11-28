@@ -29,6 +29,16 @@ function checkCreate($object)
     return $result;
 }
 
+function checkReadAllCount($object)
+{
+    $result = $object->readAllCount();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Count all household).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkReadAll($object)
 {
     $result = $object->readAll();
@@ -178,6 +188,12 @@ function getResultData($result)
             "representative_total_employed" => $representative_total_employed,
             "representative_created" => $representative_created,
             "representative_datetime" => $representative_datetime,
+
+            "sitio_aid" => $sitio_aid,
+            "sitio_is_active" => $sitio_is_active,
+            "sitio_name" => $sitio_name,
+            "sitio_created" => $sitio_created,
+            "sitio_datetime" => $sitio_datetime,
         ];
         array_push($data, $list);
     }

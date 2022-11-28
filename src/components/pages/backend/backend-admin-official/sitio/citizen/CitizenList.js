@@ -20,10 +20,7 @@ const CitizenList = ({
 }) => {
   const search = React.useRef(null);
   const { store, dispatch } = React.useContext(StoreContext);
-  const [dataItem, setData] = React.useState(null);
-  const [isSus, setSus] = React.useState(false);
-  const [id, setId] = React.useState(null);
-  const [isDel, setDel] = React.useState(false);
+
   let count = 0;
 
   return (
@@ -55,7 +52,7 @@ const CitizenList = ({
               result.map((item, key) => {
                 count += 1;
                 return (
-                  <tr>
+                  <tr key={key}>
                     <td>{count}</td>
                     <td>House {item.representative_house_number}</td>
 

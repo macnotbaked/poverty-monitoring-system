@@ -110,6 +110,12 @@ export const StoreReducer = (state, action) => {
         isEvalEnabled: action.payload,
       };
 
+    case "IS_SUBMIT_EVAL":
+      return {
+        ...state,
+        isSubmitEval: action.payload,
+      };
+
     case "CREDENTIALS":
       return {
         ...state,

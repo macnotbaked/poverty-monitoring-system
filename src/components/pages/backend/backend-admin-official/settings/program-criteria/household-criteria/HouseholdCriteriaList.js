@@ -36,6 +36,7 @@ const HouseholdCriteriaList = ({
     setDel(null);
     setData(item);
   };
+
   return (
     <>
       <SearchBox

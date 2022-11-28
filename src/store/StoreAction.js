@@ -132,6 +132,13 @@ export const setIsEvalEnabled = (val) => {
   };
 };
 
+export const setSubmitEval = (val) => {
+  return {
+    type: "IS_SUBMIT_EVAL",
+    payload: val,
+  };
+};
+
 export const setCredentials = (
   users_aid,
   users_fname,

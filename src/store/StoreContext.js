@@ -21,6 +21,7 @@ const initVal = {
   isRestore: false,
   isAccountUpdated: false,
   isEvalEnabled: false,
+  isSubmitEval: false,
   pageNum: 1,
   credentials: {},
   evaluationPreview: {

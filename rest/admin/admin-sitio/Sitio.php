@@ -14,6 +14,7 @@ class Sitio
     {
         $this->connection = $db;
         $this->tblSitio = "pms_sitio";
+        $this->tblRespresentative = "pms_representative";
     }
 
     public function create()
@@ -126,7 +127,7 @@ class Sitio
         }
     }
 
-    public function arhive()
+    public function archive()
     {
         $sql = "update {$this->tblSitio} set ";
         $sql .= "sitio_is_active = '0', ";
@@ -172,6 +173,16 @@ class Sitio
     {
         $sql = "select * from {$this->tblSitio} ";
         $sql .= "where sitio_name = '{$this->sitio_name}' ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function isExist()
+    {
+        $sql = "select * from {$this->tblRespresentative} ";
+        $sql .= "where representative_purok_id = '{$this->sitio_aid}' ";
+        $sql .= "and representative_is_active = 1 ";
         $result = $this->connection->query($sql);
 
         return $result;

@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import {
   setIsEvaluated,
   setPageNum,
+  setStartIndex,
+  setSubmitEval,
 } from "../../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../../store/StoreContext";
 import useLoadAllActivePurok from "../../../../../../custom-hooks/useLoadAllActivePurok";
@@ -67,25 +69,30 @@ const AddCitizen = () => {
   };
 
   const yupSchema = Yup.object({
-    representative_name: Yup.string().required("Required"),
-    representative_contact: Yup.string().required("Required"),
-    representative_house_number: Yup.string().required("Required"),
-    representative_total_people: Yup.string().required("Required"),
-    representative_total_underage: Yup.string().required("Required"),
-    representative_total_midage: Yup.string().required("Required"),
-    representative_total_adult: Yup.string().required("Required"),
-    representative_total_seniors: Yup.string().required("Required"),
-    representative_total_pwd: Yup.string().required("Required"),
-    representative_total_elem: Yup.string().required("Required"),
-    representative_total_highschool: Yup.string().required("Required"),
-    representative_total_college: Yup.string().required("Required"),
-    representative_household_living_id: Yup.string().required("Required"),
-    representative_monthly_income_id: Yup.string().required("Required"),
-    representative_bill_expenses_id: Yup.string().required("Required"),
-    representative_food_expenses_id: Yup.string().required("Required"),
-    representative_total_able_work: Yup.string().required("Required"),
-    representative_total_employed: Yup.string().required("Required"),
+    // representative_name: Yup.string().required("Required"),
+    // representative_contact: Yup.string().required("Required"),
+    // representative_house_number: Yup.string().required("Required"),
+    // representative_total_people: Yup.string().required("Required"),
+    // representative_total_underage: Yup.string().required("Required"),
+    // representative_total_midage: Yup.string().required("Required"),
+    // representative_total_adult: Yup.string().required("Required"),
+    // representative_total_seniors: Yup.string().required("Required"),
+    // representative_total_pwd: Yup.string().required("Required"),
+    // representative_total_elem: Yup.string().required("Required"),
+    // representative_total_highschool: Yup.string().required("Required"),
+    // representative_total_college: Yup.string().required("Required"),
+    // representative_household_living_id: Yup.string().required("Required"),
+    // representative_monthly_income_id: Yup.string().required("Required"),
+    // representative_bill_expenses_id: Yup.string().required("Required"),
+    // representative_food_expenses_id: Yup.string().required("Required"),
+    // representative_total_able_work: Yup.string().required("Required"),
+    // representative_total_employed: Yup.string().required("Required"),
   });
+
+  React.useEffect(() => {
+    dispatch(setSubmitEval(false));
+  }, []);
+
   return (
     <>
       <div className={store.isActive ? "main-content show" : "main-content"}>
@@ -125,7 +132,7 @@ const AddCitizen = () => {
                         true, // boolean to show success modal
                         false // boolean to show load more functionality button
                       );
-                      resetForm();
+                      dispatch(setStartIndex(0));
                     }}
                   >
                     {(props) => {
@@ -133,18 +140,13 @@ const AddCitizen = () => {
                         <Form>
                           <div className="input--form mb--5">
                             <label htmlFor="">Household Representative:</label>
-                            <InputText
-                              type="text"
-                              name="representative_name"
-                              required
-                            />
+                            <InputText type="text" name="representative_name" />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">Contact Number:</label>
                             <InputText
                               type="text"
                               name="representative_contact"
-                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -152,7 +154,6 @@ const AddCitizen = () => {
                             <InputText
                               type="text"
                               name="representative_house_number"
-                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -164,7 +165,6 @@ const AddCitizen = () => {
                             <InputText
                               type="number"
                               name="representative_total_people"
-                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -176,7 +176,6 @@ const AddCitizen = () => {
                             <InputText
                               type="number"
                               name="representative_total_underage"
-                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -187,7 +186,6 @@ const AddCitizen = () => {
                             <InputText
                               type="number"
                               name="representative_total_midage"
-                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -199,7 +197,6 @@ const AddCitizen = () => {
                             <InputText
                               type="number"
                               name="representative_total_adult"
-                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -211,7 +208,6 @@ const AddCitizen = () => {
                             <InputText
                               type="number"
                               name="representative_total_seniors"
-                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -223,7 +219,6 @@ const AddCitizen = () => {
                             <InputText
                               type="number"
                               name="representative_total_pwd"
-                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -234,7 +229,6 @@ const AddCitizen = () => {
                             <InputText
                               type="number"
                               name="representative_total_elem"
-                              required
                             />
                           </div>
 
@@ -246,7 +240,6 @@ const AddCitizen = () => {
                             <InputText
                               type="number"
                               name="representative_total_highschool"
-                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -257,7 +250,6 @@ const AddCitizen = () => {
                             <InputText
                               type="number"
                               name="representative_total_college"
-                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -267,10 +259,7 @@ const AddCitizen = () => {
                               your own house, renting, or living with
                               relatives?)
                             </label>
-                            <InputSelect
-                              name="representative_household_living_id"
-                              required
-                            >
+                            <InputSelect name="representative_household_living_id">
                               <option value="">--</option>
                               <option value="1">Sariling bahay</option>
                               <option value="2">Nangungupahan</option>
@@ -283,10 +272,7 @@ const AddCitizen = () => {
                               pamilya? (How much is your family's monthly
                               income?)
                             </label>
-                            <InputSelect
-                              name="representative_monthly_income_id"
-                              required
-                            >
+                            <InputSelect name="representative_monthly_income_id">
                               <option value="">--</option>
                               <option value="1">5,000 - 10,000</option>
                               <option value="2">10,000 - 20,000</option>
@@ -302,10 +288,7 @@ const AddCitizen = () => {
                               Water and Eletricity Bills, Educational expenses,
                               and other utilities.)
                             </label>
-                            <InputSelect
-                              name="representative_bill_expenses_id"
-                              required
-                            >
+                            <InputSelect name="representative_bill_expenses_id">
                               <option value="">--</option>
                               <option value="1">5,000 - 10,000</option>
                               <option value="2">10,000 - 20,000</option>
@@ -319,10 +302,7 @@ const AddCitizen = () => {
                               Buwan? (How much was spent on daily consumption of
                               food for a month?)
                             </label>
-                            <InputSelect
-                              name="representative_food_expenses_id"
-                              required
-                            >
+                            <InputSelect name="representative_food_expenses_id">
                               <option value="">--</option>
                               <option value="1">5,000 - 10,000</option>
                               <option value="2">10,000 - 20,000</option>
@@ -338,7 +318,6 @@ const AddCitizen = () => {
                             <InputText
                               type="number"
                               name="representative_total_able_work"
-                              required
                             />
                           </div>
                           <div className="input--form mb--5">
@@ -350,7 +329,6 @@ const AddCitizen = () => {
                             <InputText
                               type="number"
                               name="representative_total_employed"
-                              required
                             />
                           </div>
                           <button
