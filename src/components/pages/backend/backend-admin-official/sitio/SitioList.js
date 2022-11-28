@@ -32,10 +32,6 @@ const SitioList = ({
   const [isDel, setDel] = React.useState(false);
   let count = 0;
 
-  const { activeRepresentative } = useLoadAllActiveRepresentative(
-    "/admin/admin-representative/read-representative-count-all.php"
-  );
-
   const handleEdit = (item) => {
     dispatch(setIsAdd(true));
     setItemEdit(item);
@@ -48,15 +44,17 @@ const SitioList = ({
     setData(item);
   };
 
-  const getTotalHousehold = (pid) => {
+  const { total } = useLoadAllActiveRepresentative(
+    "/admin/admin-representative/read-representative-count-all.php"
+  );
+
+  const getTotal = (id) => {
     let val = 0;
 
-    if (activeRepresentative.length > 0) {
-      activeRepresentative.map((item) => {
-        if (item.sitio_aid === pid) {
+    if (total.length) {
+      total.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
           val = item.total;
-
-          console.log(typeof val);
         }
       });
     }
@@ -97,7 +95,7 @@ const SitioList = ({
                   <tr key={key}>
                     <td>{count}.</td>
                     <td>{item.sitio_name}</td>
-                    <td>{getTotalHousehold(item.sitio_aid)}</td>
+                    <td>{getTotal(item.sitio_aid)}</td>
                     <td>
                       <div className="d--flex">
                         <Link

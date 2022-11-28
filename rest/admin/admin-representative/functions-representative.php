@@ -165,6 +165,13 @@ function getResultData($result)
     while ($row = $result->fetch_assoc()) {
         extract($row);
         $list = [
+            "sitio_aid" => $sitio_aid,
+            "sitio_is_active" => $sitio_is_active,
+            "sitio_name" => $sitio_name,
+            "sitio_created" => $sitio_created,
+            "sitio_datetime" => $sitio_datetime,
+            "total" => $total,
+
             "representative_aid" => $representative_aid,
             "representative_purok_id" => $representative_purok_id,
             "representative_is_active" => $representative_is_active,
@@ -189,11 +196,6 @@ function getResultData($result)
             "representative_created" => $representative_created,
             "representative_datetime" => $representative_datetime,
 
-            "sitio_aid" => $sitio_aid,
-            "sitio_is_active" => $sitio_is_active,
-            "sitio_name" => $sitio_name,
-            "sitio_created" => $sitio_created,
-            "sitio_datetime" => $sitio_datetime,
         ];
         array_push($data, $list);
     }

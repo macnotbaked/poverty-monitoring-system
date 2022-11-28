@@ -98,6 +98,8 @@ class Representative
         $sql .= "where household.representative_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
         $sql .= "group by household.representative_purok_id ";
+        $sql .= "order by purok.sitio_name asc ";
+
         $result = $this->connection->query($sql);
 
         return $result;
