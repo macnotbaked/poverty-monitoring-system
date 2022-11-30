@@ -10,13 +10,6 @@ const LoadMore = ({ handleLoad, loading, totalResult, result }) => {
     return (
       <>
         <div className="loadmore_container mb--2">
-          {/* <button
-            className="btn--gradient mb--20"
-            onClick={handleLoad}
-            disabled={loading}
-          >
-            {loading && <SpinnerButton />} Load more
-          </button> */}
           <button
             className="cssbuttons-io-button"
             onClick={handleLoad}

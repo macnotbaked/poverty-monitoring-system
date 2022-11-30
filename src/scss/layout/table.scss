@@ -14,6 +14,7 @@
     th:last-child,
     td:last-child {
       width: 13rem;
+      text-align: center !important;
     }
   }
   table tr:hover {
@@ -21,6 +22,13 @@
   }
   td {
     padding: 1rem;
+    border-right: 1px solid #e0e0e0;
+    &:last-child {
+      border: none;
+    }
+    &:first-child {
+      border: none;
+    }
   }
   tr {
     border-bottom: 1px solid #e0e0e0;
@@ -29,7 +37,14 @@
     font-weight: bold;
     background: $light-gray-x;
     border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
     padding: 1rem;
+    &:first-child {
+      border: none;
+    }
+    &:last-child {
+      border: none;
+    }
   }
   .nodata {
     &:hover {

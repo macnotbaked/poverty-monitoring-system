@@ -31,6 +31,7 @@ import Settings from "./components/pages/backend/backend-admin-official/settings
 import UsersActive from "./components/pages/backend/backend-admin-official/settings/users/admin-official-user/users-active/UsersActive";
 import Citizen from "./components/pages/backend/backend-admin-official/sitio/citizen/Citizen";
 import AddCitizen from "./components/pages/backend/backend-admin-official/sitio/citizen/citizen-add/AddCitizen";
+import UpdateCitizen from "./components/pages/backend/backend-admin-official/sitio/citizen/citizen-add/UpdateCitizen";
 import Sitio from "./components/pages/backend/backend-admin-official/sitio/Sitio";
 import CreatePassword from "./components/pages/frontend/frontend-create-password/CreatePassword";
 import CreatePasswordSuccess from "./components/pages/frontend/frontend-create-password/CreatePasswordSuccess";
@@ -160,7 +161,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/household-view`}
+              path={`${devNavUrl}/admin/purok/household-view`}
               element={
                 <ProtectedRoute>
                   <CitizenView />
@@ -353,6 +354,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <AddCitizen />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/purok/household-edit`}
+              element={
+                <ProtectedRoute>
+                  <UpdateCitizen />
                 </ProtectedRoute>
               }
             />

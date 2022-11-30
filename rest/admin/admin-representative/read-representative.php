@@ -10,14 +10,11 @@ try {
     checkInputData($data);
     $representative = new Representative($connection);
 
-    $start = trim(filter_var($data["start"], FILTER_SANITIZE_STRING));
-    $total = trim(filter_var($data["total"], FILTER_SANITIZE_STRING));
-
-    $result = checkReadLimit($representative, $start, $total);
+    $result = checkRead($representative);
 
     $data = getResultData($result);
 
-    Response::sendResponse(true, "Limit representative data found", $data);
+    Response::sendResponse(true, "All representative data found", $data);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted because a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

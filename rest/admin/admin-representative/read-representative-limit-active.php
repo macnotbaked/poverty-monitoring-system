@@ -10,10 +10,12 @@ try {
     checkInputData($data);
     $representative = new Representative($connection);
 
+    $representative->representative_purok_id = filter_var($data["type"], FILTER_SANITIZE_STRING);
+
     $start = trim(filter_var($data["start"], FILTER_SANITIZE_STRING));
     $total = trim(filter_var($data["total"], FILTER_SANITIZE_STRING));
 
-    $result = checkReadLimit($representative, $start, $total);
+    $result = checkReadLimitActive($representative, $start, $total);
 
     $data = getResultData($result);
 

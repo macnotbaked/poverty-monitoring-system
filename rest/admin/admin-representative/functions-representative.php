@@ -29,6 +29,16 @@ function checkCreate($object)
     return $result;
 }
 
+function checkRead($object)
+{
+    $result = $object->read();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (All household).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkReadAllCount($object)
 {
     $result = $object->readAllCount();
@@ -59,9 +69,29 @@ function checkReadLimit($object, $start, $total)
     return $result;
 }
 
-function checkReadSearch($object, $search)
+function checkReadAllActive($object)
 {
-    $result = $object->readSearch($search);
+    $result = $object->readAllActive();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (All household).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadLimitActive($object, $start, $total)
+{
+    $result = $object->readLimitActive($start, $total);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Limit household).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadSearchActive($object, $search)
+{
+    $result = $object->readSearchActive($search);
     if ($result->num_rows == 0) {
         Response::sendResponse(true, "Empty Records (Search active household).", []);
         exit();
@@ -153,7 +183,7 @@ function checkReadAlreadyExist($object, $name, $household)
 {
     $result = $object->isAlreadyExist();
     if ($result->num_rows > 0) {
-        Response::sendResponse(false, "{$name} {$household} already exist.", []);
+        Response::sendResponse(false, "{$name} in house number {$household} already exist.", []);
         exit();
     }
     return $result;
@@ -165,13 +195,6 @@ function getResultData($result)
     while ($row = $result->fetch_assoc()) {
         extract($row);
         $list = [
-            "sitio_aid" => $sitio_aid,
-            "sitio_is_active" => $sitio_is_active,
-            "sitio_name" => $sitio_name,
-            "sitio_created" => $sitio_created,
-            "sitio_datetime" => $sitio_datetime,
-            "total" => $total,
-
             "representative_aid" => $representative_aid,
             "representative_purok_id" => $representative_purok_id,
             "representative_is_active" => $representative_is_active,
@@ -195,6 +218,13 @@ function getResultData($result)
             "representative_total_employed" => $representative_total_employed,
             "representative_created" => $representative_created,
             "representative_datetime" => $representative_datetime,
+
+            "sitio_aid" => $sitio_aid,
+            "sitio_is_active" => $sitio_is_active,
+            "sitio_name" => $sitio_name,
+            "sitio_created" => $sitio_created,
+            "sitio_datetime" => $sitio_datetime,
+            "total" => $total,
 
         ];
         array_push($data, $list);

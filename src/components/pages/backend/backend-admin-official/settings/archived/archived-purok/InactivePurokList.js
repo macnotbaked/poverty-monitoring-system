@@ -74,7 +74,7 @@ const InactivePurokList = ({
                     <td>{item.sitio_name}</td>
                     <td>{100}</td>
                     <td>
-                      <div className="d--flex">
+                      <div className="d--flex justify-center">
                         <div
                           className="dropdown tooltip--table"
                           onClick={() => handleRestore(item)}

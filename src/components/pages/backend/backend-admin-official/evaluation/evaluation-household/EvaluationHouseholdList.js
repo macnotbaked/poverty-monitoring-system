@@ -59,7 +59,7 @@ const EvaluationHouseholdList = ({
                     <td>{item.sitio_name}</td>
                     <td>{100}</td>
                     <td>
-                      <div className="d--flex">
+                      <div className="d--flex justify-center">
                         <Link
                           to={`${devNavUrl}/admin/evaluation/household?sid=${item.sitio_aid}`}
                           className="dropdown tooltip--table"

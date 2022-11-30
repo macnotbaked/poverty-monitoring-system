@@ -16,11 +16,10 @@ import CitizenList from "./CitizenList";
 
 const Citizen = () => {
   const { store, dispatch } = React.useContext(StoreContext);
-  const [itemEdit, setItemEdit] = React.useState(null);
 
   const purokId = getUrlParam().get("sid");
 
-  const { loadingActivePurok, activePurok } = useLoadAllActivePurok(
+  const { activePurok } = useLoadAllActivePurok(
     "/admin/admin-sitio/read-sitio-by-id.php",
     purokId
   );
@@ -33,8 +32,8 @@ const Citizen = () => {
     handleSearch,
     handleChange,
   } = useFetchDataLoadMore(
-    "/admin/admin-representative/read-representative-limit.php",
-    "/admin/admin-representative/read-representative-all.php",
+    "/admin/admin-representative/read-representative-limit-active.php",
+    "/admin/admin-representative/read-representative-all-active.php",
     5, // show number of records on a table
     purokId
   );
@@ -49,7 +48,9 @@ const Citizen = () => {
             <div className="content">
               <div className="content__header">
                 <h3 className="t--bold py--2">
-                  {activePurok.length
+                  {purokId === 0 || purokId === null || purokId === ""
+                    ? "No Data"
+                    : activePurok.length > 0
                     ? activePurok[0].sitio_name
                     : "Loading..."}
                 </h3>
@@ -72,7 +73,6 @@ const Citizen = () => {
                 result={result}
                 handleSearch={handleSearch}
                 handleChange={handleChange}
-                setItemEdit={setItemEdit}
               />
             </div>
           </div>

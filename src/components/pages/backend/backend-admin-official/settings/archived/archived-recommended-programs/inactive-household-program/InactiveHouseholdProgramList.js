@@ -80,7 +80,7 @@ const InactiveHouseholdProgramList = ({
                     <td>{item.household_program_contact_number}</td>
                     <td>{item.household_program_contact_email}</td>
                     <td>
-                      <div className="d--flex">
+                      <div className="d--flex justify-center">
                         <button
                           className="dropdown tooltip--table"
                           data-tooltip="Edit"

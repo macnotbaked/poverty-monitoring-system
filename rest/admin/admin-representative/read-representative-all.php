@@ -8,9 +8,8 @@ try {
     $data = json_decode($body, true);
     $connection = checkConnection();
     checkInputData($data);
-    $representative = new Representative($connection);
 
-    $representative->representative_purok_id  = filter_var($data["type"], FILTER_SANITIZE_STRING);
+    $representative = new Representative($connection);
 
     $result = checkReadAll($representative);
 

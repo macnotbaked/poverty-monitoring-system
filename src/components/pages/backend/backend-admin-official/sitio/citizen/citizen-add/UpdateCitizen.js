@@ -6,8 +6,7 @@ import {
   setSubmitEval,
 } from "../../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../../store/StoreContext";
-import useLoadAllActivePurok from "../../../../../../custom-hooks/useLoadAllActivePurok";
-import useLoadAllEvaluationList from "../../../../../../custom-hooks/useLoadAllEvaluationList";
+import useLoadAllActiveRepresentative from "../../../../../../custom-hooks/useLoadAllActiveRepresentative";
 import Header from "../../../../../../header/Header";
 import { fetchData } from "../../../../../../helpers/fetchData";
 import { InputSelect, InputText } from "../../../../../../helpers/FormInputs";
@@ -20,46 +19,81 @@ import NoData from "../../../../../../widgets/NoData";
 import Spinner from "../../../../../../widgets/Spinner";
 import SpinnerButton from "../../../../../../widgets/SpinnerButton";
 
-const AddCitizen = () => {
+const UpdateCitizen = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [loading, setLoading] = React.useState(false);
 
-  const purokId = getUrlParam().get("sid");
+  const houseId = getUrlParam().get("hid");
 
-  const { loadingActivePurok, activePurok } = useLoadAllActivePurok(
-    "/admin/admin-sitio/read-sitio-by-id.php",
-    purokId
-  );
-
-  const { evaluationList, loadingevaluationList } = useLoadAllEvaluationList(
-    "/admin/admin-evaluation/enable-evaluation/read-enable-evaluation.php",
-    "isEvalEnabled"
-  );
+  const { activeRepresentative, loadingActiveRepresentative } =
+    useLoadAllActiveRepresentative(
+      "/admin/admin-representative/read-representative-by-id.php",
+      houseId
+    );
 
   const initVal = {
-    representative_aid: "",
-    representative_eval_id:
-      evaluationList.length && evaluationList[0].evaluation_list_aid,
-    representative_purok_id: activePurok.length && activePurok[0].sitio_aid,
-    representative_is_active: "",
-    representative_name: "",
-    representative_contact: "",
-    representative_house_number: "",
-    representative_total_people: "",
-    representative_total_underage: "",
-    representative_total_midage: "",
-    representative_total_adult: "",
-    representative_total_seniors: "",
-    representative_total_pwd: "",
-    representative_total_elem: "",
-    representative_total_highschool: "",
-    representative_total_college: "",
-    representative_household_living_id: "",
-    representative_monthly_income_id: "",
-    representative_bill_expenses_id: "",
-    representative_food_expenses_id: "",
-    representative_total_able_work: "",
-    representative_total_employed: "",
+    representative_aid:
+      activeRepresentative.length && activeRepresentative[0].representative_aid,
+    representative_name:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_name,
+    representative_name_old:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_name,
+    representative_contact:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_contact,
+    representative_house_number:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_house_number,
+    representative_house_number_old:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_house_number,
+    representative_total_people:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_total_people,
+    representative_total_underage:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_total_underage,
+    representative_total_midage:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_total_midage,
+    representative_total_adult:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_total_adult,
+    representative_total_seniors:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_total_seniors,
+    representative_total_pwd:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_total_pwd,
+    representative_total_elem:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_total_elem,
+    representative_total_highschool:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_total_highschool,
+    representative_total_college:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_total_college,
+    representative_household_living_id:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_household_living_id,
+    representative_monthly_income_id:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_monthly_income_id,
+    representative_bill_expenses_id:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_bill_expenses_id,
+    representative_food_expenses_id:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_food_expenses_id,
+    representative_total_able_work:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_total_able_work,
+    representative_total_employed:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_total_employed,
   };
 
   const yupSchema = Yup.object({
@@ -97,8 +131,8 @@ const AddCitizen = () => {
             <div className="content">
               <div className="content__header">
                 <h3 className="t--bold py--2">
-                  {activePurok.length > 0
-                    ? activePurok[0].sitio_name
+                  {activeRepresentative.length > 0
+                    ? activeRepresentative[0].sitio_name
                     : "Loading..."}
                 </h3>
                 <div className="content__button">
@@ -107,19 +141,19 @@ const AddCitizen = () => {
               </div>
 
               <div className="form__container">
-                {loadingevaluationList && <Spinner />}
+                {loadingActiveRepresentative && <Spinner />}
 
-                {evaluationList.length > 0 ? (
+                {activeRepresentative.length > 0 ? (
                   <Formik
                     initialValues={initVal}
                     validationSchema={yupSchema}
                     onSubmit={async (values, { setSubmitting, resetForm }) => {
                       fetchData(
                         setLoading,
-                        "/admin/admin-representative/create-representative.php",
+                        "/admin/admin-representative/update-representative.php",
                         values, // form data values
                         null, // result set data
-                        "Succesfully evaluated.", // success msg
+                        "Succesfully updated.", // success msg
                         "", // additional error msg if needed
                         dispatch, // context api action
                         store, // context api state
@@ -359,4 +393,4 @@ const AddCitizen = () => {
   );
 };
 
-export default AddCitizen;
+export default UpdateCitizen;

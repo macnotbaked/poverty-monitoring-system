@@ -11,9 +11,11 @@ import {
   FaTrashAlt,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { setIsConfirm } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
 import { devNavUrl } from "../../../../helpers/functions-general";
 import LoadMore from "../../../../widgets/LoadMore";
+import ModalConfirm from "../../../../widgets/ModalConfirm";
 import NoData from "../../../../widgets/NoData";
 import SearchBox from "../../../../widgets/SearchBox";
 import Spinner from "../../../../widgets/Spinner";
@@ -30,6 +32,16 @@ const CitizensList = ({
   const { store, dispatch } = React.useContext(StoreContext);
   const search = React.useRef(null);
   let count = 0;
+  const [dataItem, setData] = React.useState(null);
+  const [id, setId] = React.useState(null);
+  const [isDel, setDel] = React.useState(false);
+
+  const handleArchive = (item) => {
+    dispatch(setIsConfirm(true));
+    setId(item.representative_aid);
+    setDel(null);
+    setData(item);
+  };
   return (
     <>
       <SearchBox
@@ -39,8 +51,9 @@ const CitizensList = ({
         loading={loading}
         result={result}
         store={store}
-        url="/admin/admin-sitio/read-sitio-search.php"
+        url="/admin/admin-representative/read-representative-search-active.php"
       />
+
       <div className="table__container">
         {loading && <Spinner />}
         <table>
@@ -50,9 +63,12 @@ const CitizensList = ({
                 #
               </th>
               <th className="row--name" rowSpan="1">
-                Name
+                Household Number
               </th>
-              <th rowSpan="1">Total Household</th>
+              <th className="row--name" rowSpan="1">
+                Representative
+              </th>
+              <th rowSpan="1">Purok</th>
               <th rowSpan="1">Actions</th>
             </tr>
           </thead>
@@ -63,13 +79,14 @@ const CitizensList = ({
                 return (
                   <tr key={key}>
                     <td>{count}.</td>
+                    <td>House {item.representative_house_number}</td>
+                    <td>{item.representative_name}</td>
                     <td>{item.sitio_name}</td>
-                    <td>{100}</td>
                     <td>
                       {item.sitio_is_active === "1" && (
-                        <div className="d--flex">
+                        <div className="d--flex justify-center">
                           <Link
-                            to={`${devNavUrl}/admin/household-view?sid=${item.sitio_aid}`}
+                            to={`${devNavUrl}/admin/purok/household-view?hid=${item.representative_aid}`}
                             className="dropdown tooltip--table"
                             data-tooltip="View"
                           >
@@ -83,10 +100,16 @@ const CitizensList = ({
                               <BsThreeDotsVertical />
                             </span>
                             <div className="dropdown-content">
-                              <button>
-                                <FaEdit /> Edit
-                              </button>
-                              <button>
+                              <Link
+                                to={`${devNavUrl}/admin/purok/household-edit?hid=${item.representative_aid}`}
+                                className="tooltip--table"
+                                data-tooltip="View"
+                              >
+                                <span>
+                                  <FaEdit /> Edit
+                                </span>
+                              </Link>
+                              <button onClick={() => handleArchive(item)}>
                                 <FaArchive /> Archive
                               </button>
                             </div>
@@ -130,6 +153,18 @@ const CitizensList = ({
             )}
           </tbody>
         </table>
+
+        {store.isConfirm && (
+          <ModalConfirm
+            id={id}
+            isDel={isDel}
+            mysqlApiArchive={
+              "/admin/admin-representative/archive-representative.php"
+            }
+            msg={"Are you sure you want to archive"}
+            item={`"${dataItem.representative_house_number}"`}
+          />
+        )}
 
         <div className="mt--2 t--center row">
           {!store.isSearch && (

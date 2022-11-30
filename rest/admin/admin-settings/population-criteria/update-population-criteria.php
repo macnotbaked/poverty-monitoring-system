@@ -24,14 +24,6 @@ try {
         checkReadProgramAlreadyExist($criteria);
     }
 
-    // if ($population_criteria_range_from_old != $criteria->population_criteria_range_from) {
-    //     checkReadFromAlreadyExist($criteria);
-    // }
-
-    // if ($population_criteria_range_to_old != $criteria->population_criteria_range_to) {
-    //     checkReadToAlreadyExist($criteria);
-    // }
-
     $result = checkUpdate($criteria);
 
     Response::sendResponse(true, "Update criteria success.",  $result);

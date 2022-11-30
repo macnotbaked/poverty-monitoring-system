@@ -2,10 +2,14 @@ import React from "react";
 import { StoreContext } from "../../store/StoreContext";
 import { fetchData } from "../helpers/fetchData";
 
-const useLoadAllActiveRepresentative = (url, param1 = null, param2 = null) => {
+const useLoadAllActiveRepresentativeCount = (
+  url,
+  param1 = null,
+  param2 = null
+) => {
   const { store, dispatch } = React.useContext(StoreContext);
-  const [activeRepresentative, setResult] = React.useState([]);
-  const [loadingActiveRepresentative, setLoading] = React.useState(false);
+  const [countRepresentative, setResult] = React.useState([]);
+  const [loadingCountRepresentative, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     getData();
@@ -27,9 +31,9 @@ const useLoadAllActiveRepresentative = (url, param1 = null, param2 = null) => {
   };
 
   return {
-    loadingActiveRepresentative,
-    activeRepresentative,
+    loadingCountRepresentative,
+    countRepresentative,
   };
 };
 
-export default useLoadAllActiveRepresentative;
+export default useLoadAllActiveRepresentativeCount;

@@ -32,11 +32,6 @@ const SitioList = ({
   const [isDel, setDel] = React.useState(false);
   let count = 0;
 
-  const handleEdit = (item) => {
-    dispatch(setIsAdd(true));
-    setItemEdit(item);
-  };
-
   const handleArchive = (item) => {
     dispatch(setIsConfirm(true));
     setId(item.sitio_aid);
@@ -44,15 +39,20 @@ const SitioList = ({
     setData(item);
   };
 
-  const { total } = useLoadAllActiveRepresentative(
+  const handleEdit = (item) => {
+    dispatch(setIsAdd(true));
+    setItemEdit(item);
+  };
+
+  const { activeRepresentative } = useLoadAllActiveRepresentative(
     "/admin/admin-representative/read-representative-count-all.php"
   );
 
   const getTotal = (id) => {
     let val = 0;
 
-    if (total.length) {
-      total.map((item) => {
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
         if (Number(item.representative_purok_id) === Number(id)) {
           val = item.total;
         }
@@ -97,7 +97,7 @@ const SitioList = ({
                     <td>{item.sitio_name}</td>
                     <td>{getTotal(item.sitio_aid)}</td>
                     <td>
-                      <div className="d--flex">
+                      <div className="d--flex justify-center">
                         <Link
                           to={`${devNavUrl}/admin/purok/household?sid=${item.sitio_aid}`}
                           className="dropdown tooltip--table"
@@ -137,6 +137,16 @@ const SitioList = ({
           </tbody>
         </table>
 
+        {store.isConfirm && (
+          <ModalConfirm
+            id={id}
+            isDel={isDel}
+            mysqlApiArchive={"/admin/admin-sitio/archive-sitio.php"}
+            msg={"Are you sure you want to archive"}
+            item={`"${dataItem.sitio_name}"`}
+          />
+        )}
+
         <div className="mt--2 t--center row">
           {!store.isSearch && (
             <LoadMore
@@ -148,16 +158,6 @@ const SitioList = ({
           )}
         </div>
       </div>
-
-      {store.isConfirm && (
-        <ModalConfirm
-          id={id}
-          isDel={isDel}
-          mysqlApiArchive={"/admin/admin-sitio/archive-sitio.php"}
-          msg={"Are you sure you want to archive"}
-          item={`"${dataItem.sitio_name}"`}
-        />
-      )}
     </>
   );
 };

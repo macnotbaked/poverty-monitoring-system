@@ -91,6 +91,30 @@ class Representative
         return $result;
     }
 
+    public function readById()
+    {
+        $sql = "select * from {$this->tblRespresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok ";
+        $sql .= "where household.representative_aid = '{$this->representative_aid}' ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function read()
+    {
+        $sql = "select * from {$this->tblRespresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok ";
+        $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "order by purok.sitio_name asc ";
+
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
     public function readAllCount()
     {
         $sql = "select *, count(household.representative_purok_id) as total from {$this->tblRespresentative} as household, ";
@@ -111,6 +135,46 @@ class Representative
         $sql .= "{$this->tblSitio} as purok ";
         $sql .= "where household.representative_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "order by household.representative_house_number asc ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function readLimit($start, $total)
+    {
+        $sql = "select * from {$this->tblRespresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok ";
+        $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "order by household.representative_house_number asc ";
+        $sql .= "limit {$start}, {$total} ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function readSearch($search)
+    {
+        $sql = "select * from {$this->tblRespresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok ";
+        $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and (household.representative_name like '{$search}%' ";
+        $sql .= "or household.representative_house_number like '{$search}%' ";
+        $sql .= ") ";
+        $sql .= "order by household.representative_name asc ";
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function readAllActive()
+    {
+        $sql = "select * from {$this->tblRespresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok ";
+        $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
         $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
         $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "order by household.representative_house_number asc ";
@@ -119,7 +183,7 @@ class Representative
         return $result;
     }
 
-    public function readLimit($start, $total)
+    public function readLimitActive($start, $total)
     {
         $sql = "select * from {$this->tblRespresentative} as household, ";
         $sql .= "{$this->tblSitio} as purok ";
@@ -134,15 +198,15 @@ class Representative
         return $result;
     }
 
-    public function readSearch($search)
+    public function readSearchActive($search)
     {
         $sql = "select * from {$this->tblRespresentative} as household, ";
         $sql .= "{$this->tblSitio} as purok ";
         $sql .= "where household.representative_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
-        $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
-        $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "and (household.representative_name like '{$search}%' ";
+        $sql .= "or household.representative_house_number like '{$search}%' ";
+        $sql .= "or purok.sitio_name like '{$search}%' ";
         $sql .= ") ";
         $sql .= "order by household.representative_name asc ";
         $result = $this->connection->query($sql);
@@ -197,35 +261,26 @@ class Representative
         return $result;
     }
 
-    public function readById()
-    {
-        $sql = "select * from {$this->tblRespresentative} ";
-        $sql .= "where representative_aid = '{$this->representative_aid}' ";
-        $result = $this->connection->query($sql);
-
-        return $result;
-    }
-
     public function update()
     {
         $sql = "update {$this->tblRespresentative} set ";
         $sql .= "representative_name = '{$this->representative_name}', ";
-        $sql .= "representative_contact = '{$this->representative_contact}' ";
-        $sql .= "representative_house_number = '{$this->representative_house_number}' ";
-        $sql .= "representative_total_people = '{$this->representative_total_people}' ";
-        $sql .= "representative_total_underage = '{$this->representative_total_underage}' ";
-        $sql .= "representative_total_midage = '{$this->representative_total_midage}' ";
-        $sql .= "representative_total_adult = '{$this->representative_total_adult}' ";
-        $sql .= "representative_total_seniors = '{$this->representative_total_seniors}' ";
-        $sql .= "representative_total_pwd = '{$this->representative_total_pwd}' ";
-        $sql .= "representative_total_elem = '{$this->representative_total_elem}' ";
-        $sql .= "representative_total_highschool = '{$this->representative_total_highschool}' ";
-        $sql .= "representative_total_college = '{$this->representative_total_college}' ";
-        $sql .= "representative_household_living_id = '{$this->representative_household_living_id}' ";
-        $sql .= "representative_monthly_income_id = '{$this->representative_monthly_income_id}' ";
-        $sql .= "representative_bill_expenses_id = '{$this->representative_bill_expenses_id}' ";
-        $sql .= "representative_food_expenses_id = '{$this->representative_food_expenses_id}' ";
-        $sql .= "representative_total_able_work = '{$this->representative_total_able_work}' ";
+        $sql .= "representative_contact = '{$this->representative_contact}', ";
+        $sql .= "representative_house_number = '{$this->representative_house_number}', ";
+        $sql .= "representative_total_people = '{$this->representative_total_people}', ";
+        $sql .= "representative_total_underage = '{$this->representative_total_underage}', ";
+        $sql .= "representative_total_midage = '{$this->representative_total_midage}', ";
+        $sql .= "representative_total_adult = '{$this->representative_total_adult}', ";
+        $sql .= "representative_total_seniors = '{$this->representative_total_seniors}', ";
+        $sql .= "representative_total_pwd = '{$this->representative_total_pwd}', ";
+        $sql .= "representative_total_elem = '{$this->representative_total_elem}', ";
+        $sql .= "representative_total_highschool = '{$this->representative_total_highschool}', ";
+        $sql .= "representative_total_college = '{$this->representative_total_college}', ";
+        $sql .= "representative_household_living_id = '{$this->representative_household_living_id}', ";
+        $sql .= "representative_monthly_income_id = '{$this->representative_monthly_income_id}', ";
+        $sql .= "representative_bill_expenses_id = '{$this->representative_bill_expenses_id}', ";
+        $sql .= "representative_food_expenses_id = '{$this->representative_food_expenses_id}', ";
+        $sql .= "representative_total_able_work = '{$this->representative_total_able_work}', ";
         $sql .= "representative_total_employed = '{$this->representative_total_employed}' ";
         $sql .= "where representative_aid  = '{$this->representative_aid}' ";
 
@@ -239,7 +294,7 @@ class Representative
         }
     }
 
-    public function arhive()
+    public function archive()
     {
         $sql = "update {$this->tblRespresentative} set ";
         $sql .= "representative_is_active = '0', ";

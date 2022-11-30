@@ -75,7 +75,7 @@ const InactivePopulationCriteriaList = ({
                       {item.population_criteria_range_to}
                     </td>
                     <td>
-                      <div className="d--flex">
+                      <div className="d--flex justify-center">
                         <button
                           className="dropdown tooltip--table"
                           data-tooltip="Edit"

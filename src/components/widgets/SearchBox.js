@@ -1,7 +1,5 @@
 import React from "react";
-import { FaSearch, FaTimes } from "react-icons/fa";
-import { ImSearch } from "react-icons/im";
-import { setIsSearch, setSave, setStartIndex } from "../../store/StoreAction";
+import { FaSearch } from "react-icons/fa";
 
 const SearchBox = ({
   search,
@@ -13,10 +11,6 @@ const SearchBox = ({
   dispatch,
   url,
 }) => {
-  const handleClear = () => {
-    dispatch(setIsSearch(false));
-    dispatch(setStartIndex(0));
-  };
   return (
     <>
       <div className="search__container mb--1">

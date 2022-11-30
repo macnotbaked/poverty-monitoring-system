@@ -84,7 +84,7 @@ const InactiveUserList = ({
                     <td>{item.users_phone}</td>
                     <td>{item.roles_name}</td>
                     <td>
-                      <div className="d--flex">
+                      <div className="d--flex justify-center">
                         <div
                           className="dropdown tooltip--table"
                           onClick={() => handleRestore(item)}

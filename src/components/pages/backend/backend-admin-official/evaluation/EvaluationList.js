@@ -2,10 +2,17 @@ import { Chart as ChartJS } from "chart.js/auto";
 import React from "react";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
 import { AiFillEye } from "react-icons/ai";
-import { FaEye } from "react-icons/fa";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { FaArchive, FaEdit, FaEye } from "react-icons/fa";
+import {
+  MdOutlineKeyboardArrowDown,
+  MdOutlineKeyboardArrowUp,
+} from "react-icons/md";
 import { Link } from "react-router-dom";
 import { setStartIndex } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
+import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
+import useLoadAllActiveRepresentativeCount from "../../../../custom-hooks/useLoadAllActiveRepresentativeCount";
 import { devNavUrl } from "../../../../helpers/functions-general";
 import LoadMore from "../../../../widgets/LoadMore";
 import NoData from "../../../../widgets/NoData";
@@ -23,6 +30,114 @@ const EvaluationList = ({
   const search = React.useRef(null);
   const { store, dispatch } = React.useContext(StoreContext);
   let count = 0;
+
+  const { countRepresentative } = useLoadAllActiveRepresentativeCount(
+    "/admin/admin-representative/read-representative-count-all.php"
+  );
+
+  const { activeRepresentative } = useLoadAllActiveRepresentative(
+    "/admin/admin-representative/read-representative.php"
+  );
+
+  const getTotalPopulation = (id) => {
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          val += Number(item.representative_total_people);
+        }
+      });
+    }
+
+    return val;
+  };
+
+  const getTotalUnderage = (id) => {
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          val += Number(item.representative_total_underage);
+        }
+      });
+    }
+
+    return val;
+  };
+
+  const getTotalMiddleAge = (id) => {
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          val += Number(item.representative_total_midage);
+        }
+      });
+    }
+
+    return val;
+  };
+
+  const getTotalAdult = (id) => {
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          val += Number(item.representative_total_adult);
+        }
+      });
+    }
+
+    return val;
+  };
+
+  const getTotalSenior = (id) => {
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          val += Number(item.representative_total_seniors);
+        }
+      });
+    }
+
+    return val;
+  };
+
+  const getTotalHousehold = (id) => {
+    let val = 0;
+
+    if (countRepresentative.length) {
+      countRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          val = item.total;
+        }
+      });
+    }
+
+    return val;
+  };
+
+  const getTotalHouseholdOwn = (id) => {
+    let val = 0;
+
+    if (countRepresentative.length) {
+      countRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          if (Number(item.representative_household_living_id === "1")) {
+            val = item.total;
+          }
+        }
+      });
+    }
+
+    return val;
+  };
 
   return (
     <>
@@ -46,7 +161,10 @@ const EvaluationList = ({
               <th className="row--name" rowSpan="1">
                 Name
               </th>
-              <th rowSpan="1">Total Household</th>
+              <th rowSpan="1">Population</th>
+              <th rowSpan="1">Household</th>
+              <th rowSpan="1">Monthly Expenses</th>
+              <th rowSpan="1">Unemployed</th>
               <th rowSpan="1">Actions</th>
             </tr>
           </thead>
@@ -58,9 +176,99 @@ const EvaluationList = ({
                   <tr key={key}>
                     <td>{count}.</td>
                     <td>{item.sitio_name}</td>
+                    <td>
+                      <div className="d--flex align-center justify-between">
+                        {getTotalPopulation(item.sitio_aid)}{" "}
+                        <div className="dropdown">
+                          <span className="arrow">
+                            <MdOutlineKeyboardArrowDown />
+                          </span>
+                          <div className="dropdown-content-secondary">
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>Under age</th>
+                                  <th>Middle age</th>
+                                  <th>Adult</th>
+                                  <th>Senior</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>{getTotalUnderage(item.sitio_aid)}</td>
+                                  <td>{getTotalMiddleAge(item.sitio_aid)}</td>
+                                  <td>{getTotalAdult(item.sitio_aid)}</td>
+                                  <td>{getTotalSenior(item.sitio_aid)}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="d--flex align-center justify-between">
+                        {getTotalHousehold(item.sitio_aid)}
+                        <div className="dropdown">
+                          <span className="arrow">
+                            <MdOutlineKeyboardArrowDown />
+                          </span>
+                          <div className="dropdown-content-secondary">
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>Own</th>
+                                  <th>Rent</th>
+                                  <th>Living</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>
+                                    {getTotalHouseholdOwn(item.sitio_aid)}
+                                  </td>
+                                  <td>3</td>
+                                  <td>3</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="d--flex align-center justify-between">
+                        {item.sitio_name}{" "}
+                        <div className="dropdown">
+                          <span className="arrow">
+                            <MdOutlineKeyboardArrowDown />
+                          </span>
+                          <div className="dropdown-content-secondary">
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>Middle Age</th>
+                                  <th>Child</th>
+                                  <th>Adult</th>
+                                  <th>Senior</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>{getTotalMiddleAge(item.sitio_aid)}</td>
+                                  <td>2</td>
+                                  <td>3</td>
+                                  <td>3</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
                     <td>{100}</td>
                     <td>
-                      <div className="d--flex">
+                      <div className="d--flex justify-center">
                         <Link
                           to={`${devNavUrl}/admin/evaluation/household?sid=${item.sitio_aid}`}
                           className="dropdown tooltip--table"
