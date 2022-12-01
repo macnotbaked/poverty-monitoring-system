@@ -126,17 +126,66 @@ const EvaluationList = ({
   const getTotalHouseholdOwn = (id) => {
     let val = 0;
 
-    if (countRepresentative.length) {
-      countRepresentative.map((item) => {
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
         if (Number(item.representative_purok_id) === Number(id)) {
-          if (Number(item.representative_household_living_id === "1")) {
-            val = item.total;
-          }
+          val += item.representative_household_living_id === "1";
         }
       });
     }
 
     return val;
+  };
+
+  const getTotalHouseholdRent = (id) => {
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          val += item.representative_household_living_id === "2";
+        }
+      });
+    }
+
+    return val;
+  };
+
+  const getTotalHouseholdLivingWith = (id) => {
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          val += item.representative_household_living_id === "3";
+        }
+      });
+    }
+
+    return val;
+  };
+
+  const getTotalUnemployment = (id) => {
+    let ableToWork = 0;
+    let employed = 0;
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          ableToWork += Number(item.representative_total_able_work);
+          employed += Number(item.representative_total_employed);
+        }
+      });
+    }
+
+    val = ((ableToWork - employed) / ableToWork) * 100;
+
+    if (isNaN(val)) {
+      return `${(0).toFixed(2)}`;
+    } else {
+      return val.toFixed(2);
+    }
   };
 
   return (
@@ -227,8 +276,14 @@ const EvaluationList = ({
                                   <td>
                                     {getTotalHouseholdOwn(item.sitio_aid)}
                                   </td>
-                                  <td>3</td>
-                                  <td>3</td>
+                                  <td>
+                                    {getTotalHouseholdRent(item.sitio_aid)}
+                                  </td>
+                                  <td>
+                                    {getTotalHouseholdLivingWith(
+                                      item.sitio_aid
+                                    )}
+                                  </td>
                                 </tr>
                               </tbody>
                             </table>
@@ -266,7 +321,7 @@ const EvaluationList = ({
                         </div>
                       </div>
                     </td>
-                    <td>{100}</td>
+                    <td>{getTotalUnemployment(item.sitio_aid)}%</td>
                     <td>
                       <div className="d--flex justify-center">
                         <Link
