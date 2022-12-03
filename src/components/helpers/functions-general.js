@@ -1,5 +1,3 @@
-import { setEvaluationPreview } from "../../store/StoreAction";
-
 // development url
 export const devApiUrl =
   "http://localhost/school-works/poverty-monitoring-system/rest";
@@ -87,29 +85,7 @@ export function setStorageRoute(jwt) {
   localStorage.setItem("pmstoken", JSON.stringify({ token: jwt }));
 }
 
-export const loadEvaluationPreview = (dispatch, values) => {
-  dispatch(
-    setEvaluationPreview(
-      values.representative_aid,
-      values.representative_purok_id,
-      values.representative_is_active,
-      values.representative_name,
-      values.representative_contact,
-      values.representative_house_number,
-      values.representative_total_people,
-      values.representative_total_underage,
-      values.representative_total_midage,
-      values.representative_total_adult,
-      values.representative_total_pwd,
-      values.representative_total_elem,
-      values.representative_total_highschool,
-      values.representative_total_college,
-      values.representative_household_living_id,
-      values.representative_monthly_income_id,
-      values.representative_bill_expenses_id,
-      values.representative_food_expenses_id,
-      values.representative_total_able_work,
-      values.representative_total_employed
-    )
-  );
+// format the numbers separated by comma
+export const numberWithCommas = (x) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };

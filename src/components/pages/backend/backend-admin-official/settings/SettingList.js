@@ -3,6 +3,7 @@ import {
   FaArchive,
   FaListAlt,
   FaListUl,
+  FaMoneyCheckAlt,
   FaNotesMedical,
   FaUserCircle,
 } from "react-icons/fa";
@@ -54,6 +55,19 @@ const SettingList = () => {
         >
           <FaListAlt />
           <h4 className="t--bold my--1">Program Criteria</h4>
+          <h5>Manage the services being offered.</h5>
+        </Link>
+
+        {/* 4 */}
+        <Link
+          to={`${devNavUrl}/admin/income-classification`}
+          onClick={() => {
+            dispatch(setStartIndex(0));
+          }}
+          className="setting shadow--primary "
+        >
+          <FaMoneyCheckAlt />
+          <h4 className="t--bold mb--1">Income Classification</h4>
           <h5>Manage the services being offered.</h5>
         </Link>
 

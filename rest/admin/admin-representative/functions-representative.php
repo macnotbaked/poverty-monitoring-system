@@ -212,8 +212,6 @@ function getResultData($result)
             "representative_total_college" => $representative_total_college,
             "representative_household_living_id" => $representative_household_living_id,
             "representative_monthly_income_id" => $representative_monthly_income_id,
-            "representative_bill_expenses_id" => $representative_bill_expenses_id,
-            "representative_food_expenses_id" => $representative_food_expenses_id,
             "representative_total_able_work" => $representative_total_able_work,
             "representative_total_employed" => $representative_total_employed,
             "representative_created" => $representative_created,
@@ -225,6 +223,14 @@ function getResultData($result)
             "sitio_created" => $sitio_created,
             "sitio_datetime" => $sitio_datetime,
             "total" => $total,
+
+            "monthly_income_aid" => $monthly_income_aid,
+            "monthly_income_is_active" => $monthly_income_is_active,
+            "monthly_income_name" => $monthly_income_name,
+            "monthly_income_from" => $monthly_income_from,
+            "monthly_income_to" => $monthly_income_to,
+            "monthly_income_created" => $monthly_income_created,
+            "monthly_income_datetime" => $monthly_income_datetime,
 
         ];
         array_push($data, $list);

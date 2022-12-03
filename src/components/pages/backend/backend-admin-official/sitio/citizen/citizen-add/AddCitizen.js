@@ -6,12 +6,16 @@ import {
   setSubmitEval,
 } from "../../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../../store/StoreContext";
+import useLoadAll from "../../../../../../custom-hooks/useLoadAll";
 import useLoadAllActivePurok from "../../../../../../custom-hooks/useLoadAllActivePurok";
 import useLoadAllEvaluationList from "../../../../../../custom-hooks/useLoadAllEvaluationList";
 import Header from "../../../../../../header/Header";
 import { fetchData } from "../../../../../../helpers/fetchData";
 import { InputSelect, InputText } from "../../../../../../helpers/FormInputs";
-import { getUrlParam } from "../../../../../../helpers/functions-general";
+import {
+  getUrlParam,
+  numberWithCommas,
+} from "../../../../../../helpers/functions-general";
 import Navigation from "../../../../../../navigation/Navigation";
 import Back from "../../../../../../widgets/Back";
 import ModalError from "../../../../../../widgets/ModalError";
@@ -26,7 +30,11 @@ const AddCitizen = () => {
 
   const purokId = getUrlParam().get("sid");
 
-  const { loadingActivePurok, activePurok } = useLoadAllActivePurok(
+  const { result } = useLoadAll(
+    "/admin/admin-settings/income-classification/read-income-classification-all.php"
+  );
+
+  const { activePurok } = useLoadAllActivePurok(
     "/admin/admin-sitio/read-sitio-by-id.php",
     purokId
   );
@@ -56,8 +64,6 @@ const AddCitizen = () => {
     representative_total_college: "",
     representative_household_living_id: "",
     representative_monthly_income_id: "",
-    representative_bill_expenses_id: "",
-    representative_food_expenses_id: "",
     representative_total_able_work: "",
     representative_total_employed: "",
   };
@@ -77,14 +83,16 @@ const AddCitizen = () => {
     representative_total_college: Yup.string().required("Required"),
     representative_household_living_id: Yup.string().required("Required"),
     representative_monthly_income_id: Yup.string().required("Required"),
-    representative_bill_expenses_id: Yup.string().required("Required"),
-    representative_food_expenses_id: Yup.string().required("Required"),
     representative_total_able_work: Yup.string().required("Required"),
     representative_total_employed: Yup.string().required("Required"),
   });
 
   React.useEffect(() => {
-    dispatch(setSubmitEval(false));
+    dispatch(setSubmitEval(true));
+  }, []);
+
+  React.useEffect(() => {
+    dispatch(setStartIndex(0));
   }, []);
 
   return (
@@ -268,13 +276,28 @@ const AddCitizen = () => {
                             </label>
                             <InputSelect name="representative_monthly_income_id">
                               <option value="">--</option>
-                              <option value="1">5,000 - 10,000</option>
-                              <option value="2">10,000 - 20,000</option>
-                              <option value="3">20,000 - more</option>
+                              {result.length > 0 ? (
+                                result.map((item, key) => {
+                                  return (
+                                    <option
+                                      value={item.monthly_income_aid}
+                                      key={key}
+                                    >
+                                      {numberWithCommas(
+                                        item.monthly_income_from
+                                      )}{" "}
+                                      -{" "}
+                                      {numberWithCommas(item.monthly_income_to)}
+                                    </option>
+                                  );
+                                })
+                              ) : (
+                                <option value="">No data</option>
+                              )}
                             </InputSelect>
                           </div>
 
-                          <div className="input--form mb--5">
+                          {/* <div className="input--form mb--5">
                             <label htmlFor="">
                               12. Halaga na nagagastos para sa buwanang bayarin?
                               (Kuryente at tubig, gastusin pang edukasyon, at
@@ -288,21 +311,7 @@ const AddCitizen = () => {
                               <option value="2">10,000 - 20,000</option>
                               <option value="3">20,000 - more</option>
                             </InputSelect>
-                          </div>
-                          <div className="input--form mb--5">
-                            <label htmlFor="">
-                              13. Magkano ang halaga ng inyong nagagastos para
-                              sa pang araw araw na pagkain sa loob ng isang
-                              Buwan? (How much was spent on daily consumption of
-                              food for a month?)
-                            </label>
-                            <InputSelect name="representative_food_expenses_id">
-                              <option value="">--</option>
-                              <option value="1">5,000 - 10,000</option>
-                              <option value="2">10,000 - 20,000</option>
-                              <option value="3">20,000 - more</option>
-                            </InputSelect>
-                          </div>
+                          </div> */}
                           <div className="input--form mb--5">
                             <label htmlFor="">
                               14. Ilang ang bilang sa miyembro ng pamilya ang
@@ -338,13 +347,17 @@ const AddCitizen = () => {
                   </Formik>
                 ) : (
                   <>
-                    <h3>
-                      Sorry this page is not available due to the restriction
-                      from the administrators. To be able to access this page
-                      you may request consent or wait for its availability.
-                      Thank you!
-                    </h3>
-                    <NoData />
+                    {!loadingevaluationList && (
+                      <>
+                        <h3>
+                          Sorry this page is not available due to the
+                          restriction from the administrators. To be able to
+                          access this page you may request consent or wait for
+                          its availability. Thank you!
+                        </h3>
+                        <NoData />
+                      </>
+                    )}
                   </>
                 )}
               </div>

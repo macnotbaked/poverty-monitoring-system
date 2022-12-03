@@ -188,6 +188,20 @@ const EvaluationList = ({
     }
   };
 
+  const getTotalMonthlyIncome = (id) => {
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          val += Number(item.representative_total_able_work);
+        }
+      });
+    }
+
+    return val;
+  };
+
   return (
     <>
       <div className="table__container">
@@ -293,7 +307,7 @@ const EvaluationList = ({
                     </td>
                     <td>
                       <div className="d--flex align-center justify-between">
-                        {item.sitio_name}{" "}
+                        {getTotalMonthlyIncome(item.sitio_aid)}{" "}
                         <div className="dropdown">
                           <span className="arrow">
                             <MdOutlineKeyboardArrowDown />
@@ -302,16 +316,22 @@ const EvaluationList = ({
                             <table>
                               <thead>
                                 <tr>
-                                  <th>Middle Age</th>
-                                  <th>Child</th>
-                                  <th>Adult</th>
-                                  <th>Senior</th>
+                                  <th>Poor</th>
+                                  <th>Low Income (but not poor)</th>
+                                  <th>Lower middle class</th>
+                                  <th>Middle class</th>
+                                  <th>Upper middle income</th>
+                                  <th>High income (but not rich)</th>
+                                  <th>Rich</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
                                   <td>{getTotalMiddleAge(item.sitio_aid)}</td>
                                   <td>2</td>
+                                  <td>3</td>
+                                  <td>3</td>
+                                  <td>3</td>
                                   <td>3</td>
                                   <td>3</td>
                                 </tr>

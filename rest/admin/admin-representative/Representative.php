@@ -19,8 +19,6 @@ class Representative
     public $representative_total_college;
     public $representative_household_living_id;
     public $representative_monthly_income_id;
-    public $representative_bill_expenses_id;
-    public $representative_food_expenses_id;
     public $representative_total_able_work;
     public $representative_total_employed;
     public $representative_created;
@@ -29,12 +27,14 @@ class Representative
     public $connection;
     public $tblRespresentative;
     public $tblSitio;
+    public $tblIncomeClassification;
 
     public function __construct($db)
     {
         $this->connection = $db;
         $this->tblRespresentative = "pms_representative";
         $this->tblSitio = "pms_sitio";
+        $this->tblIncomeClassification = "pms_monthly_income";
     }
 
     public function create()
@@ -57,8 +57,6 @@ class Representative
         $sql .= "representative_total_college, ";
         $sql .= "representative_household_living_id, ";
         $sql .= "representative_monthly_income_id, ";
-        $sql .= "representative_bill_expenses_id, ";
-        $sql .= "representative_food_expenses_id, ";
         $sql .= "representative_total_able_work, ";
         $sql .= "representative_total_employed, ";
         $sql .= "representative_created, ";
@@ -80,8 +78,6 @@ class Representative
         $sql .= "'{$this->representative_total_college}', ";
         $sql .= "'{$this->representative_household_living_id}', ";
         $sql .= "'{$this->representative_monthly_income_id}', ";
-        $sql .= "'{$this->representative_bill_expenses_id}', ";
-        $sql .= "'{$this->representative_food_expenses_id}', ";
         $sql .= "'{$this->representative_total_able_work}', ";
         $sql .= "'{$this->representative_total_employed}', ";
         $sql .= "'{$this->representative_created}', ";
@@ -94,9 +90,11 @@ class Representative
     public function readById()
     {
         $sql = "select * from {$this->tblRespresentative} as household, ";
-        $sql .= "{$this->tblSitio} as purok ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblIncomeClassification} as ic ";
         $sql .= "where household.representative_aid = '{$this->representative_aid}' ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_monthly_income_id = ic.monthly_income_aid ";
         $result = $this->connection->query($sql);
 
         return $result;
@@ -278,8 +276,6 @@ class Representative
         $sql .= "representative_total_college = '{$this->representative_total_college}', ";
         $sql .= "representative_household_living_id = '{$this->representative_household_living_id}', ";
         $sql .= "representative_monthly_income_id = '{$this->representative_monthly_income_id}', ";
-        $sql .= "representative_bill_expenses_id = '{$this->representative_bill_expenses_id}', ";
-        $sql .= "representative_food_expenses_id = '{$this->representative_food_expenses_id}', ";
         $sql .= "representative_total_able_work = '{$this->representative_total_able_work}', ";
         $sql .= "representative_total_employed = '{$this->representative_total_employed}' ";
         $sql .= "where representative_aid  = '{$this->representative_aid}' ";

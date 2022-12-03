@@ -1,24 +1,19 @@
 import React from "react";
 import { FaPlusCircle } from "react-icons/fa";
-import { setIsAdd } from "../../../../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../../../../store/StoreContext";
-import useFetchDataLoadMore from "../../../../../../../custom-hooks/useFetchDataLoadMore";
-import useLoadAllInactive from "../../../../../../../custom-hooks/useLoadAllInactive";
-import Header from "../../../../../../../header/Header";
-import Navigation from "../../../../../../../navigation/Navigation";
-import Back from "../../../../../../../widgets/Back";
-import ModalError from "../../../../../../../widgets/ModalError";
-import ModalSuccess from "../../../../../../../widgets/ModalSuccess";
-import ModalAddUsers from "./ModalAddUsers";
-import UsersActiveList from "./UsersActiveList";
+import { setIsAdd } from "../../../../../../store/StoreAction";
+import { StoreContext } from "../../../../../../store/StoreContext";
+import useFetchDataLoadMore from "../../../../../custom-hooks/useFetchDataLoadMore";
+import Header from "../../../../../header/Header";
+import Navigation from "../../../../../navigation/Navigation";
+import Back from "../../../../../widgets/Back";
+import ModalError from "../../../../../widgets/ModalError";
+import ModalSuccess from "../../../../../widgets/ModalSuccess";
+import IncomeClassificationList from "./IncomeClassificationList";
+import ModalAddIncomeClassifation from "./ModalAddIncomeClassification";
 
-const UsersActive = () => {
+const IncomeClassification = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [itemEdit, setItemEdit] = React.useState(null);
-
-  const { inactive } = useLoadAllInactive(
-    "/admin/admin-settings/users/read-user-inactive-all.php"
-  );
 
   const {
     loading,
@@ -28,9 +23,9 @@ const UsersActive = () => {
     handleSearch,
     handleChange,
   } = useFetchDataLoadMore(
-    "/admin/admin-settings/users/read-user-active-limit.php",
-    "/admin/admin-settings/users/read-user-active-all.php",
-    1 // show number of records on a table
+    "/admin/admin-settings/income-classification/read-income-classification-limit.php",
+    "/admin/admin-settings/income-classification/read-income-classification-all.php",
+    5 // show number of records on a table
   );
 
   const handleAdd = () => {
@@ -47,7 +42,7 @@ const UsersActive = () => {
           <div className="row">
             <div className="content">
               <div className="content__header">
-                <h3 className="t--bold py--2">Users</h3>
+                <h3 className="t--bold py--2">Income Classification</h3>
                 <div className="content__button">
                   <button className="btn--primary" onClick={handleAdd}>
                     <FaPlusCircle /> <span>Add</span>
@@ -55,7 +50,7 @@ const UsersActive = () => {
                   <Back />
                 </div>
               </div>
-              <UsersActiveList
+              <IncomeClassificationList
                 loading={loading}
                 handleLoad={handleLoad}
                 totalResult={totalResult}
@@ -69,11 +64,11 @@ const UsersActive = () => {
         </div>
       </div>
 
-      {store.isAdd && <ModalAddUsers item={itemEdit} />}
+      {store.isAdd && <ModalAddIncomeClassifation item={itemEdit} />}
       {store.error && <ModalError />}
       {store.success && <ModalSuccess />}
     </>
   );
 };
 
-export default UsersActive;
+export default IncomeClassification;

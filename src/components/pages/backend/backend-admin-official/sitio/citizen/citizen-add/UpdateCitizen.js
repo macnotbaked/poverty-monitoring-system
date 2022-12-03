@@ -6,11 +6,15 @@ import {
   setSubmitEval,
 } from "../../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../../store/StoreContext";
+import useLoadAll from "../../../../../../custom-hooks/useLoadAll";
 import useLoadAllActiveRepresentative from "../../../../../../custom-hooks/useLoadAllActiveRepresentative";
 import Header from "../../../../../../header/Header";
 import { fetchData } from "../../../../../../helpers/fetchData";
 import { InputSelect, InputText } from "../../../../../../helpers/FormInputs";
-import { getUrlParam } from "../../../../../../helpers/functions-general";
+import {
+  getUrlParam,
+  numberWithCommas,
+} from "../../../../../../helpers/functions-general";
 import Navigation from "../../../../../../navigation/Navigation";
 import Back from "../../../../../../widgets/Back";
 import ModalError from "../../../../../../widgets/ModalError";
@@ -30,6 +34,10 @@ const UpdateCitizen = () => {
       "/admin/admin-representative/read-representative-by-id.php",
       houseId
     );
+
+  const { result } = useLoadAll(
+    "/admin/admin-settings/income-classification/read-income-classification-all.php"
+  );
 
   const initVal = {
     representative_aid:
@@ -82,12 +90,6 @@ const UpdateCitizen = () => {
     representative_monthly_income_id:
       activeRepresentative.length &&
       activeRepresentative[0].representative_monthly_income_id,
-    representative_bill_expenses_id:
-      activeRepresentative.length &&
-      activeRepresentative[0].representative_bill_expenses_id,
-    representative_food_expenses_id:
-      activeRepresentative.length &&
-      activeRepresentative[0].representative_food_expenses_id,
     representative_total_able_work:
       activeRepresentative.length &&
       activeRepresentative[0].representative_total_able_work,
@@ -111,14 +113,16 @@ const UpdateCitizen = () => {
     representative_total_college: Yup.string().required("Required"),
     representative_household_living_id: Yup.string().required("Required"),
     representative_monthly_income_id: Yup.string().required("Required"),
-    representative_bill_expenses_id: Yup.string().required("Required"),
-    representative_food_expenses_id: Yup.string().required("Required"),
     representative_total_able_work: Yup.string().required("Required"),
     representative_total_employed: Yup.string().required("Required"),
   });
 
   React.useEffect(() => {
     dispatch(setSubmitEval(false));
+  }, []);
+
+  React.useEffect(() => {
+    dispatch(setStartIndex(0));
   }, []);
 
   return (
@@ -148,6 +152,7 @@ const UpdateCitizen = () => {
                     initialValues={initVal}
                     validationSchema={yupSchema}
                     onSubmit={async (values, { setSubmitting, resetForm }) => {
+                      console.log(values);
                       fetchData(
                         setLoading,
                         "/admin/admin-representative/update-representative.php",
@@ -168,12 +173,17 @@ const UpdateCitizen = () => {
                         <Form>
                           <div className="input--form mb--5">
                             <label htmlFor="">Household Representative:</label>
-                            <InputText type="text" name="representative_name" />
+                            <InputText
+                              type="text"
+                              disabled={loading}
+                              name="representative_name"
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">Contact Number:</label>
                             <InputText
                               type="text"
+                              disabled={loading}
                               name="representative_contact"
                             />
                           </div>
@@ -181,6 +191,7 @@ const UpdateCitizen = () => {
                             <label htmlFor="">Household Number:</label>
                             <InputText
                               type="text"
+                              disabled={loading}
                               name="representative_house_number"
                             />
                           </div>
@@ -192,6 +203,7 @@ const UpdateCitizen = () => {
                             </label>
                             <InputText
                               type="number"
+                              disabled={loading}
                               name="representative_total_people"
                             />
                           </div>
@@ -203,6 +215,7 @@ const UpdateCitizen = () => {
                             </label>
                             <InputText
                               type="number"
+                              disabled={loading}
                               name="representative_total_underage"
                             />
                           </div>
@@ -213,6 +226,7 @@ const UpdateCitizen = () => {
                             </label>
                             <InputText
                               type="number"
+                              disabled={loading}
                               name="representative_total_midage"
                             />
                           </div>
@@ -224,6 +238,7 @@ const UpdateCitizen = () => {
                             </label>
                             <InputText
                               type="number"
+                              disabled={loading}
                               name="representative_total_adult"
                             />
                           </div>
@@ -235,6 +250,7 @@ const UpdateCitizen = () => {
                             </label>
                             <InputText
                               type="number"
+                              disabled={loading}
                               name="representative_total_seniors"
                             />
                           </div>
@@ -246,6 +262,7 @@ const UpdateCitizen = () => {
                             </label>
                             <InputText
                               type="number"
+                              disabled={loading}
                               name="representative_total_pwd"
                             />
                           </div>
@@ -256,6 +273,7 @@ const UpdateCitizen = () => {
                             </label>
                             <InputText
                               type="number"
+                              disabled={loading}
                               name="representative_total_elem"
                             />
                           </div>
@@ -267,6 +285,7 @@ const UpdateCitizen = () => {
                             </label>
                             <InputText
                               type="number"
+                              disabled={loading}
                               name="representative_total_highschool"
                             />
                           </div>
@@ -277,6 +296,7 @@ const UpdateCitizen = () => {
                             </label>
                             <InputText
                               type="number"
+                              disabled={loading}
                               name="representative_total_college"
                             />
                           </div>
@@ -287,7 +307,10 @@ const UpdateCitizen = () => {
                               your own house, renting, or living with
                               relatives?)
                             </label>
-                            <InputSelect name="representative_household_living_id">
+                            <InputSelect
+                              disabled={loading}
+                              name="representative_household_living_id"
+                            >
                               <option value="">--</option>
                               <option value="1">Sariling bahay</option>
                               <option value="2">Nangungupahan</option>
@@ -300,15 +323,33 @@ const UpdateCitizen = () => {
                               pamilya? (How much is your family's monthly
                               income?)
                             </label>
-                            <InputSelect name="representative_monthly_income_id">
+                            <InputSelect
+                              disabled={loading}
+                              name="representative_monthly_income_id"
+                            >
                               <option value="">--</option>
-                              <option value="1">5,000 - 10,000</option>
-                              <option value="2">10,000 - 20,000</option>
-                              <option value="3">20,000 - more</option>
+                              {result.length > 0 ? (
+                                result.map((item, key) => {
+                                  return (
+                                    <option
+                                      value={item.monthly_income_aid}
+                                      key={key}
+                                    >
+                                      {numberWithCommas(
+                                        item.monthly_income_from
+                                      )}{" "}
+                                      -{" "}
+                                      {numberWithCommas(item.monthly_income_to)}
+                                    </option>
+                                  );
+                                })
+                              ) : (
+                                <option value="">No data</option>
+                              )}
                             </InputSelect>
                           </div>
 
-                          <div className="input--form mb--5">
+                          {/* <div className="input--form mb--5">
                             <label htmlFor="">
                               12. Halaga na nagagastos para sa buwanang bayarin?
                               (Kuryente at tubig, gastusin pang edukasyon, at
@@ -316,27 +357,13 @@ const UpdateCitizen = () => {
                               Water and Eletricity Bills, Educational expenses,
                               and other utilities.)
                             </label>
-                            <InputSelect name="representative_bill_expenses_id">
+                            <InputSelect disabled={loading} name="representative_bill_expenses_id">
                               <option value="">--</option>
                               <option value="1">5,000 - 10,000</option>
                               <option value="2">10,000 - 20,000</option>
                               <option value="3">20,000 - more</option>
                             </InputSelect>
-                          </div>
-                          <div className="input--form mb--5">
-                            <label htmlFor="">
-                              13. Magkano ang halaga ng inyong nagagastos para
-                              sa pang araw araw na pagkain sa loob ng isang
-                              Buwan? (How much was spent on daily consumption of
-                              food for a month?)
-                            </label>
-                            <InputSelect name="representative_food_expenses_id">
-                              <option value="">--</option>
-                              <option value="1">5,000 - 10,000</option>
-                              <option value="2">10,000 - 20,000</option>
-                              <option value="3">20,000 - more</option>
-                            </InputSelect>
-                          </div>
+                          </div> */}
                           <div className="input--form mb--5">
                             <label htmlFor="">
                               14. Ilang ang bilang sa miyembro ng pamilya ang
@@ -345,6 +372,7 @@ const UpdateCitizen = () => {
                             </label>
                             <InputText
                               type="number"
+                              disabled={loading}
                               name="representative_total_able_work"
                             />
                           </div>
@@ -356,6 +384,7 @@ const UpdateCitizen = () => {
                             </label>
                             <InputText
                               type="number"
+                              disabled={loading}
                               name="representative_total_employed"
                             />
                           </div>
@@ -372,13 +401,17 @@ const UpdateCitizen = () => {
                   </Formik>
                 ) : (
                   <>
-                    <h3>
-                      Sorry this page is not available due to the restriction
-                      from the administrators. To be able to access this page
-                      you may request consent or wait for its availability.
-                      Thank you!
-                    </h3>
-                    <NoData />
+                    {!loadingActiveRepresentative && (
+                      <>
+                        <h3>
+                          Sorry this page is not available due to the
+                          restriction from the administrators. To be able to
+                          access this page you may request consent or wait for
+                          its availability. Thank you!
+                        </h3>
+                        <NoData />
+                      </>
+                    )}
                   </>
                 )}
               </div>

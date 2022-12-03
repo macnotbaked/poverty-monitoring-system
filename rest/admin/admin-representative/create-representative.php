@@ -27,8 +27,6 @@ try {
     $representative->representative_total_college = filter_var($data["representative_total_college"], FILTER_SANITIZE_STRING);
     $representative->representative_household_living_id = filter_var($data["representative_household_living_id"], FILTER_SANITIZE_STRING);
     $representative->representative_monthly_income_id = filter_var($data["representative_monthly_income_id"], FILTER_SANITIZE_STRING);
-    $representative->representative_bill_expenses_id = filter_var($data["representative_bill_expenses_id"], FILTER_SANITIZE_STRING);
-    $representative->representative_food_expenses_id = filter_var($data["representative_food_expenses_id"], FILTER_SANITIZE_STRING);
     $representative->representative_total_able_work = filter_var($data["representative_total_able_work"], FILTER_SANITIZE_STRING);
     $representative->representative_total_employed = filter_var($data["representative_total_employed"], FILTER_SANITIZE_STRING);
     $representative->representative_created = date("Y-m-d");

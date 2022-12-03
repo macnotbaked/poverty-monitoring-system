@@ -1,16 +1,15 @@
 import React from "react";
 import { FaArchive, FaEdit } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { setIsAdd, setIsConfirm } from "../../../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../../../store/StoreContext";
-import { devNavUrl } from "../../../../../../helpers/functions-general";
-import LoadMore from "../../../../../../widgets/LoadMore";
-import ModalConfirm from "../../../../../../widgets/ModalConfirm";
-import NoData from "../../../../../../widgets/NoData";
-import SearchBox from "../../../../../../widgets/SearchBox";
-import Spinner from "../../../../../../widgets/Spinner";
+import { setIsAdd, setIsConfirm } from "../../../../../../store/StoreAction";
+import { StoreContext } from "../../../../../../store/StoreContext";
+import { numberWithCommas } from "../../../../../helpers/functions-general";
+import LoadMore from "../../../../../widgets/LoadMore";
+import ModalConfirm from "../../../../../widgets/ModalConfirm";
+import NoData from "../../../../../widgets/NoData";
+import SearchBox from "../../../../../widgets/SearchBox";
+import Spinner from "../../../../../widgets/Spinner";
 
-const PopulationRateList = ({
+const IncomeClassificationList = ({
   loading,
   handleLoad,
   totalResult,
@@ -19,12 +18,11 @@ const PopulationRateList = ({
   handleChange,
   setItemEdit,
 }) => {
-  const search = React.useRef(null);
   const { store, dispatch } = React.useContext(StoreContext);
   const [dataItem, setData] = React.useState(null);
   const [isDel, setDel] = React.useState(false);
   const [id, setId] = React.useState(null);
-
+  const search = React.useRef(null);
   let count = 0;
 
   const handleEdit = (item) => {
@@ -34,10 +32,11 @@ const PopulationRateList = ({
 
   const handleArchive = (item) => {
     dispatch(setIsConfirm(true));
-    setId(item.population_program_aid);
+    setId(item.household_criteria_aid);
     setDel(null);
     setData(item);
   };
+
   return (
     <>
       <SearchBox
@@ -47,7 +46,7 @@ const PopulationRateList = ({
         loading={loading}
         result={result}
         store={store}
-        url="/admin/admin-settings/population-program/read-search-active-population-program.php"
+        url="/admin/admin-settings/income-classification/read-income-classification-search.php"
       />
       <div className="table__container">
         {loading && <Spinner />}
@@ -57,13 +56,9 @@ const PopulationRateList = ({
               <th className="" rowSpan="1">
                 #
               </th>
-              <th className="row--name" rowSpan="1">
-                Name
-              </th>
-              <th rowSpan="1">Description</th>
-              <th rowSpan="1">Contact Person</th>
-              <th rowSpan="1">Contact Number</th>
-              <th rowSpan="1">Email</th>
+              <th rowSpan="1">Name</th>
+              <th rowSpan="1">From</th>
+              <th rowSpan="1">To</th>
               <th rowSpan="1">Actions</th>
             </tr>
           </thead>
@@ -74,18 +69,12 @@ const PopulationRateList = ({
                 return (
                   <tr key={key}>
                     <td data-label="#">{count}.</td>
-                    <td data-label="Name">{item.population_program_name}</td>
-                    <td data-label="Description">
-                      {item.population_program_description}
+                    <td data-label="Name">{item.monthly_income_name}</td>
+                    <td data-label="From">
+                      {numberWithCommas(item.monthly_income_from)}
                     </td>
-                    <td data-label="Contact Person">
-                      {item.population_program_contact_person}
-                    </td>
-                    <td data-label="Contact Number">
-                      {item.population_program_contact_number}
-                    </td>
-                    <td data-label="Email">
-                      {item.population_program_contact_email}
+                    <td data-label="To">
+                      {numberWithCommas(item.monthly_income_to)}
                     </td>
                     <td data-label="Action">
                       <div className="d--flex justify-center">
@@ -121,8 +110,7 @@ const PopulationRateList = ({
             )}
           </tbody>
         </table>
-
-        <div className="mt--2 t--center row">
+        <div className="mt--2 t--center">
           {!store.isSearch && (
             <LoadMore
               handleLoad={handleLoad}
@@ -139,14 +127,14 @@ const PopulationRateList = ({
           id={id}
           isDel={isDel}
           mysqlApiArchive={
-            "/admin/admin-settings/population-program/archive-population-program.php"
+            "/admin/admin-settings/income-classification/archive-income-classification.php"
           }
           msg={"Are you sure you want to archive this"}
-          item={`"${dataItem.population_program_name}"`}
+          item={`"${dataItem.monthly_income_name}"`}
         />
       )}
     </>
   );
 };
 
-export default PopulationRateList;
+export default IncomeClassificationList;

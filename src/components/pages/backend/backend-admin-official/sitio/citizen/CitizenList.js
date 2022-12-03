@@ -66,7 +66,7 @@ const CitizenList = ({
                 return (
                   <tr key={key}>
                     <td>{count}.</td>
-                    <td>House {item.representative_house_number}</td>
+                    <td>House #{Number(item.representative_house_number)}</td>
 
                     <td>{item.representative_name}</td>
 

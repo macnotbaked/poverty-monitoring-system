@@ -3,6 +3,7 @@ import { FaCheck, FaTimes } from "react-icons/fa";
 import {
   setIsAccountUpdated,
   setSave,
+  setSubmitEval,
   setSuccess,
 } from "../../store/StoreAction";
 import { StoreContext } from "../../store/StoreContext";
@@ -22,7 +23,11 @@ const ModalSuccess = () => {
     }
 
     // refresh page after confirm
-    window.location.reload(false);
+    if (store.isSubmitEval) {
+      window.location.reload(false);
+      dispatch(setSubmitEval(false));
+      return;
+    }
   };
 
   React.useEffect(() => {

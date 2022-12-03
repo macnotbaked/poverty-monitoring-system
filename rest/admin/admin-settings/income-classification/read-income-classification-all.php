@@ -1,20 +1,20 @@
 <?php
 try {
     include_once("../../../common/package.php");
-    include_once("Roles.php");
-    include_once("functions-roles.php");
+    include_once("IncomeClassification.php");
+    include_once("functions-income-classification.php");
 
     $body = file_get_contents("php://input");
     $data = json_decode($body, true);
     $connection = checkConnection();
     checkInputData($data);
-    $role = new Roles($connection);
+    $classsification = new IncomeClassification($connection);
 
-    $role->roles_aid = filter_var($data["id"], FILTER_SANITIZE_STRING);
+    $result = checkReadAll($classsification);
 
-    $result = checkDelete($role);
+    $data = getResultData($result);
 
-    Response::sendResponse(true, "Role successfuly deleted.", []);
+    Response::sendResponse(true, "Inactive classification data found", $data);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted because a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

@@ -3,7 +3,10 @@ import { FaPrint } from "react-icons/fa";
 import { StoreContext } from "../../../../../store/StoreContext";
 import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
 import Header from "../../../../header/Header";
-import { getUrlParam } from "../../../../helpers/functions-general";
+import {
+  getUrlParam,
+  numberWithCommas,
+} from "../../../../helpers/functions-general";
 import Navigation from "../../../../navigation/Navigation";
 import Back from "../../../../widgets/Back";
 
@@ -17,6 +20,28 @@ const CitizenView = () => {
     houseId
   );
 
+  const getHouseholdName = () => {
+    let household = "";
+    // let own = "Sariling Bahay (Own)"
+    // let livingwith = "Nakikitira (Living to/with someone)"
+
+    if (activeRepresentative.length > 0) {
+      activeRepresentative.map((item) => {
+        if (item.representative_household_living_id === "1") {
+          household = "Sariling Bahay (Own)";
+        }
+        if (item.representative_household_living_id === "2") {
+          household = "Nangungupahan (Renting)";
+        }
+        if (item.representative_household_living_id === "3") {
+          household = "Nakikitira (Living to/with someone)";
+        }
+      });
+    }
+
+    return household;
+  };
+
   return (
     <>
       <div className={store.isActive ? "main-content show" : "main-content"}>
@@ -27,7 +52,9 @@ const CitizenView = () => {
             <div className="content">
               <div className="content__header">
                 <h3 className="t--bold py--2">
-                  {houseId === 0 || houseId === null || houseId === ""
+                  {activeRepresentative.length === 0 ||
+                  houseId === null ||
+                  houseId === ""
                     ? "No Data"
                     : activeRepresentative.length
                     ? activeRepresentative[0].sitio_name
@@ -35,7 +62,9 @@ const CitizenView = () => {
                   :{" "}
                   <span className="color--primary">
                     Household{" "}
-                    {houseId === 0 || houseId === null || houseId === ""
+                    {activeRepresentative.length === 0 ||
+                    houseId === null ||
+                    houseId === ""
                       ? "No Data"
                       : activeRepresentative.length
                       ? activeRepresentative[0].representative_house_number
@@ -65,7 +94,9 @@ const CitizenView = () => {
                   <div className="input--form mb--5">
                     <label>Household representative:</label>
                     <h3 className="mt--2">
-                      {houseId === 0 || houseId === null || houseId === ""
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
                         ? "No Data"
                         : activeRepresentative.length
                         ? activeRepresentative[0].representative_name
@@ -75,7 +106,9 @@ const CitizenView = () => {
                   <div className="input--form mb--5">
                     <label>Household contact:</label>
                     <h3 className="mt--2">
-                      {houseId === 0 || houseId === null || houseId === ""
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
                         ? "No Data"
                         : activeRepresentative.length
                         ? activeRepresentative[0].representative_contact
@@ -88,7 +121,9 @@ const CitizenView = () => {
                       many people were living or staying in this house?)
                     </label>
                     <h3 className="mt--2 half--width t--bold t--center">
-                      {houseId === 0 || houseId === null || houseId === ""
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
                         ? "No Data"
                         : activeRepresentative.length
                         ? activeRepresentative[0].representative_total_people
@@ -101,7 +136,9 @@ const CitizenView = () => {
                       (How many children are there under the age of 5?)
                     </label>
                     <h3 className="mt--2 half--width t--bold t--center">
-                      {houseId === 0 || houseId === null || houseId === ""
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
                         ? "No Data"
                         : activeRepresentative.length
                         ? activeRepresentative[0].representative_total_underage
@@ -114,7 +151,9 @@ const CitizenView = () => {
                       many are 6 to 18 years old?)
                     </label>
                     <h3 className="mt--2 half--width t--bold t--center">
-                      {houseId === 0 || houseId === null || houseId === ""
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
                         ? "No Data"
                         : activeRepresentative.length
                         ? activeRepresentative[0].representative_total_midage
@@ -127,7 +166,9 @@ const CitizenView = () => {
                       taong gulang? (How many are 19 to 59 years old?)
                     </label>
                     <h3 className="mt--2 half--width t--bold t--center">
-                      {houseId === 0 || houseId === null || houseId === ""
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
                         ? "No Data"
                         : activeRepresentative.length
                         ? activeRepresentative[0].representative_total_adult
@@ -141,7 +182,9 @@ const CitizenView = () => {
                       years old and older?)
                     </label>
                     <h3 className="mt--2 half--width t--bold t--center">
-                      {houseId === 0 || houseId === null || houseId === ""
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
                         ? "No Data"
                         : activeRepresentative.length
                         ? activeRepresentative[0].representative_total_seniors
@@ -155,7 +198,9 @@ const CitizenView = () => {
                       disability?)
                     </label>
                     <h3 className="mt--2 half--width t--bold t--center">
-                      {houseId === 0 || houseId === null || houseId === ""
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
                         ? "No Data"
                         : activeRepresentative.length
                         ? activeRepresentative[0].representative_total_pwd
@@ -168,7 +213,9 @@ const CitizenView = () => {
                       in elementary school?)
                     </label>
                     <h3 className="mt--2 half--width t--bold t--center">
-                      {houseId === 0 || houseId === null || houseId === ""
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
                         ? "No Data"
                         : activeRepresentative.length
                         ? activeRepresentative[0].representative_total_elem
@@ -181,7 +228,9 @@ const CitizenView = () => {
                       high school students?)
                     </label>
                     <h3 className="mt--2 half--width t--bold t--center">
-                      {houseId === 0 || houseId === null || houseId === ""
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
                         ? "No Data"
                         : activeRepresentative.length
                         ? activeRepresentative[0]
@@ -195,7 +244,9 @@ const CitizenView = () => {
                       studying in college?)
                     </label>
                     <h3 className="mt--2 half--width t--bold t--center">
-                      {houseId === 0 || houseId === null || houseId === ""
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
                         ? "No Data"
                         : activeRepresentative.length
                         ? activeRepresentative[0].representative_total_college
@@ -204,10 +255,19 @@ const CitizenView = () => {
                   </div>
                   <div className="input--form mb--5">
                     <label>
-                      10. Magkano ang halaga ng buwanang kita ng inyong pamilya?
-                      (How much is your family's monthly income?)
+                      10. Kayo ba ay nasa inyong sariling bahay, nangungupahan o
+                      nakikitara? (Are you living in your own house, renting, or
+                      living with relatives?)
                     </label>
-                    <h3 className="mt--2 half--width t--bold t--center">--</h3>
+                    <h3 className="mt--2 half--width t--bold t--center">
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
+                        ? "No Data"
+                        : activeRepresentative.length
+                        ? getHouseholdName()
+                        : "Loading..."}
+                    </h3>
                   </div>
 
                   <div className="input--form mb--5">
@@ -215,9 +275,21 @@ const CitizenView = () => {
                       11. Magkano ang halaga ng buwanang kita ng inyong pamilya?
                       (How much is your family's monthly income?)
                     </label>
-                    <h3 className="mt--2 half--width t--bold t--center">--</h3>
+                    <h3 className="mt--2 half--width t--bold t--center">
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
+                        ? "No Data"
+                        : activeRepresentative.length
+                        ? `${numberWithCommas(
+                            activeRepresentative[0].monthly_income_from
+                          )} - ${numberWithCommas(
+                            activeRepresentative[0].monthly_income_to
+                          )} (${activeRepresentative[0].monthly_income_name})`
+                        : "Loading..."}
+                    </h3>
                   </div>
-                  <div className="input--form mb--5">
+                  {/* <div className="input--form mb--5">
                     <label>
                       12. Halaga na nagagastos para sa buwanang bayarin?
                       (Kuryente at tubig, gastusin pang edukasyon, at iba pa.)
@@ -225,15 +297,7 @@ const CitizenView = () => {
                       Bills, Educational expenses, and other utilities.)
                     </label>
                     <h3 className="mt--2 half--width t--bold t--center">--</h3>
-                  </div>
-                  <div className="input--form mb--5">
-                    <label>
-                      13. Magkano ang halaga ng inyong nagagastos para sa pang
-                      araw araw na pagkain sa loob ng isang Buwan? (How much was
-                      spent on daily consumption of food for a month?)
-                    </label>
-                    <h3 className="mt--2 half--width t--bold t--center">--</h3>
-                  </div>
+                  </div> */}
                   <div className="input--form mb--5">
                     <label>
                       14. Ilang ang bilang sa miyembro ng pamilya ang may
@@ -241,7 +305,9 @@ const CitizenView = () => {
                       to work?)
                     </label>
                     <h3 className="mt--2 half--width t--bold t--center">
-                      {houseId === 0 || houseId === null || houseId === ""
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
                         ? "No Data"
                         : activeRepresentative.length
                         ? activeRepresentative[0].representative_total_able_work
@@ -255,7 +321,9 @@ const CitizenView = () => {
                       employed or currently earning?)
                     </label>
                     <h3 className="mt--2 half--width t--bold t--center">
-                      {houseId === 0 || houseId === null || houseId === ""
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
                         ? "No Data"
                         : activeRepresentative.length
                         ? activeRepresentative[0].representative_total_employed
