@@ -1,6 +1,7 @@
 import React from "react";
 import { FaPrint } from "react-icons/fa";
 import { StoreContext } from "../../../../../store/StoreContext";
+import useLoadAllActiveIncomeClassification from "../../../../custom-hooks/useLoadAllActiveIncomeClassification";
 import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
 import Header from "../../../../header/Header";
 import {
@@ -15,6 +16,10 @@ const CitizenView = () => {
 
   const houseId = getUrlParam().get("hid");
 
+  const { incomeClass } = useLoadAllActiveIncomeClassification(
+    "/admin/admin-settings/income-classification/read-income-classification-all.php"
+  );
+
   const { activeRepresentative } = useLoadAllActiveRepresentative(
     "/admin/admin-representative/read-representative-by-id.php",
     houseId
@@ -22,8 +27,6 @@ const CitizenView = () => {
 
   const getHouseholdName = () => {
     let household = "";
-    // let own = "Sariling Bahay (Own)"
-    // let livingwith = "Nakikitira (Living to/with someone)"
 
     if (activeRepresentative.length > 0) {
       activeRepresentative.map((item) => {
@@ -40,6 +43,47 @@ const CitizenView = () => {
     }
 
     return household;
+  };
+
+  const getHouseholdArea = () => {
+    let area = "";
+
+    if (activeRepresentative.length > 0) {
+      activeRepresentative.map((item) => {
+        if (item.representative_is_in_danger_area === "1") {
+          area = "Yes (Oo)";
+        }
+        if (item.representative_is_in_danger_area === "0") {
+          area = "Hindi (No)";
+        }
+      });
+    }
+
+    return area;
+  };
+
+  const getHouseholdIncomeClassification = () => {
+    let income = "";
+    let val = 0;
+
+    if (activeRepresentative.length > 0) {
+      activeRepresentative.map((item) => {
+        val =
+          Number(item.representative_monthly_income) /
+          Number(item.representative_total_people);
+      });
+    }
+
+    incomeClass.map((item) => {
+      if (
+        val >= Number(item.monthly_income_from / 5) &&
+        val <= Number(item.monthly_income_to / 5)
+      ) {
+        income = item.monthly_income_name;
+      }
+    });
+
+    return income;
   };
 
   return (
@@ -272,6 +316,24 @@ const CitizenView = () => {
 
                   <div className="input--form mb--5">
                     <label>
+                      10. Kayo ba ay nakatira sa mapanganib na lugar i.e., lugar
+                      na prone sa pagguho ng lupa, lindol, storm surge, atbp.
+                      (Do you live in dangerous areas i.e., areas prone to
+                      lanslide, earthquake, storm surge, etc.?)
+                    </label>
+                    <h3 className="mt--2 half--width t--bold t--center">
+                      {activeRepresentative.length === 0 ||
+                      houseId === null ||
+                      houseId === ""
+                        ? "No Data"
+                        : activeRepresentative.length
+                        ? getHouseholdArea()
+                        : "Loading..."}
+                    </h3>
+                  </div>
+
+                  <div className="input--form mb--5">
+                    <label>
                       11. Magkano ang halaga ng buwanang kita ng inyong pamilya?
                       (How much is your family's monthly income?)
                     </label>
@@ -282,10 +344,9 @@ const CitizenView = () => {
                         ? "No Data"
                         : activeRepresentative.length
                         ? `${numberWithCommas(
-                            activeRepresentative[0].monthly_income_from
-                          )} - ${numberWithCommas(
-                            activeRepresentative[0].monthly_income_to
-                          )} (${activeRepresentative[0].monthly_income_name})`
+                            activeRepresentative[0]
+                              .representative_monthly_income
+                          )} (${getHouseholdIncomeClassification()})`
                         : "Loading..."}
                     </h3>
                   </div>

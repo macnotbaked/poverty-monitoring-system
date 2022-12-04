@@ -1,16 +1,10 @@
-import { Chart as ChartJS } from "chart.js/auto";
 import React from "react";
-import { Bar, Doughnut, Line } from "react-chartjs-2";
-import { AiFillEye } from "react-icons/ai";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaArchive, FaEdit, FaEye } from "react-icons/fa";
-import {
-  MdOutlineKeyboardArrowDown,
-  MdOutlineKeyboardArrowUp,
-} from "react-icons/md";
+import { FaEye } from "react-icons/fa";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { setStartIndex } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
+import useLoadAllActiveIncomeClassification from "../../../../custom-hooks/useLoadAllActiveIncomeClassification";
 import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
 import useLoadAllActiveRepresentativeCount from "../../../../custom-hooks/useLoadAllActiveRepresentativeCount";
 import { devNavUrl } from "../../../../helpers/functions-general";
@@ -37,6 +31,10 @@ const EvaluationList = ({
 
   const { activeRepresentative } = useLoadAllActiveRepresentative(
     "/admin/admin-representative/read-representative.php"
+  );
+
+  const { incomeClass } = useLoadAllActiveIncomeClassification(
+    "/admin/admin-settings/income-classification/read-income-classification-all.php"
   );
 
   const getTotalPopulation = (id) => {
@@ -188,7 +186,7 @@ const EvaluationList = ({
     }
   };
 
-  const getTotalMonthlyIncome = (id) => {
+  const getTotalIncomeEarner = (id) => {
     let val = 0;
 
     if (activeRepresentative.length) {
@@ -201,6 +199,70 @@ const EvaluationList = ({
 
     return val;
   };
+
+  const getTotalRepresentative = (rid) => {
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_aid) === Number(rid)) {
+          val =
+            Number(item.representative_monthly_income) /
+            Number(item.representative_total_people);
+        }
+      });
+    }
+
+    return val;
+  };
+
+  const getIncomeClassification = (id) => {
+    let classification = "";
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          classification = incomeClass.map((income) => {
+            if (
+              getTotalRepresentative(item.representative_aid) >=
+                Number(income.monthly_income_from / 5) &&
+              getTotalRepresentative(item.representative_aid) <=
+                Number(income.monthly_income_to / 5)
+            ) {
+              return income.monthly_income_name;
+            }
+          });
+        }
+      });
+    }
+
+    const total = {};
+    let res = classification;
+    for (let amount of Object.values(res)) {
+      total[amount] = (total[amount] || "") + 1;
+    }
+    return total;
+
+    // return count;
+  };
+
+  // const sample = () => {
+  //   const total = {};
+  //   for (let amount of Object.values(["a", "a", "b", "c"])) {
+  //     total[amount] = (total[amount] || 0) + 1;
+  //   }
+  //   return total
+  // };
+  // console.log(sample());
+
+  // const counts = {};
+  // const sampleArray = ["a", "a", "b", "c"];
+  // console.log(
+  //   sampleArray.forEach(function (x) {
+  //     counts[x] = (counts[x] || 0) + 1;
+  //   })
+  // );
 
   return (
     <>
@@ -226,7 +288,7 @@ const EvaluationList = ({
               </th>
               <th rowSpan="1">Population</th>
               <th rowSpan="1">Household</th>
-              <th rowSpan="1">Monthly Expenses</th>
+              <th rowSpan="1">Income Earner</th>
               <th rowSpan="1">Unemployed</th>
               <th rowSpan="1">Actions</th>
             </tr>
@@ -307,7 +369,7 @@ const EvaluationList = ({
                     </td>
                     <td>
                       <div className="d--flex align-center justify-between">
-                        {getTotalMonthlyIncome(item.sitio_aid)}{" "}
+                        {getTotalIncomeEarner(item.sitio_aid)}{" "}
                         <div className="dropdown">
                           <span className="arrow">
                             <MdOutlineKeyboardArrowDown />
@@ -327,13 +389,27 @@ const EvaluationList = ({
                               </thead>
                               <tbody>
                                 <tr>
-                                  <td>{getTotalMiddleAge(item.sitio_aid)}</td>
-                                  <td>2</td>
-                                  <td>3</td>
-                                  <td>3</td>
-                                  <td>3</td>
-                                  <td>3</td>
-                                  <td>3</td>
+                                  <td>
+                                    {getIncomeClassification(item.sitio_aid)}
+                                  </td>
+                                  <td>
+                                    {getIncomeClassification(item.sitio_aid)}
+                                  </td>
+                                  <td>
+                                    {getIncomeClassification(item.sitio_aid)}
+                                  </td>
+                                  <td>
+                                    {getIncomeClassification(item.sitio_aid)}
+                                  </td>
+                                  <td>
+                                    {getIncomeClassification(item.sitio_aid)}
+                                  </td>
+                                  <td>
+                                    {getIncomeClassification(item.sitio_aid)}
+                                  </td>
+                                  <td>
+                                    {getIncomeClassification(item.sitio_aid)}
+                                  </td>
                                 </tr>
                               </tbody>
                             </table>
@@ -348,6 +424,7 @@ const EvaluationList = ({
                           to={`${devNavUrl}/admin/evaluation/household?sid=${item.sitio_aid}`}
                           className="dropdown tooltip--table"
                           data-tooltip="View"
+                          onClick={() => dispatch(setStartIndex(0))}
                         >
                           <span>
                             <FaEye />

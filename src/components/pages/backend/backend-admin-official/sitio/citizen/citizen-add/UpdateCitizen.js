@@ -87,9 +87,12 @@ const UpdateCitizen = () => {
     representative_household_living_id:
       activeRepresentative.length &&
       activeRepresentative[0].representative_household_living_id,
-    representative_monthly_income_id:
+    representative_is_in_danger_area:
       activeRepresentative.length &&
-      activeRepresentative[0].representative_monthly_income_id,
+      activeRepresentative[0].representative_is_in_danger_area,
+    representative_monthly_income:
+      activeRepresentative.length &&
+      activeRepresentative[0].representative_monthly_income,
     representative_total_able_work:
       activeRepresentative.length &&
       activeRepresentative[0].representative_total_able_work,
@@ -112,13 +115,14 @@ const UpdateCitizen = () => {
     representative_total_highschool: Yup.string().required("Required"),
     representative_total_college: Yup.string().required("Required"),
     representative_household_living_id: Yup.string().required("Required"),
-    representative_monthly_income_id: Yup.string().required("Required"),
+    representative_is_in_danger_area: Yup.string().required("Required"),
+    representative_monthly_income: Yup.string().required("Required"),
     representative_total_able_work: Yup.string().required("Required"),
     representative_total_employed: Yup.string().required("Required"),
   });
 
   React.useEffect(() => {
-    dispatch(setSubmitEval(false));
+    dispatch(setSubmitEval(true));
   }, []);
 
   React.useEffect(() => {
@@ -319,34 +323,29 @@ const UpdateCitizen = () => {
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
+                              10. Kayo ba ay nakatira sa mapanganib na lugar
+                              i.e., lugar na prone sa pagguho ng lupa, lindol,
+                              storm surge, atbp. (Do you live in dangerous areas
+                              i.e., areas prone to lanslide, earthquake, storm
+                              surge, etc.?)
+                            </label>
+                            <InputSelect name="representative_is_in_danger_area">
+                              <option value="">--</option>
+                              <option value="1">Oo (Yes)</option>
+                              <option value="0">Hindi (No)</option>
+                            </InputSelect>
+                          </div>
+                          <div className="input--form mb--5">
+                            <label htmlFor="">
                               11. Magkano ang halaga ng buwanang kita ng inyong
                               pamilya? (How much is your family's monthly
                               income?)
                             </label>
-                            <InputSelect
+                            <InputText
+                              type="number"
                               disabled={loading}
-                              name="representative_monthly_income_id"
-                            >
-                              <option value="">--</option>
-                              {result.length > 0 ? (
-                                result.map((item, key) => {
-                                  return (
-                                    <option
-                                      value={item.monthly_income_aid}
-                                      key={key}
-                                    >
-                                      {numberWithCommas(
-                                        item.monthly_income_from
-                                      )}{" "}
-                                      -{" "}
-                                      {numberWithCommas(item.monthly_income_to)}
-                                    </option>
-                                  );
-                                })
-                              ) : (
-                                <option value="">No data</option>
-                              )}
-                            </InputSelect>
+                              name="representative_monthly_income"
+                            />
                           </div>
 
                           {/* <div className="input--form mb--5">

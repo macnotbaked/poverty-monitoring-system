@@ -12,10 +12,7 @@ import useLoadAllEvaluationList from "../../../../../../custom-hooks/useLoadAllE
 import Header from "../../../../../../header/Header";
 import { fetchData } from "../../../../../../helpers/fetchData";
 import { InputSelect, InputText } from "../../../../../../helpers/FormInputs";
-import {
-  getUrlParam,
-  numberWithCommas,
-} from "../../../../../../helpers/functions-general";
+import { getUrlParam } from "../../../../../../helpers/functions-general";
 import Navigation from "../../../../../../navigation/Navigation";
 import Back from "../../../../../../widgets/Back";
 import ModalError from "../../../../../../widgets/ModalError";
@@ -63,7 +60,8 @@ const AddCitizen = () => {
     representative_total_highschool: "",
     representative_total_college: "",
     representative_household_living_id: "",
-    representative_monthly_income_id: "",
+    representative_is_in_danger_area: "",
+    representative_monthly_income: "",
     representative_total_able_work: "",
     representative_total_employed: "",
   };
@@ -82,7 +80,8 @@ const AddCitizen = () => {
     representative_total_highschool: Yup.string().required("Required"),
     representative_total_college: Yup.string().required("Required"),
     representative_household_living_id: Yup.string().required("Required"),
-    representative_monthly_income_id: Yup.string().required("Required"),
+    representative_is_in_danger_area: Yup.string().required("Required"),
+    representative_monthly_income: Yup.string().required("Required"),
     representative_total_able_work: Yup.string().required("Required"),
     representative_total_employed: Yup.string().required("Required"),
   });
@@ -142,11 +141,16 @@ const AddCitizen = () => {
                         <Form>
                           <div className="input--form mb--5">
                             <label htmlFor="">Household Representative:</label>
-                            <InputText type="text" name="representative_name" />
+                            <InputText
+                              disabled={loading}
+                              type="text"
+                              name="representative_name"
+                            />
                           </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">Contact Number:</label>
                             <InputText
+                              disabled={loading}
                               type="text"
                               name="representative_contact"
                             />
@@ -154,6 +158,7 @@ const AddCitizen = () => {
                           <div className="input--form mb--5">
                             <label htmlFor="">Household Number:</label>
                             <InputText
+                              disabled={loading}
                               type="text"
                               name="representative_house_number"
                             />
@@ -165,6 +170,7 @@ const AddCitizen = () => {
                               house?)
                             </label>
                             <InputText
+                              disabled={loading}
                               type="number"
                               name="representative_total_people"
                             />
@@ -176,6 +182,7 @@ const AddCitizen = () => {
                               of 5?)
                             </label>
                             <InputText
+                              disabled={loading}
                               type="number"
                               name="representative_total_underage"
                             />
@@ -186,6 +193,7 @@ const AddCitizen = () => {
                               gulang? (How many are 6 to 18 years old?)
                             </label>
                             <InputText
+                              disabled={loading}
                               type="number"
                               name="representative_total_midage"
                             />
@@ -197,6 +205,7 @@ const AddCitizen = () => {
                               old?)
                             </label>
                             <InputText
+                              disabled={loading}
                               type="number"
                               name="representative_total_adult"
                             />
@@ -208,6 +217,7 @@ const AddCitizen = () => {
                               there who are 60 years old and older?)
                             </label>
                             <InputText
+                              disabled={loading}
                               type="number"
                               name="representative_total_seniors"
                             />
@@ -219,6 +229,7 @@ const AddCitizen = () => {
                               with disability?)
                             </label>
                             <InputText
+                              disabled={loading}
                               type="number"
                               name="representative_total_pwd"
                             />
@@ -229,6 +240,7 @@ const AddCitizen = () => {
                               many are in elementary school?)
                             </label>
                             <InputText
+                              disabled={loading}
                               type="number"
                               name="representative_total_elem"
                             />
@@ -240,6 +252,7 @@ const AddCitizen = () => {
                               are in high school students?)
                             </label>
                             <InputText
+                              disabled={loading}
                               type="number"
                               name="representative_total_highschool"
                             />
@@ -250,6 +263,7 @@ const AddCitizen = () => {
                               are studying in college?)
                             </label>
                             <InputText
+                              disabled={loading}
                               type="number"
                               name="representative_total_college"
                             />
@@ -268,33 +282,32 @@ const AddCitizen = () => {
                               <option value="3">Nakikitara</option>
                             </InputSelect>
                           </div>
+
+                          <div className="input--form mb--5">
+                            <label htmlFor="">
+                              10. Kayo ba ay nakatira sa mapanganib na lugar
+                              i.e., lugar na prone sa pagguho ng lupa, lindol,
+                              storm surge, atbp. (Do you live in dangerous areas
+                              i.e., areas prone to lanslide, earthquake, storm
+                              surge, etc.?)
+                            </label>
+                            <InputSelect name="representative_is_in_danger_area">
+                              <option value="">--</option>
+                              <option value="1">Oo (Yes)</option>
+                              <option value="0">Hindi (No)</option>
+                            </InputSelect>
+                          </div>
                           <div className="input--form mb--5">
                             <label htmlFor="">
                               11. Magkano ang halaga ng buwanang kita ng inyong
                               pamilya? (How much is your family's monthly
                               income?)
                             </label>
-                            <InputSelect name="representative_monthly_income_id">
-                              <option value="">--</option>
-                              {result.length > 0 ? (
-                                result.map((item, key) => {
-                                  return (
-                                    <option
-                                      value={item.monthly_income_aid}
-                                      key={key}
-                                    >
-                                      {numberWithCommas(
-                                        item.monthly_income_from
-                                      )}{" "}
-                                      -{" "}
-                                      {numberWithCommas(item.monthly_income_to)}
-                                    </option>
-                                  );
-                                })
-                              ) : (
-                                <option value="">No data</option>
-                              )}
-                            </InputSelect>
+                            <InputText
+                              disabled={loading}
+                              type="number"
+                              name="representative_monthly_income"
+                            />
                           </div>
 
                           {/* <div className="input--form mb--5">
@@ -319,6 +332,7 @@ const AddCitizen = () => {
                               members are able to work?)
                             </label>
                             <InputText
+                              disabled={loading}
                               type="number"
                               name="representative_total_able_work"
                             />
@@ -330,6 +344,7 @@ const AddCitizen = () => {
                               members are employed or currently earning?)
                             </label>
                             <InputText
+                              disabled={loading}
                               type="number"
                               name="representative_total_employed"
                             />

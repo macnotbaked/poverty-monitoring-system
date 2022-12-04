@@ -14,7 +14,7 @@ try {
 
     $data = getResultData($result);
 
-    Response::sendResponse(true, "Inactive classification data found", $data);
+    Response::sendResponse(true, "Active classification data found", $data);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted because a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

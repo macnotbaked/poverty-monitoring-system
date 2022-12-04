@@ -99,18 +99,25 @@
     rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
   z-index: 1;
   right: 0;
-  bottom: -5.7rem;
+  top: 1.9rem;
   margin-top: 5px;
   border-radius: 1rem;
   white-space: nowrap;
 
   table {
+    display: flex;
+    align-items: center;
+
     tr {
       border: none !important;
+      &:hover {
+        background: none;
+      }
     }
     th {
       border-right: 1px solid #e0e0e0 !important;
       border-bottom: 1px solid #e0e0e0 !important;
+      display: block;
 
       &:first-child {
         width: unset !important;
@@ -118,11 +125,14 @@
       &:last-child {
         border: none;
         width: unset !important;
+        text-align: unset !important;
       }
     }
     td {
-      border-right: 1px solid #e0e0e0 !important;
+      border-bottom: 1px solid #e0e0e0 !important;
       text-align: center;
+      display: block;
+      width: 7rem;
 
       &:first-child {
         width: unset !important;
