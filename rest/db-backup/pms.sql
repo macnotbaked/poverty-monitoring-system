@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2022 at 06:19 PM
+-- Generation Time: Dec 05, 2022 at 05:19 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,33 @@ SET time_zone = "+00:00";
 --
 -- Database: `pms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pms_barangay`
+--
+
+CREATE TABLE `pms_barangay` (
+  `barangay_aid` int(11) NOT NULL,
+  `barangay_name` varchar(128) NOT NULL,
+  `barangay_municipality` varchar(255) NOT NULL,
+  `barangay_province` varchar(255) NOT NULL,
+  `barangay_contact_person_primary` varchar(255) NOT NULL,
+  `barangay_contact_number_primary` varchar(16) NOT NULL,
+  `barangay_contact_person_secondary` varchar(255) NOT NULL,
+  `barangay_contact_number_secondary` varchar(16) NOT NULL,
+  `barangay_photo` varchar(255) NOT NULL,
+  `barangay_created` varchar(32) NOT NULL,
+  `barangay_datetime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pms_barangay`
+--
+
+INSERT INTO `pms_barangay` (`barangay_aid`, `barangay_name`, `barangay_municipality`, `barangay_province`, `barangay_contact_person_primary`, `barangay_contact_number_primary`, `barangay_contact_person_secondary`, `barangay_contact_number_secondary`, `barangay_photo`, `barangay_created`, `barangay_datetime`) VALUES
+(5, 'Santa Elena', 'San Pablo City', 'Laguna', 'Mark Ryan Merin', '09491040057', 'Meirejoy Marlait', '09662993797', 'download.jfif', '2022-11-23', '2022-11-23 15:14:14');
 
 -- --------------------------------------------------------
 
@@ -140,8 +167,8 @@ CREATE TABLE `pms_monthly_income` (
   `monthly_income_aid` int(11) NOT NULL,
   `monthly_income_is_active` tinyint(1) NOT NULL,
   `monthly_income_name` varchar(128) NOT NULL,
-  `monthly_income_from` varchar(8) NOT NULL,
-  `monthly_income_to` varchar(8) NOT NULL,
+  `monthly_income_from` varchar(16) NOT NULL,
+  `monthly_income_to` varchar(16) NOT NULL,
   `monthly_income_created` varchar(32) NOT NULL,
   `monthly_income_datetime` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -157,7 +184,7 @@ INSERT INTO `pms_monthly_income` (`monthly_income_aid`, `monthly_income_is_activ
 (4, 1, 'Middle class', '48328', '84574', '2022-12-03', '2022-12-04 18:08:50'),
 (5, 1, 'Upper middle class', '84574', '144984', '2022-12-03', '2022-12-04 18:09:10'),
 (6, 1, 'High income (but not rich)', '144984', '241640', '2022-12-03', '2022-12-04 18:09:28'),
-(7, 1, 'Rich', '241640', 'Above', '2022-12-03', '2022-12-04 21:02:31');
+(7, 1, 'Rich', '241640', '999999999999', '2022-12-03', '2022-12-05 20:24:29');
 
 -- --------------------------------------------------------
 
@@ -366,6 +393,12 @@ INSERT INTO `pms_users` (`users_aid`, `users_is_active`, `users_key`, `users_pas
 --
 
 --
+-- Indexes for table `pms_barangay`
+--
+ALTER TABLE `pms_barangay`
+  ADD PRIMARY KEY (`barangay_aid`);
+
+--
 -- Indexes for table `pms_evaluation_list`
 --
 ALTER TABLE `pms_evaluation_list`
@@ -446,6 +479,12 @@ ALTER TABLE `pms_users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `pms_barangay`
+--
+ALTER TABLE `pms_barangay`
+  MODIFY `barangay_aid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `pms_evaluation_list`

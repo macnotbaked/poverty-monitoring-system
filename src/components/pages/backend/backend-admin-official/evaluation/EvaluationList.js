@@ -37,6 +37,14 @@ const EvaluationList = ({
     "/admin/admin-settings/income-classification/read-income-classification-all.php"
   );
 
+  const incomeClassification =
+    incomeClass.length &&
+    incomeClass.map((item) => {
+      return item.monthly_income_name;
+    });
+
+  console.log(incomeClassification);
+
   const getTotalPopulation = (id) => {
     let val = 0;
 
@@ -202,6 +210,8 @@ const EvaluationList = ({
 
   const getTotalRepresentative = (rid) => {
     let val = 0;
+    let className = "";
+    let count = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
@@ -210,59 +220,40 @@ const EvaluationList = ({
             Number(item.representative_monthly_income) /
             Number(item.representative_total_people);
         }
+
+        incomeClass.map((income) => {
+          if (
+            val >= Number(income.monthly_income_from / 5) &&
+            val <= Number(income.monthly_income_to / 5)
+          ) {
+            className = income.monthly_income_name;
+          }
+        });
       });
     }
 
-    return val;
+    const occurrences = [className].reduce(function (acc, curr) {
+      return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
+    }, {});
+
+    // console.log(typeof className);
+
+    return className;
   };
 
-  const getIncomeClassification = (id) => {
-    let classification = "";
-    let val = 0;
+  const getTotalClassification = (sid) => {};
 
-    if (activeRepresentative.length) {
-      activeRepresentative.map((item) => {
-        if (Number(item.representative_purok_id) === Number(id)) {
-          classification = incomeClass.map((income) => {
-            if (
-              getTotalRepresentative(item.representative_aid) >=
-                Number(income.monthly_income_from / 5) &&
-              getTotalRepresentative(item.representative_aid) <=
-                Number(income.monthly_income_to / 5)
-            ) {
-              return income.monthly_income_name;
-            }
-          });
-        }
-      });
-    }
-
-    // const total = {};
-    // let res = classification;
-    // for (let amount of Object.values(res)) {
-    //   total[amount] = (total[amount] || "") + 1;
-    // }
-    // return total;
-
-    // return count;
-  };
-
-  // const sample = () => {
-  //   const total = {};
-  //   for (let amount of Object.values(["a", "a", "b", "c"])) {
-  //     total[amount] = (total[amount] || 0) + 1;
-  //   }
-  //   return total
-  // };
-  // console.log(sample());
-
-  // const counts = {};
-  // const sampleArray = ["a", "a", "b", "c"];
-  // console.log(
-  //   sampleArray.forEach(function (x) {
-  //     counts[x] = (counts[x] || 0) + 1;
-  //   })
-  // );
+  console.log(
+    activeRepresentative.map((item) => {
+      return [getTotalRepresentative(item.representative_aid)].reduce(function (
+        acc,
+        curr
+      ) {
+        return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
+      },
+      {});
+    })
+  );
 
   return (
     <>
@@ -390,25 +381,25 @@ const EvaluationList = ({
                               <tbody>
                                 <tr>
                                   <td>
-                                    {getIncomeClassification(item.sitio_aid)}
+                                    {getTotalClassification(item.sitio_aid)}
                                   </td>
                                   <td>
-                                    {getIncomeClassification(item.sitio_aid)}
+                                    {/* {getIncomeClassification(item.sitio_aid)} */}
                                   </td>
                                   <td>
-                                    {getIncomeClassification(item.sitio_aid)}
+                                    {/* {getIncomeClassification(item.sitio_aid)} */}
                                   </td>
                                   <td>
-                                    {getIncomeClassification(item.sitio_aid)}
+                                    {/* {getIncomeClassification(item.sitio_aid)} */}
                                   </td>
                                   <td>
-                                    {getIncomeClassification(item.sitio_aid)}
+                                    {/* {getIncomeClassification(item.sitio_aid)} */}
                                   </td>
                                   <td>
-                                    {getIncomeClassification(item.sitio_aid)}
+                                    {/* {getIncomeClassification(item.sitio_aid)} */}
                                   </td>
                                   <td>
-                                    {getIncomeClassification(item.sitio_aid)}
+                                    {/* {getIncomeClassification(item.sitio_aid)} */}
                                   </td>
                                 </tr>
                               </tbody>
