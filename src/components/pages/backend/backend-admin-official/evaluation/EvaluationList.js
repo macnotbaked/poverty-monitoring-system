@@ -237,12 +237,12 @@ const EvaluationList = ({
       });
     }
 
-    const total = {};
-    let res = classification;
-    for (let amount of Object.values(res)) {
-      total[amount] = (total[amount] || "") + 1;
-    }
-    return total;
+    // const total = {};
+    // let res = classification;
+    // for (let amount of Object.values(res)) {
+    //   total[amount] = (total[amount] || "") + 1;
+    // }
+    // return total;
 
     // return count;
   };
