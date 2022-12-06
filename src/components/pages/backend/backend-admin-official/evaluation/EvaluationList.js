@@ -37,14 +37,6 @@ const EvaluationList = ({
     "/admin/admin-settings/income-classification/read-income-classification-all.php"
   );
 
-  const incomeClassification =
-    incomeClass.length &&
-    incomeClass.map((item) => {
-      return item.monthly_income_name;
-    });
-
-  console.log(incomeClassification);
-
   const getTotalPopulation = (id) => {
     let val = 0;
 
@@ -232,26 +224,29 @@ const EvaluationList = ({
       });
     }
 
-    const occurrences = [className].reduce(function (acc, curr) {
-      return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
-    }, {});
-
-    // console.log(typeof className);
-
-    return className;
+    return className.length;
   };
 
-  const getTotalClassification = (sid) => {};
+  // const getTotalClassification = (sid) => {
+  //   let val = ""
+  //   activeRepresentative.map((item) => {
+  //     return getTotalRepresentative(item.representative_aid).map((className) => {
+  //       val =
+  //     });
+
+  //   })
+  // };
 
   console.log(
     activeRepresentative.map((item) => {
-      return [getTotalRepresentative(item.representative_aid)].reduce(function (
-        acc,
-        curr
-      ) {
-        return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
-      },
-      {});
+      return getTotalRepresentative(item.representative_aid);
+      // return [getTotalRepresentative(item.representative_aid)].reduce(function (
+      //   acc,
+      //   curr
+      // ) {
+      //   return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
+      // },
+      // {});
     })
   );
 
@@ -381,7 +376,7 @@ const EvaluationList = ({
                               <tbody>
                                 <tr>
                                   <td>
-                                    {getTotalClassification(item.sitio_aid)}
+                                    {getTotalRepresentative(item.sitio_aid)}
                                   </td>
                                   <td>
                                     {/* {getIncomeClassification(item.sitio_aid)} */}
