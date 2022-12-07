@@ -30,7 +30,7 @@ const UsersActive = () => {
   } = useFetchDataLoadMore(
     "/admin/admin-settings/users/read-user-active-limit.php",
     "/admin/admin-settings/users/read-user-active-all.php",
-    1 // show number of records on a table
+    5 // show number of records on a table
   );
 
   const handleAdd = () => {

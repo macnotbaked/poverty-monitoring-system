@@ -17,6 +17,7 @@ const ModalUserConfirm = ({ isSus, susEndpoint, resetEndpoint, item }) => {
 
   let id = item.users_aid;
   let email = item.users_email;
+  let name = item.users_fname;
 
   const handleClose = () => {
     dispatch(setIsConfirm(false));
@@ -31,7 +32,7 @@ const ModalUserConfirm = ({ isSus, susEndpoint, resetEndpoint, item }) => {
     fetchData(
       setLoading, // Boolean loading values optional
       isSus ? susEndpoint : resetEndpoint,
-      { id: id, users_email: email },
+      { id: id, users_email: email, users_fname: name },
       null,
       isSus
         ? "Account succesfully suspended."

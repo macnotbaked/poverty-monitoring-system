@@ -26,21 +26,23 @@ class Representative
     public $representative_datetime;
 
     public $connection;
-    public $tblRespresentative;
+    public $tblRepresentative;
     public $tblSitio;
     public $tblIncomeClassification;
+    public $tblEnableEvaluation;
 
     public function __construct($db)
     {
         $this->connection = $db;
-        $this->tblRespresentative = "pms_representative";
+        $this->tblRepresentative = "pms_representative";
         $this->tblSitio = "pms_sitio";
         $this->tblIncomeClassification = "pms_monthly_income";
+        $this->tblEnableEvaluation = "pms_evaluation_list";
     }
 
     public function create()
     {
-        $sql = "insert into {$this->tblRespresentative} ";
+        $sql = "insert into {$this->tblRepresentative} ";
         $sql .= "( representative_eval_id, ";
         $sql .= "representative_purok_id, ";
         $sql .= "representative_is_active, ";
@@ -92,12 +94,14 @@ class Representative
 
     public function readById()
     {
-        $sql = "select * from {$this->tblRespresentative} as household, ";
-        $sql .= "{$this->tblSitio} as purok ";
-        // $sql .= "{$this->tblIncomeClassification} as ic ";
-        $sql .= "where household.representative_aid = '{$this->representative_aid}' ";
+        $sql = "select * from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
+        $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and eval.evaluation_list_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
-        // $sql .= "and household.representative_monthly_income = ic.monthly_income_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
+        $sql .= "and household.representative_aid = '{$this->representative_aid}' ";
         $result = $this->connection->query($sql);
 
         return $result;
@@ -105,10 +109,13 @@ class Representative
 
     public function read()
     {
-        $sql = "select * from {$this->tblRespresentative} as household, ";
-        $sql .= "{$this->tblSitio} as purok ";
+        $sql = "select * from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
         $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and eval.evaluation_list_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "order by purok.sitio_name asc ";
 
         $result = $this->connection->query($sql);
@@ -118,10 +125,13 @@ class Representative
 
     public function readAllCount()
     {
-        $sql = "select *, count(household.representative_purok_id) as total from {$this->tblRespresentative} as household, ";
-        $sql .= "{$this->tblSitio} as purok ";
+        $sql = "select *, count(household.representative_purok_id) as total from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
         $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and eval.evaluation_list_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "group by household.representative_purok_id ";
         $sql .= "order by purok.sitio_name asc ";
 
@@ -132,10 +142,13 @@ class Representative
 
     public function readAll()
     {
-        $sql = "select * from {$this->tblRespresentative} as household, ";
-        $sql .= "{$this->tblSitio} as purok ";
+        $sql = "select * from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
         $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and eval.evaluation_list_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "order by household.representative_house_number asc ";
         $result = $this->connection->query($sql);
 
@@ -144,10 +157,13 @@ class Representative
 
     public function readLimit($start, $total)
     {
-        $sql = "select * from {$this->tblRespresentative} as household, ";
-        $sql .= "{$this->tblSitio} as purok ";
+        $sql = "select * from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
         $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and eval.evaluation_list_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "order by household.representative_house_number asc ";
         $sql .= "limit {$start}, {$total} ";
         $result = $this->connection->query($sql);
@@ -157,10 +173,13 @@ class Representative
 
     public function readSearch($search)
     {
-        $sql = "select * from {$this->tblRespresentative} as household, ";
-        $sql .= "{$this->tblSitio} as purok ";
+        $sql = "select * from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
         $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and eval.evaluation_list_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "and (household.representative_name like '{$search}%' ";
         $sql .= "or household.representative_house_number like '{$search}%' ";
         $sql .= ") ";
@@ -172,10 +191,13 @@ class Representative
 
     public function readAllActive()
     {
-        $sql = "select * from {$this->tblRespresentative} as household, ";
-        $sql .= "{$this->tblSitio} as purok ";
+        $sql = "select * from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
         $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and eval.evaluation_list_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
         $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "order by household.representative_house_number asc ";
@@ -186,10 +208,13 @@ class Representative
 
     public function readLimitActive($start, $total)
     {
-        $sql = "select * from {$this->tblRespresentative} as household, ";
-        $sql .= "{$this->tblSitio} as purok ";
+        $sql = "select * from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
         $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and eval.evaluation_list_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
         $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "order by household.representative_house_number asc ";
@@ -201,10 +226,13 @@ class Representative
 
     public function readSearchActive($search)
     {
-        $sql = "select * from {$this->tblRespresentative} as household, ";
-        $sql .= "{$this->tblSitio} as purok ";
+        $sql = "select * from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
         $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and eval.evaluation_list_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "and (household.representative_name like '{$search}%' ";
         $sql .= "or household.representative_house_number like '{$search}%' ";
         $sql .= "or purok.sitio_name like '{$search}%' ";
@@ -217,10 +245,12 @@ class Representative
 
     public function readAllInactive()
     {
-        $sql = "select * from {$this->tblRespresentative} as household, ";
-        $sql .= "{$this->tblSitio} as purok ";
+        $sql = "select * from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
         $sql .= "where household.representative_is_active = 0 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
         $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "order by household.representative_house_number asc ";
@@ -232,10 +262,12 @@ class Representative
 
     public function readLimitInactive($start, $total)
     {
-        $sql = "select * from {$this->tblRespresentative} as household, ";
-        $sql .= "{$this->tblSitio} as purok ";
+        $sql = "select * from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
         $sql .= "where household.representative_is_active = 0 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
         $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "order by household.representative_house_number asc ";
@@ -247,10 +279,12 @@ class Representative
 
     public function readSearchInactive($search)
     {
-        $sql = "select * from {$this->tblRespresentative} as household, ";
-        $sql .= "{$this->tblSitio} as purok ";
+        $sql = "select * from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
         $sql .= "where household.representative_is_active = 0 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
         $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "and (household.representative_name like '{$search}%' ";
@@ -264,7 +298,7 @@ class Representative
 
     public function update()
     {
-        $sql = "update {$this->tblRespresentative} set ";
+        $sql = "update {$this->tblRepresentative} set ";
         $sql .= "representative_name = '{$this->representative_name}', ";
         $sql .= "representative_contact = '{$this->representative_contact}', ";
         $sql .= "representative_house_number = '{$this->representative_house_number}', ";
@@ -296,7 +330,7 @@ class Representative
 
     public function archive()
     {
-        $sql = "update {$this->tblRespresentative} set ";
+        $sql = "update {$this->tblRepresentative} set ";
         $sql .= "representative_is_active = '0', ";
         $sql .= "representative_datetime = '{$this->representative_datetime}' ";
         $sql .= "where representative_aid = '{$this->representative_aid}' ";
@@ -313,7 +347,7 @@ class Representative
 
     public function restore()
     {
-        $sql = "update {$this->tblRespresentative} set ";
+        $sql = "update {$this->tblRepresentative} set ";
         $sql .= "representative_is_active = '1', ";
         $sql .= "representative_datetime = '{$this->representative_datetime}' ";
         $sql .= "where representative_aid = '{$this->representative_aid}' ";
@@ -330,7 +364,7 @@ class Representative
 
     public function delete()
     {
-        $sql = "delete from {$this->tblRespresentative} ";
+        $sql = "delete from {$this->tblRepresentative} ";
         $sql .= "where representative_aid  = '{$this->representative_aid}' ";
         $result = $this->connection->query($sql);
         return $result;
@@ -338,7 +372,7 @@ class Representative
 
     public function isAlreadyExist()
     {
-        $sql = "select * from {$this->tblRespresentative} ";
+        $sql = "select * from {$this->tblRepresentative} ";
         $sql .= "where representative_purok_id = '{$this->representative_purok_id}' ";
         $sql .= "and representative_name = '{$this->representative_name}' ";
         $sql .= "and representative_house_number = '{$this->representative_house_number}' ";

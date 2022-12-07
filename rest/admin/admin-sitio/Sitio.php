@@ -14,7 +14,7 @@ class Sitio
     {
         $this->connection = $db;
         $this->tblSitio = "pms_sitio";
-        $this->tblRespresentative = "pms_representative";
+        $this->tblRepresentative = "pms_representative";
     }
 
     public function create()
@@ -180,7 +180,7 @@ class Sitio
 
     public function isExist()
     {
-        $sql = "select * from {$this->tblRespresentative} ";
+        $sql = "select * from {$this->tblRepresentative} ";
         $sql .= "where representative_purok_id = '{$this->sitio_aid}' ";
         $sql .= "and representative_is_active = 1 ";
         $result = $this->connection->query($sql);

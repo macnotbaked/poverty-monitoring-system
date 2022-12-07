@@ -29,6 +29,55 @@ function checkReadAll($object)
     return $result;
 }
 
+function checkReadAllEvaluation($object)
+{
+    $result = $object->readAllEvaluation();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Record (All evaluation list).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadLimitEvaluation($object, $start, $total)
+{
+    $result = $object->readLimitEvaluation($start, $total);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Record (Limit evaluation list).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadActiveEvaluation($object)
+{
+    $result = $object->readActiveEvaluation();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Record (Active evaluation).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadAllRepresentativeEvaluation($object)
+{
+    $result = $object->readAllRepresentativeEvaluation();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Record (All representatives evaluation list).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadLimitRepresentativeEvaluation($object, $start, $total)
+{
+    $result = $object->readLimitRepresentativeEvaluation($start, $total);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Record (Limit representatives evaluation list).", []);
+        exit();
+    }
+    return $result;
+}
 
 function checkCreate($object)
 {
@@ -40,9 +89,9 @@ function checkCreate($object)
     return $result;
 }
 
-function checkDelete($object)
+function checkArchive($object)
 {
-    $result = $object->delete();
+    $result = $object->archive();
     if (!$result) {
         Response::sendResponse(false, "Please check your sql query. (delete)", []);
         exit();
@@ -58,7 +107,38 @@ function getResultData($result)
         $list = [
             "evaluation_list_aid" => $evaluation_list_aid,
             "evaluation_list_is_active" => $evaluation_list_is_active,
+            "evaluation_list_created" => $evaluation_list_created,
             "evaluation_list_datetime" => $evaluation_list_datetime,
+
+            "representative_aid" => $representative_aid,
+            "representative_purok_id" => $representative_purok_id,
+            "representative_is_active" => $representative_is_active,
+            "representative_name" => $representative_name,
+            "representative_contact" => $representative_contact,
+            "representative_house_number" => $representative_house_number,
+            "representative_total_people" => $representative_total_people,
+            "representative_total_underage" => $representative_total_underage,
+            "representative_total_midage" => $representative_total_midage,
+            "representative_total_adult" => $representative_total_adult,
+            "representative_total_seniors" => $representative_total_seniors,
+            "representative_total_pwd" => $representative_total_pwd,
+            "representative_total_elem" => $representative_total_elem,
+            "representative_total_highschool" => $representative_total_highschool,
+            "representative_total_college" => $representative_total_college,
+            "representative_household_living_id" => $representative_household_living_id,
+            "representative_is_in_danger_area" => $representative_is_in_danger_area,
+            "representative_monthly_income" => $representative_monthly_income,
+            "representative_total_able_work" => $representative_total_able_work,
+            "representative_total_employed" => $representative_total_employed,
+            "representative_created" => $representative_created,
+            "representative_datetime" => $representative_datetime,
+
+            "sitio_aid" => $sitio_aid,
+            "sitio_is_active" => $sitio_is_active,
+            "sitio_name" => $sitio_name,
+            "sitio_created" => $sitio_created,
+            "sitio_datetime" => $sitio_datetime,
+            "total" => $total,
 
         ];
         array_push($data, $list);

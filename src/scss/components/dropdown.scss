@@ -103,10 +103,37 @@
   margin-top: 5px;
   border-radius: 1rem;
   white-space: nowrap;
+  ul {
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e0e0e0 !important;
+      min-width: 15rem;
+
+      span {
+        padding: 1rem;
+
+        &:first-child {
+          background: $light-gray-x;
+          width: 18rem;
+          font-weight: 700;
+          text-align: left;
+        }
+        &:last-child {
+          width: 6rem;
+          text-align: center;
+        }
+      }
+      &:last-child {
+        border-bottom: none !important;
+      }
+    }
+  }
 
   table {
     display: flex;
-    align-items: center;
+    // align-items: center;
 
     tr {
       border: none !important;

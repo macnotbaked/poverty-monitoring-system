@@ -10,9 +10,14 @@ try {
     checkInputData($data);
     $eval = new EnableEvaluation($connection);
 
-    $result = checkDelete($eval);
+    $start = trim(filter_var($data["start"], FILTER_SANITIZE_STRING));
+    $total = trim(filter_var($data["total"], FILTER_SANITIZE_STRING));
 
-    Response::sendResponse(true, "Trainee evaluation successfuly deleted.", []);
+    $result = checkReadLimitEvaluation($eval, $start, $total);
+
+    $data = getResultData($result);
+
+    Response::sendResponse(true, "Limit evaluation data found.", $data);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted becuase a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

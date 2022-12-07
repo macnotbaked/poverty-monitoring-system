@@ -5,9 +5,11 @@ import {
   setIsAdd,
   setIsConfirm,
   setIsEvalEnabled,
+  setStartIndex,
 } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
 import useFetchDataLoadMore from "../../../../custom-hooks/useFetchDataLoadMore";
+import useLoadAllActive from "../../../../custom-hooks/useLoadAllActive";
 import useLoadAllEvaluationList from "../../../../custom-hooks/useLoadAllEvaluationList";
 import Header from "../../../../header/Header";
 import { devNavUrl } from "../../../../helpers/functions-general";
@@ -24,6 +26,12 @@ const Evaluation = () => {
     "/admin/admin-evaluation/enable-evaluation/read-enable-evaluation.php"
   );
 
+  // const { active } = useLoadAllActive(
+  //   "/admin/admin-evaluation/enable-evaluation/read-active-evaluation.php"
+  // );
+
+  // const evaluationId = active.length && active[0].evaluation_list_aid;
+
   const {
     loading,
     handleLoad,
@@ -36,6 +44,8 @@ const Evaluation = () => {
     "/admin/admin-sitio/read-sitio-all.php",
     5 // show number of records on a table
   );
+
+  // console.log(evaluationId);
 
   React.useEffect(() => {
     dispatch(setIsEvalEnabled(true));
@@ -66,7 +76,8 @@ const Evaluation = () => {
                   </label>
                   <Link
                     className="btn--primary mr--1"
-                    to={`${devNavUrl}/admin/evaluation-filter?sid=`}
+                    to={`${devNavUrl}/admin/evaluation-filter`}
+                    onClick={() => dispatch(setStartIndex(0))}
                   >
                     <FaFilter /> <span>Filter</span>
                   </Link>

@@ -233,6 +233,11 @@ function getResultData($result)
             "monthly_income_created" => $monthly_income_created,
             "monthly_income_datetime" => $monthly_income_datetime,
 
+            "evaluation_list_aid" => $evaluation_list_aid,
+            "evaluation_list_is_active" => $evaluation_list_is_active,
+            "evaluation_list_created" => $evaluation_list_created,
+            "evaluation_list_datetime" => $evaluation_list_datetime,
+
         ];
         array_push($data, $list);
     }

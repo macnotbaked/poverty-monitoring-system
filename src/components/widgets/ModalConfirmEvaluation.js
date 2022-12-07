@@ -16,16 +16,16 @@ const ModalConfirmEvaluation = () => {
   const handleYes = async () => {
     fetchData(
       setLoading, // Boolean loading values optional
-      "/admin/admin-evaluation/enable-evaluation/delete-enable-evaluation.php",
+      "/admin/admin-evaluation/enable-evaluation/archive-enable-evaluation.php",
       {
         token: "",
       },
       null,
-      "", // success msg optional
+      "Succesfully disabled.", // success msg optional
       "", // additional error msg if needed optional
       dispatch, // context api action
       store, // context api state
-      false, // optional for success modal
+      true, // optional for success modal
       false // boolean to show load more functionality button
     );
     dispatch(setStartIndex(0));

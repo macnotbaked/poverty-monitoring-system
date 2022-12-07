@@ -88,17 +88,15 @@ const Login = () => {
                         type={passwordShown ? "text" : "password"}
                         name="users_password"
                       />
-                      <i
-                        className="icon--show"
-                        onMouseUp={togglePassword}
-                        onMouseDown={togglePassword}
-                      >
-                        {passwordShown ? (
-                          <AiOutlineEye />
-                        ) : (
-                          <AiOutlineEyeInvisible />
-                        )}
-                      </i>
+                      {props.values.users_password && (
+                        <i className="icon--show" onClick={togglePassword}>
+                          {passwordShown ? (
+                            <AiOutlineEye />
+                          ) : (
+                            <AiOutlineEyeInvisible />
+                          )}
+                        </i>
+                      )}
                     </div>
 
                     <div className="t--center">

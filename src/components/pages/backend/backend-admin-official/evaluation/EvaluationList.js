@@ -200,10 +200,10 @@ const EvaluationList = ({
     return val;
   };
 
-  const getTotalRepresentative = (rid) => {
+  const getTotalPoorRepresentative = (rid) => {
     let val = 0;
-    let className = "";
-    let count = 0;
+    let className = 0;
+    let totalCount = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
@@ -218,37 +218,28 @@ const EvaluationList = ({
             val >= Number(income.monthly_income_from / 5) &&
             val <= Number(income.monthly_income_to / 5)
           ) {
-            className = income.monthly_income_name;
+            className = income.monthly_income_aid;
+            totalCount = className = 1;
           }
         });
       });
     }
 
-    return className.length;
+    return totalCount;
   };
 
-  // const getTotalClassification = (sid) => {
-  //   let val = ""
-  //   activeRepresentative.map((item) => {
-  //     return getTotalRepresentative(item.representative_aid).map((className) => {
-  //       val =
-  //     });
-
-  //   })
-  // };
-
-  console.log(
-    activeRepresentative.map((item) => {
-      return getTotalRepresentative(item.representative_aid);
-      // return [getTotalRepresentative(item.representative_aid)].reduce(function (
-      //   acc,
-      //   curr
-      // ) {
-      //   return acc[curr] ? ++acc[curr] : (acc[curr] = 1), acc;
-      // },
-      // {});
-    })
-  );
+  const getTotalPoor = (id) => {
+    let res = 0;
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          res = getTotalPoorRepresentative(item.representative_aid);
+        }
+      });
+    }
+    // console.log(res);
+    return res;
+  };
 
   return (
     <>
@@ -295,24 +286,24 @@ const EvaluationList = ({
                             <MdOutlineKeyboardArrowDown />
                           </span>
                           <div className="dropdown-content-secondary">
-                            <table>
-                              <thead>
-                                <tr>
-                                  <th>Under age</th>
-                                  <th>Middle age</th>
-                                  <th>Adult</th>
-                                  <th>Senior</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>{getTotalUnderage(item.sitio_aid)}</td>
-                                  <td>{getTotalMiddleAge(item.sitio_aid)}</td>
-                                  <td>{getTotalAdult(item.sitio_aid)}</td>
-                                  <td>{getTotalSenior(item.sitio_aid)}</td>
-                                </tr>
-                              </tbody>
-                            </table>
+                            <ul>
+                              <li>
+                                <span>Under age</span>{" "}
+                                <span>{getTotalUnderage(item.sitio_aid)}</span>
+                              </li>
+                              <li>
+                                <span>Middle age</span>{" "}
+                                <span>{getTotalMiddleAge(item.sitio_aid)}</span>
+                              </li>
+                              <li>
+                                <span>Adult</span>{" "}
+                                <span>{getTotalAdult(item.sitio_aid)}</span>
+                              </li>
+                              <li>
+                                <span>Senior</span>{" "}
+                                <span>{getTotalSenior(item.sitio_aid)}</span>
+                              </li>
+                            </ul>
                           </div>
                         </div>
                       </div>
@@ -325,80 +316,68 @@ const EvaluationList = ({
                             <MdOutlineKeyboardArrowDown />
                           </span>
                           <div className="dropdown-content-secondary">
-                            <table>
-                              <thead>
-                                <tr>
-                                  <th>Own</th>
-                                  <th>Rent</th>
-                                  <th>Living</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>
-                                    {getTotalHouseholdOwn(item.sitio_aid)}
-                                  </td>
-                                  <td>
-                                    {getTotalHouseholdRent(item.sitio_aid)}
-                                  </td>
-                                  <td>
-                                    {getTotalHouseholdLivingWith(
-                                      item.sitio_aid
-                                    )}
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
+                            <ul>
+                              <li>
+                                <span>Own</span>{" "}
+                                <span>
+                                  {getTotalHouseholdOwn(item.sitio_aid)}
+                                </span>
+                              </li>
+                              <li>
+                                <span>Rent</span>{" "}
+                                <span>
+                                  {getTotalHouseholdRent(item.sitio_aid)}
+                                </span>
+                              </li>
+                              <li>
+                                <span>Living</span>{" "}
+                                <span>
+                                  {getTotalHouseholdLivingWith(item.sitio_aid)}
+                                </span>
+                              </li>
+                            </ul>
                           </div>
                         </div>
                       </div>
                     </td>
                     <td>
                       <div className="d--flex align-center justify-between">
-                        {getTotalIncomeEarner(item.sitio_aid)}{" "}
+                        {getTotalIncomeEarner(item.sitio_aid)}
                         <div className="dropdown">
                           <span className="arrow">
                             <MdOutlineKeyboardArrowDown />
                           </span>
                           <div className="dropdown-content-secondary">
-                            <table>
-                              <thead>
-                                <tr>
-                                  <th>Poor</th>
-                                  <th>Low Income (but not poor)</th>
-                                  <th>Lower middle class</th>
-                                  <th>Middle class</th>
-                                  <th>Upper middle income</th>
-                                  <th>High income (but not rich)</th>
-                                  <th>Rich</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>
-                                    {getTotalRepresentative(item.sitio_aid)}
-                                  </td>
-                                  <td>
-                                    {/* {getIncomeClassification(item.sitio_aid)} */}
-                                  </td>
-                                  <td>
-                                    {/* {getIncomeClassification(item.sitio_aid)} */}
-                                  </td>
-                                  <td>
-                                    {/* {getIncomeClassification(item.sitio_aid)} */}
-                                  </td>
-                                  <td>
-                                    {/* {getIncomeClassification(item.sitio_aid)} */}
-                                  </td>
-                                  <td>
-                                    {/* {getIncomeClassification(item.sitio_aid)} */}
-                                  </td>
-                                  <td>
-                                    {/* {getIncomeClassification(item.sitio_aid)} */}
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
+                            <ul>
+                              <li>
+                                <span>Poor</span>{" "}
+                                <span>{getTotalPoor(item.sitio_aid)}</span>
+                              </li>
+                              <li>
+                                <span>Low Income (but not poor)</span>{" "}
+                                <span>{getTotalPoor(item.sitio_aid)}</span>
+                              </li>
+                              <li>
+                                <span>Lower middle class</span>{" "}
+                                <span>{getTotalPoor(item.sitio_aid)}</span>
+                              </li>
+                              <li>
+                                <span>Middle class</span>{" "}
+                                <span>{getTotalPoor(item.sitio_aid)}</span>
+                              </li>
+                              <li>
+                                <span>Upper middle income</span>{" "}
+                                <span>{getTotalPoor(item.sitio_aid)}</span>
+                              </li>
+                              <li>
+                                <span>High income (but not rich)</span>{" "}
+                                <span>{getTotalPoor(item.sitio_aid)}</span>
+                              </li>
+                              <li>
+                                <span>Rich</span>{" "}
+                                <span>{getTotalPoor(item.sitio_aid)}</span>
+                              </li>
+                            </ul>
                           </div>
                         </div>
                       </div>

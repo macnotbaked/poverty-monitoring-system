@@ -5,6 +5,9 @@ import { AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { setStartIndex } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
+import useLoadAllActivePurok from "../../../../custom-hooks/useLoadAllActivePurok";
+import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
+import useLoadAllActiveRepresentativeCount from "../../../../custom-hooks/useLoadAllActiveRepresentativeCount";
 import { devNavUrl } from "../../../../helpers/functions-general";
 import LoadMore from "../../../../widgets/LoadMore";
 import NoData from "../../../../widgets/NoData";
@@ -23,20 +26,69 @@ const DashboardList = ({
   const { store, dispatch } = React.useContext(StoreContext);
   let count = 0;
 
-  const labels = ["Sitio 1", "Sitio 2", "Sitio 3", "Sitio 4", "Sitio 5"];
+  const { activePurok, loadingActivePurok } = useLoadAllActivePurok(
+    "/admin/admin-sitio/read-sitio-all.php"
+  );
+
+  // bar graph for list of sitio with total population and total household
+  const { activeRepresentative } = useLoadAllActiveRepresentative(
+    "/admin/admin-representative/read-representative.php"
+  );
+
+  const { countRepresentative } = useLoadAllActiveRepresentativeCount(
+    "/admin/admin-representative/read-representative-count-all.php"
+  );
+
+  const getTotalPopulation = (id) => {
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          val += Number(item.representative_total_people);
+        }
+      });
+    }
+
+    return val;
+  };
+
+  const getTotalHousehold = (id) => {
+    let val = 0;
+
+    if (countRepresentative.length) {
+      countRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          val = item.total;
+        }
+      });
+    }
+
+    return val;
+  };
+
+  let sitio = [];
+  let population = [];
+  let household = [];
+
+  activePurok.map((item) => {
+    sitio.push(item.sitio_name);
+    population.push(getTotalPopulation(item.sitio_aid));
+    household.push(getTotalHousehold(item.sitio_aid));
+  });
 
   const userData = {
-    labels: labels,
+    labels: sitio,
     datasets: [
       {
         label: "Total Population",
-        data: [80, 76, 89, 100, 92],
+        data: population,
         backgroundColor: "rgba(255, 99, 132, 0.5)",
         borderWidth: 1,
       },
       {
-        label: "Poverty Rate",
-        data: [20, 36, 19, 70, 44],
+        label: "Total Household",
+        data: household,
         backgroundColor: "rgba(54, 162, 235, 0.5)",
         borderWidth: 1,
       },
