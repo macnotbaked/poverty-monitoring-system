@@ -6,7 +6,6 @@ import {
   setSubmitEval,
 } from "../../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../../store/StoreContext";
-import useLoadAll from "../../../../../../custom-hooks/useLoadAll";
 import useLoadAllActivePurok from "../../../../../../custom-hooks/useLoadAllActivePurok";
 import useLoadAllEvaluationList from "../../../../../../custom-hooks/useLoadAllEvaluationList";
 import Header from "../../../../../../header/Header";
@@ -26,10 +25,6 @@ const AddCitizen = () => {
   const [loading, setLoading] = React.useState(false);
 
   const purokId = getUrlParam().get("sid");
-
-  const { result } = useLoadAll(
-    "/admin/admin-settings/income-classification/read-income-classification-all.php"
-  );
 
   const { activePurok } = useLoadAllActivePurok(
     "/admin/admin-sitio/read-sitio-by-id.php",
@@ -88,10 +83,6 @@ const AddCitizen = () => {
 
   React.useEffect(() => {
     dispatch(setSubmitEval(true));
-  }, []);
-
-  React.useEffect(() => {
-    dispatch(setStartIndex(0));
   }, []);
 
   return (
@@ -309,22 +300,6 @@ const AddCitizen = () => {
                               name="representative_monthly_income"
                             />
                           </div>
-
-                          {/* <div className="input--form mb--5">
-                            <label htmlFor="">
-                              12. Halaga na nagagastos para sa buwanang bayarin?
-                              (Kuryente at tubig, gastusin pang edukasyon, at
-                              iba pa.) (Amount spent on monthly fees, i.e.,
-                              Water and Eletricity Bills, Educational expenses,
-                              and other utilities.)
-                            </label>
-                            <InputSelect name="representative_bill_expenses_id">
-                              <option value="">--</option>
-                              <option value="1">5,000 - 10,000</option>
-                              <option value="2">10,000 - 20,000</option>
-                              <option value="3">20,000 - more</option>
-                            </InputSelect>
-                          </div> */}
                           <div className="input--form mb--5">
                             <label htmlFor="">
                               14. Ilang ang bilang sa miyembro ng pamilya ang

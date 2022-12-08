@@ -37,7 +37,7 @@ try {
 
     $result = checkCreate($representative);
 
-    Response::sendResponse(true, "Create representative success.",  $result, $mail);
+    Response::sendResponse(true, "Create representative success.",  $result);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted because a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

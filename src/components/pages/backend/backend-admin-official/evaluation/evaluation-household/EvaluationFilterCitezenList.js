@@ -79,7 +79,7 @@ const EvaluationFilterCitezenList = () => {
                 loading={loading}
                 result={result}
                 store={store}
-                url="/admin/admin-representative/read-representative-search-active.php"
+                url="/admin/admin-representative/read-representative-search.php"
               />
 
               <div className="table__container">

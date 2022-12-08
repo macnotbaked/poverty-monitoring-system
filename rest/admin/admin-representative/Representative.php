@@ -175,9 +175,7 @@ class Representative
         $sql = "select * from {$this->tblRepresentative} as household, ";
         $sql .= "{$this->tblSitio} as purok, ";
         $sql .= "{$this->tblEnableEvaluation} as eval ";
-        $sql .= "where household.representative_is_active = 1 ";
-        $sql .= "and eval.evaluation_list_is_active = 1 ";
-        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "where household.representative_purok_id = purok.sitio_aid ";
         $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "and (household.representative_name like '{$search}%' ";
         $sql .= "or household.representative_house_number like '{$search}%' ";
@@ -372,8 +370,7 @@ class Representative
     public function isAlreadyExist()
     {
         $sql = "select * from {$this->tblRepresentative} ";
-        $sql .= "where representative_purok_id = '{$this->representative_purok_id}' ";
-        $sql .= "and representative_name = '{$this->representative_name}' ";
+        $sql .= "where representative_name = '{$this->representative_name}' ";
         $sql .= "and representative_house_number = '{$this->representative_house_number}' ";
         $result = $this->connection->query($sql);
 

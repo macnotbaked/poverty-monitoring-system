@@ -11,6 +11,7 @@ try {
     $eval = new EnableEvaluation($connection);
 
     $eval->evaluation_list_is_active = 1;
+    $eval->evaluation_list_created = date("Y-m-d");
     $eval->evaluation_list_datetime = date("Y-m-d H:i:s");
 
     $result = checkCreate($eval);

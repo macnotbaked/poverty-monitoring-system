@@ -39,6 +39,7 @@ class EnableEvaluation
     public function readAll()
     {
         $sql = "select * from {$this->tblEnableEvaluation} ";
+        $sql .= "where evaluation_list_is_active = 1 ";
         $sql .= "limit 1 ";
         $result = $this->connection->query($sql);
 
@@ -77,8 +78,10 @@ class EnableEvaluation
     {
         $sql = "insert into {$this->tblEnableEvaluation} ";
         $sql .= "( evaluation_list_is_active,";
+        $sql .= "evaluation_list_created,";
         $sql .= "evaluation_list_datetime ) values (";
         $sql .= "'{$this->evaluation_list_is_active}',";
+        $sql .= "'{$this->evaluation_list_created}',";
         $sql .= "'{$this->evaluation_list_datetime}')";
 
         $result = $this->connection->query($sql);

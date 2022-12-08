@@ -2,7 +2,6 @@ import React from "react";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import {
   setIsAccountUpdated,
-  setSave,
   setSubmitEval,
   setSuccess,
 } from "../../store/StoreAction";
@@ -13,7 +12,13 @@ const ModalSuccess = () => {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const handleClose = () => {
-    dispatch(setSuccess(false));
+    // refresh page after confirm
+    if (store.isSubmitEval) {
+      window.location.reload(false);
+      dispatch(setSubmitEval(false));
+      return;
+    }
+
     // logout when there's a change in account
     if (store.isAccountUpdated) {
       localStorage.removeItem("pmstoken");
@@ -22,12 +27,7 @@ const ModalSuccess = () => {
       return;
     }
 
-    // refresh page after confirm
-    if (store.isSubmitEval) {
-      window.location.reload(false);
-      dispatch(setSubmitEval(false));
-      return;
-    }
+    dispatch(setSuccess(false));
   };
 
   React.useEffect(() => {

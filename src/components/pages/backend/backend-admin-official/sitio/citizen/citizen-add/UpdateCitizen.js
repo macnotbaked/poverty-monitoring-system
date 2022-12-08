@@ -125,9 +125,9 @@ const UpdateCitizen = () => {
     dispatch(setSubmitEval(true));
   }, []);
 
-  React.useEffect(() => {
-    dispatch(setStartIndex(0));
-  }, []);
+  // React.useEffect(() => {
+  //   dispatch(setStartIndex(0));
+  // }, []);
 
   return (
     <>
@@ -347,22 +347,6 @@ const UpdateCitizen = () => {
                               name="representative_monthly_income"
                             />
                           </div>
-
-                          {/* <div className="input--form mb--5">
-                            <label htmlFor="">
-                              12. Halaga na nagagastos para sa buwanang bayarin?
-                              (Kuryente at tubig, gastusin pang edukasyon, at
-                              iba pa.) (Amount spent on monthly fees, i.e.,
-                              Water and Eletricity Bills, Educational expenses,
-                              and other utilities.)
-                            </label>
-                            <InputSelect disabled={loading} name="representative_bill_expenses_id">
-                              <option value="">--</option>
-                              <option value="1">5,000 - 10,000</option>
-                              <option value="2">10,000 - 20,000</option>
-                              <option value="3">20,000 - more</option>
-                            </InputSelect>
-                          </div> */}
                           <div className="input--form mb--5">
                             <label htmlFor="">
                               14. Ilang ang bilang sa miyembro ng pamilya ang
