@@ -30,7 +30,10 @@ const Evaluation = () => {
   //   "/admin/admin-evaluation/enable-evaluation/read-active-evaluation.php"
   // );
 
-  // const evaluationId = active.length && active[0].evaluation_list_aid;
+  const evaluationId =
+    evaluationList.length && evaluationList[0].evaluation_list_aid;
+
+  // console.log(evaluationId);
 
   const {
     loading,
@@ -96,7 +99,7 @@ const Evaluation = () => {
         </div>
       </div>
 
-      {store.isAdd && <ModalConfirmEvaluation />}
+      {store.isAdd && <ModalConfirmEvaluation id={evaluationId} />}
       {store.isConfirm && <ModalAddEvaluation />}
       {store.error && <ModalError />}
     </>

@@ -62,7 +62,7 @@ const EvaluationFilter = () => {
                   loading={loading}
                   result={result}
                   store={store}
-                  url="/admin/admin-sitio/read-sitio-search.php"
+                  url="/admin/admin-evaluation/enable-evaluation/read-search-evaluation.php"
                 />
                 <table>
                   <thead className="">
@@ -90,7 +90,7 @@ const EvaluationFilter = () => {
                             <td>
                               <div className="d--flex justify-center">
                                 <Link
-                                  to={`${devNavUrl}/admin/evaluation/household?sid=${item.sitio_aid}`}
+                                  to={`${devNavUrl}/admin/evaluation-filter/date?date=${item.evaluation_list_created}to${item.evaluation_list_datetime}&eid=${item.evaluation_list_aid}`}
                                   className="dropdown tooltip--table"
                                   data-tooltip="View"
                                   onClick={() => dispatch(setStartIndex(0))}

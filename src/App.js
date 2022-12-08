@@ -4,7 +4,8 @@ import { devNavUrl } from "./components/helpers/functions-general";
 import Citizens from "./components/pages/backend/backend-admin-official/citizens/Citizens";
 import CitizenView from "./components/pages/backend/backend-admin-official/citizens/CitizenView";
 import Evaluation from "./components/pages/backend/backend-admin-official/evaluation/Evaluation";
-import EvaluationHousehold from "./components/pages/backend/backend-admin-official/evaluation/evaluation-household/EvaluationHousehold";
+import EvaluationFilterCitezenList from "./components/pages/backend/backend-admin-official/evaluation/evaluation-household/EvaluationFilterCitezenList";
+import EvaluationFilterResult from "./components/pages/backend/backend-admin-official/evaluation/evaluation-household/EvaluationFilterResult";
 import EvaluationFilter from "./components/pages/backend/backend-admin-official/evaluation/EvaluationFilter";
 import Dashboard from "./components/pages/backend/backend-admin-official/home/Dashboard";
 import InactiveHouseholdCriteria from "./components/pages/backend/backend-admin-official/settings/archived/archived-program-criteria/inactive-household-criteria/InactiveHouseholdCriteria";
@@ -120,10 +121,10 @@ function App() {
               }
             />
             <Route
-              path={`${devNavUrl}/admin/evaluation/household`}
+              path={`${devNavUrl}/admin/evaluation-filter/date`}
               element={
                 <ProtectedRoute>
-                  <EvaluationHousehold />
+                  <EvaluationFilterResult />
                 </ProtectedRoute>
               }
             />
@@ -373,6 +374,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <IncomeClassification />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/evaluation-filter/purok`}
+              element={
+                <ProtectedRoute>
+                  <EvaluationFilterCitezenList />
                 </ProtectedRoute>
               }
             />

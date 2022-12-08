@@ -49,11 +49,31 @@ function checkReadLimitEvaluation($object, $start, $total)
     return $result;
 }
 
+function checkReadSearchEvaluation($object, $search)
+{
+    $result = $object->readSearchEvaluation($search);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Search evaluation list).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkReadActiveEvaluation($object)
 {
     $result = $object->readActiveEvaluation();
     if ($result->num_rows == 0) {
         Response::sendResponse(true, "Empty Record (Active evaluation).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadCountRepresentativeEvaluation($object)
+{
+    $result = $object->readCountRepresentativeEvaluation();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Record (Count all representatives evaluation list).", []);
         exit();
     }
     return $result;
@@ -69,9 +89,19 @@ function checkReadAllRepresentativeEvaluation($object)
     return $result;
 }
 
-function checkReadLimitRepresentativeEvaluation($object, $start, $total)
+function checkReadAllRepresentatives($object)
 {
-    $result = $object->readLimitRepresentativeEvaluation($start, $total);
+    $result = $object->readAllRepresentatives();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Record (All representatives evaluation list).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadLimitRepresentatives($object, $start, $total)
+{
+    $result = $object->readLimitRepresentatives($start, $total);
     if ($result->num_rows == 0) {
         Response::sendResponse(true, "Empty Record (Limit representatives evaluation list).", []);
         exit();

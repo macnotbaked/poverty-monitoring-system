@@ -10,7 +10,6 @@ try {
     checkInputData($data);
     $representative = new Representative($connection);
 
-
     $search = trim(filter_var($data["search"], FILTER_SANITIZE_STRING));
 
     $result = checkReadSearchActive($representative, trim($search));

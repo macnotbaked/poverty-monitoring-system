@@ -2,40 +2,28 @@ import React from "react";
 import { FaEye } from "react-icons/fa";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { setStartIndex } from "../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../store/StoreContext";
-import useLoadAllActiveIncomeClassification from "../../../../custom-hooks/useLoadAllActiveIncomeClassification";
-import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
-import useLoadAllActiveRepresentativeCount from "../../../../custom-hooks/useLoadAllActiveRepresentativeCount";
-import { devNavUrl } from "../../../../helpers/functions-general";
-import LoadMore from "../../../../widgets/LoadMore";
-import NoData from "../../../../widgets/NoData";
-import SearchBox from "../../../../widgets/SearchBox";
-import Spinner from "../../../../widgets/Spinner";
+import { setStartIndex } from "../../../../../../store/StoreAction";
+import { StoreContext } from "../../../../../../store/StoreContext";
+import { devNavUrl } from "../../../../../helpers/functions-general";
+import LoadMore from "../../../../../widgets/LoadMore";
+import NoData from "../../../../../widgets/NoData";
+import SearchBox from "../../../../../widgets/SearchBox";
+import Spinner from "../../../../../widgets/Spinner";
 
-const EvaluationList = ({
+const EvaluationFitlerResultList = ({
   loading,
   handleLoad,
   totalResult,
   result,
   handleSearch,
   handleChange,
+  countRepresentative,
+  activeRepresentative,
+  incomeClass,
 }) => {
   const search = React.useRef(null);
   const { store, dispatch } = React.useContext(StoreContext);
   let count = 0;
-
-  const { countRepresentative } = useLoadAllActiveRepresentativeCount(
-    "/admin/admin-representative/read-representative-count-all.php"
-  );
-
-  const { activeRepresentative } = useLoadAllActiveRepresentative(
-    "/admin/admin-representative/read-representative.php"
-  );
-
-  const { incomeClass } = useLoadAllActiveIncomeClassification(
-    "/admin/admin-settings/income-classification/read-income-classification-all.php"
-  );
 
   const getTotalPopulation = (id) => {
     let val = 0;
@@ -500,7 +488,6 @@ const EvaluationList = ({
 
     return val;
   };
-
   return (
     <>
       <div className="table__container">
@@ -652,7 +639,7 @@ const EvaluationList = ({
                     <td>
                       <div className="d--flex justify-center">
                         <Link
-                          to={`${devNavUrl}/admin/purok/household?sid=${item.sitio_aid}`}
+                          to={`${devNavUrl}/admin/evaluation-filter/purok?sid=${item.sitio_aid}`}
                           className="dropdown tooltip--table"
                           data-tooltip="View"
                           onClick={() => dispatch(setStartIndex(0))}
@@ -690,4 +677,4 @@ const EvaluationList = ({
   );
 };
 
-export default EvaluationList;
+export default EvaluationFitlerResultList;

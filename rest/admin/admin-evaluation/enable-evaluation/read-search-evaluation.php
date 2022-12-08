@@ -10,16 +10,13 @@ try {
     checkInputData($data);
     $eval = new EnableEvaluation($connection);
 
-    $eval->evaluation_list_aid  = filter_var($data["type"], FILTER_SANITIZE_STRING);
+    $search = trim(filter_var($data["search"], FILTER_SANITIZE_STRING));
 
-    $start = trim(filter_var($data["start"], FILTER_SANITIZE_STRING));
-    $total = trim(filter_var($data["total"], FILTER_SANITIZE_STRING));
-
-    $result = checkReadLimitRepresentativeEvaluation($eval, $start, $total);
+    $result = checkReadSearchEvaluation($eval, trim($search));
 
     $data = getResultData($result);
 
-    Response::sendResponse(true, "Limit representatives evaluation data found.", $data);
+    Response::sendResponse(true, "Search evaluation data found.", $data);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted becuase a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

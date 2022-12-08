@@ -5,7 +5,7 @@ import { StoreContext } from "../../store/StoreContext";
 import { fetchData } from "../helpers/fetchData";
 import SpinnerButton from "../widgets/SpinnerButton";
 
-const ModalConfirmEvaluation = () => {
+const ModalConfirmEvaluation = ({ id }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [loading, setLoading] = React.useState(false);
 
@@ -19,6 +19,7 @@ const ModalConfirmEvaluation = () => {
       "/admin/admin-evaluation/enable-evaluation/archive-enable-evaluation.php",
       {
         token: "",
+        id: id,
       },
       null,
       "Succesfully disabled.", // success msg optional

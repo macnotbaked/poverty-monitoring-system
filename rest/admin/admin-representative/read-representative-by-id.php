@@ -10,7 +10,7 @@ try {
     checkInputData($data);
     $representative = new Representative($connection);
 
-    $representative->representative_aid = filter_var($data["val1"], FILTER_SANITIZE_STRING);
+    $representative->representative_aid = filter_var($data["type"], FILTER_SANITIZE_STRING);
 
     $result = checkReadById($representative);
 

@@ -98,7 +98,6 @@ class Representative
         $sql .= "{$this->tblSitio} as purok, ";
         $sql .= "{$this->tblEnableEvaluation} as eval ";
         $sql .= "where household.representative_is_active = 1 ";
-        $sql .= "and eval.evaluation_list_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
         $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "and household.representative_aid = '{$this->representative_aid}' ";
