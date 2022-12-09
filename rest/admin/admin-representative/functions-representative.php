@@ -206,6 +206,7 @@ function getResultData($result)
         extract($row);
         $list = [
             "representative_aid" => $representative_aid,
+            "representative_eval_id" => $representative_eval_id,
             "representative_purok_id" => $representative_purok_id,
             "representative_is_active" => $representative_is_active,
             "representative_name" => $representative_name,

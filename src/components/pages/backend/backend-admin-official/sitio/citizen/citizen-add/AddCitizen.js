@@ -59,6 +59,7 @@ const AddCitizen = () => {
     representative_monthly_income: "",
     representative_total_able_work: "",
     representative_total_employed: "",
+    checked: "",
   };
 
   const yupSchema = Yup.object({
@@ -79,6 +80,7 @@ const AddCitizen = () => {
     representative_monthly_income: Yup.string().required("Required"),
     representative_total_able_work: Yup.string().required("Required"),
     representative_total_employed: Yup.string().required("Required"),
+    checked: Yup.string().required("Required"),
   });
 
   React.useEffect(() => {
@@ -324,10 +326,22 @@ const AddCitizen = () => {
                               name="representative_total_employed"
                             />
                           </div>
+
+                          <div className="input--form mb--5 d--flex align-center">
+                            <InputText
+                              disabled={loading}
+                              type="checkbox"
+                              name="checked"
+                              id="checked"
+                            />
+                            <span htmlFor="checked" className="ml--2">
+                              Confirm details
+                            </span>
+                          </div>
                           <button
                             className="btn--default m-left btn__container"
                             type="submit"
-                            disabled={loading || !props.dirty}
+                            disabled={loading || !props.values.checked}
                           >
                             {loading ? <SpinnerButton /> : <span>Submit</span>}
                           </button>
