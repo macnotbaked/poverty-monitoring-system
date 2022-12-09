@@ -99,6 +99,16 @@ function checkReadSearchActive($object, $search)
     return $result;
 }
 
+function checkReadSearch($object, $search)
+{
+    $result = $object->readSearch($search);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Search active household).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkReadAllInactive($object)
 {
     $result = $object->readAllInactive();
