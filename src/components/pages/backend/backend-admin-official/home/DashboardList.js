@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { setStartIndex } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
 import useLoadAll from "../../../../custom-hooks/useLoadAll";
+import useLoadAllActiveIncomeClassification from "../../../../custom-hooks/useLoadAllActiveIncomeClassification";
 import useLoadAllActivePurok from "../../../../custom-hooks/useLoadAllActivePurok";
 import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
 import useLoadAllActiveRepresentativeCount from "../../../../custom-hooks/useLoadAllActiveRepresentativeCount";
@@ -35,6 +36,10 @@ const DashboardList = () => {
     "/admin/admin-representative/read-representative-count-all.php"
   );
 
+  const { incomeClass } = useLoadAllActiveIncomeClassification(
+    "/admin/admin-settings/income-classification/read-income-classification-all.php"
+  );
+
   const getTotalPopulation = (id) => {
     let val = 0;
 
@@ -42,20 +47,6 @@ const DashboardList = () => {
       activeRepresentative.map((item) => {
         if (Number(item.representative_eval_id) === Number(id)) {
           val += Number(item.representative_total_people);
-        }
-      });
-    }
-
-    return val;
-  };
-
-  const getTotalHousehold = (id) => {
-    let val = 0;
-
-    if (countRepresentative.length) {
-      countRepresentative.map((item) => {
-        if (Number(item.representative_purok_id) === Number(id)) {
-          val = item.total;
         }
       });
     }
@@ -87,9 +78,14 @@ const DashboardList = () => {
   };
 
   let sitio = [];
-  let population = [];
   let unemployment = [];
+  let population = [];
   let year = [];
+  let incomeClassification = [];
+
+  incomeClass.map((item) => {
+    incomeClassification.push(item.monthly_income_name);
+  });
 
   activePurok.map((item) => {
     sitio.push(item.sitio_name);
@@ -101,7 +97,7 @@ const DashboardList = () => {
     population.push(getTotalPopulation(item.evaluation_list_aid));
   });
 
-  const TotalPopulationTotalHousehold = {
+  const UnemploymentRate = {
     labels: sitio,
     datasets: [
       {
@@ -125,6 +121,18 @@ const DashboardList = () => {
     ],
   };
 
+  const classification = {
+    labels: incomeClassification,
+    datasets: [
+      {
+        label: "Income Classification Percentage",
+        data: population,
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return (
     <>
       <div className="graph__container p--relative">
@@ -132,21 +140,21 @@ const DashboardList = () => {
         <div className="graph__item">
           <Bar
             style={{ width: "100%", maxHeight: "30rem" }}
-            data={TotalPopulationTotalHousehold}
+            data={UnemploymentRate}
           />
         </div>
         <div className="graph__item">
           <Doughnut
             style={{ width: "100%", maxHeight: "30rem" }}
-            data={TotalPopulationTotalHousehold}
+            data={classification}
           />
         </div>
-        <div className="graph__item">
+        {/* <div className="graph__item">
           <PolarArea
             style={{ width: "100%", maxHeight: "30rem" }}
             data={TotalPopulationTotalHousehold}
           />
-        </div>
+        </div> */}
         <div className="graph__item">
           <Line
             style={{ width: "100%", maxHeight: "30rem" }}
