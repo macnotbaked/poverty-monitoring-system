@@ -200,10 +200,9 @@ const EvaluationList = ({
     return val;
   };
 
-  const getTotalPoorRepresentative = (rid) => {
+  const getTotalRepresentativeIncomeClassification = (rid) => {
     let val = 0;
     let className = [];
-    let totalCount = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
@@ -224,233 +223,110 @@ const EvaluationList = ({
       }
     });
 
-    totalCount = [className].filter((i) => i === "1").length;
-
-    return totalCount;
+    return className;
   };
 
   const getTotalPoor = (id) => {
     let val = 0;
+    let res = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        res = [
+          getTotalRepresentativeIncomeClassification(item.representative_aid),
+        ].filter((i) => i === "1").length;
         if (Number(item.representative_purok_id) === Number(id)) {
-          val += getTotalPoorRepresentative(item.representative_aid);
+          val += res;
         }
       });
     }
 
     return val;
-  };
-
-  const getTotalLowIncomeRepresentative = (rid) => {
-    let val = 0;
-    let className = [];
-    let totalCount = 0;
-
-    if (activeRepresentative.length) {
-      activeRepresentative.map((item) => {
-        if (Number(item.representative_aid) === Number(rid)) {
-          val =
-            Number(item.representative_monthly_income) /
-            Number(item.representative_total_people);
-        }
-      });
-    }
-
-    incomeClass.map((income) => {
-      if (
-        val >= Number(income.monthly_income_from / 5) &&
-        val <= Number(income.monthly_income_to / 5)
-      ) {
-        className = income.monthly_income_aid;
-      }
-    });
-
-    totalCount = [className].filter((i) => i === "2").length;
-
-    return totalCount;
   };
 
   const getTotalLowIncome = (id) => {
     let val = 0;
+    let res = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        res = [
+          getTotalRepresentativeIncomeClassification(item.representative_aid),
+        ].filter((i) => i === "2").length;
         if (Number(item.representative_purok_id) === Number(id)) {
-          val += getTotalLowIncomeRepresentative(item.representative_aid);
+          val += res;
         }
       });
     }
 
     return val;
-  };
-
-  const getTotalLowMiddleRepresentative = (rid) => {
-    let val = 0;
-    let className = [];
-    let totalCount = 0;
-
-    if (activeRepresentative.length) {
-      activeRepresentative.map((item) => {
-        if (Number(item.representative_aid) === Number(rid)) {
-          val =
-            Number(item.representative_monthly_income) /
-            Number(item.representative_total_people);
-        }
-      });
-    }
-
-    incomeClass.map((income) => {
-      if (
-        val >= Number(income.monthly_income_from / 5) &&
-        val <= Number(income.monthly_income_to / 5)
-      ) {
-        className = income.monthly_income_aid;
-      }
-    });
-
-    totalCount = [className].filter((i) => i === "3").length;
-
-    return totalCount;
   };
 
   const getTotalLowMiddle = (id) => {
     let val = 0;
+    let res = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        res = [
+          getTotalRepresentativeIncomeClassification(item.representative_aid),
+        ].filter((i) => i === "3").length;
         if (Number(item.representative_purok_id) === Number(id)) {
-          val += getTotalLowMiddleRepresentative(item.representative_aid);
+          val += res;
         }
       });
     }
 
     return val;
-  };
-
-  const getTotalMiddleClassRepresentative = (rid) => {
-    let val = 0;
-    let className = [];
-    let totalCount = 0;
-
-    if (activeRepresentative.length) {
-      activeRepresentative.map((item) => {
-        if (Number(item.representative_aid) === Number(rid)) {
-          val =
-            Number(item.representative_monthly_income) /
-            Number(item.representative_total_people);
-        }
-      });
-    }
-
-    incomeClass.map((income) => {
-      if (
-        val >= Number(income.monthly_income_from / 5) &&
-        val <= Number(income.monthly_income_to / 5)
-      ) {
-        className = income.monthly_income_aid;
-      }
-    });
-
-    totalCount = [className].filter((i) => i === "4").length;
-
-    return totalCount;
   };
 
   const getTotalMiddleClass = (id) => {
     let val = 0;
+    let res = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        res = [
+          getTotalRepresentativeIncomeClassification(item.representative_aid),
+        ].filter((i) => i === "4").length;
         if (Number(item.representative_purok_id) === Number(id)) {
-          val += getTotalMiddleClassRepresentative(item.representative_aid);
+          val += res;
         }
       });
     }
 
     return val;
-  };
-
-  const getTotalUpperMiddleRepresentative = (rid) => {
-    let val = 0;
-    let className = [];
-    let totalCount = 0;
-
-    if (activeRepresentative.length) {
-      activeRepresentative.map((item) => {
-        if (Number(item.representative_aid) === Number(rid)) {
-          val =
-            Number(item.representative_monthly_income) /
-            Number(item.representative_total_people);
-        }
-      });
-    }
-
-    incomeClass.map((income) => {
-      if (
-        val >= Number(income.monthly_income_from / 5) &&
-        val <= Number(income.monthly_income_to / 5)
-      ) {
-        className = income.monthly_income_aid;
-      }
-    });
-
-    totalCount = [className].filter((i) => i === "5").length;
-
-    return totalCount;
   };
 
   const getTotalUpperMiddle = (id) => {
     let val = 0;
+    let res = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        res = [
+          getTotalRepresentativeIncomeClassification(item.representative_aid),
+        ].filter((i) => i === "5").length;
         if (Number(item.representative_purok_id) === Number(id)) {
-          val += getTotalUpperMiddleRepresentative(item.representative_aid);
+          val += res;
         }
       });
     }
 
     return val;
-  };
-
-  const getTotalHighIncomeRepresentative = (rid) => {
-    let val = 0;
-    let className = [];
-    let totalCount = 0;
-
-    if (activeRepresentative.length) {
-      activeRepresentative.map((item) => {
-        if (Number(item.representative_aid) === Number(rid)) {
-          val =
-            Number(item.representative_monthly_income) /
-            Number(item.representative_total_people);
-        }
-      });
-    }
-
-    incomeClass.map((income) => {
-      if (
-        val >= Number(income.monthly_income_from / 5) &&
-        val <= Number(income.monthly_income_to / 5)
-      ) {
-        className = income.monthly_income_aid;
-      }
-    });
-
-    totalCount = [className].filter((i) => i === "6").length;
-
-    return totalCount;
   };
 
   const getTotalHighIncome = (id) => {
     let val = 0;
+    let res = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        res = [
+          getTotalRepresentativeIncomeClassification(item.representative_aid),
+        ].filter((i) => i === "6").length;
         if (Number(item.representative_purok_id) === Number(id)) {
-          val += getTotalHighIncomeRepresentative(item.representative_aid);
+          val += res;
         }
       });
     }
@@ -458,42 +334,17 @@ const EvaluationList = ({
     return val;
   };
 
-  const getTotalRichRepresentative = (rid) => {
-    let val = 0;
-    let className = [];
-    let totalCount = 0;
-
-    if (activeRepresentative.length) {
-      activeRepresentative.map((item) => {
-        if (Number(item.representative_aid) === Number(rid)) {
-          val =
-            Number(item.representative_monthly_income) /
-            Number(item.representative_total_people);
-        }
-      });
-    }
-
-    incomeClass.map((income) => {
-      if (
-        val >= Number(income.monthly_income_from / 5) &&
-        val <= Number(income.monthly_income_to / 5)
-      ) {
-        className = income.monthly_income_aid;
-      }
-    });
-
-    totalCount = [className].filter((i) => i === "7").length;
-
-    return totalCount;
-  };
-
   const getTotalRich = (id) => {
     let val = 0;
+    let res = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        res = [
+          getTotalRepresentativeIncomeClassification(item.representative_aid),
+        ].filter((i) => i === "7").length;
         if (Number(item.representative_purok_id) === Number(id)) {
-          val += getTotalRichRepresentative(item.representative_aid);
+          val += res;
         }
       });
     }

@@ -156,29 +156,6 @@ const ModalAddPopulationCriteria = ({ item }) => {
                       />
                     </div>
 
-                    <div className="input my--3">
-                      <i className="icon--input">
-                        <FaArrowCircleRight />
-                      </i>
-                      <InputText
-                        placeholder="Income From"
-                        type="number"
-                        name="asd"
-                        disabled={loading}
-                      />
-                    </div>
-                    <div className="input my--3">
-                      <i className="icon--input">
-                        <FaArrowCircleRight />
-                      </i>
-                      <InputText
-                        placeholder="Income To"
-                        type="number"
-                        name="asdd"
-                        disabled={loading}
-                      />
-                    </div>
-
                     <div className="d--flex gap--1">
                       <button
                         type="submit"

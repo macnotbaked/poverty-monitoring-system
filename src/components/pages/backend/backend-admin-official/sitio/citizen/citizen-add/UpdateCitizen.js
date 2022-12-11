@@ -376,7 +376,11 @@ const UpdateCitizen = () => {
                             type="submit"
                             disabled={loading || !props.dirty}
                           >
-                            {loading ? <SpinnerButton /> : <span>Submit</span>}
+                            {loading ? (
+                              <SpinnerButton />
+                            ) : (
+                              <span>Save Changes</span>
+                            )}
                           </button>
                         </Form>
                       );

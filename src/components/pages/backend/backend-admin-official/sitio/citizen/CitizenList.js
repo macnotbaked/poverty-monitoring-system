@@ -72,7 +72,7 @@ const CitizenList = ({
 
                     <td>{item.representative_contact}</td>
                     <td>
-                      <div className="d--flex">
+                      <div className="d--flex justify-center">
                         <Link
                           to={`${devNavUrl}/admin/purok/household-view?hid=${item.representative_aid}`}
                           className="dropdown tooltip--table"
