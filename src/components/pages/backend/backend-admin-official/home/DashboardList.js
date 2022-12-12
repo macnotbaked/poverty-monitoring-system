@@ -1,39 +1,18 @@
-import { Chart as ChartJS } from "chart.js/auto";
 import React from "react";
-import { Bar, Doughnut, Line, Pie, PolarArea } from "react-chartjs-2";
-import { AiFillEye } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { setStartIndex } from "../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../store/StoreContext";
+import { Doughnut, Line, Pie } from "react-chartjs-2";
 import useLoadAll from "../../../../custom-hooks/useLoadAll";
 import useLoadAllActiveIncomeClassification from "../../../../custom-hooks/useLoadAllActiveIncomeClassification";
-import useLoadAllActivePurok from "../../../../custom-hooks/useLoadAllActivePurok";
 import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
-import useLoadAllActiveRepresentativeCount from "../../../../custom-hooks/useLoadAllActiveRepresentativeCount";
-import { devNavUrl, formatDate } from "../../../../helpers/functions-general";
-import LoadMore from "../../../../widgets/LoadMore";
-import NoData from "../../../../widgets/NoData";
-import SearchBox from "../../../../widgets/SearchBox";
+import { formatDate } from "../../../../helpers/functions-general";
 import Spinner from "../../../../widgets/Spinner";
 
 const DashboardList = () => {
-  const search = React.useRef(null);
-
-  const { activePurok } = useLoadAllActivePurok(
-    "/admin/admin-sitio/read-sitio-all.php"
-  );
-
   const { result, loading } = useLoadAll(
     "/admin/admin-evaluation/enable-evaluation/read-all-evaluation.php"
   );
 
-  // bar graph for list of sitio with total population and total household
   const { activeRepresentative } = useLoadAllActiveRepresentative(
     "/admin/admin-representative/read-representative.php"
-  );
-
-  const { countRepresentative } = useLoadAllActiveRepresentativeCount(
-    "/admin/admin-representative/read-representative-count-all.php"
   );
 
   const { incomeClass } = useLoadAllActiveIncomeClassification(
@@ -54,27 +33,43 @@ const DashboardList = () => {
     return val;
   };
 
-  const getTotalUnemployment = (id) => {
+  const getTotalUnemployed = (id) => {
     let ableToWork = 0;
     let employed = 0;
     let val = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           ableToWork += Number(item.representative_total_able_work);
           employed += Number(item.representative_total_employed);
         }
       });
     }
 
-    val = ((ableToWork - employed) / ableToWork) * 100;
+    val = ableToWork - employed;
 
     if (isNaN(val)) {
       return `${(0).toFixed(2)}`;
     } else {
       return val.toFixed(2);
     }
+  };
+
+  const getTotalAbleToWork = (id) => {
+    let ableToWork = 0;
+    let employed = 0;
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_eval_id) === Number(id)) {
+          ableToWork += Number(item.representative_total_able_work);
+        }
+      });
+    }
+
+    return ableToWork;
   };
 
   const getTotalRepresentativeIncomeClassification = (rid) => {
@@ -112,7 +107,7 @@ const DashboardList = () => {
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "1").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
@@ -130,7 +125,7 @@ const DashboardList = () => {
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "2").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
@@ -148,7 +143,7 @@ const DashboardList = () => {
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "3").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
@@ -166,7 +161,7 @@ const DashboardList = () => {
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "4").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
@@ -184,7 +179,7 @@ const DashboardList = () => {
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "5").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
@@ -202,7 +197,7 @@ const DashboardList = () => {
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "6").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
@@ -220,7 +215,7 @@ const DashboardList = () => {
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "7").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
@@ -229,11 +224,9 @@ const DashboardList = () => {
     return val;
   };
 
-  let sitio = [];
   let unemployment = [];
   let population = [];
   let year = [];
-  let incomeClassification = [];
   let poor = [];
   let low = [];
   let lowMiddle = [];
@@ -241,23 +234,7 @@ const DashboardList = () => {
   let upperMiddle = [];
   let high = [];
   let rich = [];
-  let background = [];
-
-  incomeClass.map((item) => {
-    incomeClassification.push(item.monthly_income_name);
-  });
-
-  activePurok.map((item) => {
-    sitio.push(item.sitio_name);
-    unemployment.push(getTotalUnemployment(item.sitio_aid));
-    poor.push(getTotalPoor(item.sitio_aid));
-    low.push(getTotalLowIncome(item.sitio_aid));
-    lowMiddle.push(getTotalLowMiddle(item.sitio_aid));
-    middle.push(getTotalMiddleClass(item.sitio_aid));
-    upperMiddle.push(getTotalUpperMiddle(item.sitio_aid));
-    high.push(getTotalHighIncome(item.sitio_aid));
-    rich.push(getTotalRich(item.sitio_aid));
-  });
+  let ableToWork = [];
 
   result.map((item) => {
     year.push(
@@ -266,24 +243,23 @@ const DashboardList = () => {
       }`
     );
     population.push(getTotalPopulation(item.evaluation_list_aid));
+    unemployment.push(getTotalUnemployed(item.evaluation_list_aid));
+    ableToWork.push(getTotalAbleToWork(item.evaluation_list_aid));
+    poor.push(getTotalPoor(item.evaluation_list_aid));
+    low.push(getTotalLowIncome(item.evaluation_list_aid));
+    lowMiddle.push(getTotalLowMiddle(item.evaluation_list_aid));
+    middle.push(getTotalMiddleClass(item.evaluation_list_aid));
+    upperMiddle.push(getTotalUpperMiddle(item.evaluation_list_aid));
+    high.push(getTotalHighIncome(item.evaluation_list_aid));
+    rich.push(getTotalRich(item.evaluation_list_aid));
   });
 
-  for (let i = 0; i < incomeClassification.length; i++) {
-    let r = Math.floor(Math.random() * 42);
-    let g = Math.floor(Math.random() * 122);
-    let b = Math.floor(Math.random() * 120);
-    background.push("rgba(" + r + ", " + g + ", " + b + ", .5)");
-
-    // border.push("rgba(" + r + ", " + g + ", " + b + ", 1)");
-  }
-
   const UnemploymentRate = {
-    labels: sitio,
+    labels: ["Total unemployed", "Total Able To Work"],
     datasets: [
       {
-        label: "Unemployment Rate Percentage",
-        data: unemployment,
-        backgroundColor: background,
+        data: [unemployment, ableToWork],
+        backgroundColor: ["#94C973", "#2F5233"],
         borderWidth: 1,
       },
     ],
@@ -295,55 +271,34 @@ const DashboardList = () => {
       {
         label: "Population Growth",
         data: population,
-        backgroundColor: background,
+        backgroundColor: ["#17252a"],
         borderWidth: 1,
       },
     ],
   };
 
   const classification = {
-    labels: sitio,
+    labels: [
+      "Poor",
+      "Low Income (but not poor)",
+      "Lower Middle Income",
+      "Middle Income",
+      "Upper Middle Income",
+      "High income (but not rich)",
+      "Rich",
+    ],
     datasets: [
       {
-        label: "Poor",
-        data: poor,
-        backgroundColor: background,
-        borderWidth: 1,
-      },
-      {
-        label: "Low Income (but not poor)",
-        data: low,
-        backgroundColor: background,
-        borderWidth: 1,
-      },
-      {
-        label: "Lower Middle Income",
-        data: lowMiddle,
-        backgroundColor: background,
-        borderWidth: 1,
-      },
-      {
-        label: "Middle Income",
-        data: middle,
-        backgroundColor: background,
-        borderWidth: 1,
-      },
-      {
-        label: "Upper Middle Income",
-        data: upperMiddle,
-        backgroundColor: background,
-        borderWidth: 1,
-      },
-      {
-        label: "High income (but not rich)",
-        data: high,
-        backgroundColor: background,
-        borderWidth: 1,
-      },
-      {
-        label: "Rich",
-        data: rich,
-        backgroundColor: background,
+        data: [poor, low, lowMiddle, middle, upperMiddle, high, rich],
+        backgroundColor: [
+          "#F51720",
+          "#FA26A0",
+          "#F8D210",
+          "#2FF3E0",
+          "#B1D4E0",
+          "#0C2D48",
+          "#145DA0",
+        ],
         borderWidth: 1,
       },
     ],
@@ -360,13 +315,26 @@ const DashboardList = () => {
           />
         </div>
         <div className="graph__item">
-          <Bar
+          <Doughnut
             style={{ width: "100%", maxHeight: "30rem" }}
             data={UnemploymentRate}
+            options={{
+              plugins: {
+                legend: {
+                  display: true,
+                  labels: {
+                    color: "#2b7a78",
+                    font: {
+                      weight: 600,
+                    },
+                  },
+                },
+              },
+            }}
           />
         </div>
         <div className="graph__item">
-          <Bar
+          <Pie
             style={{ width: "100%", maxHeight: "30rem" }}
             data={classification}
             options={{
@@ -384,12 +352,6 @@ const DashboardList = () => {
             }}
           />
         </div>
-        {/* <div className="graph__item">
-          <PolarArea
-            style={{ width: "100%", maxHeight: "30rem" }}
-            data={TotalPopulationTotalHousehold}
-          />
-        </div> */}
       </div>
     </>
   );
