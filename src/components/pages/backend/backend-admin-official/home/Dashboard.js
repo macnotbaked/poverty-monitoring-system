@@ -1,6 +1,5 @@
 import React from "react";
 import { StoreContext } from "../../../../../store/StoreContext";
-import useFetchDataLoadMore from "../../../../custom-hooks/useFetchDataLoadMore";
 import Header from "../../../../header/Header";
 import Navigation from "../../../../navigation/Navigation";
 import DashboardList from "./DashboardList";
