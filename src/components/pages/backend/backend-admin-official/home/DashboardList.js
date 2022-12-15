@@ -307,43 +307,36 @@ const DashboardList = () => {
       {
         label: "Poor",
         data: poor,
-        backgroundColor: background,
         borderWidth: 1,
       },
       {
         label: "Low Income (but not poor)",
         data: low,
-        backgroundColor: background,
         borderWidth: 1,
       },
       {
         label: "Lower Middle Income",
         data: lowMiddle,
-        backgroundColor: background,
         borderWidth: 1,
       },
       {
         label: "Middle Income",
         data: middle,
-        backgroundColor: background,
         borderWidth: 1,
       },
       {
         label: "Upper Middle Income",
         data: upperMiddle,
-        backgroundColor: background,
         borderWidth: 1,
       },
       {
         label: "High income (but not rich)",
         data: high,
-        backgroundColor: background,
         borderWidth: 1,
       },
       {
         label: "Rich",
         data: rich,
-        backgroundColor: background,
         borderWidth: 1,
       },
     ],
