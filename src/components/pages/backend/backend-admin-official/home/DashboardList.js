@@ -1,47 +1,32 @@
-import { Chart as ChartJS } from "chart.js/auto";
+import Chart from "chart.js/auto";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import React from "react";
-import { Bar, Doughnut, Line, Pie, PolarArea } from "react-chartjs-2";
-import { AiFillEye } from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { setStartIndex } from "../../../../../store/StoreAction";
-import { StoreContext } from "../../../../../store/StoreContext";
+import { Doughnut, Line, Pie, PolarArea, Radar } from "react-chartjs-2";
 import useLoadAll from "../../../../custom-hooks/useLoadAll";
 import useLoadAllActiveIncomeClassification from "../../../../custom-hooks/useLoadAllActiveIncomeClassification";
-import useLoadAllActivePurok from "../../../../custom-hooks/useLoadAllActivePurok";
 import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
-import useLoadAllActiveRepresentativeCount from "../../../../custom-hooks/useLoadAllActiveRepresentativeCount";
-import { devNavUrl, formatDate } from "../../../../helpers/functions-general";
-import LoadMore from "../../../../widgets/LoadMore";
-import NoData from "../../../../widgets/NoData";
-import SearchBox from "../../../../widgets/SearchBox";
+import { formatDate } from "../../../../helpers/functions-general";
 import Spinner from "../../../../widgets/Spinner";
+Chart.register(ChartDataLabels);
 
 const DashboardList = () => {
-  const search = React.useRef(null);
-
-  const { activePurok } = useLoadAllActivePurok(
-    "/admin/admin-sitio/read-sitio-all.php"
-  );
-
   const { result, loading } = useLoadAll(
     "/admin/admin-evaluation/enable-evaluation/read-all-evaluation.php"
   );
 
-  // bar graph for list of sitio with total population and total household
   const { activeRepresentative } = useLoadAllActiveRepresentative(
     "/admin/admin-representative/read-representative.php"
-  );
-
-  const { countRepresentative } = useLoadAllActiveRepresentativeCount(
-    "/admin/admin-representative/read-representative-count-all.php"
   );
 
   const { incomeClass } = useLoadAllActiveIncomeClassification(
     "/admin/admin-settings/income-classification/read-income-classification-all.php"
   );
 
+  let totalCount = activeRepresentative.length;
+
   const getTotalPopulation = (id) => {
     let val = 0;
+    let res = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
@@ -50,25 +35,49 @@ const DashboardList = () => {
         }
       });
     }
+    res = (val / val) * 100;
 
-    return val;
+    return res;
   };
 
-  const getTotalUnemployment = (id) => {
+  const getTotalUnemployedPopulation = (id) => {
+    let val = 0;
     let ableToWork = 0;
     let employed = 0;
-    let val = 0;
+    let population = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
+          population += Number(item.representative_total_people);
           ableToWork += Number(item.representative_total_able_work);
           employed += Number(item.representative_total_employed);
         }
       });
     }
 
-    val = ((ableToWork - employed) / ableToWork) * 100;
+    val = ((population - (ableToWork - employed)) / population) * 100;
+
+    return val.toFixed(2);
+  };
+
+  const getTotalUnemployed = (id) => {
+    let ableToWork = 0;
+    let employed = 0;
+    let population = 0;
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_eval_id) === Number(id)) {
+          population += Number(item.representative_total_people);
+          ableToWork += Number(item.representative_total_able_work);
+          employed += Number(item.representative_total_employed);
+        }
+      });
+    }
+
+    val = ((ableToWork - employed) / population) * 100;
 
     if (isNaN(val)) {
       return `${(0).toFixed(2)}`;
@@ -106,134 +115,189 @@ const DashboardList = () => {
   const getTotalPoor = (id) => {
     let val = 0;
     let res = 0;
+    let population = 0;
+    let total = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        population += Number(item.representative_total_people);
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "1").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
     }
 
-    return val;
+    total = (val / totalCount) * 100;
+
+    if (total === 0) {
+      return "";
+    }
+    return total.toFixed(2);
   };
 
   const getTotalLowIncome = (id) => {
     let val = 0;
     let res = 0;
+    let population = 0;
+    let total = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        population += Number(item.representative_total_people);
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "2").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
     }
 
-    return val;
+    total = (val / totalCount) * 100;
+
+    if (total === 0) {
+      return "";
+    }
+    return total.toFixed(2);
   };
 
   const getTotalLowMiddle = (id) => {
     let val = 0;
     let res = 0;
+    let population = 0;
+    let total = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        population += Number(item.representative_total_people);
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "3").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
     }
 
-    return val;
+    total = (val / totalCount) * 100;
+
+    if (total === 0) {
+      return "";
+    }
+    return total.toFixed(2);
   };
 
   const getTotalMiddleClass = (id) => {
     let val = 0;
     let res = 0;
+    let population = 0;
+    let total = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        population += Number(item.representative_total_people);
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "4").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
     }
 
-    return val;
+    total = (val / totalCount) * 100;
+
+    if (total === 0) {
+      return "";
+    }
+    return total.toFixed(2);
   };
 
   const getTotalUpperMiddle = (id) => {
     let val = 0;
     let res = 0;
+    let population = 0;
+    let total = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        population += Number(item.representative_total_people);
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "5").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
     }
 
-    return val;
+    total = (val / totalCount) * 100;
+
+    if (total === 0) {
+      return "";
+    }
+    return total.toFixed(2);
   };
 
   const getTotalHighIncome = (id) => {
     let val = 0;
     let res = 0;
+    let population = 0;
+    let total = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        population += Number(item.representative_total_people);
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "6").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
     }
 
-    return val;
+    total = (val / totalCount) * 100;
+
+    if (total === 0) {
+      return "";
+    }
+    return total.toFixed(2);
   };
 
   const getTotalRich = (id) => {
     let val = 0;
     let res = 0;
+    let population = 0;
+    let total = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
+        population += Number(item.representative_total_people);
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "7").length;
-        if (Number(item.representative_purok_id) === Number(id)) {
+        if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
       });
     }
 
-    return val;
+    total = (val / totalCount) * 100;
+
+    if (total === 0) {
+      return "";
+    }
+    return total.toFixed(2);
   };
 
-  let sitio = [];
   let unemployment = [];
   let population = [];
+  let unemployedPopulation = [];
   let year = [];
-  let incomeClassification = [];
   let poor = [];
   let low = [];
   let lowMiddle = [];
@@ -241,23 +305,8 @@ const DashboardList = () => {
   let upperMiddle = [];
   let high = [];
   let rich = [];
-  let background = [];
-
-  incomeClass.map((item) => {
-    incomeClassification.push(item.monthly_income_name);
-  });
-
-  activePurok.map((item) => {
-    sitio.push(item.sitio_name);
-    unemployment.push(getTotalUnemployment(item.sitio_aid));
-    poor.push(getTotalPoor(item.sitio_aid));
-    low.push(getTotalLowIncome(item.sitio_aid));
-    lowMiddle.push(getTotalLowMiddle(item.sitio_aid));
-    middle.push(getTotalMiddleClass(item.sitio_aid));
-    upperMiddle.push(getTotalUpperMiddle(item.sitio_aid));
-    high.push(getTotalHighIncome(item.sitio_aid));
-    rich.push(getTotalRich(item.sitio_aid));
-  });
+  let backgroundIncome = [];
+  let backgroundPopulationUnemployed = [];
 
   result.map((item) => {
     year.push(
@@ -266,24 +315,27 @@ const DashboardList = () => {
       }`
     );
     population.push(getTotalPopulation(item.evaluation_list_aid));
+    unemployedPopulation.push(
+      getTotalUnemployedPopulation(item.evaluation_list_aid)
+    );
+    unemployment.push(getTotalUnemployed(item.evaluation_list_aid));
+    poor.push(getTotalPoor(item.evaluation_list_aid));
+    low.push(getTotalLowIncome(item.evaluation_list_aid));
+    lowMiddle.push(getTotalLowMiddle(item.evaluation_list_aid));
+    middle.push(getTotalMiddleClass(item.evaluation_list_aid));
+    upperMiddle.push(getTotalUpperMiddle(item.evaluation_list_aid));
+    high.push(getTotalHighIncome(item.evaluation_list_aid));
+    rich.push(getTotalRich(item.evaluation_list_aid));
   });
 
-  for (let i = 0; i < incomeClassification.length; i++) {
-    let r = Math.floor(Math.random() * 42);
-    let g = Math.floor(Math.random() * 122);
-    let b = Math.floor(Math.random() * 120);
-    background.push("rgba(" + r + ", " + g + ", " + b + ", .5)");
-
-    // border.push("rgba(" + r + ", " + g + ", " + b + ", 1)");
-  }
+  let populationUnemployed = ["Total Population", "Unemployment Rate"];
 
   const UnemploymentRate = {
-    labels: sitio,
+    labels: populationUnemployed,
     datasets: [
       {
-        label: "Unemployment Rate Percentage",
-        data: unemployment,
-        backgroundColor: background,
+        data: [unemployedPopulation, unemployment],
+        backgroundColor: backgroundPopulationUnemployed,
         borderWidth: 1,
       },
     ],
@@ -295,75 +347,88 @@ const DashboardList = () => {
       {
         label: "Population Growth",
         data: population,
-        backgroundColor: background,
+        backgroundColor: ["#17252a"],
         borderWidth: 1,
       },
     ],
   };
 
+  let label = [
+    "Poor",
+    "Low Income (but not poor)",
+    "Lower Middle Income",
+    "Middle Income",
+    "Upper Middle Income",
+    "High income (but not rich)",
+    "Rich",
+  ];
+
   const classification = {
-    labels: sitio,
+    labels: label,
     datasets: [
       {
-        label: "Poor",
-        data: poor,
-        borderWidth: 1,
-      },
-      {
-        label: "Low Income (but not poor)",
-        data: low,
-        borderWidth: 1,
-      },
-      {
-        label: "Lower Middle Income",
-        data: lowMiddle,
-        borderWidth: 1,
-      },
-      {
-        label: "Middle Income",
-        data: middle,
-        borderWidth: 1,
-      },
-      {
-        label: "Upper Middle Income",
-        data: upperMiddle,
-        borderWidth: 1,
-      },
-      {
-        label: "High income (but not rich)",
-        data: high,
-        borderWidth: 1,
-      },
-      {
-        label: "Rich",
-        data: rich,
+        data: [poor, low, lowMiddle, middle, upperMiddle, high, rich],
+        backgroundColor: backgroundIncome,
         borderWidth: 1,
       },
     ],
   };
+
+  for (let i = 0; i < label.length; i++) {
+    let r = Math.floor(Math.random() * 43);
+    let g = Math.floor(Math.random() * 122);
+    let b = Math.floor(Math.random() * 120);
+    backgroundIncome.push("rgb(" + r + ", " + g + ", " + b + ", .7)");
+  }
+
+  for (let i = 0; i < populationUnemployed.length; i++) {
+    let r = Math.floor(Math.random() * 43);
+    let g = Math.floor(Math.random() * 122);
+    let b = Math.floor(Math.random() * 120);
+    backgroundPopulationUnemployed.push(
+      "rgb(" + r + ", " + g + ", " + b + ", .7)"
+    );
+  }
 
   return (
     <>
       <div className="graph__container p--relative">
         {loading && <Spinner />}
-        <div className="graph__item">
+        <div className="graph__item" style={{ minWidth: "100%" }}>
           <Line
-            style={{ width: "100%", maxHeight: "30rem" }}
+            style={{ width: "100%", maxHeight: "40rem" }}
             data={PopulationPerYear}
           />
         </div>
-        <div className="graph__item">
-          <Bar
-            style={{ width: "100%", maxHeight: "30rem" }}
+        <div className="graph__item" style={{ minWidth: "48%" }}>
+          <Pie
+            style={{ width: "100%", maxHeight: "40rem" }}
             data={UnemploymentRate}
-          />
-        </div>
-        <div className="graph__item">
-          <Bar
-            style={{ width: "100%", maxHeight: "30rem" }}
-            data={classification}
             options={{
               plugins: {
+                datalabels: {
+                  color: "#fff",
+                  anchor: "end",
+                  align: "start",
+                  offset: 2,
+                  borderWidth: 2,
+                  borderColor: "#fff",
+                  borderRadius: 25,
+                  backgroundColor: (context) => {
+                    return context.dataset.backgroundColor;
+                  },
+                  font: {
+                    weight: 600,
+                    size: "10",
+                  },
+                  formatter: (value) => {
+                    if (value === 0) {
+                      return "";
+                    } else {
+                      return value + "%";
+                    }
+                  },
+                },
                 legend: {
                   display: true,
                   labels: {
@@ -377,12 +442,50 @@ const DashboardList = () => {
             }}
           />
         </div>
-        {/* <div className="graph__item">
-          <PolarArea
-            style={{ width: "100%", maxHeight: "30rem" }}
-            data={TotalPopulationTotalHousehold}
+        <div className="graph__item" style={{ minWidth: "48%" }}>
+          <Doughnut
+            style={{ width: "100%", maxHeight: "40rem" }}
+            data={classification}
+            options={{
+              plugins: {
+                datalabels: {
+                  color: "#fff",
+                  anchor: "end",
+                  align: "start",
+                  borderWidth: 1,
+                  borderColor: "#fff",
+                  borderRadius: 100,
+                  offset: 2,
+                  backgroundColor: (context) => {
+                    return context.dataset.backgroundColor;
+                  },
+                  font: {
+                    weight: "bold",
+                    size: "12",
+                  },
+                  formatter: (value) => {
+                    if (value === " ") {
+                      return " ";
+                    } else {
+                      return value + "%";
+                    }
+                  },
+                },
+                legend: {
+                  align: "start",
+                  position: "left",
+                  display: true,
+                  labels: {
+                    color: "#2b7a78",
+                    font: {
+                      weight: 600,
+                    },
+                  },
+                },
+              },
+            }}
           />
-        </div> */}
+        </div>
       </div>
     </>
   );

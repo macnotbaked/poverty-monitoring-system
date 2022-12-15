@@ -192,7 +192,7 @@ const EvaluationList = ({
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
         if (Number(item.representative_purok_id) === Number(id)) {
-          val += Number(item.representative_total_able_work);
+          val += Number(item.representative_total_employed);
         }
       });
     }

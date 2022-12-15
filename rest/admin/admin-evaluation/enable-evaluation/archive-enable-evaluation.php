@@ -11,7 +11,7 @@ try {
     $eval = new EnableEvaluation($connection);
 
     $eval->evaluation_list_aid  = filter_var($data["id"], FILTER_SANITIZE_STRING);
-    $eval->evaluation_list_datetime = filter_var($data["evaluation_list_datetime"], FILTER_SANITIZE_STRING);
+    $eval->evaluation_list_datetime = date("Y-m-d H:i:s");
 
     $result = checkArchive($eval);
 
