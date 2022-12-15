@@ -11,13 +11,13 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 5rem;
-      padding: 2rem;
+      padding: 2rem 2rem 2rem 0;
     }
     .graph__item {
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
       height: fit-content;
       padding: 1rem;
-      width: 100rem;
+      // width: 100rem;
     }
     &__header {
       display: flex;
