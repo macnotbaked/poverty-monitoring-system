@@ -1,10 +1,12 @@
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import React from "react";
-import { Doughnut, Line, Pie, PolarArea, Radar } from "react-chartjs-2";
+import { Bar, Doughnut, Line, Pie, PolarArea, Radar } from "react-chartjs-2";
+import { FaHouseUser, FaMoneyCheckAlt, FaUser, FaUsers } from "react-icons/fa";
 import useLoadAll from "../../../../custom-hooks/useLoadAll";
 import useLoadAllActiveIncomeClassification from "../../../../custom-hooks/useLoadAllActiveIncomeClassification";
 import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
+import useLoadAllInactive from "../../../../custom-hooks/useLoadAllInactive";
 import { formatDate } from "../../../../helpers/functions-general";
 import Spinner from "../../../../widgets/Spinner";
 Chart.register(ChartDataLabels);
@@ -22,22 +24,51 @@ const DashboardList = () => {
     "/admin/admin-settings/income-classification/read-income-classification-all.php"
   );
 
+  const { inactive } = useLoadAllInactive(
+    "/admin/admin-representative/read-representative-inactive.php"
+  );
+
+  console.log(inactive);
+
   let totalCount = activeRepresentative.length;
+
+  const getPovertyRate = (id) => {
+    let val = 0;
+    let res = 0;
+    let total = 0;
+
+    if (inactive.length) {
+      inactive.map((item) => {
+        population += Number(item.representative_total_people);
+        res = [
+          getTotalRepresentativeIncomeClassification(item.representative_aid),
+        ].filter((i) => i === "1").length;
+        if (Number(item.representative_eval_id) === Number(id)) {
+          val += res;
+        }
+      });
+    }
+
+    total = (val / totalCount) * 100;
+
+    if (total === 0) {
+      return "";
+    }
+    return total.toFixed(2);
+  };
 
   const getTotalPopulation = (id) => {
     let val = 0;
-    let res = 0;
 
-    if (activeRepresentative.length) {
-      activeRepresentative.map((item) => {
+    if (inactive.length) {
+      inactive.map((item) => {
         if (Number(item.representative_eval_id) === Number(id)) {
           val += Number(item.representative_total_people);
         }
       });
     }
-    res = (val / val) * 100;
 
-    return res;
+    return val;
   };
 
   const getTotalUnemployedPopulation = (id) => {
@@ -79,11 +110,7 @@ const DashboardList = () => {
 
     val = ((ableToWork - employed) / population) * 100;
 
-    if (isNaN(val)) {
-      return `${(0).toFixed(2)}`;
-    } else {
-      return val.toFixed(2);
-    }
+    return val.toFixed(2);
   };
 
   const getTotalRepresentativeIncomeClassification = (rid) => {
@@ -304,6 +331,7 @@ const DashboardList = () => {
   let rich = [];
   let backgroundIncome = [];
   let backgroundPopulationUnemployed = [];
+  let povertyRate = [];
 
   result.map((item) => {
     year.push(
@@ -323,6 +351,7 @@ const DashboardList = () => {
     upperMiddle.push(getTotalUpperMiddle(item.evaluation_list_aid));
     high.push(getTotalHighIncome(item.evaluation_list_aid));
     rich.push(getTotalRich(item.evaluation_list_aid));
+    povertyRate.push(getPovertyRate(item.evaluation_list_aid));
   });
 
   let populationUnemployed = ["Total Population", "Unemployment Rate"];
@@ -344,6 +373,18 @@ const DashboardList = () => {
       {
         label: "Population Growth",
         data: population,
+        backgroundColor: ["#17252a"],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const PovertyRate = {
+    labels: year,
+    datasets: [
+      {
+        label: "Poverty Rate",
+        data: povertyRate,
         backgroundColor: ["#17252a"],
         borderWidth: 1,
       },
@@ -391,15 +432,48 @@ const DashboardList = () => {
     <>
       <div className="graph__container p--relative">
         {loading && <Spinner />}
-        <div className="graph__item" style={{ minWidth: "100%" }}>
-          <Line
-            style={{ width: "100%", maxHeight: "40rem" }}
-            data={PopulationPerYear}
-          />
+        <h3 className="full--width t--bold">Program Recommendation</h3>
+        {/* 1 */}
+        <div className="list__container">
+          <span>
+            <FaUsers />
+          </span>
+          <h4 className="t--bold my--1">Population</h4>
         </div>
-        <div className="graph__item" style={{ minWidth: "48%" }}>
+
+        {/* 2 */}
+        <div className="list__container">
+          <span>
+            <FaHouseUser />
+          </span>
+          <h4 className="t--bold my--1">Household</h4>
+        </div>
+
+        {/* 3 */}
+        <div className="list__container">
+          <span>
+            <FaMoneyCheckAlt />
+          </span>
+          <h4 className="t--bold my--1">Income</h4>
+        </div>
+
+        {/* 4 */}
+        <div className="list__container">
+          <span>
+            <FaUser />
+          </span>
+          <h4 className="t--bold my--1">Unemployment</h4>
+        </div>
+
+        <div className="graph__item" style={{ minWidth: "50%" }}>
+          <Bar data={PovertyRate} />
+        </div>
+
+        <div className="graph__item" style={{ minWidth: "100%" }}>
+          <Line data={PopulationPerYear} />
+        </div>
+        <div className="graph__item" style={{ minWidth: "45%" }}>
           <Pie
-            style={{ width: "100%", maxHeight: "40rem" }}
             data={UnemploymentRate}
             options={{
               plugins: {
@@ -419,8 +493,8 @@ const DashboardList = () => {
                     size: "10",
                   },
                   formatter: (value) => {
-                    if (value === " ") {
-                      return value + ")";
+                    if (isNaN(value)) {
+                      return "No Data";
                     } else {
                       return value + "%";
                     }
@@ -428,20 +502,13 @@ const DashboardList = () => {
                 },
                 legend: {
                   display: true,
-                  labels: {
-                    color: "#2b7a78",
-                    font: {
-                      weight: 600,
-                    },
-                  },
                 },
               },
             }}
           />
         </div>
-        <div className="graph__item" style={{ minWidth: "48%" }}>
+        <div className="graph__item" style={{ minWidth: "45%" }}>
           <Doughnut
-            style={{ width: "100%", maxHeight: "40rem" }}
             data={classification}
             options={{
               plugins: {
@@ -457,13 +524,12 @@ const DashboardList = () => {
                     return context.dataset.backgroundColor;
                   },
                   font: {
-                    weight: "bold",
-                    size: "12",
+                    weight: 600,
+                    size: "10",
                   },
                   formatter: (value) => {
-                    console.log(value);
-                    if (value === "") {
-                      return "0%";
+                    if (isNaN(value)) {
+                      return "No Data";
                     } else {
                       return value + "%";
                     }
@@ -473,12 +539,6 @@ const DashboardList = () => {
                   align: "start",
                   position: "left",
                   display: true,
-                  labels: {
-                    color: "#2b7a78",
-                    font: {
-                      weight: 600,
-                    },
-                  },
                 },
               },
             }}

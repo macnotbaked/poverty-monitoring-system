@@ -18,7 +18,7 @@ const SettingList = () => {
 
   return (
     <>
-      <div className="grid-col-3 mb--2 shadow--primary pxy--2">
+      <div className="grid-col mb--2 shadow--primary pxy--2">
         {/* 1 */}
         <Link
           to={`${devNavUrl}/admin/users`}

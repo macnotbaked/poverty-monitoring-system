@@ -122,6 +122,21 @@ class Representative
         return $result;
     }
 
+    public function readInactive()
+    {
+        $sql = "select * from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
+        $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
+        $sql .= "order by purok.sitio_name asc ";
+
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
     public function readAllCount()
     {
         $sql = "select *, count(household.representative_purok_id) as total from {$this->tblRepresentative} as household, ";

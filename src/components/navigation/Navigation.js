@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { setStartIndex } from "../../store/StoreAction";
 import { StoreContext } from "../../store/StoreContext";
 import { devBaseUrl, devNavUrl } from "../helpers/functions-general";
+import Logo from "../widgets/Logo";
 
 const Navigation = ({ menu }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -24,7 +25,8 @@ const Navigation = ({ menu }) => {
                 href={`${devNavUrl}/admin/home`}
                 onClick={() => dispatch(setStartIndex(0))}
               >
-                <img src={`${devBaseUrl}/img/pms-logo.png`} alt="PMS" />
+                {/* <img src={`${devBaseUrl}/img/pms-logo.png`} alt="PMS" /> */}
+                <Logo />
               </a>
               {/* <span></span> */}
             </div>

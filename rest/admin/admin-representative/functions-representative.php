@@ -39,6 +39,16 @@ function checkRead($object)
     return $result;
 }
 
+function checkReadInactive($object)
+{
+    $result = $object->readInactive();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (All household).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkReadAllCount($object)
 {
     $result = $object->readAllCount();

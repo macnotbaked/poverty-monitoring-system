@@ -25,9 +25,11 @@
 
   &__logo {
     padding: 2rem;
-    img {
+    img,
+    svg {
       height: 7rem;
       object-fit: contain;
+      width: fit-content;
     }
   }
 
