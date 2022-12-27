@@ -15,6 +15,9 @@
     td:last-child {
       width: 13rem;
       text-align: center !important;
+      @media screen and (max-width: 768px) {
+        text-align: left !important;
+      }
     }
   }
   table tr:hover {

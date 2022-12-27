@@ -18,8 +18,8 @@
   position: relative;
 }
 // .row {
-//   margin-left: -15px;
-//   margin-right: -15px;
+//   margin-left: 15px;
+//   margin-right: 15px;
 // }
 .clearfix:before,
 .clearfix:after,
@@ -38,7 +38,7 @@
 .grid-col {
   display: grid;
   grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(35rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
   border-radius: 5px;
   min-height: 200px;
 

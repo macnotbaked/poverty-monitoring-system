@@ -13,11 +13,9 @@ const Dashboard = () => {
         <Header />
         <Navigation menu="home" />
         <div className="container">
-          <div className="row">
-            <div className="content">
-              <h3 className="t--bold py--2">Dashboard</h3>
-              <DashboardList />
-            </div>
+          <div className="content">
+            <h3 className="t--bold py--2">Dashboard</h3>
+            <DashboardList />
           </div>
         </div>
       </div>

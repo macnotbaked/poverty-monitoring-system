@@ -1,9 +1,11 @@
 .main-content {
   .content {
     margin-left: 13rem;
-    // padding-right: 2rem;
     transition: 0.3s ease;
     padding-bottom: 2rem;
+    @media screen and (max-width: 768px) {
+      padding-left: 2rem;
+    }
     // height: 100%;
     .graph__container {
       width: 100%;
@@ -11,7 +13,10 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 5rem;
-      padding: 2rem 2rem 2rem 0;
+      padding: 2rem;
+      @media screen and (max-width: 768px) {
+        padding: 0;
+      }
     }
     .graph__item {
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -20,14 +25,31 @@
         max-height: 30rem;
       }
     }
+    .graph__bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      grid-gap: 1rem;
+      @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    .graph__top {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+
     &__header {
       display: flex;
       justify-content: space-between;
       align-items: center;
 
-      @media screen and (max-width: 420px) {
-        align-items: unset;
-      }
+      // @media screen and (max-width: 420px) {
+      //   align-items: unset;
+      // }
 
       h3 {
         @media screen and (max-width: 420px) {
@@ -109,11 +131,11 @@
         }
       }
 
-      @media screen and (max-width: 420px) {
-        flex-direction: column-reverse;
-        align-items: flex-end;
-        padding-top: 1rem;
-      }
+      // @media screen and (max-width: 420px) {
+      //   flex-direction: column-reverse;
+      //   align-items: flex-end;
+      //   padding-top: 1rem;
+      // }
     }
     .form__container {
       width: 70rem !important;

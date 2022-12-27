@@ -44,27 +44,25 @@ const UsersActive = () => {
         <Header />
         <Navigation menu="settings" />
         <div className="container">
-          <div className="row">
-            <div className="content">
-              <div className="content__header">
-                <h3 className="t--bold py--2">Users</h3>
-                <div className="content__button">
-                  <button className="btn--primary" onClick={handleAdd}>
-                    <FaPlusCircle /> <span>Add</span>
-                  </button>
-                  <Back />
-                </div>
+          <div className="content">
+            <div className="content__header">
+              <h3 className="t--bold py--2">Users</h3>
+              <div className="content__button">
+                <button className="btn--primary" onClick={handleAdd}>
+                  <FaPlusCircle /> <span>Add</span>
+                </button>
+                <Back />
               </div>
-              <UsersActiveList
-                loading={loading}
-                handleLoad={handleLoad}
-                totalResult={totalResult}
-                result={result}
-                handleSearch={handleSearch}
-                handleChange={handleChange}
-                setItemEdit={setItemEdit}
-              />
             </div>
+            <UsersActiveList
+              loading={loading}
+              handleLoad={handleLoad}
+              totalResult={totalResult}
+              result={result}
+              handleSearch={handleSearch}
+              handleChange={handleChange}
+              setItemEdit={setItemEdit}
+            />
           </div>
         </div>
       </div>

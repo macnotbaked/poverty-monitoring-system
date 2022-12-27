@@ -28,8 +28,6 @@ const DashboardList = () => {
     "/admin/admin-representative/read-representative-inactive.php"
   );
 
-  console.log(inactive);
-
   let totalCount = activeRepresentative.length;
 
   const getPovertyRate = (id) => {
@@ -434,6 +432,7 @@ const DashboardList = () => {
         {loading && <Spinner />}
         <h3 className="full--width t--bold">Program Recommendation</h3>
         {/* 1 */}
+
         <div className="list__container">
           <span>
             <FaUsers />
@@ -465,84 +464,98 @@ const DashboardList = () => {
           <h4 className="t--bold my--1">Unemployment</h4>
         </div>
 
-        <div className="graph__item" style={{ minWidth: "50%" }}>
-          <Bar data={PovertyRate} />
+        <div className="graph__item" style={{ minWidth: "100%" }}>
+          <Radar data={PovertyRate} />
         </div>
-
         <div className="graph__item" style={{ minWidth: "100%" }}>
           <Line data={PopulationPerYear} />
         </div>
-        <div className="graph__item" style={{ minWidth: "45%" }}>
-          <Pie
-            data={UnemploymentRate}
-            options={{
-              plugins: {
-                datalabels: {
-                  color: "#fff",
-                  anchor: "end",
-                  align: "start",
-                  borderWidth: 1,
-                  borderColor: "#fff",
-                  borderRadius: 100,
-                  offset: 10,
-                  backgroundColor: (context) => {
-                    return context.dataset.backgroundColor;
+
+        <div className="graph__bottom">
+          <div className="graph__item" style={{ minWidth: "50%" }}>
+            <Pie
+              data={UnemploymentRate}
+              options={{
+                plugins: {
+                  datalabels: {
+                    color: "#fff",
+                    anchor: "end",
+                    align: "start",
+                    borderWidth: 1,
+                    borderColor: "#fff",
+                    borderRadius: 100,
+                    offset: 10,
+                    backgroundColor: (context) => {
+                      return context.dataset.backgroundColor;
+                    },
+                    font: {
+                      weight: 600,
+                      size: "10",
+                    },
+                    formatter: (value) => {
+                      console.log(value);
+
+                      if (
+                        isNaN(value) ||
+                        value === "" ||
+                        value.length === 0 ||
+                        value === null
+                      ) {
+                        return "No Data";
+                      } else {
+                        return value + "%";
+                      }
+                    },
                   },
-                  font: {
-                    weight: 600,
-                    size: "10",
-                  },
-                  formatter: (value) => {
-                    if (isNaN(value)) {
-                      return "No Data";
-                    } else {
-                      return value + "%";
-                    }
-                  },
-                },
-                legend: {
-                  display: true,
-                },
-              },
-            }}
-          />
-        </div>
-        <div className="graph__item" style={{ minWidth: "45%" }}>
-          <Doughnut
-            data={classification}
-            options={{
-              plugins: {
-                datalabels: {
-                  color: "#fff",
-                  anchor: "end",
-                  align: "start",
-                  borderWidth: 1,
-                  borderColor: "#fff",
-                  borderRadius: 100,
-                  offset: 10,
-                  backgroundColor: (context) => {
-                    return context.dataset.backgroundColor;
-                  },
-                  font: {
-                    weight: 600,
-                    size: "10",
-                  },
-                  formatter: (value) => {
-                    if (isNaN(value)) {
-                      return "No Data";
-                    } else {
-                      return value + "%";
-                    }
+                  legend: {
+                    display: true,
                   },
                 },
-                legend: {
-                  align: "start",
-                  position: "left",
-                  display: true,
+              }}
+            />
+          </div>
+          <div className="graph__item" style={{ minWidth: "50%" }}>
+            <Doughnut
+              data={classification}
+              options={{
+                plugins: {
+                  datalabels: {
+                    color: "#fff",
+                    anchor: "end",
+                    align: "start",
+                    borderWidth: 1,
+                    borderColor: "#fff",
+                    borderRadius: 100,
+                    offset: 10,
+                    backgroundColor: (context) => {
+                      return context.dataset.backgroundColor;
+                    },
+                    font: {
+                      weight: 600,
+                      size: "10",
+                    },
+                    formatter: (value) => {
+                      if (
+                        isNaN(value) ||
+                        value === "" ||
+                        value.length === 0 ||
+                        value === null
+                      ) {
+                        return "No Data";
+                      } else {
+                        return value + "%";
+                      }
+                    },
+                  },
+                  legend: {
+                    align: "start",
+                    position: "left",
+                    display: true,
+                  },
                 },
-              },
-            }}
-          />
+              }}
+            />
+          </div>
         </div>
       </div>
     </>
