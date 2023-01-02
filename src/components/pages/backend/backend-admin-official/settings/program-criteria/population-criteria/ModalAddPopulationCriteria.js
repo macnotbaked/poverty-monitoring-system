@@ -138,7 +138,7 @@ const ModalAddPopulationCriteria = ({ item }) => {
                         <FaArrowCircleRight />
                       </i>
                       <InputText
-                        placeholder="Members From"
+                        placeholder="From"
                         type="number"
                         name="population_criteria_range_from"
                         disabled={loading}
@@ -149,7 +149,7 @@ const ModalAddPopulationCriteria = ({ item }) => {
                         <FaArrowCircleRight />
                       </i>
                       <InputText
-                        placeholder="Members To"
+                        placeholder="To"
                         type="number"
                         name="population_criteria_range_to"
                         disabled={loading}

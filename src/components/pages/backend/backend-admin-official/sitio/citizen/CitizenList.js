@@ -65,14 +65,16 @@ const CitizenList = ({
                 count += 1;
                 return (
                   <tr key={key}>
-                    <td>{count}.</td>
-                    <td>House #{Number(item.representative_house_number)}</td>
-
-                    <td>{item.representative_name}</td>
-
-                    <td>{item.representative_contact}</td>
-                    <td>
-                      <div className="d--flex justify-center">
+                    <td data-label="#">{count}.</td>
+                    <td data-label="House Number">
+                      House #{Number(item.representative_house_number)}
+                    </td>
+                    <td data-label="Representative Name">
+                      {item.representative_name}
+                    </td>
+                    <td data-label="Contact">{item.representative_contact}</td>
+                    <td data-label="Action">
+                      <div className="d--flex">
                         <Link
                           to={`${devNavUrl}/admin/purok/household-view?hid=${item.representative_aid}`}
                           className="dropdown tooltip--table"
@@ -126,7 +128,7 @@ const CitizenList = ({
             "/admin/admin-representative/archive-representative.php"
           }
           msg={"Are you sure you want to archive"}
-          item={`"${dataItem.representative_house_number}"`}
+          item={`House # ${dataItem.representative_house_number} "${dataItem.representative_name}"`}
         />
       )}
 

@@ -73,13 +73,21 @@ const HouseholdRateList = ({
                 count += 1;
                 return (
                   <tr key={key}>
-                    <td>{count}.</td>
-                    <td>{item.household_program_name}</td>
-                    <td>{item.household_program_description}</td>
-                    <td>{item.household_program_contact_person}</td>
-                    <td>{item.household_program_contact_number}</td>
-                    <td>{item.household_program_contact_email}</td>
-                    <td>
+                    <td data-label="#">{count}.</td>
+                    <td data-label="Name">{item.household_program_name}</td>
+                    <td data-label="Description">
+                      {item.household_program_description}
+                    </td>
+                    <td data-label="Contact Person">
+                      {item.household_program_contact_person}
+                    </td>
+                    <td data-label="Contact Number">
+                      {item.household_program_contact_number}
+                    </td>
+                    <td data-label="Email">
+                      {item.household_program_contact_email}
+                    </td>
+                    <td data-label="Action">
                       <div className="d--flex">
                         <button
                           className="dropdown tooltip--table"

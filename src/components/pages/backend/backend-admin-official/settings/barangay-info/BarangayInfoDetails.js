@@ -153,9 +153,6 @@ const BarangayInfoDetails = () => {
           }}
         </Formik>
       </div>
-
-      {store.error && <ModalError />}
-      {store.success && <ModalSuccess />}
     </>
   );
 };

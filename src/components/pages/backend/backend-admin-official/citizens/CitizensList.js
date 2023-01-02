@@ -78,13 +78,17 @@ const CitizensList = ({
                 count += 1;
                 return (
                   <tr key={key}>
-                    <td>{count}.</td>
-                    <td>House {item.representative_house_number}</td>
-                    <td>{item.representative_name}</td>
-                    <td>{item.sitio_name}</td>
-                    <td>
+                    <td data-label="#">{count}.</td>
+                    <td data-label="Household Number">
+                      House #{item.representative_house_number}
+                    </td>
+                    <td data-label="Representative">
+                      {item.representative_name}
+                    </td>
+                    <td data-label="Sitio/Purok">{item.sitio_name}</td>
+                    <td data-label="Action">
                       {item.sitio_is_active === "1" && (
-                        <div className="d--flex justify-center">
+                        <div className="d--flex">
                           <Link
                             to={`${devNavUrl}/admin/purok/household-view?hid=${item.representative_aid}`}
                             className="dropdown tooltip--table"
@@ -115,30 +119,6 @@ const CitizensList = ({
                             </div>
                           </div>
                         </div>
-                      )}
-
-                      {item.sitio_is_active === "0" && (
-                        <>
-                          <div className="d--flex">
-                            <button
-                              className="dropdown tooltip--table"
-                              data-tooltip="Restore"
-                            >
-                              <span>
-                                <FaHistory />
-                              </span>
-                            </button>
-
-                            <button
-                              className="dropdown tooltip--table"
-                              data-tooltip="Delete"
-                            >
-                              <span>
-                                <FaTrash />
-                              </span>
-                            </button>
-                          </div>
-                        </>
                       )}
                     </td>
                   </tr>

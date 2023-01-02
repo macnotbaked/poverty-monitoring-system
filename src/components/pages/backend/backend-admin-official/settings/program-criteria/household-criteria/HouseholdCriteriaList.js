@@ -69,14 +69,16 @@ const HouseholdCriteriaList = ({
                 count += 1;
                 return (
                   <tr key={key}>
-                    <td>{count}.</td>
-                    <td>{item.household_program_name}</td>
-                    <td>
-                      {item.household_criteria_range_from} -{" "}
-                      {item.household_criteria_range_to}
+                    <td data-label="#">{count}.</td>
+                    <td data-label="Program Name">
+                      {item.household_program_name}
                     </td>
-                    <td>
-                      <div className="d--flex justify-center">
+                    <td data-label="Range">
+                      {item.household_criteria_range_from}% -{" "}
+                      {item.household_criteria_range_to}%
+                    </td>
+                    <td data-label="Action">
+                      <div className="d--flex">
                         <button
                           className="dropdown tooltip--table"
                           data-tooltip="Edit"

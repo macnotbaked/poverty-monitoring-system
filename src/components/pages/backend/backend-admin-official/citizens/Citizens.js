@@ -1,12 +1,8 @@
 import React from "react";
-import { AiFillPlusCircle, AiOutlinePlus } from "react-icons/ai";
-import { FaPlus } from "react-icons/fa";
-import { HiPlus } from "react-icons/hi";
-import { Link } from "react-router-dom";
 import { StoreContext } from "../../../../../store/StoreContext";
 import useFetchDataLoadMore from "../../../../custom-hooks/useFetchDataLoadMore";
 import Header from "../../../../header/Header";
-import { devNavUrl, getUrlParam } from "../../../../helpers/functions-general";
+import { getUrlParam } from "../../../../helpers/functions-general";
 import Navigation from "../../../../navigation/Navigation";
 import CitizensList from "./CitizensList";
 
@@ -24,7 +20,7 @@ const Citizens = () => {
   } = useFetchDataLoadMore(
     "/admin/admin-representative/read-representative-limit.php",
     "/admin/admin-representative/read-representative-all.php",
-    5 // show number of records on a table
+    10 // show number of records on a table
   );
 
   const sitioId = getUrlParam().get("sid");

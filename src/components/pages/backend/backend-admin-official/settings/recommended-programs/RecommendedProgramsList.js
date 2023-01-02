@@ -50,7 +50,7 @@ const RecommendedProgramsList = ({}) => {
           >
             {loadingPopulationProgram && <SpinnerCard />}
             <h4 className="t--bold my--1">
-              {loadingPopulationProgram ? "" : "Population Rate"}
+              {loadingPopulationProgram ? "" : "Population Program"}
             </h4>
             <ul>
               {activePopulationProgram.length > 0 ? (
@@ -85,7 +85,7 @@ const RecommendedProgramsList = ({}) => {
           >
             {loadingHouseholdProgram && <SpinnerCard />}
             <h4 className="t--bold my--1">
-              {loadingHouseholdProgram ? "" : "Household Rate"}
+              {loadingHouseholdProgram ? "" : "Household Program"}
             </h4>
             <ul>
               {activeHouseholdProgram.length > 0 ? (
@@ -124,7 +124,7 @@ const RecommendedProgramsList = ({}) => {
                 ""
               ) : (
                 <>
-                  <strong>Income Rate</strong> <br />
+                  <strong>Income Program</strong> <br />
                   <i>ie., Bills Expenses, Food Threshold, Education Expenses</i>
                 </>
               )}
@@ -162,7 +162,7 @@ const RecommendedProgramsList = ({}) => {
           >
             {loadingUnemploymentProgram && <SpinnerCard />}
             <h4 className="t--bold my--1">
-              {loadingUnemploymentProgram ? "" : "Unemployment Rate"}
+              {loadingUnemploymentProgram ? "" : "Unemployment Program"}
             </h4>
             <ul>
               {activeUnemploymentProgram.length > 0 ? (

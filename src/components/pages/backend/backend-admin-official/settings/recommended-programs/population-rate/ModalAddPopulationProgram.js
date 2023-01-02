@@ -15,7 +15,7 @@ import {
 } from "../../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../../store/StoreContext";
 import { fetchData } from "../../../../../../helpers/fetchData";
-import { InputText } from "../../../../../../helpers/FormInputs";
+import { InputText, MyTextArea } from "../../../../../../helpers/FormInputs";
 import SpinnerButton from "../../../../../../widgets/SpinnerButton";
 
 const ModalAddPopulationProgram = ({ item }) => {
@@ -115,7 +115,7 @@ const ModalAddPopulationProgram = ({ item }) => {
                       <i className="icon--input">
                         <FaEdit />
                       </i>
-                      <InputText
+                      <MyTextArea
                         placeholder="Description"
                         type="text"
                         name="population_program_description"

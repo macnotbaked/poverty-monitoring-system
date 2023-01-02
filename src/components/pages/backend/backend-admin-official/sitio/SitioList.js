@@ -93,11 +93,13 @@ const SitioList = ({
                 count += 1;
                 return (
                   <tr key={key}>
-                    <td>{count}.</td>
-                    <td>{item.sitio_name}</td>
-                    <td>{getTotal(item.sitio_aid)}</td>
-                    <td>
-                      <div className="d--flex justify-center">
+                    <td data-label="#">{count}.</td>
+                    <td data-label="Name">{item.sitio_name}</td>
+                    <td data-label="Total Household">
+                      {getTotal(item.sitio_aid)}
+                    </td>
+                    <td data-label="Action">
+                      <div className="d--flex">
                         <Link
                           to={`${devNavUrl}/admin/purok/household?sid=${item.sitio_aid}`}
                           className="dropdown tooltip--table"

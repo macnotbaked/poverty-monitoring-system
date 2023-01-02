@@ -91,6 +91,16 @@ export const InactiveUser = () => {
                     Purok
                   </Link>
                 </label>
+
+                <input type="radio" name="tabs" id="representative" />
+                <label htmlFor="representative" className="menu-label">
+                  <Link
+                    to={`${devNavUrl}/admin/inactive-representative`}
+                    onClick={() => dispatch(setStartIndex(0))}
+                  >
+                    Representative
+                  </Link>
+                </label>
               </div>
             </div>
           </div>

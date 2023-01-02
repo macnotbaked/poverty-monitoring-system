@@ -17,6 +17,7 @@ import InactiveHouseholdProgram from "./components/pages/backend/backend-admin-o
 import InactiveIncomeProgram from "./components/pages/backend/backend-admin-official/settings/archived/archived-recommended-programs/inactive-income-program/InactiveIncomeProgram";
 import InactivePopulationProgram from "./components/pages/backend/backend-admin-official/settings/archived/archived-recommended-programs/inactive-population-program/InactivePopulationProgram";
 import InactiveUnemploymentProgram from "./components/pages/backend/backend-admin-official/settings/archived/archived-recommended-programs/inactive-unemployment-program/InactiveUnemploymentProgram";
+import InactiveRepresentative from "./components/pages/backend/backend-admin-official/settings/archived/archived-representative/InactiveRepresentative";
 import InactiveUser from "./components/pages/backend/backend-admin-official/settings/archived/archived-users/InactiveUser";
 import BarangayInfo from "./components/pages/backend/backend-admin-official/settings/barangay-info/BarangayInfo";
 import IncomeClassification from "./components/pages/backend/backend-admin-official/settings/income-classification/IncomeClassification";
@@ -383,6 +384,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <EvaluationFilterCitezenList />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path={`${devNavUrl}/admin/inactive-representative`}
+              element={
+                <ProtectedRoute>
+                  <InactiveRepresentative />
                 </ProtectedRoute>
               }
             />

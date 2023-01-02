@@ -1,18 +1,36 @@
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import React from "react";
-import { Bar, Doughnut, Line, Pie, PolarArea, Radar } from "react-chartjs-2";
-import { FaHouseUser, FaMoneyCheckAlt, FaUser, FaUsers } from "react-icons/fa";
-import useLoadAll from "../../../../custom-hooks/useLoadAll";
+import { Doughnut, Line, Pie, Radar } from "react-chartjs-2";
+import { StoreContext } from "../../../../../store/StoreContext";
+import useFetchDataLoadMore from "../../../../custom-hooks/useFetchDataLoadMore";
 import useLoadAllActiveIncomeClassification from "../../../../custom-hooks/useLoadAllActiveIncomeClassification";
 import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
+import useLoadAllEvaluation from "../../../../custom-hooks/useLoadAllEvaluation";
 import useLoadAllInactive from "../../../../custom-hooks/useLoadAllInactive";
 import { formatDate } from "../../../../helpers/functions-general";
+import LoadMore from "../../../../widgets/LoadMore";
+import NoData from "../../../../widgets/NoData";
 import Spinner from "../../../../widgets/Spinner";
 Chart.register(ChartDataLabels);
 
 const DashboardList = () => {
-  const { result, loading } = useLoadAll(
+  const { store, dispatch } = React.useContext(StoreContext);
+
+  const {
+    loading,
+    handleLoad,
+    totalResult,
+    result,
+    handleSearch,
+    handleChange,
+  } = useFetchDataLoadMore(
+    "/admin/admin-recommended-programs/read-recommended-program-limit.php",
+    "/admin/admin-recommended-programs/read-recommended-program-all.php",
+    5 // show number of records on a table
+  );
+
+  const { evaluation, evaluationLoading } = useLoadAllEvaluation(
     "/admin/admin-evaluation/enable-evaluation/read-all-evaluation.php"
   );
 
@@ -37,7 +55,7 @@ const DashboardList = () => {
 
     if (inactive.length) {
       inactive.map((item) => {
-        population += Number(item.representative_total_people);
+        // population += Number(item.representative_total_people);
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "1").length;
@@ -66,7 +84,9 @@ const DashboardList = () => {
       });
     }
 
-    return val;
+    // console.log(val.toFixed(2));
+
+    return val.toFixed(2);
   };
 
   const getTotalUnemployedPopulation = (id) => {
@@ -317,7 +337,7 @@ const DashboardList = () => {
   };
 
   let unemployment = [];
-  let population = [];
+  let totalPopulation = [];
   let unemployedPopulation = [];
   let year = [];
   let poor = [];
@@ -331,13 +351,13 @@ const DashboardList = () => {
   let backgroundPopulationUnemployed = [];
   let povertyRate = [];
 
-  result.map((item) => {
+  evaluation.map((item) => {
     year.push(
       `${formatDate(item.evaluation_list_created).split(" ")[0]} ${
         formatDate(item.evaluation_list_created).split(" ")[2]
       }`
     );
-    population.push(getTotalPopulation(item.evaluation_list_aid));
+    totalPopulation.push(getTotalPopulation(item.evaluation_list_aid));
     unemployedPopulation.push(
       getTotalUnemployedPopulation(item.evaluation_list_aid)
     );
@@ -358,7 +378,7 @@ const DashboardList = () => {
     labels: populationUnemployed,
     datasets: [
       {
-        data: [unemployedPopulation, unemployment],
+        data: [unemployment, unemployedPopulation],
         backgroundColor: backgroundPopulationUnemployed,
         borderWidth: 1,
       },
@@ -370,19 +390,7 @@ const DashboardList = () => {
     datasets: [
       {
         label: "Population Growth",
-        data: population,
-        backgroundColor: ["#17252a"],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const PovertyRate = {
-    labels: year,
-    datasets: [
-      {
-        label: "Poverty Rate",
-        data: povertyRate,
+        data: totalPopulation,
         backgroundColor: ["#17252a"],
         borderWidth: 1,
       },
@@ -426,42 +434,41 @@ const DashboardList = () => {
     );
   }
 
+  const PovertyRate = {
+    labels: year,
+    datasets: [
+      {
+        label: "Poverty Rate",
+        data: povertyRate,
+        backgroundColor: ["#17252a"],
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return (
     <>
       <div className="graph__container p--relative">
-        {loading && <Spinner />}
-        <h3 className="full--width t--bold">Program Recommendation</h3>
-        {/* 1 */}
-
-        <div className="list__container">
-          <span>
-            <FaUsers />
-          </span>
-          <h4 className="t--bold my--1">Population</h4>
-        </div>
-
-        {/* 2 */}
-        <div className="list__container">
-          <span>
-            <FaHouseUser />
-          </span>
-          <h4 className="t--bold my--1">Household</h4>
-        </div>
-
-        {/* 3 */}
-        <div className="list__container">
-          <span>
-            <FaMoneyCheckAlt />
-          </span>
-          <h4 className="t--bold my--1">Income</h4>
-        </div>
-
-        {/* 4 */}
-        <div className="list__container">
-          <span>
-            <FaUser />
-          </span>
-          <h4 className="t--bold my--1">Unemployment</h4>
+        {evaluationLoading && <Spinner />}
+        <div className="graph__item" style={{ width: "100%" }}>
+          <h3 className="full--width t--bold mb--1">Program Recommendation</h3>
+          <div className="program__item">
+            <ul>
+              <li>Family Planning</li>
+              <span>See details..</span>
+            </ul>
+          </div>
+          <NoData />
+          <div className="mt--2 t--center row">
+            {!store.isSearch && (
+              <LoadMore
+                handleLoad={handleLoad}
+                loading={loading}
+                result={result}
+                totalResult={totalResult}
+              />
+            )}
+          </div>
         </div>
 
         <div className="graph__item" style={{ minWidth: "100%" }}>
@@ -493,7 +500,7 @@ const DashboardList = () => {
                       size: "10",
                     },
                     formatter: (value) => {
-                      console.log(value);
+                      // console.log(value);
 
                       if (
                         isNaN(value) ||

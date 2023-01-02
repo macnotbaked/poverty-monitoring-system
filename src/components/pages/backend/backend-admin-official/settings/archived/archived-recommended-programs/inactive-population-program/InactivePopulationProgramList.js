@@ -73,14 +73,22 @@ const InactivePopulationProgramList = ({
                 count += 1;
                 return (
                   <tr key={key}>
-                    <td>{count}.</td>
-                    <td>{item.population_program_name}</td>
-                    <td>{item.population_program_description}</td>
-                    <td>{item.population_program_contact_person}</td>
-                    <td>{item.population_program_contact_number}</td>
-                    <td>{item.population_program_contact_email}</td>
-                    <td>
-                      <div className="d--flex justify-center">
+                    <td data-label="#">{count}.</td>
+                    <td data-label="Name">{item.population_program_name}</td>
+                    <td data-label="Description">
+                      {item.population_program_description}
+                    </td>
+                    <td data-label="Contact Person">
+                      {item.population_program_contact_person}
+                    </td>
+                    <td data-label="Contact Number">
+                      {item.population_program_contact_number}
+                    </td>
+                    <td data-label="Email">
+                      {item.population_program_contact_email}
+                    </td>
+                    <td data-label="Action">
+                      <div className="d--flex">
                         <button
                           className="dropdown tooltip--table"
                           data-tooltip="Edit"

@@ -184,11 +184,11 @@ class PopulationProgram
         return $result;
     }
 
-    public function ispopulationProgramExist()
-    {
-        $sql = "select * from {$this->tblAccount} ";
-        $sql .= "where settings_account_role  = '{$this->settings_role_aid}' ";
-        $result = $this->connection->query($sql);
-        return $result;
-    }
+    // public function ispopulationProgramExist()
+    // {
+    //     $sql = "select * from {$this->tblAccount} ";
+    //     $sql .= "where settings_account_role  = '{$this->settings_role_aid}' ";
+    //     $result = $this->connection->query($sql);
+    //     return $result;
+    // }
 }

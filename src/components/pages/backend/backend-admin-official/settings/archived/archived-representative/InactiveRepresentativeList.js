@@ -9,7 +9,7 @@ import NoData from "../../../../../../widgets/NoData";
 import SearchBox from "../../../../../../widgets/SearchBox";
 import Spinner from "../../../../../../widgets/Spinner";
 
-const InactivePurokList = ({
+const InactiveRepresentativeList = ({
   loading,
   handleLoad,
   totalResult,
@@ -27,33 +27,16 @@ const InactivePurokList = ({
 
   const handleRestore = (item) => {
     dispatch(setIsRestore(true));
-    setId(item.sitio_aid);
+    setId(item.representative_aid);
     setData(item);
     setDel(null);
   };
 
   const handleDelete = (item) => {
     dispatch(setIsRestore(true));
-    setId(item.sitio_aid);
+    setId(item.representative_aid);
     setData(item);
     setDel(true);
-  };
-
-  const { activeRepresentative } = useLoadAllActiveRepresentative(
-    "/admin/admin-representative/read-representative-count-all.php"
-  );
-
-  const getTotal = (id) => {
-    let val = 0;
-
-    if (activeRepresentative.length) {
-      activeRepresentative.map((item) => {
-        if (Number(item.representative_purok_id) === Number(id)) {
-          val = item.total;
-        }
-      });
-    }
-    return val;
   };
 
   return (
@@ -65,7 +48,7 @@ const InactivePurokList = ({
         loading={loading}
         result={result}
         store={store}
-        url="/admin/admin-sitio/read-sitio-search-inactive.php"
+        url="/admin/admin-representative/read-representative-search-inactive.php"
       />
       <div className="table__container">
         {loading && <Spinner />}
@@ -76,9 +59,10 @@ const InactivePurokList = ({
                 #
               </th>
               <th className="row--name" rowSpan="1">
-                Name
+                Household Number
               </th>
-              <th rowSpan="1">Total Household</th>
+              <th rowSpan="1">Name</th>
+              <th rowSpan="1">Contact</th>
               <th rowSpan="1">Actions</th>
             </tr>
           </thead>
@@ -89,10 +73,11 @@ const InactivePurokList = ({
                 return (
                   <tr key={key}>
                     <td data-label="#">{count}.</td>
-                    <td data-label="Name">{item.sitio_name}</td>
-                    <td data-label="Total Household">
-                      {getTotal(item.sitio_aid)}
+                    <td data-label="Household Number">
+                      House #{item.representative_house_number}
                     </td>
+                    <td data-label="Name">{item.representative_name}</td>
+                    <td data-label="Contact">{item.representative_contact}</td>
                     <td data-label="Action">
                       <div className="d--flex">
                         <div
@@ -143,18 +128,18 @@ const InactivePurokList = ({
         <ModalDeleteRestore
           id={id}
           isDel={isDel}
-          mysqlApiDelete="/admin/admin-sitio/delete-sitio.php"
-          mysqlApiRestore="/admin/admin-sitio/restore-sitio.php"
+          mysqlApiDelete="/admin/admin-representative/delete-representative.php"
+          mysqlApiRestore="/admin/admin-representative/restore-representative.php"
           msg={
             isDel
               ? "Are you sure you want to permanently delete"
               : "Are you sure you want to restore"
           }
-          item={dataItem.sitio_name}
+          item={`House # ${dataItem.representative_house_number} "${dataItem.representative_name}"`}
         />
       )}
     </>
   );
 };
 
-export default InactivePurokList;
+export default InactiveRepresentativeList;

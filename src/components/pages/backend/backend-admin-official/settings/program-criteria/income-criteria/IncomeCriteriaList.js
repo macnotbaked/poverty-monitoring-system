@@ -68,13 +68,15 @@ const IncomeCriteriaList = ({
                 count += 1;
                 return (
                   <tr key={key}>
-                    <td>{count}.</td>
-                    <td>{item.income_program_name}</td>
-                    <td>
-                      {item.income_criteria_range_from} -{" "}
-                      {item.income_criteria_range_to}
+                    <td data-label="#">{count}.</td>
+                    <td data-label="Program Name">
+                      {item.income_program_name}
                     </td>
-                    <td>
+                    <td data-label="Range">
+                      {item.income_criteria_range_from}% -{" "}
+                      {item.income_criteria_range_to}%
+                    </td>
+                    <td data-label="Action">
                       <div className="d--flex">
                         <button
                           className="dropdown tooltip--table"

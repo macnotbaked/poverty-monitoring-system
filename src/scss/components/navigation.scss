@@ -7,20 +7,23 @@
   width: 10rem;
   height: 100%;
   border-radius: 0 2rem 0 0;
-  transition: 0.3s ease;
+  transition: 0.15s linear;
   z-index: 1;
 
-  // overflow-y: scroll;
-  // overflow-x: scroll;
-  &::after {
-    position: absolute !important;
-    top: 6rem;
-    right: 0;
-    bottom: 0;
-    left: 10rem;
-    background: transparent;
-    width: 100vw;
-    z-index: 10 !important;
+  @media screen and (max-width: 768px) {
+    &::after {
+      position: absolute !important;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 10rem;
+      background: rgba(0, 0, 0, 0.2);
+      width: 100vw;
+      z-index: 10 !important;
+      opacity: 0;
+      transition: opacity 0.15s linear;
+      pointer-events: none;
+    }
   }
 
   &__logo {

@@ -77,7 +77,7 @@ const IncomeClassificationList = ({
                       {numberWithCommas(item.monthly_income_to)}
                     </td>
                     <td data-label="Action">
-                      <div className="d--flex justify-center">
+                      <div className="d--flex ">
                         <button
                           className="dropdown tooltip--table"
                           data-tooltip="Edit"

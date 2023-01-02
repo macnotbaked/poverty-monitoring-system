@@ -1,20 +1,20 @@
 <?php
 try {
     include_once("../../common/package.php");
-    include_once("Sitio.php");
-    include_once("functions-sitio.php");
+    include_once("RecommendedPrograms.php");
+    include_once("functions-recommended-program.php");
 
     $body = file_get_contents("php://input");
     $data = json_decode($body, true);
     $connection = checkConnection();
     checkInputData($data);
-    $sitio = new Sitio($connection);
+    $recommended_program = new RecommendedPrograms($connection);
 
-    $sitio->sitio_aid = filter_var($data["id"], FILTER_SANITIZE_STRING);
+    $result = checkReadAll($recommended_program);
 
-    $result = checkDelete($sitio);
+    $data = getResultData($result);
 
-    Response::sendResponse(true, "Sitio successfuly deleted.", []);
+    Response::sendResponse(true, "All recommended program data found", $data);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted because a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

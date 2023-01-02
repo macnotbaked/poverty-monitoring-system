@@ -82,13 +82,13 @@ const EvaluationFilter = () => {
                         count += 1;
                         return (
                           <tr key={key}>
-                            <td>{count}.</td>
-                            <td>
+                            <td data-label="#">{count}.</td>
+                            <td data-label="Date Coverage">
                               {formatDate(item.evaluation_list_created)} to{" "}
                               {formatDate(item.evaluation_list_datetime)}
                             </td>
-                            <td>
-                              <div className="d--flex justify-center">
+                            <td data-label="Action">
+                              <div className="d--flex">
                                 <Link
                                   to={`${devNavUrl}/admin/evaluation-filter/date?date=${item.evaluation_list_created}to${item.evaluation_list_datetime}&eid=${item.evaluation_list_aid}`}
                                   className="dropdown tooltip--table"

@@ -8,6 +8,8 @@
   border-bottom: 3px solid $primary-color;
   margin-left: 13rem;
   transition: 0.3s ease;
+  z-index: 9;
+  position: relative;
   &__credential {
     display: flex;
     align-items: center;
@@ -20,7 +22,7 @@
       max-width: 4.5rem !important;
       min-height: 4.5rem !important;
       min-width: 4.5rem !important;
-      object-fit: contain;
+      object-fit: cover;
       object-position: center center;
       overflow: hidden;
       border: 0.4rem solid $light-gray-x;
@@ -100,7 +102,7 @@
         max-width: 6rem !important;
         min-height: 6rem !important;
         min-width: 6rem !important;
-        object-fit: contain;
+        object-fit: cover;
         object-position: center center;
         overflow: hidden;
         border: 1px solid $light-gray;

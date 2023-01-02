@@ -75,16 +75,16 @@ const InactiveUserList = ({
                 count += 1;
                 return (
                   <tr key={key}>
-                    <td>{count}.</td>
-                    <td>
+                    <td data-label="#">{count}.</td>
+                    <td data-label="Name">
                       {item.users_lname}, {item.users_fname}{" "}
                       <span>{item.users_mname}</span>.
                     </td>
-                    <td>{item.users_email}</td>
-                    <td>{item.users_phone}</td>
-                    <td>{item.roles_name}</td>
-                    <td>
-                      <div className="d--flex justify-center">
+                    <td data-label="Email">{item.users_email}</td>
+                    <td data-label="Contact Number">{item.users_phone}</td>
+                    <td data-label="Role">{item.users_role}</td>
+                    <td data-label="Action">
+                      <div className="d--flex ">
                         <div
                           className="dropdown tooltip--table"
                           onClick={() => handleRestore(item)}

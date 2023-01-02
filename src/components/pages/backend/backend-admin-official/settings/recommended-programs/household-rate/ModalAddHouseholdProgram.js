@@ -15,7 +15,7 @@ import {
 } from "../../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../../store/StoreContext";
 import { fetchData } from "../../../../../../helpers/fetchData";
-import { InputText } from "../../../../../../helpers/FormInputs";
+import { InputText, MyTextArea } from "../../../../../../helpers/FormInputs";
 import SpinnerButton from "../../../../../../widgets/SpinnerButton";
 
 const ModalAddHouseholdProgram = ({ item }) => {
@@ -115,9 +115,8 @@ const ModalAddHouseholdProgram = ({ item }) => {
                       <i className="icon--input">
                         <FaEdit />
                       </i>
-                      <InputText
+                      <MyTextArea
                         placeholder="Description"
-                        type="text"
                         name="household_program_description"
                         disabled={loading}
                       />

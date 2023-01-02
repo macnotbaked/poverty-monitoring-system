@@ -9,6 +9,7 @@ class Sitio
 
     public $connection;
     public $tblSitio;
+    public $tblRepresentative;
 
     public function __construct($db)
     {

@@ -88,7 +88,7 @@ const PopulationRateList = ({
                       {item.population_program_contact_email}
                     </td>
                     <td data-label="Action">
-                      <div className="d--flex justify-center">
+                      <div className="d--flex">
                         <button
                           className="dropdown tooltip--table"
                           data-tooltip="Edit"

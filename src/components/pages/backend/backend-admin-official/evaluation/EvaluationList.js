@@ -387,9 +387,9 @@ const EvaluationList = ({
                 count += 1;
                 return (
                   <tr key={key}>
-                    <td>{count}.</td>
-                    <td>{item.sitio_name}</td>
-                    <td>
+                    <td data-label="#">{count}.</td>
+                    <td data-label="Sitio/Purok">{item.sitio_name}</td>
+                    <td data-label="Population">
                       <div className="d--flex align-center justify-between">
                         {getTotalPopulation(item.sitio_aid)}{" "}
                         <div className="dropdown">
@@ -419,7 +419,7 @@ const EvaluationList = ({
                         </div>
                       </div>
                     </td>
-                    <td>
+                    <td data-label="Household">
                       <div className="d--flex align-center justify-between">
                         {getTotalHousehold(item.sitio_aid)}
                         <div className="dropdown">
@@ -451,7 +451,7 @@ const EvaluationList = ({
                         </div>
                       </div>
                     </td>
-                    <td>
+                    <td data-label="Income Earner">
                       <div className="d--flex align-center justify-between">
                         {getTotalIncomeEarner(item.sitio_aid)}
                         <div className="dropdown">
@@ -499,9 +499,11 @@ const EvaluationList = ({
                         </div>
                       </div>
                     </td>
-                    <td>{getTotalUnemployment(item.sitio_aid)}%</td>
-                    <td>
-                      <div className="d--flex justify-center">
+                    <td data-label="Unemployed">
+                      {getTotalUnemployment(item.sitio_aid)}%
+                    </td>
+                    <td data-label="Action">
+                      <div className="d--flex">
                         <Link
                           to={`${devNavUrl}/admin/purok/household?sid=${item.sitio_aid}`}
                           className="dropdown tooltip--table"

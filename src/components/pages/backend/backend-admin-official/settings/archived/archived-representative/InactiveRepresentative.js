@@ -1,10 +1,6 @@
 import React from "react";
-import { FaPlusCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import {
-  setIsAdd,
-  setStartIndex,
-} from "../../../../../../../store/StoreAction";
+import { setStartIndex } from "../../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../../store/StoreContext";
 import useFetchDataLoadMore from "../../../../../../custom-hooks/useFetchDataLoadMore";
 import Header from "../../../../../../header/Header";
@@ -13,9 +9,9 @@ import Navigation from "../../../../../../navigation/Navigation";
 import Back from "../../../../../../widgets/Back";
 import ModalError from "../../../../../../widgets/ModalError";
 import ModalSuccess from "../../../../../../widgets/ModalSuccess";
-import InactivePurokList from "./InactivePurokList";
+import InactiveRepresentativeList from "./InactiveRepresentativeList";
 
-export const InactivePurok = () => {
+export const InactiveRepresentative = () => {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const {
@@ -26,8 +22,8 @@ export const InactivePurok = () => {
     handleSearch,
     handleChange,
   } = useFetchDataLoadMore(
-    "/admin/admin-sitio/read-sitio-limit-inactive.php",
-    "/admin/admin-sitio/read-sitio-all-inactive.php",
+    "/admin/admin-representative/read-representative-limit-inactive.php",
+    "/admin/admin-representative/read-representative-all-inactive.php",
     5 // show number of records on a table
   );
 
@@ -79,11 +75,26 @@ export const InactivePurok = () => {
 
                 <input type="radio" name="tabs" id="sitio" defaultChecked />
                 <label htmlFor="sitio" className="menu-label">
-                  <span>Purok</span>
+                  <Link
+                    to={`${devNavUrl}/admin/inactive-sitio`}
+                    onClick={() => dispatch(setStartIndex(0))}
+                  >
+                    Purok{" "}
+                  </Link>
+                </label>
+
+                <input
+                  type="radio"
+                  name="tabs"
+                  id="representative"
+                  defaultChecked
+                />
+                <label htmlFor="representative" className="menu-label">
+                  <span>Representative</span>
                 </label>
 
                 <div className="tab">
-                  <InactivePurokList
+                  <InactiveRepresentativeList
                     loading={loading}
                     handleLoad={handleLoad}
                     totalResult={totalResult}
@@ -92,16 +103,6 @@ export const InactivePurok = () => {
                     handleChange={handleChange}
                   />
                 </div>
-
-                <input type="radio" name="tabs" id="representative" />
-                <label htmlFor="representative" className="menu-label">
-                  <Link
-                    to={`${devNavUrl}/admin/inactive-representative`}
-                    onClick={() => dispatch(setStartIndex(0))}
-                  >
-                    Representative
-                  </Link>
-                </label>
               </div>
             </div>
           </div>
@@ -114,4 +115,4 @@ export const InactivePurok = () => {
   );
 };
 
-export default InactivePurok;
+export default InactiveRepresentative;
