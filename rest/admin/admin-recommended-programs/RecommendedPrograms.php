@@ -30,13 +30,13 @@ class RecommendedPrograms
     public function readAll()
     {
         $sql = "select * from {$this->tblHouseholdProgram} as household, ";
-        $sql .= "{$this->tblIncomeProgram} as income, ";
-        $sql .= "{$this->tblPopulationProgram} as population, ";
-        $sql .= "{$this->tblUnemploymentProgram} as unemployment, ";
-        $sql .= "{$this->tblHouseholdCriteria} as criteriaHousehold, ";
-        $sql .= "{$this->tblIncomeCriteria} as criteriaIncome, ";
-        $sql .= "{$this->tblPopulationCriteria} as criteriaPopulation, ";
-        $sql .= "{$this->tblUnemploymentCriteria} as criteriaUnemployment ";
+        // $sql .= "{$this->tblIncomeProgram} as income, ";
+        // $sql .= "{$this->tblPopulationProgram} as population, ";
+        // $sql .= "{$this->tblUnemploymentProgram} as unemployment, ";
+        $sql .= "{$this->tblHouseholdCriteria} as criteriaHousehold ";
+        // $sql .= "{$this->tblIncomeCriteria} as criteriaIncome ";
+        // $sql .= "{$this->tblPopulationCriteria} as criteriaPopulation, ";
+        // $sql .= "{$this->tblUnemploymentCriteria} as criteriaUnemployment ";
         // $sql .= "where household.household_program_is_active = 1 ";
         // $sql .= "and income.income_program_is_active = 1 ";
         // $sql .= "and population.population_program_is_active = 1 ";
@@ -45,14 +45,16 @@ class RecommendedPrograms
         // $sql .= "and criteriaIncome.income_criteria_is_active = 1 ";
         // $sql .= "and criteriaPopulation.population_criteria_is_active = 1 ";
         // $sql .= "and criteriaUnemployment.unemployment_criteria_is_active = 1 ";
-        $sql .= "where criteriaHousehold.household_criteria_program_id = household.household_program_aid ";
-        $sql .= "and criteriaIncome.income_criteria_program_id = income.income_program_aid ";
-        $sql .= "and criteriaPopulation.population_criteria_program_id = population.population_program_aid ";
-        $sql .= "and criteriaUnemployment.unemployment_criteria_program_id = unemployment.unemployment_program_aid ";
-        $sql .= "order by household.household_program_aid, ";
-        $sql .= "income.income_program_aid, ";
-        $sql .= "population.population_program_aid, ";
-        $sql .= "unemployment.unemployment_program_aid ";
+        $sql .= "where household.household_program_aid = criteriaHousehold.household_criteria_program_id ";
+        // $sql .= "and criteriaIncome.income_criteria_program_id = income.income_program_aid ";
+        // $sql .= "and criteriaPopulation.population_criteria_program_id = population.population_program_aid ";
+        // $sql .= "and criteriaUnemployment.unemployment_criteria_program_id = unemployment.unemployment_program_aid ";
+        // $sql .= "group by household.household_program_name ";
+        // $sql .= "income.income_program_name ";
+        $sql .= "order by household.household_program_name ";
+        // $sql .= "income.income_program_aid ";
+        // $sql .= "population.population_program_aid, ";
+        // $sql .= "unemployment.unemployment_program_aid ";
 
         $result = $this->connection->query($sql);
 
@@ -62,13 +64,13 @@ class RecommendedPrograms
     public function readLimit($start, $total)
     {
         $sql = "select * from {$this->tblHouseholdProgram} as household, ";
-        $sql .= "{$this->tblIncomeProgram} as income, ";
-        $sql .= "{$this->tblPopulationProgram} as population, ";
-        $sql .= "{$this->tblUnemploymentProgram} as unemployment, ";
-        $sql .= "{$this->tblHouseholdCriteria} as criteriaHousehold, ";
-        $sql .= "{$this->tblIncomeCriteria} as criteriaIncome, ";
-        $sql .= "{$this->tblPopulationCriteria} as criteriaPopulation, ";
-        $sql .= "{$this->tblUnemploymentCriteria} as criteriaUnemployment ";
+        // $sql .= "{$this->tblIncomeProgram} as income, ";
+        // $sql .= "{$this->tblPopulationProgram} as population, ";
+        // $sql .= "{$this->tblUnemploymentProgram} as unemployment, ";
+        $sql .= "{$this->tblHouseholdCriteria} as criteriaHousehold ";
+        // $sql .= "{$this->tblIncomeCriteria} as criteriaIncome ";
+        // $sql .= "{$this->tblPopulationCriteria} as criteriaPopulation, ";
+        // $sql .= "{$this->tblUnemploymentCriteria} as criteriaUnemployment ";
         // $sql .= "where household.household_program_is_active = 1 ";
         // $sql .= "and income.income_program_is_active = 1 ";
         // $sql .= "and population.population_program_is_active = 1 ";
@@ -77,14 +79,16 @@ class RecommendedPrograms
         // $sql .= "and criteriaIncome.income_criteria_is_active = 1 ";
         // $sql .= "and criteriaPopulation.population_criteria_is_active = 1 ";
         // $sql .= "and criteriaUnemployment.unemployment_criteria_is_active = 1 ";
-        $sql .= "where criteriaHousehold.household_criteria_program_id = household.household_program_aid ";
-        $sql .= "and criteriaIncome.income_criteria_program_id = income.income_program_aid ";
-        $sql .= "and criteriaPopulation.population_criteria_program_id = population.population_program_aid ";
-        $sql .= "and criteriaUnemployment.unemployment_criteria_program_id = unemployment.unemployment_program_aid ";
-        $sql .= "order by household.household_program_aid, ";
-        $sql .= "income.income_program_aid, ";
-        $sql .= "population.population_program_aid, ";
-        $sql .= "unemployment.unemployment_program_aid ";
+        $sql .= "where household.household_program_aid = criteriaHousehold.household_criteria_program_id ";
+        // $sql .= "and criteriaIncome.income_criteria_program_id = income.income_program_aid ";
+        // $sql .= "and criteriaPopulation.population_criteria_program_id = population.population_program_aid ";
+        // $sql .= "and criteriaUnemployment.unemployment_criteria_program_id = unemployment.unemployment_program_aid ";
+        // $sql .= "group by household.household_program_name ";
+        // $sql .= "income.income_program_name ";
+        $sql .= "order by household.household_program_name ";
+        // $sql .= "income.income_program_aid ";
+        // $sql .= "population.population_program_aid, ";
+        // $sql .= "unemployment.unemployment_program_aid ";
         $sql .= "limit {$start}, {$total} ";
 
         $result = $this->connection->query($sql);

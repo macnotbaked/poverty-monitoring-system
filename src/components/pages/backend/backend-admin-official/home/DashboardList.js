@@ -453,12 +453,23 @@ const DashboardList = () => {
         <div className="graph__item" style={{ width: "100%" }}>
           <h3 className="full--width t--bold mb--1">Program Recommendation</h3>
           <div className="program__item">
-            <ul>
-              <li>Family Planning</li>
-              <span>See details..</span>
-            </ul>
+            <h3 className="mb--2">Household Program</h3>
+            {result.length > 0 ? (
+              result.map((item, key) => {
+                return (
+                  <ul key={key}>
+                    <li>{item.household_program_name}</li>
+                    <span>See details..</span>
+                  </ul>
+                );
+              })
+            ) : (
+              <>
+                <NoData />
+              </>
+            )}
           </div>
-          <NoData />
+
           <div className="mt--2 t--center row">
             {!store.isSearch && (
               <LoadMore
