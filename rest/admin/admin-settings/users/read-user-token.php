@@ -16,8 +16,6 @@ try {
     $user = new Users($connection);
 
     $token = trim(filter_var($data["token"], FILTER_SANITIZE_STRING));
-    $roleId = trim(filter_var($data["roleId"], FILTER_SANITIZE_STRING));
-
 
     $key = "jwt_admin_ko_ito";
 
@@ -26,11 +24,7 @@ try {
             $decoded = JWT::decode($token, $key, array('HS256'));
             $user->users_email = $decoded->data->email;
 
-            if ($roleId == "3") {
-                $email = $user->readCitizenLogin();
-            } else {
-                $email = $user->readLogin();
-            }
+            $email = $user->readLogin();
 
             if ($email->num_rows <= 0) {
                 Response::sendResponse(false, "Account is invalid", $user->users_email);

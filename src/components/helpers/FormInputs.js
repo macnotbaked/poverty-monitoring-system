@@ -19,7 +19,7 @@ export const InputText = ({ label, ...props }) => {
   return (
     <>
       {meta.touched && meta.error ? (
-        <span className="error-msg error-show">{meta.error}</span>
+        <span className="error-show">{meta.error}</span>
       ) : null}
 
       <input

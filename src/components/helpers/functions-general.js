@@ -76,11 +76,16 @@ export const formatDate = (dateVal) => {
 
   // return `${days[day]} ${months[month]} ${date} ${year}`;
   // return `${days[day]}, ${months[month]} ${date}`;
-  return `${months[month]} ${date} ${year}`;
+  return `${months[month]} ${date}, ${year}`;
   // return `${months[month]}. ${date}, ${year}`;
   // return `${date} `;
 };
 
-export function setStorageRoute(jwt, roleId) {
-  localStorage.setItem("pmstoken", JSON.stringify({ token: jwt, roleId }));
+export function setStorageRoute(jwt) {
+  localStorage.setItem("pmstoken", JSON.stringify({ token: jwt }));
 }
+
+// format the numbers separated by comma
+export const numberWithCommas = (x) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};

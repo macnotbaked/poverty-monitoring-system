@@ -19,6 +19,7 @@ const ModalAddSitio = ({ item }) => {
   const initVal = {
     sitio_aid: item ? item.sitio_aid : "",
     sitio_name: item ? item.sitio_name : "",
+    sitio_name_old: item ? item.sitio_name : "",
   };
 
   const yupSchema = Yup.object({
@@ -87,9 +88,13 @@ const ModalAddSitio = ({ item }) => {
                       <button
                         type="submit"
                         disabled={loading}
-                        className="btn--default"
+                        className="btn--default d--flex align-center justify-center"
                       >
-                        {loading && <SpinnerButton />} {item ? "Save" : "Add"}
+                        {loading ? (
+                          <SpinnerButton />
+                        ) : (
+                          <span>{item ? "Save" : "Add"}</span>
+                        )}
                       </button>
                       <button
                         className="btn--outline "

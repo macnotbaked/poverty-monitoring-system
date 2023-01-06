@@ -1,21 +1,14 @@
 import React from "react";
-import { AiFillEye } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import {
-  FaArchive,
-  FaEdit,
-  FaEye,
-  FaHistory,
-  FaTrash,
-  FaUndo,
-} from "react-icons/fa";
+import { FaArchive, FaEdit, FaEye, FaHistory, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import {
   setIsAdd,
-  setIsClick,
   setIsConfirm,
+  setStartIndex,
 } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
+import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
 import { devNavUrl } from "../../../../helpers/functions-general";
 import LoadMore from "../../../../widgets/LoadMore";
 import ModalConfirm from "../../../../widgets/ModalConfirm";
@@ -35,25 +28,37 @@ const SitioList = ({
   const search = React.useRef(null);
   const { store, dispatch } = React.useContext(StoreContext);
   const [dataItem, setData] = React.useState(null);
-  const [isSus, setSus] = React.useState(false);
   const [id, setId] = React.useState(null);
   const [isDel, setDel] = React.useState(false);
   let count = 0;
+
+  const handleArchive = (item) => {
+    dispatch(setIsConfirm(true));
+    setId(item.sitio_aid);
+    setDel(null);
+    setData(item);
+  };
 
   const handleEdit = (item) => {
     dispatch(setIsAdd(true));
     setItemEdit(item);
   };
 
-  const handleDelete = (item) => {
-    dispatch(setIsConfirm(true));
-    setId(item.sitio_aid);
-    setData(item);
-    setDel(true);
-  };
+  const { activeRepresentative } = useLoadAllActiveRepresentative(
+    "/admin/admin-representative/read-representative-count-all.php"
+  );
 
-  const handleClick = () => {
-    dispatch(setIsClick(!store.isClick));
+  const getTotal = (id) => {
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_purok_id) === Number(id)) {
+          val = item.total;
+        }
+      });
+    }
+    return val;
   };
 
   return (
@@ -88,62 +93,38 @@ const SitioList = ({
                 count += 1;
                 return (
                   <tr key={key}>
-                    <td>{count}.</td>
-                    <td>{item.sitio_name}</td>
-                    <td>{100}</td>
-                    <td>
-                      {item.sitio_is_active === "1" && (
-                        <div className="d--flex">
-                          <Link
-                            to={`${devNavUrl}/admin/purok/household?sid=${item.sitio_aid}`}
-                            className="dropdown tooltip--table"
-                            data-tooltip="View"
-                          >
-                            <span>
-                              <FaEye />
-                            </span>
-                          </Link>
+                    <td data-label="#">{count}.</td>
+                    <td data-label="Name">{item.sitio_name}</td>
+                    <td data-label="Total Household">
+                      {getTotal(item.sitio_aid)}
+                    </td>
+                    <td data-label="Action">
+                      <div className="d--flex">
+                        <Link
+                          to={`${devNavUrl}/admin/purok/household?sid=${item.sitio_aid}`}
+                          className="dropdown tooltip--table"
+                          data-tooltip="View"
+                          onClick={() => dispatch(setStartIndex(0))}
+                        >
+                          <span>
+                            <FaEye />
+                          </span>
+                        </Link>
 
-                          <div className="dropdown">
-                            <span>
-                              <BsThreeDotsVertical />
-                            </span>
-                            <div className="dropdown-content">
-                              <button onClick={() => handleEdit(item)}>
-                                <FaEdit /> Edit
-                              </button>
-                              <button>
-                                <FaArchive /> Archive
-                              </button>
-                            </div>
+                        <div className="dropdown">
+                          <span>
+                            <BsThreeDotsVertical />
+                          </span>
+                          <div className="dropdown-content">
+                            <button onClick={() => handleEdit(item)}>
+                              <FaEdit /> Edit
+                            </button>
+                            <button onClick={() => handleArchive(item)}>
+                              <FaArchive /> Archive
+                            </button>
                           </div>
                         </div>
-                      )}
-
-                      {item.sitio_is_active === "0" && (
-                        <>
-                          <div className="d--flex">
-                            <button
-                              className="dropdown tooltip--table"
-                              data-tooltip="Restore"
-                            >
-                              <span>
-                                <FaHistory />
-                              </span>
-                            </button>
-
-                            <button
-                              onClick={() => handleDelete(item)}
-                              className="dropdown tooltip--table"
-                              data-tooltip="Delete"
-                            >
-                              <span>
-                                <FaTrash />
-                              </span>
-                            </button>
-                          </div>
-                        </>
-                      )}
+                      </div>
                     </td>
                   </tr>
                 );
@@ -158,6 +139,16 @@ const SitioList = ({
           </tbody>
         </table>
 
+        {store.isConfirm && (
+          <ModalConfirm
+            id={id}
+            isDel={isDel}
+            mysqlApiArchive={"/admin/admin-sitio/archive-sitio.php"}
+            msg={"Are you sure you want to archive"}
+            item={`"${dataItem.sitio_name}"`}
+          />
+        )}
+
         <div className="mt--2 t--center row">
           {!store.isSearch && (
             <LoadMore
@@ -169,16 +160,6 @@ const SitioList = ({
           )}
         </div>
       </div>
-
-      {store.isConfirm && (
-        <ModalConfirm
-          id={id}
-          isDel={isDel}
-          mysqlApiDelete={"/admin/admin-sitio/delete-sitio.php"}
-          msg={"Are you sure you want to delete this"}
-          item={`"${dataItem.sitio_name}"`}
-        />
-      )}
     </>
   );
 };

@@ -29,6 +29,16 @@ function checkCreate($object)
     return $result;
 }
 
+function checkReadById($object)
+{
+    $result = $object->readById();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (User by id)", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkReadAll($object)
 {
     $result = $object->readAll();
@@ -109,6 +119,16 @@ function checkUpdate($object)
     return $result;
 }
 
+function checkUpdatePhoto($object)
+{
+    $result = $object->updatePhoto();
+    if (!$result) {
+        Response::sendResponse(false, "Please check your sql query (Update photo).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkDelete($object)
 {
     $result = $object->delete();
@@ -184,8 +204,8 @@ function getResultData($result)
             "users_lname" => $users_lname,
             "users_email" => $users_email,
             "users_phone" => $users_phone,
-            "users_gender" => $users_gender,
-            "users_role_id" => $users_role_id,
+            "users_role" => $users_role,
+            "users_photo" => $users_photo,
             "users_created" => $users_created,
             "users_datetime" => $users_datetime,
 

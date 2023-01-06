@@ -1,9 +1,9 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 import { setCredentials } from "../store/StoreAction";
 import { StoreContext } from "../store/StoreContext";
 import fetchApi from "./helpers/fetchApi";
 import { devApiUrl, devNavUrl } from "./helpers/functions-general";
-import { Navigate } from "react-router-dom";
 import Spinner from "./widgets/Spinner";
 
 const ProtectedRoute = ({ children }) => {
@@ -18,7 +18,6 @@ const ProtectedRoute = ({ children }) => {
         devApiUrl + "/admin/admin-settings/users/read-user-token.php",
         {
           token: pmstoken.token,
-          roleId: pmstoken.roleId,
         }
       );
 
@@ -32,10 +31,12 @@ const ProtectedRoute = ({ children }) => {
         dispatch(
           setCredentials(
             login.data.users_aid,
-            login.data.roles_aid,
             login.data.users_fname,
-            login.data.roles_name,
-            login.data.users_email
+            login.data.users_mname,
+            login.data.users_lname,
+            login.data.users_email,
+            login.data.users_photo,
+            login.data.users_role
           )
         );
         setIsAuth("123");

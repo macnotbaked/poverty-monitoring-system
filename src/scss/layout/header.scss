@@ -8,14 +8,34 @@
   border-bottom: 3px solid $primary-color;
   margin-left: 13rem;
   transition: 0.3s ease;
+  z-index: 9;
+  position: relative;
   &__credential {
     display: flex;
     align-items: center;
     gap: 2rem;
+    position: relative;
+
+    .avatar,
+    img {
+      max-height: 4.5rem !important;
+      max-width: 4.5rem !important;
+      min-height: 4.5rem !important;
+      min-width: 4.5rem !important;
+      object-fit: cover;
+      object-position: center center;
+      overflow: hidden;
+      border: 0.4rem solid $light-gray-x;
+      transition: 0.15s ease;
+      border-radius: 100%;
+      cursor: pointer;
+      &:hover {
+        border: 0.4rem solid rgba($light-gray, 0.4);
+      }
+    }
 
     svg {
-      color: $light-gray;
-      font-size: 3.5rem;
+      fill: $light-gray;
     }
   }
   &__collapse {
@@ -31,5 +51,116 @@
         background-color: $light-gray;
       }
     }
+  }
+
+  .profile {
+    &__container {
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+      background: $light-color;
+      border-radius: 0.3rem 0.3rem 1rem 1rem;
+      position: absolute;
+      top: 5.4rem;
+      z-index: 2;
+      padding: 1rem;
+      width: 30rem;
+      right: 0.4rem;
+      // display: none;
+      transform: translate(0);
+      opacity: 0;
+      transition: opacity 0.15s linear;
+      pointer-events: none;
+      &::before {
+        content: "";
+        position: absolute;
+        transform: rotate(180deg);
+        width: 0;
+        height: 0;
+        right: 1rem;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid $light-color;
+        opacity: 1;
+        pointer-events: none;
+        top: -0.8rem;
+      }
+    }
+    &__container.show {
+      // display: block;
+      transition: opacity 0.15s linear;
+      transform: translate(0);
+      opacity: 1;
+      pointer-events: visible;
+    }
+    &__avatar {
+      position: relative;
+
+      .avatar,
+      img {
+        max-height: 6rem !important;
+        max-width: 6rem !important;
+        min-height: 6rem !important;
+        min-width: 6rem !important;
+        object-fit: cover;
+        object-position: center center;
+        overflow: hidden;
+        border: 1px solid $light-gray;
+        border-radius: 100%;
+        cursor: default !important;
+      }
+
+      .upload-button {
+        svg {
+          fill: $dark-color;
+        }
+        position: absolute;
+        bottom: 0;
+        right: -0.5rem;
+        background: rgba($dark-color, 0.2);
+        border-radius: 100%;
+        height: 2.5rem;
+        width: 2.5rem;
+        padding: 0.5rem;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        input {
+          opacity: 0;
+          cursor: pointer;
+          font-size: 0;
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          width: 100%;
+        }
+      }
+    }
+    &__credentials {
+      display: flex;
+      flex-direction: column;
+      color: $dark-color;
+      position: relative !important;
+      span:first-child {
+        font-size: 1.2rem;
+      }
+      span:last-child {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  // MEDIA QUERY FOR NAVIGATION CLASS
+
+  @media screen and (max-width: 768px) {
+    margin-left: 0;
+    padding-left: 2rem;
+  }
+  @media screen and (max-width: 420px) {
+    padding: 1rem !important;
   }
 }

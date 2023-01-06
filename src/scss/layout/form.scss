@@ -12,7 +12,8 @@ textarea:disabled,
 button:disabled,
 .disabled {
   cursor: not-allowed;
-  opacity: 0.5;
+  background: hsl(0, 0%, 95%) !important;
+  border: transparent !important;
 }
 input[type="checkbox"]:focus,
 input[type="radio"]:focus,
@@ -52,7 +53,7 @@ input[type="time"],
 input[type="password"],
 select,
 textarea {
-  background: #fff;
+  background: $light-color;
   height: 38px;
   padding: 6px 15px;
   font-size: 1.2rem;
@@ -79,6 +80,9 @@ textarea {
   margin: 0 auto;
   border-radius: 5px;
   max-width: 40rem;
+  img {
+    width: 10rem;
+  }
 }
 .form {
   position: relative;
@@ -93,8 +97,9 @@ textarea {
   input[type="email"],
   input[type="date"],
   input[type="number"],
+  input[type="search"],
   select {
-    border: 1px solid $dark-color;
+    border: 1px solid $light-gray;
     background: #fff;
     height: 38px;
     padding: 0.6rem 1rem 0.6rem 5rem;
@@ -108,10 +113,10 @@ textarea {
     border-radius: 2rem;
   }
   textarea {
-    border: 1px solid $dark-color;
+    border: 1px solid $light-gray;
     background: #fff;
     height: 10rem;
-    padding: 6px 15px;
+    padding: 0.6rem 1rem 0.6rem 5rem;
     font-weight: 400;
     line-height: 1.5;
     color: #54667a;
@@ -119,11 +124,12 @@ textarea {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     box-shadow: none;
     width: 100%;
+    border-radius: 2rem;
   }
   label {
     position: absolute;
-    top: 12px;
-    left: 15px;
+    top: -2rem;
+    left: 0;
     pointer-events: none;
     background: $light-color;
     font-size: 1.3rem;
@@ -134,6 +140,7 @@ textarea {
   input[type="date"]:focus,
   input[type="number"]:focus,
   input[type="email"]:focus,
+  input[type="search"]:focus,
   select:focus,
   textarea:focus {
     border: 1px solid $primary-color;
@@ -171,17 +178,19 @@ textarea {
     padding: 0 8px;
   }
   span.error-show {
-    display: block;
-    left: 0;
-    right: 0;
-    text-align: right;
+    right: 10px;
     bottom: -20px;
-    font-weight: bold;
+    color: rgba(255, 0, 0, 0.8);
+    position: absolute;
+    font-size: 1rem;
+    font-style: italic;
   }
+
   input.error-show,
   textarea.error-show,
   select.error-show {
     border: 1px solid red !important;
+    background: hsl(0, 100%, 97%);
   }
 
   label.error-show {
@@ -190,10 +199,141 @@ textarea {
   .icon--show {
     position: absolute;
     right: 1rem;
-    bottom: 0.6rem;
+    transform: translateY(50%);
+    bottom: 50%;
     font-size: 2rem;
-    cursor: pointer;
     color: $dark-gray;
+    top: 0;
+    cursor: pointer;
+  }
+  .icon--search {
+    position: absolute;
+    right: 3.5rem;
+    transform: translateY(50%);
+    bottom: 50%;
+    svg {
+      position: absolute;
+      font-size: 2.5rem;
+      transform: translateY(50%);
+      bottom: 50%;
+      border-left: 0.1rem solid $dark-gray;
+      padding-left: 1rem;
+      fill: $dark-gray;
+    }
+  }
+  .icon--input {
+    position: absolute;
+    left: 1.5rem;
+    transform: translateY(50%);
+    bottom: 50%;
+    svg {
+      position: absolute;
+      font-size: 2.5rem;
+      transform: translateY(50%);
+      bottom: 50%;
+      border-right: 0.1rem solid $light-gray;
+      padding-right: 1rem;
+      fill: $dark-gray;
+    }
+  }
+  .search--bar {
+    padding-left: 2rem !important;
+    padding-right: 5rem !important;
+    border-radius: 0 2rem 2rem 0 !important;
+    border: 0.1rem solid $light-gray !important;
+  }
+}
+// INPUT FORM
+
+.input--form {
+  position: relative;
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="date"],
+  input[type="number"],
+  select {
+    // border: none;
+    border: 1px solid $light-gray;
+    background: #fff;
+    height: 38px;
+    padding: 0.6rem 2rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #54667a;
+    background-clip: padding-box;
+    box-shadow: none;
+    width: 100%;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+  }
+  textarea {
+    border: none;
+    border-bottom: 1px solid $light-gray;
+    background: #fff;
+    height: 10rem;
+    padding: 6px 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #54667a;
+    background-clip: padding-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-shadow: none;
+    width: 100%;
+  }
+  label {
+    // position: absolute;
+    margin-bottom: 1rem;
+    pointer-events: none;
+    // background: $light-color;
+    font-size: 1.3rem;
+    transition: 0.5s;
+    font-weight: bold;
+  }
+  h3 {
+    border-bottom: 1px solid $dark-color;
+  }
+  input[type="password"]:focus,
+  input[type="text"]:focus,
+  input[type="date"]:focus,
+  input[type="number"]:focus,
+  input[type="email"]:focus,
+  select:focus,
+  textarea:focus {
+    border: 0;
+    border-bottom: 1px solid $light-gray;
+    box-shadow: inset 0 1px 5px #d6d6d6 !important;
+  }
+
+  span.error-show {
+    right: 10px;
+    bottom: -20px;
+    color: rgba(255, 0, 0, 0.8);
+    position: absolute;
+    font-size: 1rem;
+    font-style: italic;
+  }
+
+  input.error-show,
+  textarea.error-show,
+  select.error-show {
+    border: 1px solid red !important;
+    background: hsl(0, 100%, 97%);
+  }
+
+  label.error-show {
+    color: $primary-color !important;
+  }
+  .icon--show {
+    position: absolute;
+    right: 1rem;
+    transform: translateY(50%);
+    bottom: 50%;
+    font-size: 2rem;
+    color: $dark-gray;
+    top: 0;
+    cursor: pointer;
   }
   .icon--search {
     position: absolute;
@@ -241,6 +381,7 @@ textarea {
     border: 0.1rem solid $light-gray !important;
   }
 }
+
 .profile--upload {
   border-radius: 100%;
   width: 8rem;

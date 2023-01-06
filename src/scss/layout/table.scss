@@ -4,7 +4,6 @@
   table {
     border-collapse: collapse;
     border-spacing: 0;
-    min-height: 25rem;
     table-layout: auto;
     width: 100%;
     text-align: left;
@@ -15,6 +14,10 @@
     th:last-child,
     td:last-child {
       width: 13rem;
+      text-align: left !important;
+      // @media screen and (max-width: 768px) {
+      //   text-align: left !important;
+      // }
     }
   }
   table tr:hover {
@@ -22,6 +25,13 @@
   }
   td {
     padding: 1rem;
+    border-right: 1px solid #e0e0e0;
+    &:last-child {
+      border: none;
+    }
+    &:first-child {
+      border: none;
+    }
   }
   tr {
     border-bottom: 1px solid #e0e0e0;
@@ -30,7 +40,14 @@
     font-weight: bold;
     background: $light-gray-x;
     border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
     padding: 1rem;
+    &:first-child {
+      border: none;
+    }
+    &:last-child {
+      border: none;
+    }
   }
   .nodata {
     &:hover {
@@ -45,6 +62,40 @@
       img {
         width: 30rem;
       }
+    }
+    td {
+      padding: unset !important;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    tr,
+    td {
+      display: block;
+      width: unset !important;
+    }
+    thead tr th {
+      display: none;
+    }
+    tbody tr {
+      margin: 0 auto;
+      border-bottom: 1px solid $light-gray;
+    }
+    tbody tr td {
+      border: none;
+      position: relative;
+      padding-left: 50%;
+      text-align: left !important;
+      word-break: break-all;
+    }
+    tbody tr td:before {
+      content: attr(data-label);
+      position: absolute;
+      top: 1rem;
+      left: 0.6rem;
+      width: 50%;
+      font-weight: 700;
+      padding-right: 1rem;
+      color: $dark-color;
     }
   }
 }

@@ -59,6 +59,46 @@ function checkReadSearch($object, $search)
     return $result;
 }
 
+function checkReadAllInactive($object)
+{
+    $result = $object->readAllInactive();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (All inactive sitio).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadLimitInactive($object, $start, $total)
+{
+    $result = $object->readLimitInactive($start, $total);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Limit inactive sitio).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadSearchInactive($object, $search)
+{
+    $result = $object->readSearchInactive($search);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Search inactive sitio).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadById($object)
+{
+    $result = $object->readById();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (Active purok by ID).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkUpdate($object)
 {
     $result = $object->update();
@@ -69,11 +109,51 @@ function checkUpdate($object)
     return $result;
 }
 
+function checkArchive($object)
+{
+    $result = $object->archive();
+    if (!$result) {
+        Response::sendResponse(false, "Please check your sql query (Archive).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkRestore($object)
+{
+    $result = $object->restore();
+    if (!$result) {
+        Response::sendResponse(false, "Please check your sql query (Restore).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkDelete($object)
 {
     $result = $object->delete();
     if (!$result) {
         Response::sendResponse(false, "Please check your sql query (Delete).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadAlreadyExist($object, $role)
+{
+    $result = $object->isAlreadyExist();
+    if ($result->num_rows > 0) {
+        Response::sendResponse(false, "{$role} already exist.", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadExist($object)
+{
+    $result = $object->isExist();
+    if ($result->num_rows > 0) {
+        Response::sendResponse(false, "You cannot archive this purok. There are active representative inside.", []);
         exit();
     }
     return $result;

@@ -17,11 +17,8 @@ const useIsLogin = (navigate) => {
         devApiUrl + "/admin/admin-settings/users/read-user-token.php",
         {
           token: checkLocalStorage().token,
-          // idNumber: checkLocalStorage().data.settings_account_aid,
         }
       );
-
-      // console.log(login);
 
       if (typeof login === "undefined" || !login.status) {
         setLoading(false);

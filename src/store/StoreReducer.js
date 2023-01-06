@@ -38,6 +38,11 @@ export const StoreReducer = (state, action) => {
         ...state,
         isAdd: action.payload,
       };
+    case "IS_EDIT":
+      return {
+        ...state,
+        isEdit: action.payload,
+      };
 
     case "IS_SEARCH":
       return {
@@ -85,6 +90,30 @@ export const StoreReducer = (state, action) => {
       return {
         ...state,
         isClick: action.payload,
+      };
+
+    case "RESTORE":
+      return {
+        ...state,
+        isRestore: action.payload,
+      };
+
+    case "IS_ACCOUNT_UPDATED":
+      return {
+        ...state,
+        isAccountUpdated: action.payload,
+      };
+
+    case "IS_EVAL_ENABLED":
+      return {
+        ...state,
+        isEvalEnabled: action.payload,
+      };
+
+    case "IS_SUBMIT_EVAL":
+      return {
+        ...state,
+        isSubmitEval: action.payload,
       };
 
     case "CREDENTIALS":

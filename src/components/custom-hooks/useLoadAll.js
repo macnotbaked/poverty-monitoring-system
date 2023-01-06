@@ -1,5 +1,4 @@
 import React from "react";
-import { setIsEvalEnabled } from "../../store/StoreAction";
 import { StoreContext } from "../../store/StoreContext";
 import { fetchData } from "../helpers/fetchData";
 

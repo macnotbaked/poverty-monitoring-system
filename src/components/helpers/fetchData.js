@@ -15,7 +15,10 @@ import {
   setForgotPass,
   setIsAdd,
   setIsConfirm,
+  setIsEdit,
+  setIsEvaluated,
   setIsLogin,
+  setIsRestore,
   setIsSignup,
   setMessage,
   setSave,
@@ -75,9 +78,22 @@ export const fetchData = async (
       store.isSave ? dispatch(setSave(false)) : dispatch(setSave(true));
     }
 
+    // profile edit will be canceled when used
+    if (store.isEdit) {
+      dispatch(setIsEdit(false));
+      //this will refresh table list
+      store.isSave ? dispatch(setSave(false)) : dispatch(setSave(true));
+    }
+
     // delete modal will be closed when used
     if (store.isConfirm) {
       dispatch(setIsConfirm(false));
+      store.isSave ? dispatch(setSave(false)) : dispatch(setSave(true));
+    }
+
+    // restore modal will be closed when used
+    if (store.isRestore) {
+      dispatch(setIsRestore(false));
       store.isSave ? dispatch(setSave(false)) : dispatch(setSave(true));
     }
 
@@ -113,8 +129,10 @@ export const fetchData = async (
         setCredentials(
           data.mail.users_aid,
           data.mail.users_fname,
-          data.mail.roles_name,
+          data.mail.users_mname,
+          data.mail.users_lname,
           data.mail.users_email,
+          data.mail.users_role,
           data.mail.users_aid
         )
       );

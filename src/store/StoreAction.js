@@ -48,6 +48,13 @@ export const setIsAdd = (val) => {
   };
 };
 
+export const setIsEdit = (val) => {
+  return {
+    type: "IS_EDIT",
+    payload: val,
+  };
+};
+
 export const setIsSearch = (val) => {
   return {
     type: "IS_SEARCH",
@@ -104,21 +111,53 @@ export const setIsClick = (val) => {
   };
 };
 
+export const setIsRestore = (val) => {
+  return {
+    type: "RESTORE",
+    payload: val,
+  };
+};
+
+export const setIsAccountUpdated = (val) => {
+  return {
+    type: "IS_ACCOUNT_UPDATED",
+    payload: val,
+  };
+};
+
+export const setIsEvalEnabled = (val) => {
+  return {
+    type: "IS_EVAL_ENABLED",
+    payload: val,
+  };
+};
+
+export const setSubmitEval = (val) => {
+  return {
+    type: "IS_SUBMIT_EVAL",
+    payload: val,
+  };
+};
+
 export const setCredentials = (
   users_aid,
-  roles_aid,
   users_fname,
-  roles_name,
-  users_email
+  users_mname,
+  users_lname,
+  users_email,
+  users_photo,
+  users_role
 ) => {
   return {
     type: "CREDENTIALS",
     payload: {
       users_aid,
-      roles_aid,
       users_fname,
-      roles_name,
+      users_mname,
+      users_lname,
       users_email,
+      users_photo,
+      users_role,
     },
   };
 };

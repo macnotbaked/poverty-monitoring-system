@@ -1,6 +1,7 @@
 import { Form, Formik } from "formik";
 import React from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import {
@@ -24,9 +25,14 @@ const CreatePassword = ({ itemEdit }) => {
   const [Loading, setLoading] = React.useState(false);
   const Navigate = useNavigate();
   const [passwordShown, setPasswordShown] = React.useState(false);
+  const [passwordShownConfirm, setPasswordShownConfirm] = React.useState(false);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
+  };
+
+  const togglePasswordConfirm = () => {
+    setPasswordShownConfirm(!passwordShownConfirm);
   };
 
   const { loading, result } = useLoadAll(
@@ -47,22 +53,14 @@ const CreatePassword = ({ itemEdit }) => {
   const yupSchema = Yup.object({
     users_password: Yup.string()
       .required("Required")
-      .oneOf(
-        [Yup.ref("user_account_password"), null],
-        "Passwords does not match."
-      )
-      .min(6, "Password must be at least 6 characters.")
-      .matches(/[a-z]/, "At least one lowercase character.")
-      .matches(/[A-Z]/, "At least one uppercase character."),
+      .min(8, "Password must be at least 8 characters.")
+      .matches(/[a-z]/, "At least one lowercase letter.")
+      .matches(/[A-Z]/, "At least one uppercase letter.")
+      .matches("(?=.*[@$!%*#?&])", "Atleast 1 special character.")
+      .matches("(?=.*[0-9])", "Atleast 1 number."),
     users_password_confirm: Yup.string()
       .required("Required")
-      .oneOf(
-        [Yup.ref("user_account_password"), null],
-        "Passwords does not match."
-      )
-      .min(6, "Password must be at least 6 characters.")
-      .matches(/[a-z]/, "At least one lowercase character.")
-      .matches(/[A-Z]/, "At least one uppercase character."),
+      .oneOf([Yup.ref("users_password"), null], "Passwords does not match."),
   });
 
   if (
@@ -121,51 +119,53 @@ const CreatePassword = ({ itemEdit }) => {
             {(props) => {
               return (
                 <Form>
-                  <div className="input mb--2 ">
+                  <div className="input mb--3 ">
+                    <i className="icon--input">
+                      <FaLock />
+                    </i>
                     <InputText
-                      label="New Password"
+                      placeholder="New Password"
                       type={passwordShown ? "text" : "password"}
                       name="users_password"
-                      required
                     />
-                    <i
-                      className="icon--input"
-                      onMouseDown={togglePassword}
-                      onMouseUp={togglePassword}
-                    >
-                      {passwordShown ? (
-                        <AiOutlineEye />
-                      ) : (
-                        <AiOutlineEyeInvisible />
-                      )}
-                    </i>
+                    {props.values.users_password && (
+                      <i className="icon--show" onClick={togglePassword}>
+                        {passwordShown ? (
+                          <AiOutlineEye />
+                        ) : (
+                          <AiOutlineEyeInvisible />
+                        )}
+                      </i>
+                    )}
                   </div>
                   <div className="input mb--3">
-                    <InputText
-                      label="Confirm Password"
-                      type={passwordShown ? "text" : "password"}
-                      name="users_password_confirm"
-                      required
-                    />
-                    <i
-                      className="icon--input"
-                      onMouseDown={togglePassword}
-                      onMouseUp={togglePassword}
-                    >
-                      {passwordShown ? (
-                        <AiOutlineEye />
-                      ) : (
-                        <AiOutlineEyeInvisible />
-                      )}
+                    <i className="icon--input">
+                      <FaLock />
                     </i>
+                    <InputText
+                      placeholder="Confirm Password"
+                      type={passwordShownConfirm ? "text" : "password"}
+                      name="users_password_confirm"
+                    />
+                    {props.values.users_password_confirm && (
+                      <i className="icon--show" onClick={togglePasswordConfirm}>
+                        {passwordShownConfirm ? (
+                          <AiOutlineEye />
+                        ) : (
+                          <AiOutlineEyeInvisible />
+                        )}
+                      </i>
+                    )}
                   </div>
-                  <button
-                    type="submit"
-                    className="btn--outline"
-                    disabled={Loading ? true : false}
-                  >
-                    {Loading && <SpinnerButton />} <span>Create</span>
-                  </button>
+                  <div className="t--center">
+                    <button
+                      type="submit"
+                      className="btn--gradient"
+                      disabled={Loading ? true : false}
+                    >
+                      {Loading && <SpinnerButton />} <span>Create</span>
+                    </button>
+                  </div>
                 </Form>
               );
             }}

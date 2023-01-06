@@ -1,6 +1,14 @@
 import { Form, Formik } from "formik";
 import React from "react";
-import { FaTimes } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaPhone,
+  FaTimes,
+  FaTransgender,
+  FaUser,
+  FaUserEdit,
+  FaUsersCog,
+} from "react-icons/fa";
 import * as Yup from "yup";
 import {
   setIsAdd,
@@ -14,7 +22,7 @@ import {
 } from "../../../../../../../helpers/FormInputs";
 import SpinnerButton from "../../../../../../../widgets/SpinnerButton";
 
-const ModalAddUsers = ({ item, role }) => {
+const ModalAddUsers = ({ item }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [loading, setLoading] = React.useState(false);
 
@@ -29,8 +37,7 @@ const ModalAddUsers = ({ item, role }) => {
     users_lname: item ? item.users_lname : "",
     users_email: item ? item.users_email : "",
     users_phone: item ? item.users_phone : "",
-    users_gender: item ? item.users_gender : "",
-    users_role_id: item ? item.users_role_id : "",
+    users_role: item ? item.users_role : "",
   };
 
   const yupSchema = Yup.object({
@@ -39,8 +46,7 @@ const ModalAddUsers = ({ item, role }) => {
     users_lname: Yup.string().required("Required"),
     users_email: Yup.string().required("Required").email("Invalid email"),
     users_phone: Yup.string().required("Required"),
-    users_gender: Yup.string().required("Required"),
-    users_role_id: Yup.string().required("Required"),
+    users_role: Yup.string().required("Required"),
   });
 
   React.useEffect(() => {
@@ -92,88 +98,70 @@ const ModalAddUsers = ({ item, role }) => {
                 return (
                   <Form>
                     <div className="input my--3">
+                      <i className="icon--input">
+                        <FaUserEdit />
+                      </i>
                       <InputText
-                        label="First name"
+                        placeholder="First name"
                         type="text"
                         name="users_fname"
                         disabled={loading}
-                        required
                       />
                     </div>
 
                     <div className="input my--3">
+                      <i className="icon--input">
+                        <FaUserEdit />
+                      </i>
                       <InputText
-                        label="Middle name"
+                        placeholder="Middle name"
                         type="text"
                         name="users_mname"
                         disabled={loading}
-                        required
                       />
                     </div>
                     <div className="input my--3">
+                      <i className="icon--input">
+                        <FaUserEdit />
+                      </i>
                       <InputText
-                        label="Last name"
+                        placeholder="Last name"
                         type="text"
                         name="users_lname"
                         disabled={loading}
-                        required
                       />
                     </div>
                     <div className="input my--3">
+                      <i className="icon--input">
+                        <FaEnvelope />
+                      </i>
                       <InputText
-                        label="Email"
+                        placeholder="Email"
                         type="text"
                         name="users_email"
                         disabled={loading}
-                        required
                       />
                     </div>
                     <div className="input my--3">
+                      <i className="icon--input">
+                        <FaPhone />
+                      </i>
                       <InputText
-                        label="Phone number"
+                        placeholder="Phone number"
                         type="text"
                         name="users_phone"
                         disabled={loading}
-                        required
                       />
-                    </div>
-                    <div className="input my--3">
-                      <InputSelect
-                        label="Gender"
-                        name="users_gender"
-                        disabled={loading}
-                        required
-                      >
-                        <option value="">
-                          {loading ? "loading..." : "--"}
-                        </option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                      </InputSelect>
                     </div>
 
                     <div className="input my--3">
-                      <InputSelect
-                        label="Role"
-                        name="users_role_id"
-                        disabled={loading}
-                        required
-                      >
-                        <option value="">
-                          {" "}
-                          {loading ? "loading..." : "--"}
-                        </option>
-                        {role.length > 0 ? (
-                          role.map((item, key) => {
-                            return (
-                              <option key={key} value={item.roles_aid}>
-                                {item.roles_name}
-                              </option>
-                            );
-                          })
-                        ) : (
-                          <option value="">No data</option>
-                        )}
+                      <i className="icon--input">
+                        <FaUsersCog />
+                      </i>
+                      <InputSelect name="users_role" disabled={loading}>
+                        <option value="">Role</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Official">Official</option>
                       </InputSelect>
                     </div>
 
@@ -181,12 +169,16 @@ const ModalAddUsers = ({ item, role }) => {
                       <button
                         type="submit"
                         disabled={loading}
-                        className="btn--outline"
+                        className="btn--default d--flex align-center justify-center"
                       >
-                        {loading && <SpinnerButton />} {item ? "Save" : "Add"}
+                        {loading ? (
+                          <SpinnerButton />
+                        ) : (
+                          <span>{item ? "Save" : "Add"}</span>
+                        )}
                       </button>
                       <button
-                        className="btn--secondary "
+                        className="btn--outline "
                         type="reset"
                         onClick={handleClose}
                       >

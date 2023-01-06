@@ -8,7 +8,7 @@ import { StoreContext } from "../../../../store/StoreContext";
 import useIsLogin from "../../../custom-hooks/useIsLogin";
 import { fetchData } from "../../../helpers/fetchData";
 import { InputText } from "../../../helpers/FormInputs";
-import { devNavUrl, fetchFormData } from "../../../helpers/functions-general";
+import { devNavUrl } from "../../../helpers/functions-general";
 import Logo from "../../../widgets/Logo";
 import ModalError from "../../../widgets/ModalError";
 import Spinner from "../../../widgets/Spinner";
@@ -16,8 +16,8 @@ import Spinner from "../../../widgets/Spinner";
 const Login = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [passwordShown, setPasswordShown] = React.useState(false);
-  const navigate = useNavigate();
   const [btnLoading, setLoading] = React.useState(false);
+  const navigate = useNavigate();
   const { loading } = useIsLogin(navigate);
 
   const togglePassword = () => {
@@ -44,7 +44,6 @@ const Login = () => {
             <div className="t--center mb--2">
               <Logo />
             </div>
-            {/* <h2 className="t--left t--exbold my--2">LOGIN</h2> */}
 
             <Formik
               initialValues={initVal}
@@ -70,7 +69,7 @@ const Login = () => {
               {(props) => {
                 return (
                   <Form>
-                    <div className="input mb--2">
+                    <div className="input mb--3">
                       <i className="icon--input">
                         <FaUser />
                       </i>
@@ -78,7 +77,6 @@ const Login = () => {
                         placeholder="Email address"
                         type="text"
                         name="users_email"
-                        required
                       />
                     </div>
                     <div className="input mb--3">
@@ -89,24 +87,27 @@ const Login = () => {
                         placeholder="Password"
                         type={passwordShown ? "text" : "password"}
                         name="users_password"
-                        required
                       />
-                      <i
-                        className="icon--show"
-                        onMouseUp={togglePassword}
-                        onMouseDown={togglePassword}
-                      >
-                        {passwordShown ? (
-                          <AiOutlineEye />
-                        ) : (
-                          <AiOutlineEyeInvisible />
-                        )}
-                      </i>
+                      {props.values.users_password && (
+                        <i className="icon--show" onClick={togglePassword}>
+                          {passwordShown ? (
+                            <AiOutlineEye />
+                          ) : (
+                            <AiOutlineEyeInvisible />
+                          )}
+                        </i>
+                      )}
                     </div>
 
-                    <button type="submit" className="btn--outline mb--2">
-                      <span>Log in</span>
-                    </button>
+                    <div className="t--center">
+                      <button
+                        type="submit"
+                        className="btn--gradient mb--2 "
+                        disabled={btnLoading}
+                      >
+                        <span>LOGIN</span>
+                      </button>
+                    </div>
 
                     <p className="t--center">
                       <a

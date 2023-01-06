@@ -16,8 +16,7 @@ try {
     $user->users_lname = filter_var($data["users_lname"], FILTER_SANITIZE_STRING);
     $user->users_email = filter_var($data["users_email"], FILTER_SANITIZE_STRING);
     $user->users_phone = filter_var($data["users_phone"], FILTER_SANITIZE_STRING);
-    $user->users_gender = filter_var($data["users_gender"], FILTER_SANITIZE_STRING);
-    $user->users_role_id = filter_var($data["users_role_id"], FILTER_SANITIZE_STRING);
+    $user->users_role = filter_var($data["users_role"], FILTER_SANITIZE_STRING);
     $user->users_datetime = filter_var($data["users_datetime"], FILTER_SANITIZE_STRING);
 
     $result = checkUpdate($user);

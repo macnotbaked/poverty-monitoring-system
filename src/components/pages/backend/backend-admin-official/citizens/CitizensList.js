@@ -1,164 +1,162 @@
 import React from "react";
+import { AiFillEdit } from "react-icons/ai";
 import { BiMessageDetail } from "react-icons/bi";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaArchive, FaTrashAlt } from "react-icons/fa";
-import { AiFillEdit } from "react-icons/ai";
+import {
+  FaArchive,
+  FaEdit,
+  FaEye,
+  FaHistory,
+  FaTrash,
+  FaTrashAlt,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { devNavUrl } from "../../../../helpers/functions-general";
-import NoData from "../../../../widgets/NoData";
+import { setIsConfirm } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
+import { devNavUrl } from "../../../../helpers/functions-general";
+import LoadMore from "../../../../widgets/LoadMore";
+import ModalConfirm from "../../../../widgets/ModalConfirm";
+import NoData from "../../../../widgets/NoData";
+import SearchBox from "../../../../widgets/SearchBox";
 import Spinner from "../../../../widgets/Spinner";
 
-const CitizensList = () => {
+const CitizensList = ({
+  loading,
+  handleLoad,
+  totalResult,
+  result,
+  handleSearch,
+  handleChange,
+  setItemEdit,
+}) => {
   const { store, dispatch } = React.useContext(StoreContext);
-  const [loading, setLoading] = React.useState(false);
+  const search = React.useRef(null);
+  let count = 0;
+  const [dataItem, setData] = React.useState(null);
+  const [id, setId] = React.useState(null);
+  const [isDel, setDel] = React.useState(false);
 
+  const handleArchive = (item) => {
+    dispatch(setIsConfirm(true));
+    setId(item.representative_aid);
+    setDel(null);
+    setData(item);
+  };
   return (
     <>
-      {/* <SearchBox url="/admin/admin-trainee/read-trainee-search-active.php" /> */}
-      <div className="mb--2">
+      <SearchBox
+        search={search}
+        handleSearch={handleSearch}
+        handleChange={handleChange}
+        loading={loading}
+        result={result}
+        store={store}
+        url="/admin/admin-representative/read-representative-search-active.php"
+      />
+
+      <div className="table__container">
         {loading && <Spinner />}
-        <table id="" className="" cellSpacing="0" width="100%">
+        <table>
           <thead className="">
             <tr>
               <th className="" rowSpan="1">
                 #
               </th>
-              <th className="row--name" rowSpan="1" style={{ width: "15rem" }}>
-                Name
+              <th className="row--name" rowSpan="1">
+                Household Number
               </th>
-
-              <th style={{ width: "12rem" }} rowSpan="1">
-                Contact
+              <th className="row--name" rowSpan="1">
+                Representative
               </th>
-              <th rowSpan="1">Email</th>
+              <th rowSpan="1">Purok</th>
               <th rowSpan="1">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr className=" ">
-              <td>1.</td>
-              <td>Reyes, Ervin B.</td>
+            {result.length > 0 ? (
+              result.map((item, key) => {
+                count += 1;
+                return (
+                  <tr key={key}>
+                    <td data-label="#">{count}.</td>
+                    <td data-label="Household Number">
+                      House #{item.representative_house_number}
+                    </td>
+                    <td data-label="Representative">
+                      {item.representative_name}
+                    </td>
+                    <td data-label="Sitio/Purok">{item.sitio_name}</td>
+                    <td data-label="Action">
+                      {item.sitio_is_active === "1" && (
+                        <div className="d--flex">
+                          <Link
+                            to={`${devNavUrl}/admin/purok/household-view?hid=${item.representative_aid}`}
+                            className="dropdown tooltip--table"
+                            data-tooltip="View"
+                          >
+                            <span>
+                              <FaEye />
+                            </span>
+                          </Link>
 
-              <td>09491040057</td>
-              <td>ervin@gmail.com</td>
-              <td>
-                <div className="dropdown tooltip--view">
-                  <span>
-                    <AiFillEdit />
-                  </span>
-                </div>
-
-                <div className="dropdown">
-                  <span>
-                    <BsThreeDotsVertical />
-                  </span>
-                  <div className="dropdown-content">
-                    <button>
-                      <FaTrashAlt /> Delete
-                    </button>
-                    <button>
-                      <FaArchive /> Archive
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr className=" ">
-              <td>2.</td>
-              <td>Maralit, Meirejoy C.</td>
-
-              <td>09491040057</td>
-              <td>maralit@gmail.com</td>
-              <td>
-                <div className="dropdown tooltip--view">
-                  <span>
-                    <AiFillEdit />
-                  </span>
-                </div>
-
-                <div className="dropdown">
-                  <span>
-                    <BsThreeDotsVertical />
-                  </span>
-                  <div className="dropdown-content">
-                    <button>
-                      <FaTrashAlt /> Delete
-                    </button>
-                    <button>
-                      <FaArchive /> Archive
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr className=" ">
-              <td>3.</td>
-              <td>Briones, Carlo D.</td>
-
-              <td>09491040057</td>
-              <td>carlo@gmail.com</td>
-              <td>
-                <div className="dropdown tooltip--view">
-                  <span>
-                    <AiFillEdit />
-                  </span>
-                </div>
-
-                <div className="dropdown">
-                  <span>
-                    <BsThreeDotsVertical />
-                  </span>
-                  <div className="dropdown-content">
-                    <button>
-                      <FaTrashAlt /> Delete
-                    </button>
-                    <button>
-                      <FaArchive /> Archive
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr className=" ">
-              <td>4.</td>
-              <td>Merin, Mark Ryan B.</td>
-
-              <td>09491040057</td>
-              <td>merin.ryanmark@gmail.com</td>
-              <td>
-                <div className="dropdown tooltip--view">
-                  <span>
-                    <AiFillEdit />
-                  </span>
-                </div>
-
-                <div className="dropdown">
-                  <span>
-                    <BsThreeDotsVertical />
-                  </span>
-                  <div className="dropdown-content">
-                    <button>
-                      <FaTrashAlt /> Delete
-                    </button>
-                    <button>
-                      <FaArchive /> Archive
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <>
-              <tr className="">
+                          <div className="dropdown">
+                            <span>
+                              <BsThreeDotsVertical />
+                            </span>
+                            <div className="dropdown-content">
+                              <Link
+                                to={`${devNavUrl}/admin/purok/household-edit?hid=${item.representative_aid}`}
+                                className="tooltip--table"
+                                data-tooltip="View"
+                              >
+                                <span>
+                                  <FaEdit /> Edit
+                                </span>
+                              </Link>
+                              <button onClick={() => handleArchive(item)}>
+                                <FaArchive /> Archive
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr className="nodata">
                 <td colSpan="100%">
                   <NoData />
                 </td>
               </tr>
-            </>
+            )}
           </tbody>
         </table>
+
+        {store.isConfirm && (
+          <ModalConfirm
+            id={id}
+            isDel={isDel}
+            mysqlApiArchive={
+              "/admin/admin-representative/archive-representative.php"
+            }
+            msg={"Are you sure you want to archive"}
+            item={`"${dataItem.representative_house_number}"`}
+          />
+        )}
+
+        <div className="mt--2 t--center row">
+          {!store.isSearch && (
+            <LoadMore
+              handleLoad={handleLoad}
+              loading={loading}
+              result={result}
+              totalResult={totalResult}
+            />
+          )}
+        </div>
       </div>
-      <div className="t--center row">{/* <LoadMore /> */}</div>
     </>
   );
 };

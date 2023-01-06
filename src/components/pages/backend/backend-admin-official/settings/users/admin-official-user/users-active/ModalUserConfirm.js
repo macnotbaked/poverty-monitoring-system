@@ -1,8 +1,9 @@
 import React from "react";
-import { RiUserUnfollowLine } from "react-icons/ri";
-import { MdPassword } from "react-icons/md";
 import { FaTimes } from "react-icons/fa";
+import { MdPassword } from "react-icons/md";
+import { RiUserUnfollowLine } from "react-icons/ri";
 import {
+  setIsAccountUpdated,
   setIsConfirm,
   setStartIndex,
 } from "../../../../../../../../store/StoreAction";
@@ -14,24 +15,32 @@ const ModalUserConfirm = ({ isSus, susEndpoint, resetEndpoint, item }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [loading, setLoading] = React.useState(false);
 
-  let pId = item.users_aid;
+  let id = item.users_aid;
+  let email = item.users_email;
+  let name = item.users_fname;
 
   const handleClose = () => {
     dispatch(setIsConfirm(false));
   };
 
   const handleYes = () => {
-    console.log(isSus);
+    // console.log(isSus);
+    if (store.credentials.users_email === email) {
+      dispatch(setIsAccountUpdated(true));
+    }
+
     fetchData(
       setLoading, // Boolean loading values optional
       isSus ? susEndpoint : resetEndpoint,
-      { id: pId, users_email: item.users_email },
+      { id: id, users_email: email, users_fname: name },
       null,
-      "Please check your spam or junk email to continue resetting password.", // success msg optional
+      isSus
+        ? "Account succesfully suspended."
+        : "Please check your email to continue resetting password.",
       "", // additional error msg if needed optional
       dispatch, // context api action
       store, // context api state
-      isSus ? false : true, // optional for success modal
+      true, // optional for success modal
       false // boolean to show load more functionality button
     );
     dispatch(setStartIndex(0));
@@ -64,21 +73,21 @@ const ModalUserConfirm = ({ isSus, susEndpoint, resetEndpoint, item }) => {
               {isSus
                 ? "Are you sure you want to suspend "
                 : "Are you sure you want to reset password to "}
-              <strong>{`"${item.users_email}"`}</strong> ?
+              <strong>{`"${email}"`}</strong> ?
             </h3>
             <p className="t--center mb--5">You can't undo this action</p>
 
             <div className="d--flex gap--1">
               <button
                 type="submit"
-                className="btn--outline"
+                className="btn--default d--flex align-center justify-center"
                 disabled={loading}
                 onClick={handleYes}
               >
-                {loading && <SpinnerButton />} Confirm
+                {loading ? <SpinnerButton /> : "Confirm"}
               </button>
               <button
-                className="btn--secondary "
+                className="btn--outline "
                 type="reset"
                 onClick={handleClose}
               >

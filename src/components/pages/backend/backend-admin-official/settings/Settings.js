@@ -1,26 +1,23 @@
 import React from "react";
+import { StoreContext } from "../../../../../store/StoreContext";
+import Header from "../../../../header/Header";
 import Navigation from "../../../../navigation/Navigation";
 import SettingList from "./SettingList";
 
 const Settings = () => {
+  const { store, dispatch } = React.useContext(StoreContext);
+
   return (
     <>
-      <Navigation menu="settings" />
-      <div className="main-content">
-        <div className="container">
-          <div className="title">
-            <div className="row">
-              <div style={{ marginBottom: "1.5rem" }}>
-                <span className="tab-title">{"Settings"}</span>
-              </div>
-              <hr />
-            </div>
-          </div>
-        </div>
-
+      <div className={store.isActive ? "main-content show" : "main-content"}>
+        <Header />
+        <Navigation menu="settings" />
         <div className="container">
           <div className="row">
-            <div className="content-block">
+            <div className="content">
+              <div className="content__header">
+                <h3 className="t--bold py--2">Settings</h3>
+              </div>
               <SettingList />
             </div>
           </div>

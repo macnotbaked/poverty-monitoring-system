@@ -10,9 +10,15 @@ try {
     checkInputData($data);
     $sitio = new Sitio($connection);
 
+    $sitio_name_old = filter_var($data["sitio_name_old"], FILTER_SANITIZE_STRING);
+
     $sitio->sitio_aid  = filter_var($data["sitio_aid"], FILTER_SANITIZE_STRING);
     $sitio->sitio_name = filter_var($data["sitio_name"], FILTER_SANITIZE_STRING);
-    $sitio->sitio_datetime = filter_var($data["sitio_datetime"], FILTER_SANITIZE_STRING);
+    $sitio->sitio_datetime = date("Y-m-d H:i:s");
+
+    if ($sitio_name_old != $sitio->sitio_name) {
+        checkReadAlreadyExist($sitio, $sitio->sitio_name);
+    }
 
     $result = checkUpdate($sitio);
 

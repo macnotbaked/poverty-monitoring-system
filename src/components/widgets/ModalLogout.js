@@ -48,19 +48,19 @@ const ModalLogout = () => {
               <MdLogout />
             </div>
             <h3 className="t--center t--bold mb--1">
-              Are you sure you want to Logout?
+              Are you sure you want to log out?
             </h3>
             <p className="t--center ">You can't undo this action</p>
             <div className="d--flex gap--1 mt--3">
               <button
                 onClick={handleYes}
-                className="btn--outline"
+                className="btn--default d--flex justify-center align-center"
                 disabled={loading}
               >
-                {loading && <SpinnerButton />} Logout
+                {loading ? <SpinnerButton /> : "Logout"}
               </button>
               <button
-                className="btn--secondary "
+                className="btn--outline "
                 type="reset"
                 onClick={handleClose}
               >
