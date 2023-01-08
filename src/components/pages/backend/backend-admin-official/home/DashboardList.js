@@ -1,34 +1,44 @@
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import React from "react";
-import { Doughnut, Line, Pie, Radar } from "react-chartjs-2";
+import { Bar, Line, Pie, Radar } from "react-chartjs-2";
+import { Link } from "react-router-dom";
+import { setStartIndex } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
-import useFetchDataLoadMore from "../../../../custom-hooks/useFetchDataLoadMore";
+import useLoadAllActiveHouseholdProgram from "../../../../custom-hooks/useLoadAllActiveHouseholdProgram";
 import useLoadAllActiveIncomeClassification from "../../../../custom-hooks/useLoadAllActiveIncomeClassification";
+import useLoadAllActiveIncomeProgram from "../../../../custom-hooks/useLoadAllActiveIncomeProgram";
+import useLoadAllActivePopulationProgram from "../../../../custom-hooks/useLoadAllActivePopulationProgram";
 import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
+import useLoadAllActiveUnemploymentProgram from "../../../../custom-hooks/useLoadAllActiveUnemploymentProgram";
 import useLoadAllEvaluation from "../../../../custom-hooks/useLoadAllEvaluation";
 import useLoadAllInactive from "../../../../custom-hooks/useLoadAllInactive";
-import { formatDate } from "../../../../helpers/functions-general";
-import LoadMore from "../../../../widgets/LoadMore";
+import { devNavUrl, formatDate } from "../../../../helpers/functions-general";
 import NoData from "../../../../widgets/NoData";
 import Spinner from "../../../../widgets/Spinner";
 Chart.register(ChartDataLabels);
 
 const DashboardList = () => {
   const { store, dispatch } = React.useContext(StoreContext);
+  const { loadingHouseholdProgram, activeHouseholdProgram } =
+    useLoadAllActiveHouseholdProgram(
+      "/admin/admin-recommended-programs/read-household-recommended-program-all.php"
+    );
 
-  const {
-    loading,
-    handleLoad,
-    totalResult,
-    result,
-    handleSearch,
-    handleChange,
-  } = useFetchDataLoadMore(
-    "/admin/admin-recommended-programs/read-recommended-program-limit.php",
-    "/admin/admin-recommended-programs/read-recommended-program-all.php",
-    5 // show number of records on a table
-  );
+  const { loadingIncomeProgram, activeIncomeProgram } =
+    useLoadAllActiveIncomeProgram(
+      "/admin/admin-recommended-programs/read-income-recommended-program-all.php"
+    );
+
+  const { loadingPopulationProgram, activePopulationProgram } =
+    useLoadAllActivePopulationProgram(
+      "/admin/admin-recommended-programs/read-population-recommended-program-all.php"
+    );
+
+  const { loadingUnemploymentProgram, activeUnemploymentProgram } =
+    useLoadAllActiveUnemploymentProgram(
+      "/admin/admin-recommended-programs/read-unemployment-recommended-program-all.php"
+    );
 
   const { evaluation, evaluationLoading } = useLoadAllEvaluation(
     "/admin/admin-evaluation/enable-evaluation/read-all-evaluation.php"
@@ -325,6 +335,7 @@ const DashboardList = () => {
         res = [
           getTotalRepresentativeIncomeClassification(item.representative_aid),
         ].filter((i) => i === "7").length;
+
         if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
         }
@@ -411,6 +422,7 @@ const DashboardList = () => {
     labels: label,
     datasets: [
       {
+        label: "Income Classification",
         data: [poor, low, lowMiddle, middle, upperMiddle, high, rich],
         backgroundColor: backgroundIncome,
         borderWidth: 1,
@@ -446,6 +458,42 @@ const DashboardList = () => {
     ],
   };
 
+  const getTotalHouseholdMember = (id) => {
+    let val = 0;
+    let res = 0;
+    let final = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_eval_id) === Number(id)) {
+          res =
+            Number(item.representative_total_people) >= 4 &&
+            Number(item.representative_total_people) <= 12;
+        }
+        val += res;
+      });
+    }
+
+    final = (val / activeRepresentative.length) * 100;
+
+    // console.log(final);
+
+    return final.toFixed(2);
+  };
+
+  const getTotalHouseHoldMemberForEvaluation = () => {
+    let res = 0;
+    if (evaluation.length) {
+      evaluation.map((item) => {
+        res = getTotalHouseholdMember(item.evaluation_list_aid);
+      });
+    }
+
+    return res;
+  };
+
+  // console.log(getTotalHouseHoldMemberForEvaluation());
+
   return (
     <>
       <div className="graph__container p--relative">
@@ -453,13 +501,32 @@ const DashboardList = () => {
         <div className="graph__item" style={{ width: "100%" }}>
           <h3 className="full--width t--bold mb--1">Program Recommendation</h3>
           <div className="program__item">
-            <h3 className="mb--2">Household Program</h3>
-            {result.length > 0 ? (
-              result.map((item, key) => {
+            <h3 className="mb--2">Household Recommended Program</h3>
+            {activeHouseholdProgram.length > 0 ? (
+              activeHouseholdProgram.map((item, key) => {
                 return (
-                  <ul key={key}>
-                    <li>{item.household_program_name}</li>
-                    <span>See details..</span>
+                  <ul key={key} className="mb--1">
+                    {loadingHouseholdProgram ? (
+                      "Loading..."
+                    ) : (
+                      <>
+                        <li>
+                          {item.household_program_aid === "1" &&
+                            getTotalHouseHoldMemberForEvaluation() >=
+                              Number(item.household_criteria_range_from) &&
+                            getTotalHouseHoldMemberForEvaluation() <=
+                              Number(item.household_criteria_range_to) &&
+                            item.household_program_name}
+                          <br />
+                          <Link
+                            to={`${devNavUrl}/admin/home`}
+                            onClick={() => dispatch(setStartIndex(0))}
+                          >
+                            See details...
+                          </Link>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 );
               })
@@ -469,15 +536,73 @@ const DashboardList = () => {
               </>
             )}
           </div>
-
-          <div className="mt--2 t--center row">
-            {!store.isSearch && (
-              <LoadMore
-                handleLoad={handleLoad}
-                loading={loading}
-                result={result}
-                totalResult={totalResult}
-              />
+          <div className="program__item">
+            <h3 className="mb--2">Income Recommended Program</h3>
+            {activeIncomeProgram.length > 0 ? (
+              activeIncomeProgram.map((item, key) => {
+                return (
+                  <ul key={key} className="mb--1">
+                    {loadingIncomeProgram ? (
+                      "Loading..."
+                    ) : (
+                      <>
+                        <li>{item.income_program_name}</li>
+                        <span>See details..</span>
+                      </>
+                    )}
+                  </ul>
+                );
+              })
+            ) : (
+              <>
+                <NoData />
+              </>
+            )}
+          </div>
+          <div className="program__item">
+            <h3 className="mb--2">Population Recommended Program</h3>
+            {activePopulationProgram.length > 0 ? (
+              activePopulationProgram.map((item, key) => {
+                return (
+                  <ul key={key} className="mb--1">
+                    {loadingPopulationProgram ? (
+                      "Loading..."
+                    ) : (
+                      <>
+                        <li>{item.population_program_name}</li>
+                        <span>See details..</span>
+                      </>
+                    )}
+                  </ul>
+                );
+              })
+            ) : (
+              <>
+                <NoData />
+              </>
+            )}
+          </div>
+          <div className="program__item">
+            <h3 className="mb--2">Unemployment Recommended Program</h3>
+            {activeUnemploymentProgram.length > 0 ? (
+              activeUnemploymentProgram.map((item, key) => {
+                return (
+                  <ul key={key} className="mb--1">
+                    {loadingUnemploymentProgram ? (
+                      "Loading..."
+                    ) : (
+                      <>
+                        <li>{item.unemployment_program_name}</li>
+                        <span>See details..</span>
+                      </>
+                    )}
+                  </ul>
+                );
+              })
+            ) : (
+              <>
+                <NoData />
+              </>
             )}
           </div>
         </div>
@@ -489,92 +614,92 @@ const DashboardList = () => {
           <Line data={PopulationPerYear} />
         </div>
 
-        <div className="graph__bottom">
-          <div className="graph__item" style={{ minWidth: "50%" }}>
-            <Pie
-              data={UnemploymentRate}
-              options={{
-                plugins: {
-                  datalabels: {
-                    color: "#fff",
-                    anchor: "end",
-                    align: "start",
-                    borderWidth: 1,
-                    borderColor: "#fff",
-                    borderRadius: 100,
-                    offset: 10,
-                    backgroundColor: (context) => {
-                      return context.dataset.backgroundColor;
-                    },
-                    font: {
-                      weight: 600,
-                      size: "10",
-                    },
-                    formatter: (value) => {
-                      // console.log(value);
+        {/* <div className="graph__bottom"> */}
+        <div className="graph__item" style={{ minWidth: "100%" }}>
+          <Pie
+            data={UnemploymentRate}
+            options={{
+              plugins: {
+                datalabels: {
+                  color: "#fff",
+                  anchor: "end",
+                  align: "start",
+                  borderWidth: 1,
+                  borderColor: "#fff",
+                  borderRadius: 100,
+                  offset: 10,
+                  backgroundColor: (context) => {
+                    return context.dataset.backgroundColor;
+                  },
+                  font: {
+                    weight: 600,
+                    size: "10",
+                  },
+                  formatter: (value) => {
+                    // console.log(value);
 
-                      if (
-                        isNaN(value) ||
-                        value === "" ||
-                        value.length === 0 ||
-                        value === null
-                      ) {
-                        return "No Data";
-                      } else {
-                        return value + "%";
-                      }
-                    },
-                  },
-                  legend: {
-                    display: true,
+                    if (
+                      isNaN(value) ||
+                      value === "" ||
+                      value.length === 0 ||
+                      value === null
+                    ) {
+                      return "No Data";
+                    } else {
+                      return value + "%";
+                    }
                   },
                 },
-              }}
-            />
-          </div>
-          <div className="graph__item" style={{ minWidth: "50%" }}>
-            <Doughnut
-              data={classification}
-              options={{
-                plugins: {
-                  datalabels: {
-                    color: "#fff",
-                    anchor: "end",
-                    align: "start",
-                    borderWidth: 1,
-                    borderColor: "#fff",
-                    borderRadius: 100,
-                    offset: 10,
-                    backgroundColor: (context) => {
-                      return context.dataset.backgroundColor;
-                    },
-                    font: {
-                      weight: 600,
-                      size: "10",
-                    },
-                    formatter: (value) => {
-                      if (
-                        isNaN(value) ||
-                        value === "" ||
-                        value.length === 0 ||
-                        value === null
-                      ) {
-                        return "No Data";
-                      } else {
-                        return value + "%";
-                      }
-                    },
-                  },
-                  legend: {
-                    align: "start",
-                    position: "left",
-                    display: true,
-                  },
+                legend: {
+                  display: true,
                 },
-              }}
-            />
-          </div>
+              },
+            }}
+          />
         </div>
+        <div className="graph__item" style={{ minWidth: "100%" }}>
+          <Bar
+            data={classification}
+            options={{
+              plugins: {
+                datalabels: {
+                  color: "#fff",
+                  anchor: "end",
+                  align: "start",
+                  borderWidth: 1,
+                  borderColor: "#fff",
+                  borderRadius: 100,
+                  offset: 10,
+                  backgroundColor: (context) => {
+                    return context.dataset.backgroundColor;
+                  },
+                  font: {
+                    weight: 600,
+                    size: "10",
+                  },
+                  formatter: (value) => {
+                    if (
+                      isNaN(value) ||
+                      value === "" ||
+                      value.length === 0 ||
+                      value === null
+                    ) {
+                      return "No Data";
+                    } else {
+                      return value + "%";
+                    }
+                  },
+                },
+                legend: {
+                  // align: "start",
+                  // position: "left",
+                  display: true,
+                },
+              },
+            }}
+          />
+        </div>
+        {/* </div> */}
       </div>
     </>
   );

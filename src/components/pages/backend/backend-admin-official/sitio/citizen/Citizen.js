@@ -73,6 +73,7 @@ const Citizen = () => {
                 result={result}
                 handleSearch={handleSearch}
                 handleChange={handleChange}
+                purokId={purokId}
               />
             </div>
           </div>

@@ -157,13 +157,13 @@ const CreatePassword = ({ itemEdit }) => {
                       </i>
                     )}
                   </div>
-                  <div className="t--center">
+                  <div className="t--center d--flex align-center justify-center">
                     <button
                       type="submit"
-                      className="btn--gradient"
-                      disabled={Loading ? true : false}
+                      className="btn--gradient mb--2 d--flex align-center justify-center"
+                      disabled={Loading}
                     >
-                      {Loading && <SpinnerButton />} <span>Create</span>
+                      {Loading ? <SpinnerButton /> : <span>Submit</span>}
                     </button>
                   </div>
                 </Form>

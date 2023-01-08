@@ -10,11 +10,11 @@ try {
     checkInputData($data);
     $recommended_program = new RecommendedPrograms($connection);
 
-    $result = checkReadAll($recommended_program);
+    $result = checkReadAllUnemploymentRecommendedProgram($recommended_program);
 
     $data = getResultData($result);
 
-    Response::sendResponse(true, "All recommended program data found", $data);
+    Response::sendResponse(true, "All unemployment recommended program data found", $data);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted because a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

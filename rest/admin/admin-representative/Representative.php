@@ -211,7 +211,6 @@ class Representative
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
         $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
-        $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "order by household.representative_house_number asc ";
         $result = $this->connection->query($sql);
 
@@ -228,7 +227,6 @@ class Representative
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
         $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
-        $sql .= "and purok.sitio_aid = '{$this->representative_purok_id}' ";
         $sql .= "order by household.representative_house_number asc ";
         $sql .= "limit {$start}, {$total} ";
         $result = $this->connection->query($sql);
@@ -245,7 +243,7 @@ class Representative
         $sql .= "and eval.evaluation_list_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
         $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
-        // $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
+        $sql .= "and household.representative_purok_id = '{$this->representative_purok_id}' ";
         $sql .= "and (household.representative_name like '{$search}%' ";
         $sql .= "or household.representative_house_number like '{$search}%' ";
         $sql .= "or purok.sitio_name like '{$search}%' ";

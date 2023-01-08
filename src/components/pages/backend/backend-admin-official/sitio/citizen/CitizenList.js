@@ -18,7 +18,7 @@ const CitizenList = ({
   result,
   handleSearch,
   handleChange,
-  setItemEdit,
+  purokId,
 }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const search = React.useRef(null);
@@ -34,6 +34,8 @@ const CitizenList = ({
     setDel(null);
     setData(item);
   };
+
+  // console.log(result);
 
   return (
     <>

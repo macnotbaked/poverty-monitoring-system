@@ -94,7 +94,8 @@ html {
   height: 100%;
 }
 body {
-  font-size: 1.2rem;
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem) !important;
+  // font-size: 1.2rem;
   color: $dark-color;
   height: 100%;
   transition: all 0.5s;

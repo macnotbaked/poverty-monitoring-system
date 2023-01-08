@@ -10,7 +10,7 @@ try {
     checkInputData($data);
     $representative = new Representative($connection);
 
-    $representative->representative_purok_id  = filter_var($data["type"], FILTER_SANITIZE_STRING);
+    $representative->representative_purok_id = filter_var($data["type"], FILTER_SANITIZE_STRING);
 
     $search = trim(filter_var($data["search"], FILTER_SANITIZE_STRING));
 

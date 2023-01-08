@@ -19,26 +19,45 @@ function checkInputData($data)
     }
 }
 
-function checkReadAll($object)
+function checkReadAllHouseholdRecommendedProgram($object)
 {
-    $result = $object->readAll();
+    $result = $object->readAllHouseholdRecommendedProgram();
     if ($result->num_rows == 0) {
-        Response::sendResponse(true, "Empty Records (All recommended programs).", []);
+        Response::sendResponse(true, "Empty Records (All household recommended programs).", []);
         exit();
     }
     return $result;
 }
 
-function checkReadLimit($object, $start, $total)
+function checkReadAllIncomeRecommendedProgram($object)
 {
-    $result = $object->readLimit($start, $total);
+    $result = $object->readAllIncomeRecommendedProgram();
     if ($result->num_rows == 0) {
-        Response::sendResponse(true, "Empty Records (Limit recommended programs).", []);
+        Response::sendResponse(true, "Empty Records (All income recommended programs).", []);
         exit();
     }
     return $result;
 }
 
+function checkReadAllPopulationRecommendedProgram($object)
+{
+    $result = $object->readAllPopulationRecommendedProgram();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (All population recommended programs).", []);
+        exit();
+    }
+    return $result;
+}
+
+function checkReadAllUnemploymentRecommendedProgram($object)
+{
+    $result = $object->readAllUnemploymentRecommendedProgram();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Records (All unemployment recommended programs).", []);
+        exit();
+    }
+    return $result;
+}
 
 function getResultData($result)
 {

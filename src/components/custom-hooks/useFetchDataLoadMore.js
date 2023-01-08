@@ -81,7 +81,7 @@ const useFetchDataLoadMore = (url, url2, perPage = 2, param1 = null) => {
     fetchData(
       setLoading,
       endpoint,
-      { token: "", search: val }, // form data values
+      { token: "", search: val, type: param1 }, // form data values
       setResult,
       "", // success msg
       "Server connection error. Please contact technical support.", // additional error msg if needed

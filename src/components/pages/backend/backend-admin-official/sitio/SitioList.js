@@ -45,19 +45,47 @@ const SitioList = ({
   };
 
   const { activeRepresentative } = useLoadAllActiveRepresentative(
-    "/admin/admin-representative/read-representative-count-all.php"
+    "/admin/admin-representative/read-representative-all.php"
   );
 
   const getTotal = (id) => {
     let val = 0;
+    let res = 0;
 
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
-        if (Number(item.representative_purok_id) === Number(id)) {
-          val = item.total;
+        if (Number(item.representative_aid) === Number(id)) {
+          val = item.representative_household_living_id;
         }
       });
     }
+    return val;
+  };
+
+  const getTotalHousehold = (id) => {
+    let totalOwn = 0;
+    let totalRent = 0;
+    let own = 0;
+    let rent = 0;
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        // console.log(getTotal(item.representative_aid));
+        own = [getTotal(item.representative_aid)].filter(
+          (i) => i === "1"
+        ).length;
+        rent = [getTotal(item.representative_aid)].filter(
+          (i) => i === "2"
+        ).length;
+        if (Number(item.representative_purok_id) === Number(id)) {
+          totalOwn += own;
+          totalRent += rent;
+          val = totalOwn + totalRent;
+        }
+      });
+    }
+
     return val;
   };
 
@@ -96,7 +124,7 @@ const SitioList = ({
                     <td data-label="#">{count}.</td>
                     <td data-label="Name">{item.sitio_name}</td>
                     <td data-label="Total Household">
-                      {getTotal(item.sitio_aid)}
+                      {getTotalHousehold(item.sitio_aid)}
                     </td>
                     <td data-label="Action">
                       <div className="d--flex">

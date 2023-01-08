@@ -10,14 +10,11 @@ try {
     checkInputData($data);
     $recommended_program = new RecommendedPrograms($connection);
 
-    $start = trim(filter_var($data["start"], FILTER_SANITIZE_STRING));
-    $total = trim(filter_var($data["total"], FILTER_SANITIZE_STRING));
-
-    $result = checkReadLimit($recommended_program, $start, $total);
+    $result = checkReadAllIncomeRecommendedProgram($recommended_program);
 
     $data = getResultData($result);
 
-    Response::sendResponse(true, "Limit recommended program data found", $data);
+    Response::sendResponse(true, "All income recommended program data found", $data);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted because a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

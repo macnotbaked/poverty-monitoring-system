@@ -37,9 +37,10 @@
             font-weight: 600;
             margin-bottom: 0.5rem;
           }
-          span {
+          a {
+            font-size: 1.2rem;
+            font-weight: 400;
             color: $primary-color;
-            cursor: pointer;
             &:hover {
               text-decoration: underline;
             }
@@ -269,10 +270,10 @@
     }
     &::after {
       content: "";
-      transition: opacity 0.15s linear;
-      transform: translate(0);
-      opacity: 1;
-      pointer-events: visible;
+      // transition: opacity 0.2s linear;
+      // transform: translate(0);
+      // opacity: 1;
+      // pointer-events: visible;
     }
   }
 }
