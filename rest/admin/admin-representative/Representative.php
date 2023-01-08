@@ -130,6 +130,7 @@ class Representative
         $sql .= "where household.representative_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
         $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
+        $sql .= "group by household.representative_aid ";
         $sql .= "order by purok.sitio_name asc ";
 
         $result = $this->connection->query($sql);
@@ -163,7 +164,8 @@ class Representative
         $sql .= "and eval.evaluation_list_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
         $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
-        $sql .= "order by household.representative_house_number asc ";
+        $sql .= "order by household.representative_house_number asc, ";
+        $sql .= "purok.sitio_name asc ";
         $result = $this->connection->query($sql);
 
         return $result;
@@ -178,7 +180,8 @@ class Representative
         $sql .= "and eval.evaluation_list_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
         $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
-        $sql .= "order by household.representative_house_number asc ";
+        $sql .= "order by household.representative_house_number asc, ";
+        $sql .= "purok.sitio_name asc ";
         $sql .= "limit {$start}, {$total} ";
         $result = $this->connection->query($sql);
 
@@ -375,7 +378,8 @@ class Representative
     public function isAlreadyExist()
     {
         $sql = "select * from {$this->tblRepresentative} ";
-        $sql .= "where representative_name = '{$this->representative_name}' ";
+        $sql .= "where representative_eval_id = '{$this->representative_eval_id}' ";
+        $sql .= "and representative_name = '{$this->representative_name}' ";
         $sql .= "and representative_house_number = '{$this->representative_house_number}' ";
         $result = $this->connection->query($sql);
 

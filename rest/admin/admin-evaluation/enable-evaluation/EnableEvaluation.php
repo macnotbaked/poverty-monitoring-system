@@ -6,6 +6,8 @@ class EnableEvaluation
     public $evaluation_list_is_active;
     public $evaluation_list_created;
     public $evaluation_list_datetime;
+    
+    public $last_created_id;
 
     public $connection;
     public $tblEnableEvaluation;
@@ -77,12 +79,67 @@ class EnableEvaluation
     public function create()
     {
         $sql = "insert into {$this->tblEnableEvaluation} ";
-        $sql .= "( evaluation_list_is_active,";
-        $sql .= "evaluation_list_created,";
-        $sql .= "evaluation_list_datetime ) values (";
-        $sql .= "'{$this->evaluation_list_is_active}',";
-        $sql .= "'{$this->evaluation_list_created}',";
-        $sql .= "'{$this->evaluation_list_datetime}')";
+        $sql .= "( evaluation_list_is_active, ";
+        $sql .= "evaluation_list_created, ";
+        $sql .= "evaluation_list_datetime ) values ( ";
+        $sql .= "'{$this->evaluation_list_is_active}', ";
+        $sql .= "'{$this->evaluation_list_created}', ";
+        $sql .= "'{$this->evaluation_list_datetime}' )";
+
+        $result = $this->connection->query($sql);
+        $this->last_created_id = $this->connection->insert_id;
+        return $result;
+    }
+
+    public function copyOldRepresentative()
+    {
+        $sql = "insert into {$this->tblRepresentative} ";
+        $sql .= "( representative_eval_id, ";
+        $sql .= "representative_purok_id, ";
+        $sql .= "representative_is_active, ";
+        $sql .= "representative_name, ";
+        $sql .= "representative_contact, ";
+        $sql .= "representative_house_number, ";
+        $sql .= "representative_total_people, ";
+        $sql .= "representative_total_underage, ";
+        $sql .= "representative_total_midage, ";
+        $sql .= "representative_total_adult, ";
+        $sql .= "representative_total_seniors, ";
+        $sql .= "representative_total_pwd, ";
+        $sql .= "representative_total_elem, ";
+        $sql .= "representative_total_highschool, ";
+        $sql .= "representative_total_college, ";
+        $sql .= "representative_household_living_id, ";
+        $sql .= "representative_is_in_danger_area, ";
+        $sql .= "representative_monthly_income, ";
+        $sql .= "representative_total_able_work, ";
+        $sql .= "representative_total_employed, ";
+        $sql .= "representative_created, ";
+        $sql .= "representative_datetime ) select ";
+        $sql .= "'{$this->last_created_id}', ";
+        $sql .= "representative_purok_id, ";
+        $sql .= "representative_is_active, ";
+        $sql .= "representative_name, ";
+        $sql .= "representative_contact, ";
+        $sql .= "representative_house_number, ";
+        $sql .= "representative_total_people, ";
+        $sql .= "representative_total_underage, ";
+        $sql .= "representative_total_midage, ";
+        $sql .= "representative_total_adult, ";
+        $sql .= "representative_total_seniors, ";
+        $sql .= "representative_total_pwd, ";
+        $sql .= "representative_total_elem, ";
+        $sql .= "representative_total_highschool, ";
+        $sql .= "representative_total_college, ";
+        $sql .= "representative_household_living_id, ";
+        $sql .= "representative_is_in_danger_area, ";
+        $sql .= "representative_monthly_income, ";
+        $sql .= "representative_total_able_work, ";
+        $sql .= "representative_total_employed, ";
+        $sql .= "'{$this->evaluation_list_created}', ";
+        $sql .= "'{$this->evaluation_list_datetime}' ";
+        $sql .= "from {$this->tblRepresentative} ";
+        $sql .= "where representative_eval_id = representative_eval_id ";
 
         $result = $this->connection->query($sql);
         return $result;

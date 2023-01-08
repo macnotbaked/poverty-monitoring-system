@@ -12,6 +12,7 @@ import useLoadAllActivePopulationProgram from "../../../../custom-hooks/useLoadA
 import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
 import useLoadAllActiveUnemploymentProgram from "../../../../custom-hooks/useLoadAllActiveUnemploymentProgram";
 import useLoadAllEvaluation from "../../../../custom-hooks/useLoadAllEvaluation";
+import useLoadAllEvaluationList from "../../../../custom-hooks/useLoadAllEvaluationList";
 import useLoadAllInactive from "../../../../custom-hooks/useLoadAllInactive";
 import { devNavUrl, formatDate } from "../../../../helpers/functions-general";
 import NoData from "../../../../widgets/NoData";
@@ -20,6 +21,7 @@ Chart.register(ChartDataLabels);
 
 const DashboardList = () => {
   const { store, dispatch } = React.useContext(StoreContext);
+
   const { loadingHouseholdProgram, activeHouseholdProgram } =
     useLoadAllActiveHouseholdProgram(
       "/admin/admin-recommended-programs/read-household-recommended-program-all.php"
@@ -44,6 +46,10 @@ const DashboardList = () => {
     "/admin/admin-evaluation/enable-evaluation/read-all-evaluation.php"
   );
 
+  const { evaluationList, loadingevaluationList } = useLoadAllEvaluationList(
+    "/admin/admin-evaluation/enable-evaluation/read-enable-evaluation.php"
+  );
+
   const { activeRepresentative } = useLoadAllActiveRepresentative(
     "/admin/admin-representative/read-representative.php"
   );
@@ -58,24 +64,72 @@ const DashboardList = () => {
 
   let totalCount = activeRepresentative.length;
 
-  const getPovertyRate = (id) => {
+  // const totalEvalRepresentative = (id) => {
+  //   let total = 0
+  //   inactive.map((item) => {
+  //     if (Number(item.representative_eval_id) === Number(id)) {
+  //       total += Number(item.representative_total_people);
+  //     }
+  //   });
+
+  //   return total.toFixed(2)
+  // }
+
+  // console.log(activeRepresentative.length);
+
+  const getTotalRepresentativeIncomeClassification = (rid) => {
     let val = 0;
-    let res = 0;
-    let total = 0;
+    let className = [];
 
     if (inactive.length) {
       inactive.map((item) => {
-        // population += Number(item.representative_total_people);
-        res = [
-          getTotalRepresentativeIncomeClassification(item.representative_aid),
-        ].filter((i) => i === "1").length;
-        if (Number(item.representative_eval_id) === Number(id)) {
-          val += res;
+        if (Number(item.representative_aid) === Number(rid)) {
+          val =
+            Number(item.representative_monthly_income) /
+            Number(item.representative_total_people);
         }
       });
     }
 
-    total = (val / totalCount) * 100;
+    incomeClass.map((income) => {
+      if (
+        val >= Number(income.monthly_income_from / 5) &&
+        val <= Number(income.monthly_income_to / 5)
+      ) {
+        className = income.monthly_income_aid;
+      }
+    });
+
+    return className;
+  };
+
+  const getPovertyRate = (id) => {
+    let val = 0;
+    let res = 0;
+    let total = 0;
+    let population = 0;
+    let countTotal = 0;
+
+    if (inactive.length) {
+      inactive.map((item) => {
+        res = [
+          getTotalRepresentativeIncomeClassification(
+            Number(item.representative_aid)
+          ),
+        ].filter((i) => i === "1").length;
+
+        population = inactive;
+
+        if (Number(item.representative_eval_id) === Number(id)) {
+          val += res;
+          countTotal = population;
+        }
+      });
+    }
+
+    console.log(countTotal);
+
+    total = (val / countTotal) * 100;
 
     if (total === 0) {
       return "";
@@ -117,6 +171,8 @@ const DashboardList = () => {
 
     val = ((population - (ableToWork - employed)) / population) * 100;
 
+    // console.log(val);
+
     return val.toFixed(2);
   };
 
@@ -138,33 +194,9 @@ const DashboardList = () => {
 
     val = ((ableToWork - employed) / population) * 100;
 
+    // console.log(val);
+
     return val.toFixed(2);
-  };
-
-  const getTotalRepresentativeIncomeClassification = (rid) => {
-    let val = 0;
-    let className = [];
-
-    if (activeRepresentative.length) {
-      activeRepresentative.map((item) => {
-        if (Number(item.representative_aid) === Number(rid)) {
-          val =
-            Number(item.representative_monthly_income) /
-            Number(item.representative_total_people);
-        }
-      });
-    }
-
-    incomeClass.map((income) => {
-      if (
-        val >= Number(income.monthly_income_from / 5) &&
-        val <= Number(income.monthly_income_to / 5)
-      ) {
-        className = income.monthly_income_aid;
-      }
-    });
-
-    return className;
   };
 
   const getTotalPoor = (id) => {
@@ -348,8 +380,8 @@ const DashboardList = () => {
   };
 
   let unemployment = [];
-  let totalPopulation = [];
   let unemployedPopulation = [];
+  let totalPopulation = [];
   let year = [];
   let poor = [];
   let low = [];
@@ -368,19 +400,22 @@ const DashboardList = () => {
         formatDate(item.evaluation_list_created).split(" ")[2]
       }`
     );
-    totalPopulation.push(getTotalPopulation(item.evaluation_list_aid));
+    totalPopulation.push(getTotalPopulation(Number(item.evaluation_list_aid)));
+    povertyRate.push(getPovertyRate(Number(item.evaluation_list_aid)));
+  });
+
+  evaluationList.map((item) => {
     unemployedPopulation.push(
-      getTotalUnemployedPopulation(item.evaluation_list_aid)
+      getTotalUnemployedPopulation(Number(item.evaluation_list_aid))
     );
-    unemployment.push(getTotalUnemployed(item.evaluation_list_aid));
-    poor.push(getTotalPoor(item.evaluation_list_aid));
-    low.push(getTotalLowIncome(item.evaluation_list_aid));
-    lowMiddle.push(getTotalLowMiddle(item.evaluation_list_aid));
-    middle.push(getTotalMiddleClass(item.evaluation_list_aid));
-    upperMiddle.push(getTotalUpperMiddle(item.evaluation_list_aid));
-    high.push(getTotalHighIncome(item.evaluation_list_aid));
-    rich.push(getTotalRich(item.evaluation_list_aid));
-    povertyRate.push(getPovertyRate(item.evaluation_list_aid));
+    unemployment.push(getTotalUnemployed(Number(item.evaluation_list_aid)));
+    poor.push(getTotalPoor(Number(item.evaluation_list_aid)));
+    low.push(getTotalLowIncome(Number(item.evaluation_list_aid)));
+    lowMiddle.push(getTotalLowMiddle(Number(item.evaluation_list_aid)));
+    middle.push(getTotalMiddleClass(Number(item.evaluation_list_aid)));
+    upperMiddle.push(getTotalUpperMiddle(Number(item.evaluation_list_aid)));
+    high.push(getTotalHighIncome(Number(item.evaluation_list_aid)));
+    rich.push(getTotalRich(Number(item.evaluation_list_aid)));
   });
 
   let populationUnemployed = ["Total Population", "Unemployment Rate"];
@@ -395,6 +430,9 @@ const DashboardList = () => {
       },
     ],
   };
+
+  // console.log(totalPopulation);
+  // console.log(povertyRate);
 
   const PopulationPerYear = {
     labels: year,
@@ -452,8 +490,11 @@ const DashboardList = () => {
       {
         label: "Poverty Rate",
         data: povertyRate,
-        backgroundColor: ["#17252a"],
+        // backgroundColor: ["#17252a"],
         borderWidth: 1,
+        borderColor: "rgb(53, 162, 235)",
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        fill: true,
       },
     ],
   };
@@ -498,7 +539,7 @@ const DashboardList = () => {
     <>
       <div className="graph__container p--relative">
         {evaluationLoading && <Spinner />}
-        <div className="graph__item" style={{ width: "100%" }}>
+        {/* <div className="graph__item" style={{ width: "100%" }}>
           <h3 className="full--width t--bold mb--1">Program Recommendation</h3>
           <div className="program__item">
             <h3 className="mb--2">Household Recommended Program</h3>
@@ -605,10 +646,10 @@ const DashboardList = () => {
               </>
             )}
           </div>
-        </div>
+        </div> */}
 
         <div className="graph__item" style={{ minWidth: "100%" }}>
-          <Radar data={PovertyRate} />
+          <Line data={PovertyRate} />
         </div>
         <div className="graph__item" style={{ minWidth: "100%" }}>
           <Line data={PopulationPerYear} />
@@ -636,15 +677,13 @@ const DashboardList = () => {
                     size: "10",
                   },
                   formatter: (value) => {
-                    // console.log(value);
-
                     if (
                       isNaN(value) ||
                       value === "" ||
                       value.length === 0 ||
                       value === null
                     ) {
-                      return "No Data";
+                      return "No data";
                     } else {
                       return value + "%";
                     }
@@ -684,7 +723,7 @@ const DashboardList = () => {
                       value.length === 0 ||
                       value === null
                     ) {
-                      return "No Data";
+                      return "No data";
                     } else {
                       return value + "%";
                     }

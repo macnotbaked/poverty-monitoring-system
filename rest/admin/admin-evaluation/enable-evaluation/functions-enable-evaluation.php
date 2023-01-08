@@ -119,6 +119,16 @@ function checkCreate($object)
     return $result;
 }
 
+function checkCopyOldRepresentative($object)
+{
+    $result = $object->copyOldRepresentative();
+    if (!$result) {
+        Response::sendResponse(false, "Please check your sql query. (copy representative)", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkArchive($object)
 {
     $result = $object->archive();

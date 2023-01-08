@@ -34,7 +34,7 @@ const Citizen = () => {
   } = useFetchDataLoadMore(
     "/admin/admin-representative/read-representative-limit-active.php",
     "/admin/admin-representative/read-representative-all-active.php",
-    10, // show number of records on a table
+    20, // show number of records on a table
     purokId
   );
 

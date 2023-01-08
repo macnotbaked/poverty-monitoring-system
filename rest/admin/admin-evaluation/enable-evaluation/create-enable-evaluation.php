@@ -16,6 +16,8 @@ try {
 
     $result = checkCreate($eval);
 
+    $copyRepresentative = checkCopyOldRepresentative($eval);
+
     Response::sendResponse(true, "Enable evaluation success.", $result);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted becuase a system error occured, please contact merin.ryanmark@gmail.com", "finally");

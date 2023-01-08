@@ -33,7 +33,7 @@ try {
     $representative->representative_created = date("Y-m-d");
     $representative->representative_datetime = date("Y-m-d H:i:s");
 
-    checkReadAlreadyExist($representative, $representative->representative_name,  $representative->representative_house_number);
+    checkReadAlreadyExist($representative, $representative->representative_eval_id, $representative->representative_name,  $representative->representative_house_number);
 
     $result = checkCreate($representative);
 
