@@ -14,7 +14,7 @@ try {
 
     $search = trim(filter_var($data["search"], FILTER_SANITIZE_STRING));
 
-    $result = checkReadSearchActive($representative, trim($search));
+    $result = checkReadSearch($representative, trim($search));
 
     $data = getResultData($result);
 
