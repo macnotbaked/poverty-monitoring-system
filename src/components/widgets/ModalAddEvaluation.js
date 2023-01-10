@@ -2,12 +2,25 @@ import React from "react";
 import { FaQuestion, FaTimes } from "react-icons/fa";
 import { setIsConfirm, setStartIndex } from "../../store/StoreAction";
 import { StoreContext } from "../../store/StoreContext";
+import useLoadAllEvaluation from "../custom-hooks/useLoadAllEvaluation";
 import { fetchData } from "../helpers/fetchData";
 import SpinnerButton from "../widgets/SpinnerButton";
 
 const ModalAddEvaluation = () => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [loading, setLoading] = React.useState(false);
+
+  const { evaluation, evaluationLoading } = useLoadAllEvaluation(
+    "/admin/admin-evaluation/enable-evaluation/read-all-evaluation.php"
+  );
+
+  let lastId = evaluation.map((item) => {
+    return item.evaluation_list_aid;
+  });
+
+  let getLastId = lastId[lastId.length - 1];
+
+  // console.log(getLastId);
 
   const handleClose = () => {
     dispatch(setIsConfirm(false));
@@ -18,6 +31,7 @@ const ModalAddEvaluation = () => {
       setLoading, // Boolean loading values optional
       "/admin/admin-evaluation/enable-evaluation/create-enable-evaluation.php",
       {
+        id: getLastId,
         token: "",
       },
       null,

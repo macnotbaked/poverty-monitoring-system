@@ -4,8 +4,8 @@ try {
 
     if ($_FILES['photo']) {
         $photo = $_FILES["photo"]["name"];
-        // if (move_uploaded_file($_FILES["photo"]["tmp_name"], "../../img/" . $photo)) {
-        if (move_uploaded_file($_FILES["photo"]["tmp_name"], "../../public/img/" . $photo)) {
+        // if (move_uploaded_file($_FILES["photo"]["tmp_name"], "../../img/" . $photo)) { // if online
+        if (move_uploaded_file($_FILES["photo"]["tmp_name"], "../../public/img/" . $photo)) { // if localhost
             Response::sendResponse(true, "Yes photo", $photo);
         } else {
             Response::sendResponse(false, "No photo", $photo);

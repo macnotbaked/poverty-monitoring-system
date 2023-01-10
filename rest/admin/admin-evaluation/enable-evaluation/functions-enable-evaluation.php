@@ -69,6 +69,16 @@ function checkReadActiveEvaluation($object)
     return $result;
 }
 
+function checkReadAllCount($object)
+{
+    $result = $object->readAllCount();
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Record (All evaluation representative).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkReadCountRepresentativeEvaluation($object)
 {
     $result = $object->readCountRepresentativeEvaluation();
@@ -119,9 +129,9 @@ function checkCreate($object)
     return $result;
 }
 
-function checkCopyOldRepresentative($object)
+function checkCopyOldRepresentative($object, $lastId)
 {
-    $result = $object->copyOldRepresentative();
+    $result = $object->copyOldRepresentative($lastId);
     if (!$result) {
         Response::sendResponse(false, "Please check your sql query. (copy representative)", []);
         exit();
@@ -151,6 +161,7 @@ function getResultData($result)
             "evaluation_list_datetime" => $evaluation_list_datetime,
 
             "representative_aid" => $representative_aid,
+            "representative_eval_id" => $representative_eval_id,
             "representative_purok_id" => $representative_purok_id,
             "representative_is_active" => $representative_is_active,
             "representative_name" => $representative_name,
@@ -172,13 +183,14 @@ function getResultData($result)
             "representative_total_employed" => $representative_total_employed,
             "representative_created" => $representative_created,
             "representative_datetime" => $representative_datetime,
+            "total" => $total,
 
             "sitio_aid" => $sitio_aid,
             "sitio_is_active" => $sitio_is_active,
             "sitio_name" => $sitio_name,
             "sitio_created" => $sitio_created,
             "sitio_datetime" => $sitio_datetime,
-            "total" => $total,
+
 
         ];
         array_push($data, $list);

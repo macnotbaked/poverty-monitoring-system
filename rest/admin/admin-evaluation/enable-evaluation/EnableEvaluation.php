@@ -6,7 +6,7 @@ class EnableEvaluation
     public $evaluation_list_is_active;
     public $evaluation_list_created;
     public $evaluation_list_datetime;
-    
+
     public $last_created_id;
 
     public $connection;
@@ -91,7 +91,23 @@ class EnableEvaluation
         return $result;
     }
 
-    public function copyOldRepresentative()
+    public function readAllCount()
+    {
+        $sql = "select *, count(household.representative_eval_id) as total from {$this->tblRepresentative} as household, ";
+        $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblEnableEvaluation} as eval ";
+        $sql .= "where household.representative_is_active = 1 ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
+        $sql .= "group by household.representative_eval_id ";
+        $sql .= "order by purok.sitio_name asc ";
+
+        $result = $this->connection->query($sql);
+
+        return $result;
+    }
+
+    public function copyOldRepresentative($lastId)
     {
         $sql = "insert into {$this->tblRepresentative} ";
         $sql .= "( representative_eval_id, ";
@@ -139,7 +155,7 @@ class EnableEvaluation
         $sql .= "'{$this->evaluation_list_created}', ";
         $sql .= "'{$this->evaluation_list_datetime}' ";
         $sql .= "from {$this->tblRepresentative} ";
-        $sql .= "where representative_eval_id = representative_eval_id ";
+        $sql .= "where representative_eval_id = $lastId ";
 
         $result = $this->connection->query($sql);
         return $result;

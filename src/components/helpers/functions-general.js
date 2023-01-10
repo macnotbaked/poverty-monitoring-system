@@ -5,6 +5,11 @@ export const devBaseUrl =
   "http://localhost/school-works/poverty-monitoring-system/public";
 export const devNavUrl = "/dev-app";
 
+// // demo url
+// export const devApiUrl = "https://demo.frontlinebusiness.com.ph/pms/rest";
+// export const devBaseUrl = "https://demo.frontlinebusiness.com.ph/pms";
+// export const devNavUrl = "";
+
 // Copyright year
 export const copyrightYear = () => {
   return new Date().getFullYear();

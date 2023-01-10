@@ -10,17 +10,11 @@ try {
     checkInputData($data);
     $eval = new EnableEvaluation($connection);
 
-    $lastId = $data["id"];
+    $result = checkReadAllCount($eval);
 
-    $eval->evaluation_list_is_active = 1;
-    $eval->evaluation_list_created = date("Y-m-d");
-    $eval->evaluation_list_datetime = date("Y-m-d H:i:s");
+    $data = getResultData($result);
 
-    $result = checkCreate($eval);
-
-    $copyRepresentative = checkCopyOldRepresentative($eval, $lastId);
-
-    Response::sendResponse(true, "Enable evaluation success.", $result);
+    Response::sendResponse(true, "All evaluation representative data found.", $data);
 } catch (Error $e) {
     Response::sendResponse(false, "Request interrupted becuase a system error occured, please contact merin.ryanmark@gmail.com", "finally");
 }

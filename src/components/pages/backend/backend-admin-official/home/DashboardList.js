@@ -10,6 +10,7 @@ import useLoadAllActiveIncomeClassification from "../../../../custom-hooks/useLo
 import useLoadAllActiveIncomeProgram from "../../../../custom-hooks/useLoadAllActiveIncomeProgram";
 import useLoadAllActivePopulationProgram from "../../../../custom-hooks/useLoadAllActivePopulationProgram";
 import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
+import useLoadAllActiveRepresentativeCount from "../../../../custom-hooks/useLoadAllActiveRepresentativeCount";
 import useLoadAllActiveUnemploymentProgram from "../../../../custom-hooks/useLoadAllActiveUnemploymentProgram";
 import useLoadAllEvaluation from "../../../../custom-hooks/useLoadAllEvaluation";
 import useLoadAllEvaluationList from "../../../../custom-hooks/useLoadAllEvaluationList";
@@ -62,20 +63,11 @@ const DashboardList = () => {
     "/admin/admin-representative/read-representative-inactive.php"
   );
 
+  const { countRepresentative } = useLoadAllActiveRepresentativeCount(
+    "/admin/admin-evaluation/enable-evaluation/read-all-evaluation-representative.php"
+  );
+
   let totalCount = activeRepresentative.length;
-
-  // const totalEvalRepresentative = (id) => {
-  //   let total = 0
-  //   inactive.map((item) => {
-  //     if (Number(item.representative_eval_id) === Number(id)) {
-  //       total += Number(item.representative_total_people);
-  //     }
-  //   });
-
-  //   return total.toFixed(2)
-  // }
-
-  // console.log(activeRepresentative.length);
 
   const getTotalRepresentativeIncomeClassification = (rid) => {
     let val = 0;
@@ -107,8 +99,15 @@ const DashboardList = () => {
     let val = 0;
     let res = 0;
     let total = 0;
-    let population = 0;
-    let countTotal = 0;
+    let countPopulation = 0;
+
+    if (countRepresentative.length) {
+      countRepresentative.map((item) => {
+        if (Number(item.representative_eval_id) === Number(id)) {
+          countPopulation = item.total;
+        }
+      });
+    }
 
     if (inactive.length) {
       inactive.map((item) => {
@@ -118,18 +117,13 @@ const DashboardList = () => {
           ),
         ].filter((i) => i === "1").length;
 
-        population = inactive;
-
         if (Number(item.representative_eval_id) === Number(id)) {
           val += res;
-          countTotal = population;
         }
       });
     }
 
-    console.log(countTotal);
-
-    total = (val / countTotal) * 100;
+    total = (val / countPopulation) * 100;
 
     if (total === 0) {
       return "";
@@ -533,13 +527,11 @@ const DashboardList = () => {
     return res;
   };
 
-  // console.log(getTotalHouseHoldMemberForEvaluation());
-
   return (
     <>
       <div className="graph__container p--relative">
         {evaluationLoading && <Spinner />}
-        {/* <div className="graph__item" style={{ width: "100%" }}>
+        <div className="graph__item" style={{ width: "100%" }}>
           <h3 className="full--width t--bold mb--1">Program Recommendation</h3>
           <div className="program__item">
             <h3 className="mb--2">Household Recommended Program</h3>
@@ -552,9 +544,8 @@ const DashboardList = () => {
                     ) : (
                       <>
                         <li>
-                          {item.household_program_aid === "1" &&
-                            getTotalHouseHoldMemberForEvaluation() >=
-                              Number(item.household_criteria_range_from) &&
+                          {getTotalHouseHoldMemberForEvaluation() >=
+                            Number(item.household_criteria_range_from) &&
                             getTotalHouseHoldMemberForEvaluation() <=
                               Number(item.household_criteria_range_to) &&
                             item.household_program_name}
@@ -646,13 +637,87 @@ const DashboardList = () => {
               </>
             )}
           </div>
-        </div> */}
+        </div>
 
         <div className="graph__item" style={{ minWidth: "100%" }}>
-          <Line data={PovertyRate} />
+          <Line
+            data={PovertyRate}
+            options={{
+              plugins: {
+                datalabels: {
+                  color: "#fff",
+                  anchor: "end",
+                  align: "start",
+                  borderWidth: 1,
+                  borderColor: "#fff",
+                  borderRadius: 100,
+                  offset: -10,
+                  backgroundColor: (context) => {
+                    return context.dataset.backgroundColor;
+                  },
+                  font: {
+                    weight: 600,
+                    size: "10",
+                  },
+                  formatter: (value) => {
+                    if (
+                      isNaN(value) ||
+                      value === "" ||
+                      value.length === 0 ||
+                      value === null
+                    ) {
+                      return "No data";
+                    } else {
+                      return value + "%";
+                    }
+                  },
+                },
+                legend: {
+                  display: true,
+                },
+              },
+            }}
+          />
         </div>
         <div className="graph__item" style={{ minWidth: "100%" }}>
-          <Line data={PopulationPerYear} />
+          <Line
+            data={PopulationPerYear}
+            options={{
+              plugins: {
+                datalabels: {
+                  color: "#fff",
+                  anchor: "end",
+                  align: "start",
+                  borderWidth: 1,
+                  borderColor: "#fff",
+                  borderRadius: 100,
+                  offset: -10,
+                  backgroundColor: (context) => {
+                    return context.dataset.backgroundColor;
+                  },
+                  font: {
+                    weight: 600,
+                    size: "10",
+                  },
+                  formatter: (value) => {
+                    if (
+                      isNaN(value) ||
+                      value === "" ||
+                      value.length === 0 ||
+                      value === null
+                    ) {
+                      return "No data";
+                    } else {
+                      return value;
+                    }
+                  },
+                },
+                legend: {
+                  display: true,
+                },
+              },
+            }}
+          />
         </div>
 
         {/* <div className="graph__bottom"> */}
@@ -668,7 +733,7 @@ const DashboardList = () => {
                   borderWidth: 1,
                   borderColor: "#fff",
                   borderRadius: 100,
-                  offset: 10,
+                  offset: -10,
                   backgroundColor: (context) => {
                     return context.dataset.backgroundColor;
                   },
@@ -708,7 +773,7 @@ const DashboardList = () => {
                   borderWidth: 1,
                   borderColor: "#fff",
                   borderRadius: 100,
-                  offset: 10,
+                  offset: -10,
                   backgroundColor: (context) => {
                     return context.dataset.backgroundColor;
                   },
