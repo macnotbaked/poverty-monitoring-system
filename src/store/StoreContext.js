@@ -22,6 +22,10 @@ const initVal = {
   isAccountUpdated: false,
   isEvalEnabled: false,
   isSubmitEval: false,
+  isViewHousehold: false,
+  isViewIncome: false,
+  isViewPopulation: false,
+  isViewUnemployment: false,
   credentials: {},
 };
 

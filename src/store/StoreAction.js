@@ -139,6 +139,34 @@ export const setSubmitEval = (val) => {
   };
 };
 
+export const viewHousehold = (val) => {
+  return {
+    type: "VIEW_HOUSEHOLD",
+    payload: val,
+  };
+};
+
+export const viewIncome = (val) => {
+  return {
+    type: "VIEW_INCOME",
+    payload: val,
+  };
+};
+
+export const viewPopulation = (val) => {
+  return {
+    type: "VIEW_POPULATION",
+    payload: val,
+  };
+};
+
+export const viewUnemployment = (val) => {
+  return {
+    type: "VIEW_UNEMPLOYMENT",
+    payload: val,
+  };
+};
+
 export const setCredentials = (
   users_aid,
   users_fname,

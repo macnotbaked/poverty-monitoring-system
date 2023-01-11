@@ -3,6 +3,7 @@ import { StoreContext } from "../../../../../store/StoreContext";
 import Header from "../../../../header/Header";
 import Navigation from "../../../../navigation/Navigation";
 import DashboardList from "./DashboardList";
+import ModalViewHouseholdProgram from "./ModalViewHouseholdProgram";
 
 const Dashboard = () => {
   const { store, dispatch } = React.useContext(StoreContext);

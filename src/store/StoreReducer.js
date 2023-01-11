@@ -122,6 +122,30 @@ export const StoreReducer = (state, action) => {
         credentials: action.payload,
       };
 
+    case "VIEW_HOUSEHOLD":
+      return {
+        ...state,
+        isViewHousehold: action.payload,
+      };
+
+    case "VIEW_INCOME":
+      return {
+        ...state,
+        isViewIncome: action.payload,
+      };
+
+    case "VIEW_POPULATION":
+      return {
+        ...state,
+        isViewPopulation: action.payload,
+      };
+
+    case "VIEW_UNEMPLOYMENT":
+      return {
+        ...state,
+        isViewUnemployment: action.payload,
+      };
+
     default:
       return state;
   }
