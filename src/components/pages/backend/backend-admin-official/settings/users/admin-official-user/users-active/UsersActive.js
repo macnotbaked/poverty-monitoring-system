@@ -61,6 +61,7 @@ const UsersActive = () => {
               result={result}
               handleSearch={handleSearch}
               handleChange={handleChange}
+              itemEdit={itemEdit}
               setItemEdit={setItemEdit}
             />
           </div>
@@ -69,7 +70,6 @@ const UsersActive = () => {
 
       {store.isAdd && <ModalAddUsers item={itemEdit} />}
       {store.error && <ModalError />}
-      {store.success && <ModalSuccess />}
     </>
   );
 };

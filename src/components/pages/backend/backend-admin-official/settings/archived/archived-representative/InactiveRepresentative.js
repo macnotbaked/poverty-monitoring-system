@@ -46,7 +46,7 @@ export const InactiveRepresentative = () => {
                 <input type="radio" name="tabs" id="user" />
                 <label htmlFor="user" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/inactive-users`}
+                    to={`${devNavUrl}/inactive-users`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Users{" "}
@@ -56,7 +56,7 @@ export const InactiveRepresentative = () => {
                 <input type="radio" name="tabs" id="program" />
                 <label htmlFor="program" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/inactive-population-program`}
+                    to={`${devNavUrl}/inactive-population-program`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Recommended Programs
@@ -66,7 +66,7 @@ export const InactiveRepresentative = () => {
                 <input type="radio" name="tabs" id="criteria" />
                 <label htmlFor="criteria" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/inactive-population-criteria`}
+                    to={`${devNavUrl}/inactive-population-criteria`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Program Criteria
@@ -76,7 +76,7 @@ export const InactiveRepresentative = () => {
                 <input type="radio" name="tabs" id="sitio" defaultChecked />
                 <label htmlFor="sitio" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/inactive-sitio`}
+                    to={`${devNavUrl}/inactive-sitio`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Purok{" "}

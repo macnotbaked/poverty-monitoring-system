@@ -107,13 +107,40 @@ const EvaluationList = ({
     return val;
   };
 
+  const getTotal = (id) => {
+    let val = 0;
+    let res = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_aid) === Number(id)) {
+          val = item.representative_household_living_id;
+        }
+      });
+    }
+    return val;
+  };
+
   const getTotalHousehold = (id) => {
+    let totalOwn = 0;
+    let totalRent = 0;
+    let own = 0;
+    let rent = 0;
     let val = 0;
 
-    if (countRepresentative.length) {
-      countRepresentative.map((item) => {
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        // console.log(getTotal(item.representative_aid));
+        own = [getTotal(item.representative_aid)].filter(
+          (i) => i === "1"
+        ).length;
+        rent = [getTotal(item.representative_aid)].filter(
+          (i) => i === "2"
+        ).length;
         if (Number(item.representative_purok_id) === Number(id)) {
-          val = item.total;
+          totalOwn += own;
+          totalRent += rent;
+          val = totalOwn + totalRent;
         }
       });
     }
@@ -377,7 +404,7 @@ const EvaluationList = ({
               <th rowSpan="1">Population</th>
               <th rowSpan="1">Household</th>
               <th rowSpan="1">Income Earner</th>
-              <th rowSpan="1">Unemployed</th>
+              <th rowSpan="1">Unemployment Rate</th>
               <th rowSpan="1">Actions</th>
             </tr>
           </thead>
@@ -505,7 +532,7 @@ const EvaluationList = ({
                     <td data-label="Action">
                       <div className="d--flex">
                         <Link
-                          to={`${devNavUrl}/admin/purok/household?sid=${item.sitio_aid}`}
+                          to={`${devNavUrl}/purok/household?sid=${item.sitio_aid}`}
                           className="dropdown tooltip--table"
                           data-tooltip="View"
                           onClick={() => dispatch(setStartIndex(0))}

@@ -639,7 +639,7 @@ const EvaluationFitlerResultList = ({
                     <td>
                       <div className="d--flex justify-center">
                         <Link
-                          to={`${devNavUrl}/admin/evaluation-filter/purok?sid=${item.sitio_aid}`}
+                          to={`${devNavUrl}/evaluation-filter/purok?sid=${item.sitio_aid}`}
                           className="dropdown tooltip--table"
                           data-tooltip="View"
                           onClick={() => dispatch(setStartIndex(0))}

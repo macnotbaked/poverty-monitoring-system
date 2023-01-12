@@ -107,7 +107,7 @@ export const fetchData = async (
     // redirect to other page after success application
     if (store.isSignup) {
       dispatch(setIsSignup(false));
-      navigate(`${devNavUrl}/admin/application-almost-done`);
+      navigate(`${devNavUrl}/application-almost-done`);
     }
 
     // redirect to other page after create password

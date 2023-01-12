@@ -20,7 +20,7 @@ const Citizens = () => {
   } = useFetchDataLoadMore(
     "/admin/admin-representative/read-representative-limit.php",
     "/admin/admin-representative/read-representative-all.php",
-    1700 // show number of records on a table
+    20 // show number of records on a table
   );
 
   const sitioId = getUrlParam().get("sid");

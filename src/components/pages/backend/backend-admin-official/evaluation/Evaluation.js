@@ -79,7 +79,7 @@ const Evaluation = () => {
                   </label>
                   <Link
                     className="btn--primary mr--1"
-                    to={`${devNavUrl}/admin/evaluation-filter`}
+                    to={`${devNavUrl}/evaluation-filter`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     <FaFilter /> <span>Filter</span>

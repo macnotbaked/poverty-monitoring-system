@@ -110,13 +110,18 @@ const Header = () => {
                     <FaUserCircle className="avatar" />
                   )}
                 </div>
-                <div className="profile__credentials ml--2">
-                  <span className="t--bold">
+                <div
+                  className="profile__credentials ml--2"
+                  style={{ wordBreak: "break-all" }}
+                >
+                  <span className="t--bold" style={{ wordBreak: "break-all" }}>
                     {store.credentials.users_fname}{" "}
                     {store.credentials.users_lname} (
                     {store.credentials.users_role})
                   </span>
-                  <span>{store.credentials.users_email}</span>
+                  <small style={{ wordBreak: "break-all" }}>
+                    {store.credentials.users_email}
+                  </small>
                   <div className="d--flex gap--1">
                     <button
                       type="sumbit"
@@ -198,13 +203,21 @@ const Header = () => {
                             />
                           </div>
                         </div>
-                        <div className="profile__credentials ml--2">
-                          <span className="t--bold">
+                        <div
+                          className="profile__credentials ml--2"
+                          style={{ wordBreak: "break-all" }}
+                        >
+                          <span
+                            className="t--bold"
+                            style={{ wordBreak: "break-all" }}
+                          >
                             {store.credentials.users_fname}{" "}
                             {store.credentials.users_lname} (
                             {store.credentials.users_role})
                           </span>
-                          <span>{store.credentials.users_email}</span>
+                          <small style={{ wordBreak: "break-all" }}>
+                            {store.credentials.users_email}
+                          </small>
                           <div className="d--flex gap--1">
                             <button
                               type="sumbit"

@@ -8,10 +8,14 @@ import {
 import { StoreContext } from "../../store/StoreContext";
 import { devNavUrl } from "../helpers/functions-general";
 
-const ModalSuccess = () => {
+const ModalSuccess = ({ email }) => {
   const { store, dispatch } = React.useContext(StoreContext);
 
+  console.log(email);
+
   const handleClose = () => {
+    dispatch(setSuccess(false));
+
     // refresh page after confirm
     if (store.isSubmitEval) {
       window.location.reload(false);
@@ -20,14 +24,12 @@ const ModalSuccess = () => {
     }
 
     // logout when there's a change in account
-    if (store.isAccountUpdated) {
+    if (store.isAccountUpdated && store.credentials.users_email === email) {
       localStorage.removeItem("pmstoken");
       window.location.replace(`${devNavUrl}/login`);
       dispatch(setIsAccountUpdated(false));
       return;
     }
-
-    dispatch(setSuccess(false));
   };
 
   React.useEffect(() => {

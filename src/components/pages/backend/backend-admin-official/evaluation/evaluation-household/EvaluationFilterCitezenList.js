@@ -63,7 +63,7 @@ const EvaluationFilterCitezenList = () => {
                 <div className="content__button">
                   <Link
                     className="btn--primary mr--1"
-                    to={`${devNavUrl}/admin/household-add?sid=${purokId}`}
+                    to={`${devNavUrl}/household-add?sid=${purokId}`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     <FaPlusCircle /> <span>Add</span>
@@ -111,7 +111,7 @@ const EvaluationFilterCitezenList = () => {
                             <td>
                               <div className="d--flex justify-center">
                                 <Link
-                                  to={`${devNavUrl}/admin/purok/household-view?hid=${item.representative_aid}`}
+                                  to={`${devNavUrl}/purok/household-view?hid=${item.representative_aid}`}
                                   className="dropdown tooltip--table"
                                   data-tooltip="View"
                                 >

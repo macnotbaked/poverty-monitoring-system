@@ -4,7 +4,7 @@ import {
   FaChartBar,
   FaHome,
   FaHouseUser,
-  FaMapMarkedAlt,
+  FaMapMarkedAlt
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { setStartIndex } from "../../store/StoreAction";
@@ -22,7 +22,7 @@ const Navigation = ({ menu }) => {
           <>
             <div className="navigation__logo">
               <a
-                href={`${devNavUrl}/admin/home`}
+                href={`${devNavUrl}/home`}
                 onClick={() => dispatch(setStartIndex(0))}
               >
                 {/* <img src={`${devBaseUrl}/img/pms-logo.png`} alt="PMS" /> */}
@@ -32,7 +32,7 @@ const Navigation = ({ menu }) => {
             </div>
             <li className={menu === "home" ? "tab--active" : ""}>
               <Link
-                to={`${devNavUrl}/admin/home`}
+                to={`${devNavUrl}/home`}
                 onClick={() => dispatch(setStartIndex(0))}
                 className="tooltip"
                 data-tooltip="Home"
@@ -42,7 +42,7 @@ const Navigation = ({ menu }) => {
             </li>
             <li className={menu === "sitio" ? "tab--active" : ""}>
               <Link
-                to={`${devNavUrl}/admin/sitio`}
+                to={`${devNavUrl}/sitio`}
                 onClick={() => dispatch(setStartIndex(0))}
                 className="tooltip"
                 data-tooltip="Purok"
@@ -52,7 +52,7 @@ const Navigation = ({ menu }) => {
             </li>
             <li className={menu === "household" ? "tab--active" : ""}>
               <Link
-                to={`${devNavUrl}/admin/citizens`}
+                to={`${devNavUrl}/citizens`}
                 onClick={() => dispatch(setStartIndex(0))}
                 className="tooltip"
                 data-tooltip="Household"
@@ -66,7 +66,7 @@ const Navigation = ({ menu }) => {
             <>
               <li className={menu === "evaluation" ? "tab--active" : ""}>
                 <Link
-                  to={`${devNavUrl}/admin/evaluation`}
+                  to={`${devNavUrl}/evaluation`}
                   onClick={() => dispatch(setStartIndex(0))}
                   className="tooltip"
                   data-tooltip="Evaluation"
@@ -76,7 +76,7 @@ const Navigation = ({ menu }) => {
               </li>
               <li className={menu === "settings" ? "tab--active" : ""}>
                 <Link
-                  to={`${devNavUrl}/admin/settings`}
+                  to={`${devNavUrl}/settings`}
                   onClick={() => dispatch(setStartIndex(0))}
                   className="tooltip"
                   data-tooltip="Settings"

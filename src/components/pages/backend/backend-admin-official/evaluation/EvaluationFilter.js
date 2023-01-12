@@ -90,7 +90,7 @@ const EvaluationFilter = () => {
                             <td data-label="Action">
                               <div className="d--flex">
                                 <Link
-                                  to={`${devNavUrl}/admin/evaluation-filter/date?date=${item.evaluation_list_created}to${item.evaluation_list_datetime}&eid=${item.evaluation_list_aid}`}
+                                  to={`${devNavUrl}/evaluation-filter/date?date=${item.evaluation_list_created}to${item.evaluation_list_datetime}&eid=${item.evaluation_list_aid}`}
                                   className="dropdown tooltip--table"
                                   data-tooltip="View"
                                   onClick={() => dispatch(setStartIndex(0))}

@@ -129,7 +129,7 @@ const SitioList = ({
                     <td data-label="Action">
                       <div className="d--flex">
                         <Link
-                          to={`${devNavUrl}/admin/purok/household?sid=${item.sitio_aid}`}
+                          to={`${devNavUrl}/purok/household?sid=${item.sitio_aid}`}
                           className="dropdown tooltip--table"
                           data-tooltip="View"
                           onClick={() => dispatch(setStartIndex(0))}

@@ -78,7 +78,7 @@ const CitizenList = ({
                     <td data-label="Action">
                       <div className="d--flex">
                         <Link
-                          to={`${devNavUrl}/admin/purok/household-view?hid=${item.representative_aid}`}
+                          to={`${devNavUrl}/purok/household-view?hid=${item.representative_aid}`}
                           className="dropdown tooltip--table"
                           data-tooltip="View"
                         >
@@ -93,7 +93,7 @@ const CitizenList = ({
                           </span>
                           <div className="dropdown-content">
                             <Link
-                              to={`${devNavUrl}/admin/purok/household-edit?hid=${item.representative_aid}`}
+                              to={`${devNavUrl}/purok/household-edit?hid=${item.representative_aid}`}
                               className="tooltip--table"
                               data-tooltip="View"
                             >

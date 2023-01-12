@@ -42,7 +42,7 @@ const RecommendedProgramsList = ({}) => {
             <FaUsers />
           </span>
           <Link
-            to={`${devNavUrl}/admin/population-rate`}
+            to={`${devNavUrl}/population-rate`}
             onClick={() => {
               dispatch(setStartIndex(0));
             }}
@@ -77,7 +77,7 @@ const RecommendedProgramsList = ({}) => {
             <FaHouseUser />
           </span>
           <Link
-            to={`${devNavUrl}/admin/household-rate`}
+            to={`${devNavUrl}/household-rate`}
             onClick={() => {
               dispatch(setStartIndex(0));
             }}
@@ -112,7 +112,7 @@ const RecommendedProgramsList = ({}) => {
             <FaMoneyCheckAlt />
           </span>
           <Link
-            to={`${devNavUrl}/admin/income`}
+            to={`${devNavUrl}/income`}
             onClick={() => {
               dispatch(setStartIndex(0));
             }}
@@ -154,7 +154,7 @@ const RecommendedProgramsList = ({}) => {
             <FaUser />
           </span>
           <Link
-            to={`${devNavUrl}/admin/unemployment-rate`}
+            to={`${devNavUrl}/unemployment-rate`}
             onClick={() => {
               dispatch(setStartIndex(0));
             }}

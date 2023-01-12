@@ -9,6 +9,7 @@ import {
 } from "../../../../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../../../../store/StoreContext";
 import LoadMore from "../../../../../../../widgets/LoadMore";
+import ModalSuccess from "../../../../../../../widgets/ModalSuccess";
 import NoData from "../../../../../../../widgets/NoData";
 import SearchBox from "../../../../../../../widgets/SearchBox";
 import Spinner from "../../../../../../../widgets/Spinner";
@@ -21,6 +22,7 @@ const UsersActiveList = ({
   result,
   handleSearch,
   handleChange,
+  itemEdit,
   setItemEdit,
 }) => {
   const { store, dispatch } = React.useContext(StoreContext);
@@ -143,6 +145,18 @@ const UsersActiveList = ({
           susEndpoint="/admin/admin-settings/users/archive-user.php"
           resetEndpoint="/admin/admin-settings/users/update-user-forgot-pass.php"
           item={dataItem}
+        />
+      )}
+
+      {store.success && (
+        <ModalSuccess
+          email={
+            itemEdit
+              ? itemEdit.users_email
+              : null || dataItem
+              ? dataItem.users_email
+              : null
+          }
         />
       )}
     </>

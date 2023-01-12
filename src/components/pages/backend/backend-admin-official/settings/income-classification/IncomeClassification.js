@@ -25,7 +25,7 @@ const IncomeClassification = () => {
   } = useFetchDataLoadMore(
     "/admin/admin-settings/income-classification/read-income-classification-limit.php",
     "/admin/admin-settings/income-classification/read-income-classification-all.php",
-    5 // show number of records on a table
+    10 // show number of records on a table
   );
 
   const handleAdd = () => {

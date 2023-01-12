@@ -21,7 +21,7 @@ const SettingList = () => {
       <div className="grid-col mb--2 shadow--primary pxy--2">
         {/* 1 */}
         <Link
-          to={`${devNavUrl}/admin/users`}
+          to={`${devNavUrl}/users`}
           onClick={() => {
             dispatch(setStartIndex(0));
           }}
@@ -34,7 +34,7 @@ const SettingList = () => {
 
         {/* 2 */}
         <Link
-          to={`${devNavUrl}/admin/recommended-programs`}
+          to={`${devNavUrl}/recommended-programs`}
           onClick={() => {
             dispatch(setStartIndex(0));
           }}
@@ -47,7 +47,7 @@ const SettingList = () => {
 
         {/* 3 */}
         <Link
-          to={`${devNavUrl}/admin/population-criteria`}
+          to={`${devNavUrl}/population-criteria`}
           onClick={() => {
             dispatch(setStartIndex(0));
           }}
@@ -60,7 +60,7 @@ const SettingList = () => {
 
         {/* 4 */}
         <Link
-          to={`${devNavUrl}/admin/income-classification`}
+          to={`${devNavUrl}/income-classification`}
           onClick={() => {
             dispatch(setStartIndex(0));
           }}
@@ -73,7 +73,7 @@ const SettingList = () => {
 
         {/* 4 */}
         <Link
-          to={`${devNavUrl}/admin/inactive-users`}
+          to={`${devNavUrl}/inactive-users`}
           onClick={() => {
             dispatch(setStartIndex(0));
           }}
@@ -86,7 +86,7 @@ const SettingList = () => {
 
         {/* 6 */}
         <Link
-          to={`${devNavUrl}/admin/info`}
+          to={`${devNavUrl}/info`}
           onClick={() => {
             dispatch(setStartIndex(0));
           }}

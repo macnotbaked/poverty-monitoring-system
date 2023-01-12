@@ -82,7 +82,7 @@ export const PopulationCriteria = () => {
                 <input type="radio" name="tabs" id="household-criteria" />
                 <label htmlFor="household-criteria" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/household-criteria`}
+                    to={`${devNavUrl}/household-criteria`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Household
@@ -92,7 +92,7 @@ export const PopulationCriteria = () => {
                 <input type="radio" name="tabs" id="income-criteria" />
                 <label htmlFor="income-criteria" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/income-criteria`}
+                    to={`${devNavUrl}/income-criteria`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Income
@@ -102,7 +102,7 @@ export const PopulationCriteria = () => {
                 <input type="radio" name="tabs" id="unemployment-criteria" />
                 <label htmlFor="unemployment-criteria" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/unemployment-criteria`}
+                    to={`${devNavUrl}/unemployment-criteria`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Unemployment

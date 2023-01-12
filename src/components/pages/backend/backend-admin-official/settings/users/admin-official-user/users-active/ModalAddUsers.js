@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import * as Yup from "yup";
 import {
+  setIsAccountUpdated,
   setIsAdd,
   setStartIndex,
 } from "../../../../../../../../store/StoreAction";
@@ -25,6 +26,7 @@ import SpinnerButton from "../../../../../../../widgets/SpinnerButton";
 const ModalAddUsers = ({ item }) => {
   const { store, dispatch } = React.useContext(StoreContext);
   const [loading, setLoading] = React.useState(false);
+  let msg = "";
 
   const handleClose = () => {
     dispatch(setIsAdd(false));
@@ -75,6 +77,11 @@ const ModalAddUsers = ({ item }) => {
               validationSchema={yupSchema}
               onSubmit={async (values, { setSubmitting, resetForm }) => {
                 // console.log(values);
+                if (item) {
+                  if (store.credentials.users_email === item.users_email) {
+                    msg = " You will be automatically logged out.";
+                  }
+                }
                 fetchData(
                   setLoading,
                   item
@@ -83,7 +90,7 @@ const ModalAddUsers = ({ item }) => {
                   values, // form data values
                   null, // result set data
                   item
-                    ? "User updated!" // success msg
+                    ? `User updated! ${msg}` // success msg
                     : "Please check the email to proceed.",
                   "", // additional error msg if needed
                   dispatch, // context api action
@@ -168,8 +175,9 @@ const ModalAddUsers = ({ item }) => {
                     <div className="d--flex gap--1">
                       <button
                         type="submit"
-                        disabled={loading}
+                        disabled={loading || !props.dirty}
                         className="btn--default d--flex align-center justify-center"
+                        onClick={() => dispatch(setIsAccountUpdated(true))}
                       >
                         {loading ? (
                           <SpinnerButton />

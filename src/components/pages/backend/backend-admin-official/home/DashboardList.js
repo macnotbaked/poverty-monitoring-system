@@ -562,37 +562,6 @@ const DashboardList = () => {
     return final.toFixed(2);
   };
 
-  const getTotalSocialPension = (id) => {
-    let res = 0;
-    let final = 0;
-    let val = 0;
-
-    if (activeRepresentative.length) {
-      activeRepresentative.map((item) => {
-        if (Number(item.representative_eval_id) === Number(id)) {
-          res = Number(item.representative_total_seniors) >= 60;
-        }
-
-        val += res;
-      });
-    }
-
-    final = (val / activeRepresentative.length) * 100;
-
-    return final.toFixed(2);
-  };
-
-  const getTotalSenior = () => {
-    let res = 0;
-    if (evaluation.length) {
-      evaluation.map((item) => {
-        res = getTotalSocialPension(item.evaluation_list_aid);
-      });
-    }
-
-    return res;
-  };
-
   const getTotalPopulationMemberForEvaluation = () => {
     let res = 0;
     if (evaluation.length) {
@@ -674,21 +643,20 @@ const DashboardList = () => {
                       "Loading..."
                     ) : (
                       <>
-                        {((getTotalPopulationBelowIncome() >=
+                        {getTotalPopulationBelowIncome() >=
                           Number(item.income_criteria_range_from) &&
                           getTotalPopulationBelowIncome() <=
-                            Number(item.income_criteria_range_to)) ||
-                          (getTotalSenior() >=
-                            Number(item.income_criteria_range_from) &&
-                            getTotalSenior() <=
-                              Number(item.income_criteria_range_to))) && (
-                          <li>
-                            {item.income_program_name} <br />
-                            <button type="button" onClick={handleViewHousehold}>
-                              See details...
-                            </button>
-                          </li>
-                        )}
+                            Number(item.income_criteria_range_to) && (
+                            <li>
+                              {item.income_program_name} <br />
+                              <button
+                                type="button"
+                                onClick={handleViewHousehold}
+                              >
+                                See details...
+                              </button>
+                            </li>
+                          )}
                       </>
                     )}
                   </ul>

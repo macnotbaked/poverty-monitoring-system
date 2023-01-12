@@ -24,7 +24,7 @@ const Sitio = () => {
   } = useFetchDataLoadMore(
     "/admin/admin-sitio/read-sitio-limit.php",
     "/admin/admin-sitio/read-sitio-all.php",
-    5 // show number of records on a table
+    10 // show number of records on a table
   );
 
   const handleAdd = () => {

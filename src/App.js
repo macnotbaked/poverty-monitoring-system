@@ -82,7 +82,7 @@ function App() {
               }
             />
             <Route
-              path={`${devNavUrl}/admin/home`}
+              path={`${devNavUrl}/home`}
               element={
                 <ProtectedRoute>
                   <Dashboard />
@@ -90,7 +90,7 @@ function App() {
               }
             />
             <Route
-              path={`${devNavUrl}/admin/purok/household`}
+              path={`${devNavUrl}/purok/household`}
               element={
                 <ProtectedRoute>
                   <Citizen />
@@ -98,7 +98,7 @@ function App() {
               }
             />
             {/* <Route
-              path={`${devNavUrl}/admin/household-add`}
+              path={`${devNavUrl}/household-add`}
               element={
                 <ProtectedRoute>
                   <AddCitizen />
@@ -106,7 +106,7 @@ function App() {
               }
             /> */}
             <Route
-              path={`${devNavUrl}/admin/evaluation`}
+              path={`${devNavUrl}/evaluation`}
               element={
                 <ProtectedRoute>
                   <Evaluation />
@@ -114,7 +114,7 @@ function App() {
               }
             />
             <Route
-              path={`${devNavUrl}/admin/evaluation-filter`}
+              path={`${devNavUrl}/evaluation-filter`}
               element={
                 <ProtectedRoute>
                   <EvaluationFilter />
@@ -122,7 +122,7 @@ function App() {
               }
             />
             <Route
-              path={`${devNavUrl}/admin/evaluation-filter/date`}
+              path={`${devNavUrl}/evaluation-filter/date`}
               element={
                 <ProtectedRoute>
                   <EvaluationFilterResult />
@@ -130,7 +130,7 @@ function App() {
               }
             />
             <Route
-              path={`${devNavUrl}/admin/settings`}
+              path={`${devNavUrl}/settings`}
               element={
                 <ProtectedRoute>
                   <Settings />
@@ -138,7 +138,7 @@ function App() {
               }
             />
             <Route
-              path={`${devNavUrl}/admin/users`}
+              path={`${devNavUrl}/users`}
               element={
                 <ProtectedRoute>
                   <UsersActive />
@@ -147,7 +147,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/sitio`}
+              path={`${devNavUrl}/sitio`}
               element={
                 <ProtectedRoute>
                   <Sitio />
@@ -155,7 +155,7 @@ function App() {
               }
             />
             <Route
-              path={`${devNavUrl}/admin/citizens`}
+              path={`${devNavUrl}/citizens`}
               element={
                 <ProtectedRoute>
                   <Citizens />
@@ -164,7 +164,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/purok/household-view`}
+              path={`${devNavUrl}/purok/household-view`}
               element={
                 <ProtectedRoute>
                   <CitizenView />
@@ -173,7 +173,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/recommended-programs`}
+              path={`${devNavUrl}/recommended-programs`}
               element={
                 <ProtectedRoute>
                   <RecommendedPrograms />
@@ -182,7 +182,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/population-rate`}
+              path={`${devNavUrl}/population-rate`}
               element={
                 <ProtectedRoute>
                   <PopulationRate />
@@ -191,7 +191,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/household-rate`}
+              path={`${devNavUrl}/household-rate`}
               element={
                 <ProtectedRoute>
                   <HouseholdRate />
@@ -200,7 +200,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/income`}
+              path={`${devNavUrl}/income`}
               element={
                 <ProtectedRoute>
                   <IncomeRate />
@@ -209,7 +209,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/unemployment-rate`}
+              path={`${devNavUrl}/unemployment-rate`}
               element={
                 <ProtectedRoute>
                   <UnemploymentRate />
@@ -218,7 +218,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/population-criteria`}
+              path={`${devNavUrl}/population-criteria`}
               element={
                 <ProtectedRoute>
                   <PopulationCriteria />
@@ -227,7 +227,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/household-criteria`}
+              path={`${devNavUrl}/household-criteria`}
               element={
                 <ProtectedRoute>
                   <HouseholdCriteria />
@@ -236,7 +236,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/income-criteria`}
+              path={`${devNavUrl}/income-criteria`}
               element={
                 <ProtectedRoute>
                   <IncomeCriteria />
@@ -245,7 +245,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/unemployment-criteria`}
+              path={`${devNavUrl}/unemployment-criteria`}
               element={
                 <ProtectedRoute>
                   <UnemploymentCriteria />
@@ -254,7 +254,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/inactive-users`}
+              path={`${devNavUrl}/inactive-users`}
               element={
                 <ProtectedRoute>
                   <InactiveUser />
@@ -263,7 +263,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/inactive-population-program`}
+              path={`${devNavUrl}/inactive-population-program`}
               element={
                 <ProtectedRoute>
                   <InactivePopulationProgram />
@@ -272,7 +272,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/inactive-household-program`}
+              path={`${devNavUrl}/inactive-household-program`}
               element={
                 <ProtectedRoute>
                   <InactiveHouseholdProgram />
@@ -281,7 +281,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/inactive-income-program`}
+              path={`${devNavUrl}/inactive-income-program`}
               element={
                 <ProtectedRoute>
                   <InactiveIncomeProgram />
@@ -290,7 +290,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/inactive-unemployment-program`}
+              path={`${devNavUrl}/inactive-unemployment-program`}
               element={
                 <ProtectedRoute>
                   <InactiveUnemploymentProgram />
@@ -299,7 +299,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/inactive-population-criteria`}
+              path={`${devNavUrl}/inactive-population-criteria`}
               element={
                 <ProtectedRoute>
                   <InactivePopulationCriteria />
@@ -308,7 +308,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/inactive-household-criteria`}
+              path={`${devNavUrl}/inactive-household-criteria`}
               element={
                 <ProtectedRoute>
                   <InactiveHouseholdCriteria />
@@ -317,7 +317,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/inactive-income-criteria`}
+              path={`${devNavUrl}/inactive-income-criteria`}
               element={
                 <ProtectedRoute>
                   <InactiveIncomeCriteria />
@@ -326,7 +326,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/inactive-unemployment-criteria`}
+              path={`${devNavUrl}/inactive-unemployment-criteria`}
               element={
                 <ProtectedRoute>
                   <InactiveUnemploymentCriteria />
@@ -335,7 +335,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/inactive-sitio`}
+              path={`${devNavUrl}/inactive-sitio`}
               element={
                 <ProtectedRoute>
                   <InactivePurok />
@@ -344,7 +344,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/info`}
+              path={`${devNavUrl}/info`}
               element={
                 <ProtectedRoute>
                   <BarangayInfo />
@@ -353,7 +353,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/household-add`}
+              path={`${devNavUrl}/household-add`}
               element={
                 <ProtectedRoute>
                   <AddCitizen />
@@ -362,7 +362,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/purok/household-edit`}
+              path={`${devNavUrl}/purok/household-edit`}
               element={
                 <ProtectedRoute>
                   <UpdateCitizen />
@@ -371,7 +371,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/income-classification`}
+              path={`${devNavUrl}/income-classification`}
               element={
                 <ProtectedRoute>
                   <IncomeClassification />
@@ -380,7 +380,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/evaluation-filter/purok`}
+              path={`${devNavUrl}/evaluation-filter/purok`}
               element={
                 <ProtectedRoute>
                   <EvaluationFilterCitezenList />
@@ -389,7 +389,7 @@ function App() {
             />
 
             <Route
-              path={`${devNavUrl}/admin/inactive-representative`}
+              path={`${devNavUrl}/inactive-representative`}
               element={
                 <ProtectedRoute>
                   <InactiveRepresentative />

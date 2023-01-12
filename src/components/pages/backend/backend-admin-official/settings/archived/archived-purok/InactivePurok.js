@@ -50,7 +50,7 @@ export const InactivePurok = () => {
                 <input type="radio" name="tabs" id="user" />
                 <label htmlFor="user" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/inactive-users`}
+                    to={`${devNavUrl}/inactive-users`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Users{" "}
@@ -60,7 +60,7 @@ export const InactivePurok = () => {
                 <input type="radio" name="tabs" id="program" />
                 <label htmlFor="program" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/inactive-population-program`}
+                    to={`${devNavUrl}/inactive-population-program`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Recommended Programs
@@ -70,7 +70,7 @@ export const InactivePurok = () => {
                 <input type="radio" name="tabs" id="criteria" />
                 <label htmlFor="criteria" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/inactive-population-criteria`}
+                    to={`${devNavUrl}/inactive-population-criteria`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Program Criteria
@@ -96,7 +96,7 @@ export const InactivePurok = () => {
                 <input type="radio" name="tabs" id="representative" />
                 <label htmlFor="representative" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/inactive-representative`}
+                    to={`${devNavUrl}/inactive-representative`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Representative

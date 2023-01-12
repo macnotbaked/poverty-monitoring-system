@@ -57,7 +57,7 @@ const Citizen = () => {
                 <div className="content__button">
                   <Link
                     className="btn--primary mr--1"
-                    to={`${devNavUrl}/admin/household-add?sid=${purokId}`}
+                    to={`${devNavUrl}/household-add?sid=${purokId}`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     <FaPlusCircle /> <span>Add</span>

@@ -4,10 +4,10 @@ export const checkRoleToRedirect = (navigate, data) => {
   // console.log(data.users_role);
   switch (data.users_role) {
     case "Admin":
-      navigate(`${devNavUrl}/admin/home`);
+      navigate(`${devNavUrl}/home`);
       break;
     default:
-      navigate(`${devNavUrl}/official/home`);
+      navigate(`${devNavUrl}/home`);
       break;
   }
 };

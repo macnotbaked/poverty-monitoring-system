@@ -46,7 +46,7 @@ export const InactiveIncomeProgram = () => {
                 <input type="radio" name="tabs" id="user" />
                 <label htmlFor="user" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/inactive-users`}
+                    to={`${devNavUrl}/inactive-users`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Users
@@ -67,7 +67,7 @@ export const InactiveIncomeProgram = () => {
                     />
                     <label htmlFor="inactive-population" className="menu-label">
                       <Link
-                        to={`${devNavUrl}/admin/inactive-population-program`}
+                        to={`${devNavUrl}/inactive-population-program`}
                         onClick={() => dispatch(setStartIndex(0))}
                       >
                         Population
@@ -81,7 +81,7 @@ export const InactiveIncomeProgram = () => {
                     />
                     <label htmlFor="inactive-household" className="menu-label">
                       <Link
-                        to={`${devNavUrl}/admin/inactive-household-program`}
+                        to={`${devNavUrl}/inactive-household-program`}
                         onClick={() => dispatch(setStartIndex(0))}
                       >
                         Household
@@ -119,7 +119,7 @@ export const InactiveIncomeProgram = () => {
                       className="menu-label"
                     >
                       <Link
-                        to={`${devNavUrl}/admin/inactive-unemployment-program`}
+                        to={`${devNavUrl}/inactive-unemployment-program`}
                         onClick={() => dispatch(setStartIndex(0))}
                       >
                         Unemployment
@@ -131,7 +131,7 @@ export const InactiveIncomeProgram = () => {
                 <input type="radio" name="tabs" id="criteria" />
                 <label htmlFor="criteria" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/inactive-population-criteria`}
+                    to={`${devNavUrl}/inactive-population-criteria`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Program Criteria
@@ -141,7 +141,7 @@ export const InactiveIncomeProgram = () => {
                 <input type="radio" name="tabs" id="sitio" />
                 <label htmlFor="sitio" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/inactive-sitio`}
+                    to={`${devNavUrl}/inactive-sitio`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Purok
@@ -151,7 +151,7 @@ export const InactiveIncomeProgram = () => {
                 <input type="radio" name="tabs" id="representative" />
                 <label htmlFor="representative" className="menu-label">
                   <Link
-                    to={`${devNavUrl}/admin/inactive-representative`}
+                    to={`${devNavUrl}/inactive-representative`}
                     onClick={() => dispatch(setStartIndex(0))}
                   >
                     Representative
