@@ -1,9 +1,8 @@
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import React from "react";
-import { Bar, Line, Pie, Radar } from "react-chartjs-2";
-import { Link } from "react-router-dom";
-import { setStartIndex, viewHousehold } from "../../../../../store/StoreAction";
+import { Bar, Line, Pie } from "react-chartjs-2";
+import { viewHousehold } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
 import useLoadAllActiveHouseholdProgram from "../../../../custom-hooks/useLoadAllActiveHouseholdProgram";
 import useLoadAllActiveIncomeClassification from "../../../../custom-hooks/useLoadAllActiveIncomeClassification";
@@ -15,7 +14,7 @@ import useLoadAllActiveUnemploymentProgram from "../../../../custom-hooks/useLoa
 import useLoadAllEvaluation from "../../../../custom-hooks/useLoadAllEvaluation";
 import useLoadAllEvaluationList from "../../../../custom-hooks/useLoadAllEvaluationList";
 import useLoadAllInactive from "../../../../custom-hooks/useLoadAllInactive";
-import { devNavUrl, formatDate } from "../../../../helpers/functions-general";
+import { formatDate } from "../../../../helpers/functions-general";
 import NoData from "../../../../widgets/NoData";
 import Spinner from "../../../../widgets/Spinner";
 import ModalViewHouseholdProgram from "./ModalViewHouseholdProgram";
@@ -413,7 +412,7 @@ const DashboardList = () => {
     rich.push(getTotalRich(Number(item.evaluation_list_aid)));
   });
 
-  let populationUnemployed = ["Total Population", "Unemployment Rate"];
+  let populationUnemployed = ["Unemployment Rate", "Total Population"];
 
   const UnemploymentRate = {
     labels: populationUnemployed,
@@ -425,9 +424,6 @@ const DashboardList = () => {
       },
     ],
   };
-
-  // console.log(totalPopulation);
-  // console.log(povertyRate);
 
   const PopulationPerYear = {
     labels: year,
@@ -518,7 +514,7 @@ const DashboardList = () => {
     return final.toFixed(2);
   };
 
-  const getTotalUnderge = (id) => {
+  const getTotalMidage = (id) => {
     let val = 0;
     let res = 0;
     let final = 0;
@@ -526,9 +522,7 @@ const DashboardList = () => {
     if (activeRepresentative.length) {
       activeRepresentative.map((item) => {
         if (Number(item.representative_eval_id) === Number(id)) {
-          res =
-            Number(item.representative_total_underage) >= 10 &&
-            Number(item.representative_total_underage) <= 19;
+          res = Number(item.representative_total_midage);
         }
         val += res;
       });
@@ -536,7 +530,83 @@ const DashboardList = () => {
 
     final = (val / activeRepresentative.length) * 100;
 
-    // console.log(ageTotal);
+    return final.toFixed(2);
+  };
+
+  const getTotalSenior = (id) => {
+    let val = 0;
+    let res = 0;
+    let final = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_eval_id) === Number(id)) {
+          res = Number(item.representative_total_seniors);
+        }
+        val += res;
+      });
+    }
+
+    final = (val / activeRepresentative.length) * 100;
+
+    return final.toFixed(2);
+  };
+
+  const getTotalUnderage = (id) => {
+    let val = 0;
+    let res = 0;
+    let final = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_eval_id) === Number(id)) {
+          res = Number(item.representative_total_underage);
+        }
+        val += res;
+      });
+    }
+
+    final = (val / activeRepresentative.length) * 100;
+    // console.log(final);
+
+    return final.toFixed(2);
+  };
+
+  const getTotalPwd = (id) => {
+    let val = 0;
+    let res = 0;
+    let final = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_eval_id) === Number(id)) {
+          res = Number(item.representative_total_pwd);
+        }
+        val += res;
+      });
+    }
+
+    final = (val / activeRepresentative.length) * 100;
+    // console.log(final);
+
+    return final.toFixed(2);
+  };
+
+  const getTotalInDanger = (id) => {
+    let val = 0;
+    let res = 0;
+    let final = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_eval_id) === Number(id)) {
+          res = item.representative_is_in_danger_area === "1";
+        }
+        val += res;
+      });
+    }
+
+    final = (val / activeRepresentative.length) * 100;
 
     return final.toFixed(2);
   };
@@ -557,7 +627,24 @@ const DashboardList = () => {
 
     final = (val / activeRepresentative.length) * 100;
 
-    // console.log(final);
+    return final.toFixed(2);
+  };
+
+  const getTotalRenting = (id) => {
+    let res = 0;
+    let final = 0;
+    let val = 0;
+
+    if (activeRepresentative.length) {
+      activeRepresentative.map((item) => {
+        if (Number(item.representative_eval_id) === Number(id)) {
+          res = item.representative_household_living_id === "2";
+        }
+        val += res;
+      });
+    }
+
+    final = (val / activeRepresentative.length) * 100;
 
     return final.toFixed(2);
   };
@@ -573,6 +660,52 @@ const DashboardList = () => {
     return res;
   };
 
+  const getTotalPopulationRenting = () => {
+    let res = 0;
+    if (evaluation.length) {
+      evaluation.map((item) => {
+        res = getTotalRenting(item.evaluation_list_aid);
+      });
+    }
+
+    return res;
+  };
+
+  const getTotalPopulationInDanger = () => {
+    let res = 0;
+    if (evaluation.length) {
+      evaluation.map((item) => {
+        res = getTotalInDanger(item.evaluation_list_aid);
+      });
+    }
+
+    return res;
+  };
+
+  const getTotalPopulationPwd = () => {
+    let res = 0;
+    if (evaluation.length) {
+      evaluation.map((item) => {
+        res = getTotalPwd(item.evaluation_list_aid);
+      });
+    }
+
+    return res;
+  };
+
+  const getTotalUnemploymentRate = () => {
+    let res = 0;
+    if (evaluation.length) {
+      evaluation.map((item) => {
+        res = Number(getTotalUnemployed(item.evaluation_list_aid));
+      });
+    }
+
+    // console.log(res);
+
+    return res;
+  };
+
   const getTotalPopulationBelowIncome = () => {
     let res = 0;
     if (evaluation.length) {
@@ -584,11 +717,33 @@ const DashboardList = () => {
     return res;
   };
 
+  const getTotalPopulationMidage = () => {
+    let res = 0;
+    if (evaluation.length) {
+      evaluation.map((item) => {
+        res = getTotalMidage(item.evaluation_list_aid);
+      });
+    }
+
+    return res;
+  };
+
   const getTotalPopulationUnderage = () => {
     let res = 0;
     if (evaluation.length) {
       evaluation.map((item) => {
-        res = getTotalUnderge(item.evaluation_list_aid);
+        res = getTotalUnderage(item.evaluation_list_aid);
+      });
+    }
+
+    return res;
+  };
+
+  const getTotalSeniors = () => {
+    let res = 0;
+    if (evaluation.length) {
+      evaluation.map((item) => {
+        res = getTotalSenior(item.evaluation_list_aid);
       });
     }
 
@@ -615,13 +770,29 @@ const DashboardList = () => {
                       "Loading..."
                     ) : (
                       <>
-                        <li>
-                          {item.household_program_name}
-                          <br />
-                          <button type="button" onClick={handleViewHousehold}>
-                            See details...
-                          </button>
-                        </li>
+                        {((item.household_program_aid === "1" &&
+                          getTotalPopulationInDanger() >=
+                            Number(item.household_criteria_range_from) &&
+                          getTotalPopulationInDanger() <=
+                            Number(item.household_criteria_range_to)) ||
+                          (item.household_program_aid === "2" &&
+                            getTotalPopulationInDanger() >=
+                              Number(item.household_criteria_range_from) &&
+                            getTotalPopulationInDanger() <=
+                              Number(item.household_criteria_range_to)) ||
+                          (item.household_program_aid === "3" &&
+                            getTotalPopulationRenting() >=
+                              Number(item.household_criteria_range_from) &&
+                            getTotalPopulationRenting() <=
+                              Number(item.household_criteria_range_to))) && (
+                          <li>
+                            {item.household_program_name}
+                            <br />
+                            <button type="button" onClick={handleViewHousehold}>
+                              See details...
+                            </button>
+                          </li>
+                        )}
                       </>
                     )}
                   </ul>
@@ -643,20 +814,28 @@ const DashboardList = () => {
                       "Loading..."
                     ) : (
                       <>
-                        {getTotalPopulationBelowIncome() >=
-                          Number(item.income_criteria_range_from) &&
+                        {((item.income_program_aid === "1" &&
+                          getTotalPopulationBelowIncome() >=
+                            Number(item.income_criteria_range_from) &&
                           getTotalPopulationBelowIncome() <=
-                            Number(item.income_criteria_range_to) && (
-                            <li>
-                              {item.income_program_name} <br />
-                              <button
-                                type="button"
-                                onClick={handleViewHousehold}
-                              >
-                                See details...
-                              </button>
-                            </li>
-                          )}
+                            Number(item.income_criteria_range_to)) ||
+                          (item.income_program_aid === "3" &&
+                            getTotalSeniors() >=
+                              Number(item.income_criteria_range_from) &&
+                            getTotalSeniors() <=
+                              Number(item.income_criteria_range_to)) ||
+                          (item.income_program_aid === "4" &&
+                            getTotalPopulationUnderage() >=
+                              Number(item.income_criteria_range_from) &&
+                            getTotalPopulationUnderage() <=
+                              Number(item.income_criteria_range_to))) && (
+                          <li>
+                            {item.income_program_name} <br />
+                            <button type="button" onClick={handleViewHousehold}>
+                              See details...
+                            </button>
+                          </li>
+                        )}
                       </>
                     )}
                   </ul>
@@ -678,13 +857,15 @@ const DashboardList = () => {
                       "Loading..."
                     ) : (
                       <>
-                        {((getTotalPopulationMemberForEvaluation() >=
-                          Number(item.population_criteria_range_from) &&
+                        {((item.population_program_aid === "1" &&
+                          getTotalPopulationMemberForEvaluation() >=
+                            Number(item.population_criteria_range_from) &&
                           getTotalPopulationMemberForEvaluation() <=
                             Number(item.population_criteria_range_to)) ||
-                          (getTotalPopulationUnderage() >=
-                            Number(item.population_criteria_range_from) &&
-                            getTotalPopulationUnderage() <=
+                          (item.population_program_aid === "2" &&
+                            getTotalPopulationMidage() >=
+                              Number(item.population_criteria_range_from) &&
+                            getTotalPopulationMidage() <=
                               Number(item.population_criteria_range_to))) && (
                           <li>
                             {item.population_program_name}
@@ -715,12 +896,32 @@ const DashboardList = () => {
                       "Loading..."
                     ) : (
                       <>
-                        <li>
-                          {item.unemployment_program_name} <br />
-                          <button type="button" onClick={handleViewHousehold}>
-                            See details...
-                          </button>
-                        </li>
+                        {((item.unemployment_program_aid === "2" &&
+                          getTotalUnemploymentRate() >=
+                            Number(item.unemployment_criteria_range_from) &&
+                          getTotalUnemploymentRate() <=
+                            Number(item.unemployment_criteria_range_to)) ||
+                          (item.unemployment_program_aid === "3" &&
+                            getTotalPopulationBelowIncome() >=
+                              Number(item.unemployment_criteria_range_from) &&
+                            getTotalPopulationBelowIncome() <=
+                              Number(item.unemployment_criteria_range_to)) ||
+                          (item.unemployment_program_aid === "4" &&
+                            getTotalPopulationPwd() >=
+                              Number(item.unemployment_criteria_range_from) &&
+                            getTotalPopulationPwd() <=
+                              Number(item.unemployment_criteria_range_to) &&
+                            getTotalPopulationBelowIncome() >=
+                              Number(item.unemployment_criteria_range_from) &&
+                            getTotalPopulationBelowIncome() <=
+                              Number(item.unemployment_criteria_range_to))) && (
+                          <li>
+                            {item.unemployment_program_name} <br />
+                            <button type="button" onClick={handleViewHousehold}>
+                              See details...
+                            </button>
+                          </li>
+                        )}
                       </>
                     )}
                   </ul>
@@ -859,6 +1060,7 @@ const DashboardList = () => {
           <Bar
             data={classification}
             options={{
+              indexAxis: "y",
               plugins: {
                 datalabels: {
                   color: "#fff",
