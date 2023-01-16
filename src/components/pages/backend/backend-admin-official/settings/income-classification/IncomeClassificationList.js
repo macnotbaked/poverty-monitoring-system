@@ -32,9 +32,11 @@ const IncomeClassificationList = ({
 
   const handleArchive = (item) => {
     dispatch(setIsConfirm(true));
-    setId(item.household_criteria_aid);
+    setId(item.monthly_income_aid);
     setDel(null);
     setData(item);
+
+    // console.log(item.monthly_income_aid);
   };
 
   return (

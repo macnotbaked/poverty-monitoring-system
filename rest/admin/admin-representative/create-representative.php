@@ -12,6 +12,7 @@ try {
 
     $representative->representative_eval_id = filter_var($data["representative_eval_id"], FILTER_SANITIZE_STRING);
     $representative->representative_purok_id = filter_var($data["representative_purok_id"], FILTER_SANITIZE_STRING);
+    $representative->representative_user_id = filter_var($data["representative_user_id"], FILTER_SANITIZE_STRING);
     $representative->representative_is_active = 1;
     $representative->representative_name = filter_var($data["representative_name"], FILTER_SANITIZE_STRING);
     $representative->representative_contact = filter_var($data["representative_contact"], FILTER_SANITIZE_STRING);

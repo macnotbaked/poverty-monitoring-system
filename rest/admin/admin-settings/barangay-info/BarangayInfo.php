@@ -62,6 +62,7 @@ class BarangayInfo
     public function update()
     {
         $sql = "update {$this->tblBarangay} set ";
+        $sql .= "barangay_photo = '{$this->barangay_photo}', ";
         $sql .= "barangay_name = '{$this->barangay_name}', ";
         $sql .= "barangay_municipality = '{$this->barangay_municipality}', ";
         $sql .= "barangay_province = '{$this->barangay_province}', ";
@@ -69,7 +70,6 @@ class BarangayInfo
         $sql .= "barangay_contact_number_primary = '{$this->barangay_contact_number_primary}', ";
         $sql .= "barangay_contact_person_secondary = '{$this->barangay_contact_person_secondary}', ";
         $sql .= "barangay_contact_number_secondary = '{$this->barangay_contact_number_secondary}', ";
-        $sql .= "barangay_photo = '{$this->barangay_photo}', ";
         $sql .= "barangay_datetime = '{$this->barangay_datetime}' ";
         $sql .= "where barangay_aid  = '{$this->barangay_aid}' ";
 

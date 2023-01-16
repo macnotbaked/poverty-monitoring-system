@@ -18,8 +18,9 @@ const ModalConfirm = ({
   const [loading, setLoading] = React.useState(false);
   let pId = id;
 
-  const handleClose = (e) => {
-    e.preventDefault();
+  console.log(pId);
+
+  const handleClose = () => {
     dispatch(setIsConfirm(false));
   };
 

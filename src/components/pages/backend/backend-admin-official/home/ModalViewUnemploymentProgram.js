@@ -1,13 +1,13 @@
 import React from "react";
 import { FaTimes } from "react-icons/fa";
-import { viewHousehold } from "../../../../../store/StoreAction";
+import { viewUnemployment } from "../../../../../store/StoreAction";
 import { StoreContext } from "../../../../../store/StoreContext";
 
-const ModalViewHouseholdProgram = ({ item }) => {
+const ModalViewUnemploymentProgram = ({ item }) => {
   const { store, dispatch } = React.useContext(StoreContext);
 
   const handleClose = () => {
-    dispatch(viewHousehold(false));
+    dispatch(viewUnemployment(false));
   };
 
   React.useEffect(() => {
@@ -32,20 +32,20 @@ const ModalViewHouseholdProgram = ({ item }) => {
           </div>
           <div className="bg--white">
             <div className="pxy--1">
-              <h2 className="mb--1">{item.household_program_name}</h2>
-              <p className="mb--1">{item.household_program_description}</p>
+              <h2 className="mb--1">{item.unemployment_program_name}</h2>
+              <p className="mb--1">{item.unemployment_program_description}</p>
               <h2>Contacts</h2>
               <p className="t--right d--flex align-center gap--1">
                 <span className="t--bold">Name:</span>
-                <span>{item.household_program_contact_person}</span>
+                <span>{item.unemployment_program_contact_person}</span>
               </p>
               <p className="t--right d--flex align-center gap--1">
                 <span className="t--bold">Phone:</span>
-                <span>{item.household_program_contact_person}</span>
+                <span>{item.unemployment_program_contact_person}</span>
               </p>
               <p className="t--right d--flex align-center gap--1">
                 <span className="t--bold">Email:</span>
-                <span>{item.household_program_contact_email}</span>
+                <span>{item.unemployment_program_contact_email}</span>
               </p>
             </div>
             <div className="pt--2">
@@ -64,4 +64,4 @@ const ModalViewHouseholdProgram = ({ item }) => {
   );
 };
 
-export default ModalViewHouseholdProgram;
+export default ModalViewUnemploymentProgram;

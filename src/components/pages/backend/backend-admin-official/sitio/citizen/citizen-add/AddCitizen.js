@@ -19,7 +19,7 @@ const AddCitizen = () => {
     purokId
   );
 
-  // console.log(purokId);
+  // console.log(store.credentials.users_aid);
 
   return (
     <>

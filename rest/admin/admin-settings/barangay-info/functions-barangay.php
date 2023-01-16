@@ -57,6 +57,7 @@ function getResultData($result)
         extract($row);
         $list = [
             "barangay_aid" => $barangay_aid,
+            "barangay_photo" => $barangay_photo,
             "barangay_name" => $barangay_name,
             "barangay_municipality" => $barangay_municipality,
             "barangay_province" => $barangay_province,
@@ -64,7 +65,6 @@ function getResultData($result)
             "barangay_contact_number_primary" => $barangay_contact_number_primary,
             "barangay_contact_person_secondary" => $barangay_contact_person_secondary,
             "barangay_contact_number_secondary" => $barangay_contact_number_secondary,
-            "barangay_photo" => $barangay_photo,
             "barangay_created" => $barangay_created,
             "barangay_datetime" => $barangay_datetime,
         ];

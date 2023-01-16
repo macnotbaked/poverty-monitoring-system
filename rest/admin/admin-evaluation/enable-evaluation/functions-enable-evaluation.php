@@ -119,6 +119,16 @@ function checkReadLimitRepresentatives($object, $start, $total)
     return $result;
 }
 
+function checkReadSearchRepresentatives($object, $search)
+{
+    $result = $object->readSearchRepresentatives($search);
+    if ($result->num_rows == 0) {
+        Response::sendResponse(true, "Empty Record (Limit representatives evaluation list).", []);
+        exit();
+    }
+    return $result;
+}
+
 function checkCreate($object)
 {
     $result = $object->create();

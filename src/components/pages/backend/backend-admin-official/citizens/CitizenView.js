@@ -5,6 +5,7 @@ import useLoadAllActiveIncomeClassification from "../../../../custom-hooks/useLo
 import useLoadAllActiveRepresentative from "../../../../custom-hooks/useLoadAllActiveRepresentative";
 import Header from "../../../../header/Header";
 import {
+  devBaseUrl,
   getUrlParam,
   numberWithCommas,
 } from "../../../../helpers/functions-general";
@@ -24,6 +25,8 @@ const CitizenView = () => {
     "/admin/admin-representative/read-representative-by-id.php",
     houseId
   );
+
+  // const conductedName = {`${activeRepresentative.length && activeRepresentative[0].users_fname, activeRepresentative[0].users_mname, activeRepresentative[0].users_lname}`}
 
   const getHouseholdName = () => {
     let household = "";
@@ -129,8 +132,20 @@ const CitizenView = () => {
               <div className="form__container ">
                 <div className="to_print">
                   <div className="t--right">
-                    <i>Conducted by: Meirejoy Maralit</i>
+                    <i style={{ fontSize: "1.1rem" }}>
+                      Conducted by:{" "}
+                      {activeRepresentative.length > 0 &&
+                        activeRepresentative[0].users_fname}{" "}
+                      {activeRepresentative.length > 0 &&
+                        activeRepresentative[0].users_lname}
+                    </i>
                   </div>
+
+                  <img
+                    style={{ marginLeft: "4rem" }}
+                    src={devBaseUrl + "/img/santa-elena-logo.png"}
+                    alt=""
+                  />
                   <h2 className="t--center mb--3">
                     <span className="t--bold">Santa Elena</span> <br /> City of
                     San Pablo <br /> Province of Laguna

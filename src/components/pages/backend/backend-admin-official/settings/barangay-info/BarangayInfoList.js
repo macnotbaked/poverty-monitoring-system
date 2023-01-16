@@ -17,24 +17,26 @@ const BarangayInfoList = ({ result }) => {
     dispatch
   );
 
+  // console.log(result);
+
   const initVal = {
-    barangay_aid: result.length ? result[0].barangay_aid : "",
-    barangay_name: result.length ? result[0].barangay_name : "",
-    barangay_municipality: result.length ? result[0].barangay_municipality : "",
-    barangay_province: result.length ? result[0].barangay_province : "",
-    barangay_contact_person_primary: result.length
+    barangay_aid: result ? result[0].barangay_aid : "",
+    barangay_name: result ? result[0].barangay_name : "",
+    barangay_municipality: result ? result[0].barangay_municipality : "",
+    barangay_province: result ? result[0].barangay_province : "",
+    barangay_contact_person_primary: result
       ? result[0].barangay_contact_person_primary
       : "",
-    barangay_contact_number_primary: result.length
+    barangay_contact_number_primary: result
       ? result[0].barangay_contact_number_primary
       : "",
-    barangay_contact_person_secondary: result.length
+    barangay_contact_person_secondary: result
       ? result[0].barangay_contact_person_secondary
       : "",
-    barangay_contact_number_secondary: result.length
+    barangay_contact_number_secondary: result
       ? result[0].barangay_contact_number_secondary
       : "",
-    barangay_photo: result.length ? result[0].barangay_photo : "",
+    barangay_photo: result ? result[0].barangay_photo : "",
   };
 
   return (

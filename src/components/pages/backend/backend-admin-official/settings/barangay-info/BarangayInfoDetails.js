@@ -63,7 +63,7 @@ const BarangayInfoDetails = () => {
             return (
               <Form>
                 <div className="input--form mb--3 ">
-                  <label htmlFor="">Your logo here:</label>
+                  <label htmlFor="">Your logo here: Details</label>
                   <div className="logo__container d--flex justify-center align-center">
                     {photo ? (
                       <img

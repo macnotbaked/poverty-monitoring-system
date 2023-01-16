@@ -11,6 +11,7 @@ try {
     $barangay = new BarangayInfo($connection);
 
     $barangay->barangay_aid  = filter_var($data["barangay_aid"], FILTER_SANITIZE_STRING);
+    $barangay->barangay_photo  = filter_var($data["barangay_photo"], FILTER_SANITIZE_STRING);
     $barangay->barangay_name  = filter_var($data["barangay_name"], FILTER_SANITIZE_STRING);
     $barangay->barangay_municipality  = filter_var($data["barangay_municipality"], FILTER_SANITIZE_STRING);
     $barangay->barangay_province  = filter_var($data["barangay_province"], FILTER_SANITIZE_STRING);
@@ -18,10 +19,9 @@ try {
     $barangay->barangay_contact_number_primary  = filter_var($data["barangay_contact_number_primary"], FILTER_SANITIZE_STRING);
     $barangay->barangay_contact_person_secondary  = filter_var($data["barangay_contact_person_secondary"], FILTER_SANITIZE_STRING);
     $barangay->barangay_contact_number_secondary  = filter_var($data["barangay_contact_number_secondary"], FILTER_SANITIZE_STRING);
-    $barangay->barangay_photo  = filter_var($data["barangay_photo"], FILTER_SANITIZE_STRING);
     $barangay->barangay_datetime = date("Y-m-d H:i:s");
 
-    // $result = checkUpdate($barangay);
+    $result = checkUpdate($barangay);
 
     Response::sendResponse(true, "Update barangay success.",  $barangay);
 } catch (Error $e) {

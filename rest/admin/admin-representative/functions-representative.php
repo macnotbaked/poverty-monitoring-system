@@ -218,6 +218,7 @@ function getResultData($result)
             "representative_aid" => $representative_aid,
             "representative_eval_id" => $representative_eval_id,
             "representative_purok_id" => $representative_purok_id,
+            "representative_user_id" => $representative_user_id,
             "representative_is_active" => $representative_is_active,
             "representative_name" => $representative_name,
             "representative_contact" => $representative_contact,
@@ -258,6 +259,13 @@ function getResultData($result)
             "evaluation_list_is_active" => $evaluation_list_is_active,
             "evaluation_list_created" => $evaluation_list_created,
             "evaluation_list_datetime" => $evaluation_list_datetime,
+
+            "users_aid" => $users_aid,
+            "users_is_active" => $users_is_active,
+            "users_fname" => $users_fname,
+            "users_mname" => $users_mname,
+            "users_lname" => $users_lname,
+
 
         ];
         array_push($data, $list);

@@ -8,14 +8,14 @@ try {
     $data = json_decode($body, true);
     $connection = checkConnection();
     checkInputData($data);
-    $classsification = new IncomeClassification($connection);
+    $classification = new IncomeClassification($connection);
 
     $classification->monthly_income_aid  = filter_var($data["id"], FILTER_SANITIZE_STRING);
     $classification->monthly_income_datetime = date("Y-m-d H:i:s");
 
-    $result = checkArchive($classification);
+    // $result = checkArchive($classification);
 
-    Response::sendResponse(true, "Archive income classification success.",  $result);
+    Response::sendResponse(true, "Archive income classification success.",  $classification->monthly_income_aid);
 } catch (Error $e) {
-    Response::sendResponse(false, "Request interrupted because a system error occured, please contact merin.ryanmark@gmail.com", "finally");
+    Response::sendResponse(false, "Request interrupted because a system error occured, please contact merin.ryanmark@gmail.com", $classification->monthly_income_aid);
 }

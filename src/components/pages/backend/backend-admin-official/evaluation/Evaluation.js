@@ -26,10 +26,6 @@ const Evaluation = () => {
     "/admin/admin-evaluation/enable-evaluation/read-enable-evaluation.php"
   );
 
-  // const { active } = useLoadAllActive(
-  //   "/admin/admin-evaluation/enable-evaluation/read-active-evaluation.php"
-  // );
-
   const evaluationId =
     evaluationList.length && evaluationList[0].evaluation_list_aid;
 
@@ -45,10 +41,8 @@ const Evaluation = () => {
   } = useFetchDataLoadMore(
     "/admin/admin-sitio/read-sitio-limit.php",
     "/admin/admin-sitio/read-sitio-all.php",
-    5 // show number of records on a table
+    10 // show number of records on a table
   );
-
-  // console.log(evaluationId);
 
   React.useEffect(() => {
     dispatch(setIsEvalEnabled(true));

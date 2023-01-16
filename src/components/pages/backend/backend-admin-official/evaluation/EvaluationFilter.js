@@ -35,7 +35,7 @@ const EvaluationFilter = () => {
   } = useFetchDataLoadMore(
     "/admin/admin-evaluation/enable-evaluation/read-limit-evaluation.php",
     "/admin/admin-evaluation/enable-evaluation/read-all-evaluation.php",
-    5 // show number of records on a table
+    10 // show number of records on a table
   );
 
   return (

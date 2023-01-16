@@ -30,7 +30,7 @@ const useUploadPhoto = (url, dispatch) => {
     console.log(img);
 
     if (img.size > 60000) {
-      console.log(1);
+      // console.log(1);
       dispatch(setError(true));
       dispatch(
         setMessage("Profile photo is too big. It should be less than 60Kb.")

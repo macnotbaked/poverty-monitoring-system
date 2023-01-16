@@ -11,7 +11,7 @@ import { devNavUrl } from "../helpers/functions-general";
 const ModalSuccess = ({ email }) => {
   const { store, dispatch } = React.useContext(StoreContext);
 
-  console.log(email);
+  // console.log(email);
 
   const handleClose = () => {
     dispatch(setSuccess(false));

@@ -3,6 +3,7 @@ class Representative
 {
     public $representative_aid;
     public $representative_eval_id;
+    public $representative_user_id;
     public $representative_purok_id;
     public $representative_is_active;
     public $representative_name;
@@ -28,6 +29,7 @@ class Representative
     public $connection;
     public $tblRepresentative;
     public $tblSitio;
+    public $tblUsers;
     public $tblIncomeClassification;
     public $tblEnableEvaluation;
 
@@ -36,6 +38,7 @@ class Representative
         $this->connection = $db;
         $this->tblRepresentative = "pms_representative";
         $this->tblSitio = "pms_sitio";
+        $this->tblUsers = "pms_users";
         $this->tblIncomeClassification = "pms_monthly_income";
         $this->tblEnableEvaluation = "pms_evaluation_list";
     }
@@ -45,6 +48,7 @@ class Representative
         $sql = "insert into {$this->tblRepresentative} ";
         $sql .= "( representative_eval_id, ";
         $sql .= "representative_purok_id, ";
+        $sql .= "representative_user_id, ";
         $sql .= "representative_is_active, ";
         $sql .= "representative_name, ";
         $sql .= "representative_contact, ";
@@ -67,6 +71,7 @@ class Representative
         $sql .= "representative_datetime ) values ( ";
         $sql .= "'{$this->representative_eval_id}', ";
         $sql .= "'{$this->representative_purok_id}', ";
+        $sql .= "'{$this->representative_user_id}', ";
         $sql .= "'{$this->representative_is_active}', ";
         $sql .= "'{$this->representative_name}', ";
         $sql .= "'{$this->representative_contact}', ";
@@ -96,9 +101,11 @@ class Representative
     {
         $sql = "select * from {$this->tblRepresentative} as household, ";
         $sql .= "{$this->tblSitio} as purok, ";
+        $sql .= "{$this->tblUsers} as user, ";
         $sql .= "{$this->tblEnableEvaluation} as eval ";
         $sql .= "where household.representative_is_active = 1 ";
         $sql .= "and household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "and household.representative_user_id = user.users_aid ";
         $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "and household.representative_aid = '{$this->representative_aid}' ";
         $result = $this->connection->query($sql);
@@ -193,7 +200,8 @@ class Representative
         $sql = "select * from {$this->tblRepresentative} as household, ";
         $sql .= "{$this->tblSitio} as purok, ";
         $sql .= "{$this->tblEnableEvaluation} as eval ";
-        $sql .= "where household.representative_purok_id = purok.sitio_aid ";
+        $sql .= "where eval.evaluation_list_is_active = 1 ";
+        $sql .= "and household.representative_purok_id = purok.sitio_aid ";
         $sql .= "and household.representative_eval_id = eval.evaluation_list_aid ";
         $sql .= "and (household.representative_name like '{$search}%' ";
         $sql .= "or household.representative_house_number like '{$search}%' ";

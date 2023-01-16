@@ -27,6 +27,7 @@ const AddCitizenList = ({ purokId }) => {
     representative_eval_id:
       evaluationList.length && evaluationList[0].evaluation_list_aid,
     representative_purok_id: purokId,
+    representative_user_id: store.credentials.users_aid,
     representative_is_active: "",
     representative_name: "",
     representative_contact: "",

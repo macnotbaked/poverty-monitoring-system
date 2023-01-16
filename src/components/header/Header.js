@@ -70,7 +70,11 @@ const Header = () => {
   return (
     <>
       <header className="header">
-        <div className="header__collapse" onClick={handleShow}>
+        <div
+          className="header__collapse tooltip--menu"
+          onClick={handleShow}
+          data-tooltip="Main Menu"
+        >
           <AiOutlineMenuFold />
         </div>
         <div className="header__credential">
@@ -110,18 +114,13 @@ const Header = () => {
                     <FaUserCircle className="avatar" />
                   )}
                 </div>
-                <div
-                  className="profile__credentials ml--2"
-                  style={{ wordBreak: "break-all" }}
-                >
-                  <span className="t--bold" style={{ wordBreak: "break-all" }}>
+                <div className="profile__credentials ml--2">
+                  <span className="t--bold">
                     {store.credentials.users_fname}{" "}
                     {store.credentials.users_lname} (
                     {store.credentials.users_role})
                   </span>
-                  <small style={{ wordBreak: "break-all" }}>
-                    {store.credentials.users_email}
-                  </small>
+                  <small>{store.credentials.users_email}</small>
                   <div className="d--flex gap--1">
                     <button
                       type="sumbit"

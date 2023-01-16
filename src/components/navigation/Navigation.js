@@ -4,12 +4,12 @@ import {
   FaChartBar,
   FaHome,
   FaHouseUser,
-  FaMapMarkedAlt
+  FaMapMarkedAlt,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { setStartIndex } from "../../store/StoreAction";
 import { StoreContext } from "../../store/StoreContext";
-import { devBaseUrl, devNavUrl } from "../helpers/functions-general";
+import { devNavUrl } from "../helpers/functions-general";
 import Logo from "../widgets/Logo";
 
 const Navigation = ({ menu }) => {
